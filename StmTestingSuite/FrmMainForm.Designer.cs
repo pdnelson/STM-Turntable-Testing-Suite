@@ -36,10 +36,13 @@
             cmnSimpleSent = new DataGridViewTextBoxColumn();
             cmnSimpleReceived = new DataGridViewTextBoxColumn();
             grpSimpleInput = new GroupBox();
+            cboSimpleCommandInput = new ComboBox();
+            numSimpleCommandInput = new NumericUpDown();
+            cboSimpleCommandOptions = new ComboBox();
             btnSimpleSendCommand = new Button();
-            txtCommandInput = new TextBox();
+            txtSimpleCommandInput = new TextBox();
             lblSimpleExtraData = new Label();
-            lblSimpleCommandOptions = new ComboBox();
+            cboSimpleCommandGroupOptions = new ComboBox();
             lblSimpleCommand = new Label();
             tabAdvanced = new TabPage();
             lblTodo1 = new Label();
@@ -53,6 +56,7 @@
             tabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSimpleLog).BeginInit();
             grpSimpleInput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
             tabGraphical.SuspendLayout();
             SuspendLayout();
@@ -124,55 +128,85 @@
             // 
             // grpSimpleInput
             // 
+            grpSimpleInput.Controls.Add(cboSimpleCommandInput);
+            grpSimpleInput.Controls.Add(numSimpleCommandInput);
+            grpSimpleInput.Controls.Add(cboSimpleCommandOptions);
             grpSimpleInput.Controls.Add(btnSimpleSendCommand);
-            grpSimpleInput.Controls.Add(txtCommandInput);
+            grpSimpleInput.Controls.Add(txtSimpleCommandInput);
             grpSimpleInput.Controls.Add(lblSimpleExtraData);
-            grpSimpleInput.Controls.Add(lblSimpleCommandOptions);
+            grpSimpleInput.Controls.Add(cboSimpleCommandGroupOptions);
             grpSimpleInput.Controls.Add(lblSimpleCommand);
             grpSimpleInput.Location = new Point(6, 6);
             grpSimpleInput.Name = "grpSimpleInput";
-            grpSimpleInput.Size = new Size(428, 79);
+            grpSimpleInput.Size = new Size(483, 79);
             grpSimpleInput.TabIndex = 8;
             grpSimpleInput.TabStop = false;
             grpSimpleInput.Text = "Input Data";
             // 
+            // cboSimpleCommandInput
+            // 
+            cboSimpleCommandInput.FormattingEnabled = true;
+            cboSimpleCommandInput.Location = new Point(106, 45);
+            cboSimpleCommandInput.Name = "cboSimpleCommandInput";
+            cboSimpleCommandInput.Size = new Size(227, 23);
+            cboSimpleCommandInput.TabIndex = 14;
+            // 
+            // numSimpleCommandInput
+            // 
+            numSimpleCommandInput.Location = new Point(106, 45);
+            numSimpleCommandInput.Name = "numSimpleCommandInput";
+            numSimpleCommandInput.Size = new Size(227, 23);
+            numSimpleCommandInput.TabIndex = 13;
+            // 
+            // cboSimpleCommandOptions
+            // 
+            cboSimpleCommandOptions.FormattingEnabled = true;
+            cboSimpleCommandOptions.Location = new Point(203, 16);
+            cboSimpleCommandOptions.Name = "cboSimpleCommandOptions";
+            cboSimpleCommandOptions.Size = new Size(248, 23);
+            cboSimpleCommandOptions.TabIndex = 12;
+            cboSimpleCommandOptions.SelectedIndexChanged += cboSimpleCommandOptions_SelectedIndexChanged;
+            // 
             // btnSimpleSendCommand
             // 
-            btnSimpleSendCommand.Location = new Point(303, 15);
+            btnSimpleSendCommand.Location = new Point(339, 45);
             btnSimpleSendCommand.Name = "btnSimpleSendCommand";
-            btnSimpleSendCommand.Size = new Size(115, 23);
+            btnSimpleSendCommand.Size = new Size(112, 23);
             btnSimpleSendCommand.TabIndex = 5;
             btnSimpleSendCommand.Text = "Send Command";
             btnSimpleSendCommand.UseVisualStyleBackColor = true;
+            btnSimpleSendCommand.Click += btnSimpleSendCommand_Click;
             // 
-            // txtCommandInput
+            // txtSimpleCommandInput
             // 
-            txtCommandInput.Location = new Point(132, 45);
-            txtCommandInput.Name = "txtCommandInput";
-            txtCommandInput.Size = new Size(154, 23);
-            txtCommandInput.TabIndex = 11;
+            txtSimpleCommandInput.Location = new Point(106, 45);
+            txtSimpleCommandInput.Name = "txtSimpleCommandInput";
+            txtSimpleCommandInput.Size = new Size(227, 23);
+            txtSimpleCommandInput.TabIndex = 11;
             // 
             // lblSimpleExtraData
             // 
             lblSimpleExtraData.AutoSize = true;
-            lblSimpleExtraData.Location = new Point(32, 48);
+            lblSimpleExtraData.Location = new Point(6, 48);
             lblSimpleExtraData.Name = "lblSimpleExtraData";
             lblSimpleExtraData.Size = new Size(94, 15);
             lblSimpleExtraData.TabIndex = 10;
             lblSimpleExtraData.Text = "Command Data:";
+            lblSimpleExtraData.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // lblSimpleCommandOptions
+            // cboSimpleCommandGroupOptions
             // 
-            lblSimpleCommandOptions.FormattingEnabled = true;
-            lblSimpleCommandOptions.Location = new Point(132, 16);
-            lblSimpleCommandOptions.Name = "lblSimpleCommandOptions";
-            lblSimpleCommandOptions.Size = new Size(154, 23);
-            lblSimpleCommandOptions.TabIndex = 8;
+            cboSimpleCommandGroupOptions.FormattingEnabled = true;
+            cboSimpleCommandGroupOptions.Location = new Point(106, 16);
+            cboSimpleCommandGroupOptions.Name = "cboSimpleCommandGroupOptions";
+            cboSimpleCommandGroupOptions.Size = new Size(91, 23);
+            cboSimpleCommandGroupOptions.TabIndex = 8;
+            cboSimpleCommandGroupOptions.SelectedIndexChanged += cboSimpleCommandGroupOptions_SelectedIndexChanged;
             // 
             // lblSimpleCommand
             // 
             lblSimpleCommand.AutoSize = true;
-            lblSimpleCommand.Location = new Point(59, 19);
+            lblSimpleCommand.Location = new Point(33, 19);
             lblSimpleCommand.Name = "lblSimpleCommand";
             lblSimpleCommand.Size = new Size(67, 15);
             lblSimpleCommand.TabIndex = 9;
@@ -252,6 +286,7 @@
             btnConnect.TabIndex = 13;
             btnConnect.Text = "Connect";
             btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += btnConnect_Click;
             // 
             // FrmMainForm
             // 
@@ -271,6 +306,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvSimpleLog).EndInit();
             grpSimpleInput.ResumeLayout(false);
             grpSimpleInput.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
             tabAdvanced.PerformLayout();
             tabGraphical.ResumeLayout(false);
@@ -291,9 +327,9 @@
         private Label lblTodo1;
         private Label lblTodo2;
         private GroupBox grpSimpleInput;
-        private TextBox txtCommandInput;
+        private TextBox txtSimpleCommandInput;
         private Label lblSimpleExtraData;
-        private ComboBox lblSimpleCommandOptions;
+        private ComboBox cboSimpleCommandGroupOptions;
         private Label lblSimpleCommand;
         private Button btnSimpleSendCommand;
         private DataGridView dgvSimpleLog;
@@ -302,5 +338,8 @@
         private DataGridViewTextBoxColumn cmnSimpleSent;
         private DataGridViewTextBoxColumn cmnSimpleReceived;
         private Button btnConnect;
+        private ComboBox cboSimpleCommandOptions;
+        private NumericUpDown numSimpleCommandInput;
+        private ComboBox cboSimpleCommandInput;
     }
 }
