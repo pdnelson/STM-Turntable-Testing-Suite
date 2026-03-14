@@ -1,4 +1,5 @@
 ﻿using StmTestingSuite.Model.Command;
+using StmTestingSuite.Model.Command.Input;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -9,11 +10,13 @@ namespace StmTestingSuite
     internal class StmCommunicator
     {
         SerialPort? Port { get; set; }
-        public bool IsOpen { get; private set; }
+        public bool Connected { get; private set; }
+        DataGridView Logger { get; }
 
-        public StmCommunicator()
+        public StmCommunicator(DataGridView logger)
         {
-            IsOpen = false;
+            Logger = logger;
+            Connected = false;
         }
 
         public bool OpenCommunication(string port)
@@ -22,7 +25,7 @@ namespace StmTestingSuite
             try
             {
                 Port.Open();
-                IsOpen = true;
+                Connected = true;
                 return true;
             } catch (Exception ex)
             {
@@ -33,7 +36,7 @@ namespace StmTestingSuite
 
         public bool CloseCommunication()
         {
-            IsOpen = false;
+            Connected = false;
             if (Port is not null)
             {
                 try
@@ -62,7 +65,28 @@ namespace StmTestingSuite
             if(Port is not null)
             {
                 Port.Write(commandBytes, 0, 2);
+                logCommand(command, null, "");
             }
+        }
+
+        private void logCommand(StmExternalCommand command, StmExternalCommandInputOption? option, string responseData)
+        {
+            string timestamp = DateTime.Now.ToString("HH:mm:ss");
+
+            StringBuilder commandSent = new StringBuilder(command.Name);
+
+            if(option is not null)
+            {
+                commandSent.Append(": ");
+                commandSent.Append(option.Value.Name);
+            }
+
+            Logger.Rows.Add(timestamp, commandSent.ToString(), responseData);
+        }
+
+        public void clearLog()
+        {
+            Logger.Rows.Clear();
         }
     }
 }

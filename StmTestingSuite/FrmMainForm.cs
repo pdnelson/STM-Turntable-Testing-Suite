@@ -9,11 +9,13 @@ namespace StmTestingSuite
 {
     public partial class FrmMainForm : Form
     {
-        StmCommunicator stm = new StmCommunicator();
+        StmCommunicator Stm;
 
         public FrmMainForm()
         {
             InitializeComponent();
+
+            Stm = new StmCommunicator(dgvSimpleLog);
 
             // Populate command group list items
             List<StmExternalCommandGroup> groupOptions = new List<StmExternalCommandGroup>();
@@ -34,11 +36,6 @@ namespace StmTestingSuite
             // Initialize COM ports
             cboSerialOptions.DataSource = SerialPort.GetPortNames().ToList();
             cboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void cboSimpleCommandGroupOptions_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,23 +110,22 @@ namespace StmTestingSuite
         {
             StmExternalCommand? selectedCommand = (StmExternalCommand?)cboSimpleCommandOptions.SelectedValue;
 
-            if(selectedCommand is not null)
+            if (selectedCommand is not null)
             {
-                switch(selectedCommand.Input.Type)
+                switch (selectedCommand.Input.Type)
                 {
                     case StmExternalCommandInputType.NONE:
-                        stm.sendCommand(selectedCommand);
+                        Stm.sendCommand(selectedCommand);
                         break;
-
                 }
             }
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            if(stm.IsOpen)
+            if (Stm.Connected)
             {
-                if(stm.CloseCommunication())
+                if (Stm.CloseCommunication())
                 {
                     lblConnectionStatus.Text = "Not Connected";
                     btnConnect.Text = "Connect";
@@ -141,14 +137,23 @@ namespace StmTestingSuite
             {
                 string? comPort = (string?)cboSerialOptions.SelectedValue;
 
-                if (comPort is not null && stm.OpenCommunication(comPort))
+                if (comPort is not null && Stm.OpenCommunication(comPort))
                 {
                     lblConnectionStatus.Text = "Connected";
                     btnConnect.Text = "Disconnect";
                     btnSimpleSendCommand.Enabled = true;
                     cboSerialOptions.Enabled = false;
                 }
+                else if (comPort is null)
+                {
+                    MessageBox.Show("No COM ports are available. Is the turntable connected to the computer?", "No COM Ports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
+        }
+
+        private void btnSimpleClearLog_Click(object sender, EventArgs e)
+        {
+            Stm.clearLog();
         }
     }
 }

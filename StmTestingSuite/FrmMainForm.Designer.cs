@@ -93,6 +93,7 @@
             btnSimpleClearLog.TabIndex = 12;
             btnSimpleClearLog.Text = "Clear Log";
             btnSimpleClearLog.UseVisualStyleBackColor = true;
+            btnSimpleClearLog.Click += btnSimpleClearLog_Click;
             // 
             // dgvSimpleLog
             // 
@@ -300,7 +301,6 @@
             Controls.Add(cboSerialOptions);
             Name = "FrmMainForm";
             Text = "Statimatic STM Testing Suite";
-            Load += Form1_Load;
             tabMain.ResumeLayout(false);
             tabSimple.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvSimpleLog).EndInit();
