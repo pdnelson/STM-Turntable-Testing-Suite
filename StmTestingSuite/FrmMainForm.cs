@@ -1,8 +1,6 @@
-using StmTestingSuite.Model;
 using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
-using System.Data.Common;
 using System.IO.Ports;
 
 namespace StmTestingSuite
@@ -15,7 +13,7 @@ namespace StmTestingSuite
         {
             InitializeComponent();
 
-            Stm = new StmCommunicator(dgvSimpleLog);
+            Stm = new StmCommunicator(dgvSimpleLog, this);
 
             // Populate command group list items
             List<StmExternalCommandGroup> groupOptions = new List<StmExternalCommandGroup>();
@@ -112,12 +110,17 @@ namespace StmTestingSuite
 
             if (selectedCommand is not null)
             {
-                switch (selectedCommand.Input.Type)
+                Task commandTask = new Task(async () =>
                 {
-                    case StmExternalCommandInputType.NONE:
-                        Stm.sendCommand(selectedCommand);
-                        break;
-                }
+                    switch (selectedCommand.Input.Type)
+                    {
+                        case StmExternalCommandInputType.NONE:
+                            await Stm.SendCommand(selectedCommand);
+                            break;
+                    }
+                });
+
+                commandTask.Start();
             }
         }
 
@@ -153,7 +156,7 @@ namespace StmTestingSuite
 
         private void btnSimpleClearLog_Click(object sender, EventArgs e)
         {
-            Stm.clearLog();
+            Stm.ClearLog();
         }
     }
 }

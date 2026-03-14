@@ -1,7 +1,5 @@
 ﻿using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Input;
-using System;
-using System.Collections.Generic;
 using System.IO.Ports;
 using System.Text;
 
@@ -13,9 +11,12 @@ namespace StmTestingSuite
         public bool Connected { get; private set; }
         DataGridView Logger { get; }
 
-        public StmCommunicator(DataGridView logger)
+        Form Form { get; }
+
+        public StmCommunicator(DataGridView logger, Form form)
         {
             Logger = logger;
+            Form = form;
             Connected = false;
         }
 
@@ -55,21 +56,36 @@ namespace StmTestingSuite
             }
         }
 
-        /**
-         * Sends a command, taking no arguments.
-         */
-        public void sendCommand(StmExternalCommand command)
+        public async Task<string> SendCommand(StmExternalCommand command)
         {
             var commandBytes = new byte[] { Constants.CommandKey, (byte)command.Type };
 
-            if(Port is not null)
+            if (Port is not null)
             {
+                string responseString = "";
                 Port.Write(commandBytes, 0, 2);
-                logCommand(command, null, "");
+
+                // If a response is expected, wait a little, and then read that response.
+                if(command.ResponseSize > 0)
+                {
+                    await Task.Delay(100);
+
+                    byte[] rawData = new byte[command.ResponseSize];
+                    Port.Read(rawData, 0, command.ResponseSize);
+
+                    responseString = command.interpretResponseData(rawData);
+                }
+
+                LogCommand(command, null, responseString);
+
+                return responseString;
+            } else
+            {
+                return "";
             }
         }
 
-        private void logCommand(StmExternalCommand command, StmExternalCommandInputOption? option, string responseData)
+        private void LogCommand(StmExternalCommand command, StmExternalCommandInputOption? option, string responseData)
         {
             string timestamp = DateTime.Now.ToString("HH:mm:ss");
 
@@ -81,10 +97,13 @@ namespace StmTestingSuite
                 commandSent.Append(option.Value.Name);
             }
 
-            Logger.Rows.Add(timestamp, commandSent.ToString(), responseData);
+            Utilities.WriteToUiFromThread(Form, () =>
+            {
+                Logger.Rows.Add(timestamp, commandSent.ToString(), responseData);
+            });
         }
 
-        public void clearLog()
+        public void ClearLog()
         {
             Logger.Rows.Clear();
         }

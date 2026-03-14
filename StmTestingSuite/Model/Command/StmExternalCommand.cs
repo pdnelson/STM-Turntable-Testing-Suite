@@ -13,6 +13,8 @@ namespace StmTestingSuite.Model.Command
         public string Name { get; }
         public StmExternalCommandType? Type1 { get; }
 
+        public ushort ResponseSize { get; }
+
         public StmExternalCommand(StmExternalCommandType type)
         {
             Type = type;
@@ -21,6 +23,7 @@ namespace StmTestingSuite.Model.Command
             // Default values that will cover most use cases. Special cases are handed in the switch statement below.
             Input = new StmExternalCommandInput(StmExternalCommandInputType.NONE);
             Name = "";
+            ResponseSize = 0;
 
             switch (type)
             {
@@ -64,18 +67,23 @@ namespace StmTestingSuite.Model.Command
                     break;
                 case StmExternalCommandType.GET_VERTICAL_ENCODER_POS:
                     Name = "Vertical Encoder Position";
+                    ResponseSize = 2;
                     break;
                 case StmExternalCommandType.GET_HORIZONTAL_ENCODER_POS:
                     Name = "Horizontal Encoder Position";
+                    ResponseSize = 2;
                     break;
                 case StmExternalCommandType.GET_LIFT_STATUS:
                     Name = "Lift Status";
+                    ResponseSize = 1;
                     break;
                 case StmExternalCommandType.GET_HOME_STATUS:
                     Name = "Home Status";
+                    ResponseSize = 1;
                     break;
                 case StmExternalCommandType.GET_CURRENT_COMMAND:
                     Name = "Current Command";
+                    ResponseSize = 1;
                     break;
             }
         }
@@ -98,6 +106,11 @@ namespace StmTestingSuite.Model.Command
             {
                 return new StmExternalCommandGroup(StmExternalCommandGroupType.GET);
             }
+        }
+
+        public string interpretResponseData(byte[] data)
+        {
+            return "to do";
         }
     }
 }
