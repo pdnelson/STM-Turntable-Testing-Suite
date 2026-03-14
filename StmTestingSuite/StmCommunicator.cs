@@ -73,7 +73,7 @@ namespace StmTestingSuite
                     byte[] rawData = new byte[command.ResponseSize];
                     Port.Read(rawData, 0, command.ResponseSize);
 
-                    responseString = command.interpretResponseData(rawData);
+                    responseString = command.InterpretResponseData(rawData);
                 }
 
                 LogCommand(command, null, responseString);

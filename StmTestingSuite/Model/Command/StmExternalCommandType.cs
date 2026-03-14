@@ -12,6 +12,7 @@
         SET_SIZE = 32,
         SET_CUSTOM_SPEED = 33,
         SET_CUSTOM_SIZE = 34,
+        SET_CLEAR_ACTION_COMMAND = 35,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,

@@ -1,6 +1,7 @@
 ﻿using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
 using StmTestingSuite.Model.Command.Input.Value;
+using StmTestingSuite.Model.Response;
 using static System.Windows.Forms.Design.AxImporter;
 
 namespace StmTestingSuite.Model.Command
@@ -32,6 +33,9 @@ namespace StmTestingSuite.Model.Command
                     break;
                 case StmExternalCommandType.ACTION_PAUSE_UNPAUSE:
                     Name = "Pause/Unpause";
+                    break;
+                case StmExternalCommandType.SET_CLEAR_ACTION_COMMAND:
+                    Name = "Clear Errors/Current Command";
                     break;
                 case StmExternalCommandType.SET_SPEED:
                     {
@@ -108,9 +112,42 @@ namespace StmTestingSuite.Model.Command
             }
         }
 
-        public string interpretResponseData(byte[] data)
+        public string InterpretResponseData(byte[] data)
         {
-            return "to do";
+            string result = "";
+
+            switch(Type)
+            {
+                case StmExternalCommandType.GET_LIFT_STATUS:
+                    return data[0] switch
+                    {
+                        (byte)LiftStatus.LIFTED => "Lifted",
+                        (byte)LiftStatus.SET_DOWN => "Set Down",
+                        _ => "Invalid Data Received"
+                    };
+                case StmExternalCommandType.GET_CURRENT_COMMAND:
+                    return data[0] switch
+                    {
+                        (byte)ActionCommand.NO_ACTION => "Idle",
+                        (byte)ActionCommand.PAUSE => "Pause",
+                        (byte)ActionCommand.UNPAUSE => "Unpause",
+                        (byte)ActionCommand.PLAY => "Play",
+                        (byte)ActionCommand.HOME => "Home",
+                        (byte)ActionCommand.CALIBRATION => "Calibration",
+                        (byte)ActionCommand.TEST_MODE => "Test Mode",
+                        (byte)ActionCommand.ERROR => "Error",
+                        _ => "Invalid Data Received"
+                    };
+                case StmExternalCommandType.GET_VERTICAL_ENCODER_POS:
+                    byte lsb = data[0];
+                    byte msb = data[1];
+
+                    UInt16 finalInt = (UInt16)(((UInt16)msb << 8) | (UInt16)lsb);
+
+                    return finalInt.ToString();
+            }
+
+            return result;
         }
     }
 }
