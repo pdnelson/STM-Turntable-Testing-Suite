@@ -39,34 +39,32 @@ namespace StmTestingSuite.Model.Command
                 case StmExternalCommandType.SET_SPEED:
                     {
                         Name = "Speed";
-                        List<StmExternalCommandInputOption> options = new List<StmExternalCommandInputOption>
-                        {
-                            new StmExternalCommandInputOption("33 1/3", (ushort)SpeedValue.RPM_33),
-                            new StmExternalCommandInputOption("45", (ushort)SpeedValue.RPM_45),
-                            new StmExternalCommandInputOption("78", (ushort)SpeedValue.RPM_78)
-                        };
+                        List<StmExternalCommandInputOption> options =
+                        [
+                            new("33 1/3", (ushort)SpeedValue.RPM_33),
+                            new("45", (ushort)SpeedValue.RPM_45),
+                            new("78", (ushort)SpeedValue.RPM_78),
+                            new("Auto", (ushort)SpeedValue.AUTO)
+                        ];
                         Input = new StmExternalCommandInput(StmExternalCommandInputType.DROP_DOWN, "RPM", options);
                         break;
                     }
                 case StmExternalCommandType.SET_SIZE:
                     {
                         Name = "Size";
-                        List<StmExternalCommandInputOption> options = new List<StmExternalCommandInputOption>
-                        {
-                            new StmExternalCommandInputOption("7", (ushort)SizeValue.IN_7),
-                            new StmExternalCommandInputOption("10", (ushort)SizeValue.IN_10),
-                            new StmExternalCommandInputOption("12", (ushort)SizeValue.IN_12)
-                        };
+                        List<StmExternalCommandInputOption> options =
+                        [
+                            new("7", (ushort)SizeValue.IN_7),
+                            new("10", (ushort)SizeValue.IN_10),
+                            new("12", (ushort)SizeValue.IN_12),
+                            new("Auto", (ushort)SizeValue.AUTO)
+                        ];
                         Input = new StmExternalCommandInput(StmExternalCommandInputType.DROP_DOWN, "Inches", options);
                         break;
                     }
                 case StmExternalCommandType.SET_CUSTOM_SPEED:
                     Name = "Custom Speed";
                     Input = new StmExternalCommandInput(StmExternalCommandInputType.NUMERIC_DEC, "RPM");
-                    break;
-                case StmExternalCommandType.SET_CUSTOM_SIZE:
-                    Name = "Custom Size";
-                    Input = new StmExternalCommandInput(StmExternalCommandInputType.NUMERIC_INT, "Encoder Ticks");
                     break;
                 case StmExternalCommandType.GET_VERTICAL_ENCODER_POS:
                     Name = "Vertical Encoder Position";

@@ -8,6 +8,7 @@ namespace StmTestingSuite.Model.Command.Input.Value
     {
         RPM_33 = 0,
         RPM_45 = 1,
-        RPM_78 = 2
+        RPM_78 = 2,
+        AUTO = 3,
     }
 }

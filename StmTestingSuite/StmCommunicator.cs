@@ -88,7 +88,7 @@ namespace StmTestingSuite
                     }
                     catch (TimeoutException)
                     {
-                        responseString = "Response timed out.";
+                        responseString = "Response timed out";
                     }
 
                 }
