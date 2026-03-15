@@ -88,6 +88,10 @@ namespace StmTestingSuite.Model.Command
                     Name = "Current Command";
                     ResponseSize = 1;
                     break;
+                case StmExternalCommandType.GET_ERROR_CODE:
+                    Name = "Error Code";
+                    ResponseSize = 1;
+                    break;
             }
         }
 
@@ -144,6 +148,15 @@ namespace StmTestingSuite.Model.Command
                     UInt16 finalInt = (UInt16)(((UInt16)msb << 8) | (UInt16)lsb);
 
                     return finalInt.ToString();
+                case StmExternalCommandType.GET_ERROR_CODE:
+                    return data[0] switch
+                    {
+                        (byte)CommandError.NO_ERROR => "No error",
+                        (byte)CommandError.LIFT_STALLED_MOVING_UP => "Lift error: Stalled moving up",
+                        (byte)CommandError.LIFT_STALLED_MOVING_DOWN => "Lift error: Stalled moving down",
+                        (byte)CommandError.NOT_LIFTED => "Lift error: Not lifted at the end of \"Pause\" routine",
+                        _ => "Invalid Data Received"
+                    };
             }
 
             return result;
