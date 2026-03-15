@@ -1,6 +1,7 @@
 using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
+using System.Diagnostics.Contracts;
 using System.IO.Ports;
 
 namespace StmTestingSuite
@@ -31,9 +32,7 @@ namespace StmTestingSuite
             cboSimpleCommandInput.DropDownStyle = ComboBoxStyle.DropDownList;
             btnSimpleSendCommand.Enabled = false;
 
-            // Initialize COM ports
-            cboSerialOptions.DataSource = SerialPort.GetPortNames().ToList();
-            cboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            RefreshSerialOptions();
         }
 
         private void cboSimpleCommandGroupOptions_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,30 +109,28 @@ namespace StmTestingSuite
 
             if (selectedCommand is not null)
             {
-                btnSimpleSendCommand.Enabled = false;
-
-                Task commandTask = new Task(async () =>
-                {
-                    switch (selectedCommand.Input.Type)
-                    {
-                        case StmExternalCommandInputType.NONE:
-                            await Stm.SendCommand(selectedCommand);
-                            break;
-                    }
-
-                    await Task.Delay(Constants.SendCommandDebounceMs);
-                    Utilities.WriteToUiFromThread(this, () =>
-                    {
-                        btnSimpleSendCommand.Enabled = true;
-                        btnSimpleSendCommand.Focus();
-                    });
-                });
-
-                commandTask.Start();
+                executeCommand(selectedCommand);
             }
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
+        {
+            ToggleConnection();
+        }
+
+        private void btnSimpleClearLog_Click(object sender, EventArgs e)
+        {
+            Stm.ClearLog();
+        }
+
+        private void RefreshSerialOptions()
+        {
+            // Initialize COM ports
+            cboSerialOptions.DataSource = SerialPort.GetPortNames().ToList();
+            cboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void ToggleConnection()
         {
             if (Stm.Connected)
             {
@@ -155,17 +152,51 @@ namespace StmTestingSuite
                     btnConnect.Text = "Disconnect";
                     btnSimpleSendCommand.Enabled = true;
                     cboSerialOptions.Enabled = false;
+                    executeCommand(new StmExternalCommand(StmExternalCommandType.CONNECTION_TEST));
                 }
                 else if (comPort is null)
                 {
                     MessageBox.Show("No COM ports are available. Is the turntable connected to the computer?", "No COM Ports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    RefreshSerialOptions();
                 }
             }
         }
 
-        private void btnSimpleClearLog_Click(object sender, EventArgs e)
+        private void executeCommand(StmExternalCommand command)
         {
-            Stm.ClearLog();
+            btnSimpleSendCommand.Enabled = false;
+
+            Task commandTask = new Task(async () =>
+            {
+                try
+                {
+                    switch (command.Input.Type)
+                    {
+                        case StmExternalCommandInputType.NONE:
+                            await Stm.SendCommand(command);
+                            break;
+                    }
+
+                    await Task.Delay(Constants.SendCommandDebounceMs);
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        btnSimpleSendCommand.Enabled = true;
+                        btnSimpleSendCommand.Focus();
+                    });
+
+                }
+                catch (InvalidOperationException)
+                {
+                    MessageBox.Show("The device has been disconnected", "Device Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        ToggleConnection();
+                        RefreshSerialOptions();
+                    });
+                }
+            });
+
+            commandTask.Start();
         }
     }
 }

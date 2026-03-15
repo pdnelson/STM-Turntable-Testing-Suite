@@ -2,7 +2,7 @@
 {
     enum StmExternalCommandType : byte
     {
-        NO_OP = 0,
+        CONNECTION_TEST = 0,
 
         // Actions
         ACTION_PAUSE_UNPAUSE = 1,

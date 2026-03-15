@@ -27,8 +27,9 @@ namespace StmTestingSuite.Model.Command
 
             switch (type)
             {
-                case StmExternalCommandType.NO_OP:
-                    Name = "Blank Command";
+                case StmExternalCommandType.CONNECTION_TEST:
+                    Name = "Connection Test";
+                    ResponseSize = 1;
                     break;
                 case StmExternalCommandType.ACTION_PAUSE_UNPAUSE:
                     Name = "Pause/Unpause";
@@ -119,6 +120,12 @@ namespace StmTestingSuite.Model.Command
 
             switch(Type)
             {
+                case StmExternalCommandType.CONNECTION_TEST:
+                    return data[0] switch
+                    {
+                        Constants.ConnectionTestSuccessResponse => "Success",
+                        _ => "Error"
+                    };
                 case StmExternalCommandType.GET_LIFT_STATUS:
                     return data[0] switch
                     {
