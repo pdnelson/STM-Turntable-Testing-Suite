@@ -90,7 +90,7 @@
             btnSimpleClearLog.Location = new Point(640, 62);
             btnSimpleClearLog.Name = "btnSimpleClearLog";
             btnSimpleClearLog.Size = new Size(115, 23);
-            btnSimpleClearLog.TabIndex = 12;
+            btnSimpleClearLog.TabIndex = 8;
             btnSimpleClearLog.Text = "Clear Log";
             btnSimpleClearLog.UseVisualStyleBackColor = true;
             btnSimpleClearLog.Click += btnSimpleClearLog_Click;
@@ -150,14 +150,14 @@
             cboSimpleCommandInput.Location = new Point(106, 45);
             cboSimpleCommandInput.Name = "cboSimpleCommandInput";
             cboSimpleCommandInput.Size = new Size(227, 23);
-            cboSimpleCommandInput.TabIndex = 14;
+            cboSimpleCommandInput.TabIndex = 4;
             // 
             // numSimpleCommandInput
             // 
             numSimpleCommandInput.Location = new Point(106, 45);
             numSimpleCommandInput.Name = "numSimpleCommandInput";
             numSimpleCommandInput.Size = new Size(227, 23);
-            numSimpleCommandInput.TabIndex = 13;
+            numSimpleCommandInput.TabIndex = 5;
             // 
             // cboSimpleCommandOptions
             // 
@@ -165,7 +165,7 @@
             cboSimpleCommandOptions.Location = new Point(203, 16);
             cboSimpleCommandOptions.Name = "cboSimpleCommandOptions";
             cboSimpleCommandOptions.Size = new Size(248, 23);
-            cboSimpleCommandOptions.TabIndex = 12;
+            cboSimpleCommandOptions.TabIndex = 3;
             cboSimpleCommandOptions.SelectedIndexChanged += cboSimpleCommandOptions_SelectedIndexChanged;
             // 
             // btnSimpleSendCommand
@@ -173,7 +173,7 @@
             btnSimpleSendCommand.Location = new Point(339, 45);
             btnSimpleSendCommand.Name = "btnSimpleSendCommand";
             btnSimpleSendCommand.Size = new Size(112, 23);
-            btnSimpleSendCommand.TabIndex = 5;
+            btnSimpleSendCommand.TabIndex = 7;
             btnSimpleSendCommand.Text = "Send Command";
             btnSimpleSendCommand.UseVisualStyleBackColor = true;
             btnSimpleSendCommand.Click += btnSimpleSendCommand_Click;
@@ -183,7 +183,7 @@
             txtSimpleCommandInput.Location = new Point(106, 45);
             txtSimpleCommandInput.Name = "txtSimpleCommandInput";
             txtSimpleCommandInput.Size = new Size(227, 23);
-            txtSimpleCommandInput.TabIndex = 11;
+            txtSimpleCommandInput.TabIndex = 6;
             // 
             // lblSimpleExtraData
             // 
@@ -201,7 +201,7 @@
             cboSimpleCommandGroupOptions.Location = new Point(106, 16);
             cboSimpleCommandGroupOptions.Name = "cboSimpleCommandGroupOptions";
             cboSimpleCommandGroupOptions.Size = new Size(91, 23);
-            cboSimpleCommandGroupOptions.TabIndex = 8;
+            cboSimpleCommandGroupOptions.TabIndex = 2;
             cboSimpleCommandGroupOptions.SelectedIndexChanged += cboSimpleCommandGroupOptions_SelectedIndexChanged;
             // 
             // lblSimpleCommand
@@ -284,7 +284,7 @@
             btnConnect.Location = new Point(697, 6);
             btnConnect.Name = "btnConnect";
             btnConnect.Size = new Size(84, 23);
-            btnConnect.TabIndex = 13;
+            btnConnect.TabIndex = 1;
             btnConnect.Text = "Connect";
             btnConnect.UseVisualStyleBackColor = true;
             btnConnect.Click += btnConnect_Click;

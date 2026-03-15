@@ -23,6 +23,7 @@ namespace StmTestingSuite
         public bool OpenCommunication(string port)
         {
             Port = new SerialPort(port, Constants.BaudRate);
+            Port.ReadTimeout = Constants.CommandTimeoutTimeMs;
             try
             {
                 Port.Open();
@@ -63,17 +64,33 @@ namespace StmTestingSuite
             if (Port is not null)
             {
                 string responseString = "";
+
+                // Clear out the buffer before sending a command, just in case
+                // some other junk from another command accidentally got left over.
+                Port.DiscardInBuffer();
+                Port.DiscardOutBuffer();
+
+                await Task.Delay(Constants.CommandResponseTimeMs);
+
                 Port.Write(commandBytes, 0, 2);
 
                 // If a response is expected, wait a little, and then read that response.
                 if(command.ResponseSize > 0)
                 {
-                    await Task.Delay(100);
+                    await Task.Delay(Constants.CommandResponseTimeMs);
 
                     byte[] rawData = new byte[command.ResponseSize];
-                    Port.Read(rawData, 0, command.ResponseSize);
 
-                    responseString = command.InterpretResponseData(rawData);
+                    try
+                    {
+                        Port?.Read(rawData, 0, rawData.Length);
+                        responseString = command.InterpretResponseData(rawData);
+                    }
+                    catch (TimeoutException)
+                    {
+                        responseString = "Response timed out.";
+                    }
+
                 }
 
                 LogCommand(command, null, responseString);
@@ -84,6 +101,7 @@ namespace StmTestingSuite
                 return "";
             }
         }
+
 
         private void LogCommand(StmExternalCommand command, StmExternalCommandInputOption? option, string responseData)
         {
@@ -100,6 +118,7 @@ namespace StmTestingSuite
             Utilities.WriteToUiFromThread(Form, () =>
             {
                 Logger.Rows.Add(timestamp, commandSent.ToString(), responseData);
+                Logger.FirstDisplayedScrollingRowIndex = Logger.RowCount - 1;
             });
         }
 

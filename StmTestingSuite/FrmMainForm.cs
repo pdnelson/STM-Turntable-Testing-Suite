@@ -110,6 +110,8 @@ namespace StmTestingSuite
 
             if (selectedCommand is not null)
             {
+                btnSimpleSendCommand.Enabled = false;
+
                 Task commandTask = new Task(async () =>
                 {
                     switch (selectedCommand.Input.Type)
@@ -118,6 +120,13 @@ namespace StmTestingSuite
                             await Stm.SendCommand(selectedCommand);
                             break;
                     }
+
+                    await Task.Delay(Constants.SendCommandDebounceMs);
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        btnSimpleSendCommand.Enabled = true;
+                        btnSimpleSendCommand.Focus();
+                    });
                 });
 
                 commandTask.Start();
