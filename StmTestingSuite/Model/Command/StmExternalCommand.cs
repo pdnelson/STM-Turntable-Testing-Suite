@@ -128,6 +128,13 @@ namespace StmTestingSuite.Model.Command
                         (byte)LiftStatus.SET_DOWN => "Set Down",
                         _ => "Invalid Data Received"
                     };
+                case StmExternalCommandType.GET_HOME_STATUS:
+                    return data[0] switch
+                    {
+                        (byte)HomeStatus.HOMED => "Homed",
+                        (byte)HomeStatus.NOT_HOMED => "Not Homed",
+                        _ => "Invalid Data Received"
+                    };
                 case StmExternalCommandType.GET_CURRENT_COMMAND:
                     return data[0] switch
                     {
