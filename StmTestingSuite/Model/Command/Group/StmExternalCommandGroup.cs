@@ -17,7 +17,7 @@ namespace StmTestingSuite.Model.Command.Group
             switch(type)
             {
                 case StmExternalCommandGroupType.OTHER:
-                    Name = "Empty";
+                    Name = "Other";
                     break;
                 case StmExternalCommandGroupType.ACTION:
                     Name = "Action";

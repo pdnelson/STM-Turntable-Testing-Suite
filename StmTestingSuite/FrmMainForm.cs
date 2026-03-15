@@ -140,6 +140,7 @@ namespace StmTestingSuite
                     btnConnect.Text = "Connect";
                     btnSimpleSendCommand.Enabled = false;
                     cboSerialOptions.Enabled = true;
+                    BtnRefreshSerialPorts.Enabled = true;
                 }
             }
             else
@@ -153,6 +154,7 @@ namespace StmTestingSuite
                     btnSimpleSendCommand.Enabled = true;
                     cboSerialOptions.Enabled = false;
                     executeCommand(new StmExternalCommand(StmExternalCommandType.CONNECTION_TEST));
+                    BtnRefreshSerialPorts.Enabled = false;
                 }
                 else if (comPort is null)
                 {
@@ -197,6 +199,11 @@ namespace StmTestingSuite
             });
 
             commandTask.Start();
+        }
+
+        private void BtnRefreshSerialPorts_Click(object sender, EventArgs e)
+        {
+            RefreshSerialOptions();
         }
     }
 }

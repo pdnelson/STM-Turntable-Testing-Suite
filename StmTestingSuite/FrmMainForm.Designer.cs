@@ -52,6 +52,7 @@
             lblSerialOptions = new Label();
             lblConnectionStatus = new Label();
             btnConnect = new Button();
+            BtnRefreshSerialPorts = new Button();
             tabMain.SuspendLayout();
             tabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSimpleLog).BeginInit();
@@ -289,11 +290,22 @@
             btnConnect.UseVisualStyleBackColor = true;
             btnConnect.Click += btnConnect_Click;
             // 
+            // BtnRefreshSerialPorts
+            // 
+            BtnRefreshSerialPorts.Location = new Point(208, 6);
+            BtnRefreshSerialPorts.Name = "BtnRefreshSerialPorts";
+            BtnRefreshSerialPorts.Size = new Size(59, 23);
+            BtnRefreshSerialPorts.TabIndex = 10;
+            BtnRefreshSerialPorts.Text = "Refresh";
+            BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
+            BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
+            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(793, 544);
+            Controls.Add(BtnRefreshSerialPorts);
             Controls.Add(btnConnect);
             Controls.Add(tabMain);
             Controls.Add(lblConnectionStatus);
@@ -341,5 +353,6 @@
         private ComboBox cboSimpleCommandOptions;
         private NumericUpDown numSimpleCommandInput;
         private ComboBox cboSimpleCommandInput;
+        private Button BtnRefreshSerialPorts;
     }
 }
