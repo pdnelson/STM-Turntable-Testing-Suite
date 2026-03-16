@@ -25,10 +25,7 @@ namespace StmTestingSuite.Command
         {
             if(rawData == null) return new StmCommandResult<UInt16?>(null, "");
 
-            byte lsb = rawData[0];
-            byte msb = rawData[1];
-
-            UInt16 finalInt = (UInt16)(((UInt16)msb << 8) | (UInt16)lsb);
+            UInt16 finalInt = BitConverter.ToUInt16(rawData);
 
             return new StmCommandResult<UInt16>(finalInt, finalInt.ToString());
         }

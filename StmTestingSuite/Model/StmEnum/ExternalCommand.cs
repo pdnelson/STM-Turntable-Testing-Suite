@@ -19,6 +19,7 @@
         GET_LIFT_STATUS = 102,
         GET_HOME_STATUS = 103,
         GET_CURRENT_COMMAND = 104,
-        GET_ERROR_CODE = 105
+        GET_ERROR_CODE = 105,
+        GET_UP_TIME = 106
     }
 }

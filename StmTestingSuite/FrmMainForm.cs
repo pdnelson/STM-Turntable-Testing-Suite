@@ -226,6 +226,7 @@ namespace StmTestingSuite
                 new CmdGetHomeStatus(Conn),
                 new CmdGetHorizontalEncoderPos(Conn),
                 new CmdGetLiftStatus(Conn),
+                new CmdGetUpTime(Conn),
                 new CmdGetVerticalEncoderPos(Conn)
             ];
         }
