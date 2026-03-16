@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StmTestingSuite.Model.Command.Input.Value
+namespace StmTestingSuite.Model.StmEnum
 {
-    enum SpeedValue : byte
+    enum SpeedOption : byte
     {
         RPM_33 = 0,
         RPM_45 = 1,

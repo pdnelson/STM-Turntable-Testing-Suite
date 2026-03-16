@@ -1,3 +1,5 @@
+using StmTestingSuite.Command;
+using StmTestingSuite.Command.Base;
 using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
@@ -8,13 +10,16 @@ namespace StmTestingSuite
 {
     public partial class FrmMainForm : Form
     {
-        StmCommunicator Stm;
+        StmConnector Conn;
+        List<BaseStmCommand> Commands;
 
         public FrmMainForm()
         {
             InitializeComponent();
 
-            Stm = new StmCommunicator(dgvSimpleLog, this);
+            Conn = new StmConnector(dgvSimpleLog, this);
+            RefreshSerialOptions();
+            RegisterCommands();
 
             // Populate command group list items
             List<StmExternalCommandGroup> groupOptions = new List<StmExternalCommandGroup>();
@@ -31,8 +36,6 @@ namespace StmTestingSuite
             cboSimpleCommandOptions.DropDownStyle = ComboBoxStyle.DropDownList;
             cboSimpleCommandInput.DropDownStyle = ComboBoxStyle.DropDownList;
             btnSimpleSendCommand.Enabled = false;
-
-            RefreshSerialOptions();
         }
 
         private void cboSimpleCommandGroupOptions_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,15 +52,13 @@ namespace StmTestingSuite
                 cboSimpleCommandOptions.Enabled = true;
             }
 
-            // Populate combo box list items based on group selection
-            List<StmExternalCommand> commandOptions = new List<StmExternalCommand>();
-            foreach (StmExternalCommandType commandType in Enum.GetValues(typeof(StmExternalCommandType)))
+            // Populate combo box commands based on group selection
+            List<BaseStmCommand> commandOptions = new List<BaseStmCommand>();
+            foreach (BaseStmCommand command in Commands)
             {
-                StmExternalCommand newCommand = new StmExternalCommand(commandType);
-
-                if (newCommand.Group.Type == selectedGroup.Type)
+                if (command.GroupType == selectedGroup.Type)
                 {
-                    commandOptions.Add(newCommand);
+                    commandOptions.Add(command);
                 }
             }
             cboSimpleCommandOptions.DataSource = commandOptions.OrderBy(x => x.Name).ToList();
@@ -66,23 +67,23 @@ namespace StmTestingSuite
 
         private void cboSimpleCommandOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            StmExternalCommand? selectedCommand = (StmExternalCommand?)cboSimpleCommandOptions.SelectedValue;
+            BaseStmCommand? selectedCommand = (BaseStmCommand?)cboSimpleCommandOptions.SelectedValue;
             if (selectedCommand is null) return;
 
             txtSimpleCommandInput.Visible = false;
             cboSimpleCommandInput.Visible = false;
             numSimpleCommandInput.Visible = false;
 
-            if (selectedCommand.Input.Type == StmExternalCommandInputType.NONE)
+            if (selectedCommand.InputType == StmExternalCommandInputType.NONE)
             {
                 lblSimpleExtraData.Visible = false;
             }
             else
             {
-                lblSimpleExtraData.Text = selectedCommand.Input.Name + ":";
+                lblSimpleExtraData.Text = ((BaseStmInputCommand)selectedCommand).FieldName + ":";
                 lblSimpleExtraData.Visible = true;
 
-                switch (selectedCommand.Input.Type)
+                switch (selectedCommand.InputType)
                 {
                     case StmExternalCommandInputType.NUMERIC_INT:
                         numSimpleCommandInput.Value = 0;
@@ -95,8 +96,9 @@ namespace StmTestingSuite
                         numSimpleCommandInput.Visible = true;
                         break;
                     case StmExternalCommandInputType.DROP_DOWN:
-                        cboSimpleCommandInput.DataSource = selectedCommand.Input.Options;
+                        cboSimpleCommandInput.DataSource = ((BaseStmDropDownCommand)selectedCommand).Options;
                         cboSimpleCommandInput.DisplayMember = "Name";
+                        cboSimpleCommandInput.SelectedIndex = 0;
                         cboSimpleCommandInput.Visible = true;
                         break;
                 }
@@ -105,11 +107,11 @@ namespace StmTestingSuite
 
         private void btnSimpleSendCommand_Click(object sender, EventArgs e)
         {
-            StmExternalCommand? selectedCommand = (StmExternalCommand?)cboSimpleCommandOptions.SelectedValue;
+            BaseStmCommand? selectedCommand = (BaseStmCommand?)cboSimpleCommandOptions.SelectedValue;
 
             if (selectedCommand is not null)
             {
-                executeCommand(selectedCommand);
+                ExecuteSimpleCommand(selectedCommand);
             }
         }
 
@@ -120,7 +122,7 @@ namespace StmTestingSuite
 
         private void btnSimpleClearLog_Click(object sender, EventArgs e)
         {
-            Stm.ClearLog();
+            Conn.ClearLog();
         }
 
         private void RefreshSerialOptions()
@@ -132,9 +134,9 @@ namespace StmTestingSuite
 
         private void ToggleConnection()
         {
-            if (Stm.Connected)
+            if (Conn.Connected)
             {
-                if (Stm.CloseCommunication())
+                if (Conn.CloseCommunication())
                 {
                     lblConnectionStatus.Text = "Not Connected";
                     btnConnect.Text = "Connect";
@@ -147,13 +149,13 @@ namespace StmTestingSuite
             {
                 string? comPort = (string?)cboSerialOptions.SelectedValue;
 
-                if (comPort is not null && Stm.OpenCommunication(comPort))
+                if (comPort is not null && Conn.OpenCommunication(comPort))
                 {
                     lblConnectionStatus.Text = "Connected";
                     btnConnect.Text = "Disconnect";
                     btnSimpleSendCommand.Enabled = true;
                     cboSerialOptions.Enabled = false;
-                    executeCommand(new StmExternalCommand(StmExternalCommandType.CONNECTION_TEST));
+                    ExecuteSimpleCommand(Commands.First());
                     BtnRefreshSerialPorts.Enabled = false;
                 }
                 else if (comPort is null)
@@ -164,7 +166,7 @@ namespace StmTestingSuite
             }
         }
 
-        private void executeCommand(StmExternalCommand command)
+        private void ExecuteSimpleCommand(BaseStmCommand command)
         {
             btnSimpleSendCommand.Enabled = false;
 
@@ -172,14 +174,10 @@ namespace StmTestingSuite
             {
                 try
                 {
-                    switch (command.Input.Type)
-                    {
-                        case StmExternalCommandInputType.NONE:
-                            await Stm.SendCommand(command);
-                            break;
-                    }
+                    await command.Execute();
 
                     await Task.Delay(Constants.SendCommandDebounceMs);
+
                     Utilities.WriteToUiFromThread(this, () =>
                     {
                         btnSimpleSendCommand.Enabled = true;
@@ -204,6 +202,65 @@ namespace StmTestingSuite
         private void BtnRefreshSerialPorts_Click(object sender, EventArgs e)
         {
             RefreshSerialOptions();
+        }
+
+        private void RegisterCommands()
+        {
+            Commands =
+            [
+                // other
+                new CmdConnectionTest(Conn),
+
+                // action
+                new CmdPauseUnpause(Conn),
+
+                // set
+                new CmdSetClearActionCommand(Conn),
+                new CmdSetCustomSpeed(Conn),
+                new CmdSetSize(Conn),
+                new CmdSetSpeed(Conn),
+
+                // get
+                new CmdGetCurrentCommand(Conn),
+                new CmdGetErrorCode(Conn),
+                new CmdGetHomeStatus(Conn),
+                new CmdGetHorizontalEncoderPos(Conn),
+                new CmdGetLiftStatus(Conn),
+                new CmdGetVerticalEncoderPos(Conn)
+            ];
+        }
+
+        private void cboSimpleCommandInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BaseStmDropDownCommand? command = (BaseStmDropDownCommand?)cboSimpleCommandOptions.SelectedValue;
+
+            if (command is not null)
+            {
+                StmExternalCommandInputOption? option = (StmExternalCommandInputOption?)cboSimpleCommandInput.SelectedValue;
+
+                if (option is not null)
+                {
+                    command.UpdateInputData((StmExternalCommandInputOption)option);
+                }
+            }
+        }
+
+        private void numSimpleCommandInput_ValueChanged(object sender, EventArgs e)
+        {
+            BaseStmInputCommand? command = (BaseStmInputCommand?)cboSimpleCommandOptions.SelectedValue;
+
+            if(command is not null)
+            {
+                decimal value = numSimpleCommandInput.Value;
+
+                if (command.InputType == StmExternalCommandInputType.NUMERIC_INT)
+                {
+                    command.UpdateInputData(Decimal.ToUInt16(value));
+                } else
+                {
+                    command.UpdateInputData(Decimal.ToSingle(value));
+                }
+            }
         }
     }
 }

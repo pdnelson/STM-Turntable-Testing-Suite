@@ -1,6 +1,6 @@
-﻿namespace StmTestingSuite.Model.Command
+﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum StmExternalCommandType : byte
+    enum ExternalCommand : byte
     {
         CONNECTION_TEST = 0,
 

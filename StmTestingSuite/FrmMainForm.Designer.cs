@@ -130,14 +130,14 @@
             // 
             // grpSimpleInput
             // 
-            grpSimpleInput.Controls.Add(cboSimpleCommandInput);
-            grpSimpleInput.Controls.Add(numSimpleCommandInput);
             grpSimpleInput.Controls.Add(cboSimpleCommandOptions);
             grpSimpleInput.Controls.Add(btnSimpleSendCommand);
-            grpSimpleInput.Controls.Add(txtSimpleCommandInput);
             grpSimpleInput.Controls.Add(lblSimpleExtraData);
             grpSimpleInput.Controls.Add(cboSimpleCommandGroupOptions);
             grpSimpleInput.Controls.Add(lblSimpleCommand);
+            grpSimpleInput.Controls.Add(numSimpleCommandInput);
+            grpSimpleInput.Controls.Add(txtSimpleCommandInput);
+            grpSimpleInput.Controls.Add(cboSimpleCommandInput);
             grpSimpleInput.Location = new Point(6, 6);
             grpSimpleInput.Name = "grpSimpleInput";
             grpSimpleInput.Size = new Size(483, 79);
@@ -152,6 +152,7 @@
             cboSimpleCommandInput.Name = "cboSimpleCommandInput";
             cboSimpleCommandInput.Size = new Size(227, 23);
             cboSimpleCommandInput.TabIndex = 4;
+            cboSimpleCommandInput.SelectedIndexChanged += cboSimpleCommandInput_SelectedIndexChanged;
             // 
             // numSimpleCommandInput
             // 
@@ -159,6 +160,7 @@
             numSimpleCommandInput.Name = "numSimpleCommandInput";
             numSimpleCommandInput.Size = new Size(227, 23);
             numSimpleCommandInput.TabIndex = 5;
+            numSimpleCommandInput.ValueChanged += numSimpleCommandInput_ValueChanged;
             // 
             // cboSimpleCommandOptions
             // 

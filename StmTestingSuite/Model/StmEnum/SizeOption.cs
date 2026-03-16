@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StmTestingSuite.Model.Command.Input.Value
+namespace StmTestingSuite.Model.StmEnum
 {
-    enum SizeValue : byte
+    enum SizeOption : byte
     {
         IN_7 = 0,
         IN_10 = 1,

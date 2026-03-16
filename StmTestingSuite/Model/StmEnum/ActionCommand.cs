@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StmTestingSuite.Model.Response
+namespace StmTestingSuite.Model.StmEnum
 {
     enum ActionCommand : byte
     {
