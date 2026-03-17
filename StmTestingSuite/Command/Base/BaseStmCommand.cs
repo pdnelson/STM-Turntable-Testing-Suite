@@ -5,19 +5,14 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command.Base
 {
-    abstract class BaseStmCommand
+    abstract class BaseStmCommand(StmConnector conn)
     {
         public abstract StmExternalCommandGroupType GroupType { get; }
         public abstract ExternalCommand ExternalCommandType { get; }
         public abstract StmExternalCommandInputType InputType { get; }
         public abstract string Name { get; }
         public abstract ushort ResponseSize { get; }
-        public StmConnector Conn { get; }
-
-        protected BaseStmCommand(StmConnector conn)
-        {
-            Conn = conn;
-        }
+        public StmConnector Conn { get; } = conn;
 
         public virtual async Task<IStmCommandResult?> Execute() {
             int dataSize = 2; // key + command

@@ -1,25 +1,16 @@
 ﻿using StmTestingSuite.Command.Base;
-using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
-using StmTestingSuite.Model.Command.Input;
 using System.IO.Ports;
 using System.Text;
 
 namespace StmTestingSuite
 {
-    internal class StmConnector
+    internal class StmConnector(DataGridView logger, Form form)
     {
         SerialPort? Port { get; set; }
-        public bool Connected { get; private set; }
-        DataGridView Logger { get; }
-        Form Form { get; }
-
-        public StmConnector(DataGridView logger, Form form)
-        {
-            Logger = logger;
-            Form = form;
-            Connected = false;
-        }
+        public bool Connected { get; private set; } = false;
+        DataGridView Logger { get; } = logger;
+        Form Form { get; } = form;
 
         public bool OpenCommunication(string port)
         {
@@ -101,17 +92,17 @@ namespace StmTestingSuite
 
             if(command.GroupType != StmExternalCommandGroupType.OTHER && command.GroupType != StmExternalCommandGroupType.ACTION)
             {
-                var actionType = new StmExternalCommandGroup(command.GroupType).Name.Substring(0, 3);
+                var actionType = new StmExternalCommandGroup(command.GroupType).Name[..3];
 
                 commandSent.Append(actionType + " ");
             }
 
             commandSent.Append(command.Name);
 
-            if(command is BaseStmInputCommand)
+            if(command is BaseStmInputCommand inputCommand)
             {
                 commandSent.Append(": ");
-                commandSent.Append(((BaseStmInputCommand)command).ReadableInputData + " " + ((BaseStmInputCommand)command).FieldName);
+                commandSent.Append(inputCommand.ReadableInputData + " " + inputCommand.FieldName);
             }
 
             string response = "";

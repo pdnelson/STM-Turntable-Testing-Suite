@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StmTestingSuite.Model.Command.Input
+﻿namespace StmTestingSuite.Model.Command.Input
 {
     enum StmExternalCommandInputType
     {

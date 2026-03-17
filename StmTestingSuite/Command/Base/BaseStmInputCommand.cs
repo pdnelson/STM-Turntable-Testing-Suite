@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StmTestingSuite.Command.Base
+﻿namespace StmTestingSuite.Command.Base
 {
     abstract class BaseStmInputCommand(StmConnector conn) : BaseStmCommand(conn)
     {

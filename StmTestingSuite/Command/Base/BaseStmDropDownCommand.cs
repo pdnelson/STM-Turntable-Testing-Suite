@@ -1,7 +1,4 @@
 ﻿using StmTestingSuite.Model.Command.Input;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StmTestingSuite.Command.Base
 {
@@ -20,7 +17,7 @@ namespace StmTestingSuite.Command.Base
         {
             string dataName = Options.Find(x => x.Value == data).Name;
 
-            UpdateInputData("", [data]);
+            UpdateInputData(dataName, [data]);
         }
     }
 }
