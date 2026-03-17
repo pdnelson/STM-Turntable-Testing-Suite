@@ -1,113 +1,94 @@
 using StmTestingSuite.Command;
 using StmTestingSuite.Command.Base;
-using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
-using System.Diagnostics.Contracts;
+
 using System.IO.Ports;
 
 namespace StmTestingSuite
 {
     public partial class FrmMainForm : Form
     {
-        StmConnector Conn;
-        List<BaseStmCommand> Commands;
+        private readonly StmConnector Conn;
+        private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
         {
             InitializeComponent();
 
-            Conn = new StmConnector(dgvSimpleLog, this);
+            Conn = new StmConnector(DgvSimpleLog, this);
             RefreshSerialOptions();
             RegisterCommands();
 
             // Populate command group list items
-            List<StmExternalCommandGroup> groupOptions = new List<StmExternalCommandGroup>();
-            foreach (StmExternalCommandGroupType commandGroup in Enum.GetValues(typeof(StmExternalCommandGroupType)))
+            List<StmExternalCommandGroup> groupOptions = [];
+            foreach (StmExternalCommandGroupType commandGroup in Enum.GetValues<StmExternalCommandGroupType>())
             {
                 groupOptions.Add(new StmExternalCommandGroup(commandGroup));
             }
-            cboSimpleCommandGroupOptions.DataSource = groupOptions;
-            cboSimpleCommandGroupOptions.DisplayMember = "Name";
-            cboSimpleCommandGroupOptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            CboSimpleCommandGroupOptions.DataSource = groupOptions;
+            CboSimpleCommandGroupOptions.DisplayMember = "Name";
 
-            cboSimpleCommandOptions.Enabled = false;
-
-            cboSimpleCommandOptions.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboSimpleCommandInput.DropDownStyle = ComboBoxStyle.DropDownList;
-            btnSimpleSendCommand.Enabled = false;
+            BtnSimpleSendCommand.Enabled = false;
         }
 
-        private void cboSimpleCommandGroupOptions_SelectedIndexChanged(object sender, EventArgs e)
+        private void CboSimpleCommandGroupOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            StmExternalCommandGroup? selectedGroup = (StmExternalCommandGroup?)cboSimpleCommandGroupOptions.SelectedValue;
-            if (selectedGroup is null) return;
-
-            if (selectedGroup.Type == StmExternalCommandGroupType.OTHER)
-            {
-                cboSimpleCommandOptions.Enabled = false;
-            }
-            else
-            {
-                cboSimpleCommandOptions.Enabled = true;
-            }
+            StmExternalCommandGroup? selectedGroup = (StmExternalCommandGroup?)CboSimpleCommandGroupOptions.SelectedValue;
 
             // Populate combo box commands based on group selection
-            List<BaseStmCommand> commandOptions = new List<BaseStmCommand>();
+            List<BaseStmCommand> commandOptions = [];
             foreach (BaseStmCommand command in Commands)
             {
-                if (command.GroupType == selectedGroup.Type)
+                if (command.GroupType == selectedGroup?.Type)
                 {
                     commandOptions.Add(command);
                 }
             }
-            cboSimpleCommandOptions.DataSource = commandOptions.OrderBy(x => x.Name).ToList();
-            cboSimpleCommandOptions.DisplayMember = "Name";
+            CboSimpleCommandOptions.DataSource = commandOptions.OrderBy(x => x.Name).ToList();
+            CboSimpleCommandOptions.DisplayMember = "Name";
         }
 
-        private void cboSimpleCommandOptions_SelectedIndexChanged(object sender, EventArgs e)
+        private void CboSimpleCommandOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BaseStmCommand? selectedCommand = (BaseStmCommand?)cboSimpleCommandOptions.SelectedValue;
+            BaseStmCommand? selectedCommand = (BaseStmCommand?)CboSimpleCommandOptions.SelectedValue;
             if (selectedCommand is null) return;
 
-            txtSimpleCommandInput.Visible = false;
-            cboSimpleCommandInput.Visible = false;
-            numSimpleCommandInput.Visible = false;
+            TxtSimpleCommandInput.Visible = false;
+            CboSimpleCommandInput.Visible = false;
+            NumSimpleCommandInput.Visible = false;
+            LblSimpleExtraData.Visible = false;
 
-            if (selectedCommand.InputType == StmExternalCommandInputType.NONE)
+            if (selectedCommand.InputType != StmExternalCommandInputType.NONE)
             {
-                lblSimpleExtraData.Visible = false;
-            }
-            else
-            {
-                lblSimpleExtraData.Text = ((BaseStmInputCommand)selectedCommand).FieldName + ":";
-                lblSimpleExtraData.Visible = true;
+                LblSimpleExtraData.Text = ((BaseStmInputCommand)selectedCommand).FieldName + ":";
+                LblSimpleExtraData.Visible = true;
 
                 switch (selectedCommand.InputType)
                 {
                     case StmExternalCommandInputType.NUMERIC_INT:
-                        numSimpleCommandInput.Value = 0;
-                        numSimpleCommandInput.DecimalPlaces = 0;
-                        numSimpleCommandInput.Visible = true;
+                        NumSimpleCommandInput.Value = 0;
+                        NumSimpleCommandInput.DecimalPlaces = 0;
+                        NumSimpleCommandInput.Visible = true;
                         break;
                     case StmExternalCommandInputType.NUMERIC_DEC:
-                        numSimpleCommandInput.Value = 0;
-                        numSimpleCommandInput.DecimalPlaces = 3;
-                        numSimpleCommandInput.Visible = true;
+                        NumSimpleCommandInput.Value = 0;
+                        NumSimpleCommandInput.DecimalPlaces = 3;
+                        NumSimpleCommandInput.Visible = true;
                         break;
                     case StmExternalCommandInputType.DROP_DOWN:
-                        cboSimpleCommandInput.DataSource = ((BaseStmDropDownCommand)selectedCommand).Options;
-                        cboSimpleCommandInput.DisplayMember = "Name";
-                        cboSimpleCommandInput.SelectedIndex = 0;
-                        cboSimpleCommandInput.Visible = true;
+                        CboSimpleCommandInput.DataSource = ((BaseStmDropDownCommand)selectedCommand).Options;
+                        CboSimpleCommandInput.DisplayMember = "Name";
+                        CboSimpleCommandInput.SelectedIndex = 0;
+                        CboSimpleCommandInput.Visible = true;
                         break;
                 }
             }
         }
 
-        private void btnSimpleSendCommand_Click(object sender, EventArgs e)
+        private void BtnSimpleSendCommand_Click(object sender, EventArgs e)
         {
-            BaseStmCommand? selectedCommand = (BaseStmCommand?)cboSimpleCommandOptions.SelectedValue;
+            BaseStmCommand? selectedCommand = (BaseStmCommand?)CboSimpleCommandOptions.SelectedValue;
 
             if (selectedCommand is not null)
             {
@@ -115,94 +96,57 @@ namespace StmTestingSuite
             }
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void BtnConnect_Click(object sender, EventArgs e)
         {
             ToggleConnection();
         }
 
-        private void btnSimpleClearLog_Click(object sender, EventArgs e)
+        private void BtnSimpleClearLog_Click(object sender, EventArgs e)
         {
             Conn.ClearLog();
-        }
-
-        private void RefreshSerialOptions()
-        {
-            // Initialize COM ports
-            cboSerialOptions.DataSource = SerialPort.GetPortNames().ToList();
-            cboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        private void ToggleConnection()
-        {
-            if (Conn.Connected)
-            {
-                if (Conn.CloseCommunication())
-                {
-                    lblConnectionStatus.Text = "Not Connected";
-                    btnConnect.Text = "Connect";
-                    btnSimpleSendCommand.Enabled = false;
-                    cboSerialOptions.Enabled = true;
-                    BtnRefreshSerialPorts.Enabled = true;
-                }
-            }
-            else
-            {
-                string? comPort = (string?)cboSerialOptions.SelectedValue;
-
-                if (comPort is not null && Conn.OpenCommunication(comPort))
-                {
-                    lblConnectionStatus.Text = "Connected";
-                    btnConnect.Text = "Disconnect";
-                    btnSimpleSendCommand.Enabled = true;
-                    cboSerialOptions.Enabled = false;
-                    ExecuteSimpleCommand(Commands.First());
-                    BtnRefreshSerialPorts.Enabled = false;
-                }
-                else if (comPort is null)
-                {
-                    MessageBox.Show("No COM ports are available. Is the turntable connected to the computer?", "No COM Ports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    RefreshSerialOptions();
-                }
-            }
-        }
-
-        private void ExecuteSimpleCommand(BaseStmCommand command)
-        {
-            btnSimpleSendCommand.Enabled = false;
-
-            Task commandTask = new Task(async () =>
-            {
-                try
-                {
-                    await command.Execute();
-
-                    await Task.Delay(Constants.SendCommandDebounceMs);
-
-                    Utilities.WriteToUiFromThread(this, () =>
-                    {
-                        btnSimpleSendCommand.Enabled = true;
-                        btnSimpleSendCommand.Focus();
-                    });
-
-                }
-                catch (InvalidOperationException)
-                {
-                    MessageBox.Show("The device has been disconnected", "Device Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Utilities.WriteToUiFromThread(this, () =>
-                    {
-                        ToggleConnection();
-                        RefreshSerialOptions();
-                    });
-                }
-            });
-
-            commandTask.Start();
         }
 
         private void BtnRefreshSerialPorts_Click(object sender, EventArgs e)
         {
             RefreshSerialOptions();
         }
+
+        private void CboSimpleCommandInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BaseStmDropDownCommand? command = (BaseStmDropDownCommand?)CboSimpleCommandOptions.SelectedValue;
+
+            if (command is not null)
+            {
+                StmExternalCommandInputOption? option = (StmExternalCommandInputOption?)CboSimpleCommandInput.SelectedValue;
+
+                if (option is not null)
+                {
+                    command.UpdateInputData((StmExternalCommandInputOption)option);
+                }
+            }
+        }
+
+        private void NumSimpleCommandInput_ValueChanged(object sender, EventArgs e)
+        {
+            BaseStmInputCommand? command = (BaseStmInputCommand?)CboSimpleCommandOptions.SelectedValue;
+
+            if(command is not null)
+            {
+                decimal value = NumSimpleCommandInput.Value;
+
+                if (command.InputType == StmExternalCommandInputType.NUMERIC_INT)
+                {
+                    command.UpdateInputData(Decimal.ToUInt16(value));
+                } else
+                {
+                    command.UpdateInputData(Decimal.ToSingle(value));
+                }
+            }
+        }
+
+        /**
+         * Beyond here lie helper methods.
+         **/
 
         private void RegisterCommands()
         {
@@ -230,38 +174,76 @@ namespace StmTestingSuite
                 new CmdGetVerticalEncoderPos(Conn)
             ];
         }
-
-        private void cboSimpleCommandInput_SelectedIndexChanged(object sender, EventArgs e)
+        private void ToggleConnection()
         {
-            BaseStmDropDownCommand? command = (BaseStmDropDownCommand?)cboSimpleCommandOptions.SelectedValue;
-
-            if (command is not null)
+            if (Conn.Connected)
             {
-                StmExternalCommandInputOption? option = (StmExternalCommandInputOption?)cboSimpleCommandInput.SelectedValue;
-
-                if (option is not null)
+                if (Conn.CloseCommunication())
                 {
-                    command.UpdateInputData((StmExternalCommandInputOption)option);
+                    LblConnectionStatus.Text = "Not Connected";
+                    BtnConnect.Text = "Connect";
+                    BtnSimpleSendCommand.Enabled = false;
+                    CboSerialOptions.Enabled = true;
+                    BtnRefreshSerialPorts.Enabled = true;
+                }
+            }
+            else
+            {
+                string? comPort = (string?)CboSerialOptions.SelectedValue;
+
+                if (comPort is not null && Conn.OpenCommunication(comPort))
+                {
+                    LblConnectionStatus.Text = "Connected";
+                    BtnConnect.Text = "Disconnect";
+                    BtnSimpleSendCommand.Enabled = true;
+                    CboSerialOptions.Enabled = false;
+                    ExecuteSimpleCommand(new CmdConnectionTest(Conn));
+                    BtnRefreshSerialPorts.Enabled = false;
+                }
+                else if (comPort is null)
+                {
+                    MessageBox.Show("No COM ports are available. Is the turntable connected to the computer?", "No COM Ports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    RefreshSerialOptions();
                 }
             }
         }
 
-        private void numSimpleCommandInput_ValueChanged(object sender, EventArgs e)
+        private void ExecuteSimpleCommand(BaseStmCommand command)
         {
-            BaseStmInputCommand? command = (BaseStmInputCommand?)cboSimpleCommandOptions.SelectedValue;
+            BtnSimpleSendCommand.Enabled = false;
 
-            if(command is not null)
+            Task commandTask = new(async () =>
             {
-                decimal value = numSimpleCommandInput.Value;
+                try
+                {
+                    await command.Execute();
 
-                if (command.InputType == StmExternalCommandInputType.NUMERIC_INT)
-                {
-                    command.UpdateInputData(Decimal.ToUInt16(value));
-                } else
-                {
-                    command.UpdateInputData(Decimal.ToSingle(value));
+                    await Task.Delay(Constants.SendCommandDebounceMs);
+
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        BtnSimpleSendCommand.Enabled = true;
+                        BtnSimpleSendCommand.Focus();
+                    });
+
                 }
-            }
+                catch (InvalidOperationException)
+                {
+                    MessageBox.Show("The device has been disconnected", "Device Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        ToggleConnection();
+                        RefreshSerialOptions();
+                    });
+                }
+            });
+
+            commandTask.Start();
+        }
+
+        private void RefreshSerialOptions()
+        {
+            CboSerialOptions.DataSource = SerialPort.GetPortNames().ToList();
         }
     }
 }

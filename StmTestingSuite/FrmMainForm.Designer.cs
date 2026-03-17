@@ -29,42 +29,42 @@
         private void InitializeComponent()
         {
             tabMain = new TabControl();
-            tabSimple = new TabPage();
-            btnSimpleClearLog = new Button();
-            dgvSimpleLog = new DataGridView();
+            TabSimple = new TabPage();
+            BtnSimpleClearLog = new Button();
+            DgvSimpleLog = new DataGridView();
             cmnSimpleTime = new DataGridViewTextBoxColumn();
             cmnSimpleSent = new DataGridViewTextBoxColumn();
             cmnSimpleReceived = new DataGridViewTextBoxColumn();
-            grpSimpleInput = new GroupBox();
-            cboSimpleCommandInput = new ComboBox();
-            numSimpleCommandInput = new NumericUpDown();
-            cboSimpleCommandOptions = new ComboBox();
-            btnSimpleSendCommand = new Button();
-            txtSimpleCommandInput = new TextBox();
-            lblSimpleExtraData = new Label();
-            cboSimpleCommandGroupOptions = new ComboBox();
-            lblSimpleCommand = new Label();
+            GrpSimpleInput = new GroupBox();
+            CboSimpleCommandOptions = new ComboBox();
+            BtnSimpleSendCommand = new Button();
+            LblSimpleExtraData = new Label();
+            CboSimpleCommandGroupOptions = new ComboBox();
+            LblSimpleCommand = new Label();
+            CboSimpleCommandInput = new ComboBox();
+            NumSimpleCommandInput = new NumericUpDown();
+            TxtSimpleCommandInput = new TextBox();
             tabAdvanced = new TabPage();
-            lblTodo1 = new Label();
+            LblTodo1 = new Label();
             tabGraphical = new TabPage();
-            lblTodo2 = new Label();
-            cboSerialOptions = new ComboBox();
-            lblSerialOptions = new Label();
-            lblConnectionStatus = new Label();
-            btnConnect = new Button();
+            LblTodo2 = new Label();
+            CboSerialOptions = new ComboBox();
+            LblSerialOptions = new Label();
+            LblConnectionStatus = new Label();
+            BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
             tabMain.SuspendLayout();
-            tabSimple.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvSimpleLog).BeginInit();
-            grpSimpleInput.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numSimpleCommandInput).BeginInit();
+            TabSimple.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
+            GrpSimpleInput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
             tabGraphical.SuspendLayout();
             SuspendLayout();
             // 
             // tabMain
             // 
-            tabMain.Controls.Add(tabSimple);
+            tabMain.Controls.Add(TabSimple);
             tabMain.Controls.Add(tabAdvanced);
             tabMain.Controls.Add(tabGraphical);
             tabMain.Location = new Point(12, 35);
@@ -73,40 +73,40 @@
             tabMain.Size = new Size(769, 497);
             tabMain.TabIndex = 4;
             // 
-            // tabSimple
+            // TabSimple
             // 
-            tabSimple.Controls.Add(btnSimpleClearLog);
-            tabSimple.Controls.Add(dgvSimpleLog);
-            tabSimple.Controls.Add(grpSimpleInput);
-            tabSimple.Location = new Point(4, 24);
-            tabSimple.Name = "tabSimple";
-            tabSimple.Padding = new Padding(3);
-            tabSimple.Size = new Size(761, 469);
-            tabSimple.TabIndex = 0;
-            tabSimple.Text = "Simple";
-            tabSimple.UseVisualStyleBackColor = true;
+            TabSimple.Controls.Add(BtnSimpleClearLog);
+            TabSimple.Controls.Add(DgvSimpleLog);
+            TabSimple.Controls.Add(GrpSimpleInput);
+            TabSimple.Location = new Point(4, 24);
+            TabSimple.Name = "TabSimple";
+            TabSimple.Padding = new Padding(3);
+            TabSimple.Size = new Size(761, 469);
+            TabSimple.TabIndex = 0;
+            TabSimple.Text = "Simple";
+            TabSimple.UseVisualStyleBackColor = true;
             // 
-            // btnSimpleClearLog
+            // BtnSimpleClearLog
             // 
-            btnSimpleClearLog.Location = new Point(640, 62);
-            btnSimpleClearLog.Name = "btnSimpleClearLog";
-            btnSimpleClearLog.Size = new Size(115, 23);
-            btnSimpleClearLog.TabIndex = 8;
-            btnSimpleClearLog.Text = "Clear Log";
-            btnSimpleClearLog.UseVisualStyleBackColor = true;
-            btnSimpleClearLog.Click += btnSimpleClearLog_Click;
+            BtnSimpleClearLog.Location = new Point(640, 62);
+            BtnSimpleClearLog.Name = "BtnSimpleClearLog";
+            BtnSimpleClearLog.Size = new Size(115, 23);
+            BtnSimpleClearLog.TabIndex = 8;
+            BtnSimpleClearLog.Text = "Clear Log";
+            BtnSimpleClearLog.UseVisualStyleBackColor = true;
+            BtnSimpleClearLog.Click += BtnSimpleClearLog_Click;
             // 
-            // dgvSimpleLog
+            // DgvSimpleLog
             // 
-            dgvSimpleLog.AllowUserToAddRows = false;
-            dgvSimpleLog.AllowUserToDeleteRows = false;
-            dgvSimpleLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSimpleLog.Columns.AddRange(new DataGridViewColumn[] { cmnSimpleTime, cmnSimpleSent, cmnSimpleReceived });
-            dgvSimpleLog.Location = new Point(6, 91);
-            dgvSimpleLog.Name = "dgvSimpleLog";
-            dgvSimpleLog.ReadOnly = true;
-            dgvSimpleLog.Size = new Size(749, 372);
-            dgvSimpleLog.TabIndex = 9;
+            DgvSimpleLog.AllowUserToAddRows = false;
+            DgvSimpleLog.AllowUserToDeleteRows = false;
+            DgvSimpleLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvSimpleLog.Columns.AddRange(new DataGridViewColumn[] { cmnSimpleTime, cmnSimpleSent, cmnSimpleReceived });
+            DgvSimpleLog.Location = new Point(6, 91);
+            DgvSimpleLog.Name = "DgvSimpleLog";
+            DgvSimpleLog.ReadOnly = true;
+            DgvSimpleLog.Size = new Size(749, 372);
+            DgvSimpleLog.TabIndex = 9;
             // 
             // cmnSimpleTime
             // 
@@ -128,97 +128,100 @@
             cmnSimpleReceived.Name = "cmnSimpleReceived";
             cmnSimpleReceived.ReadOnly = true;
             // 
-            // grpSimpleInput
+            // GrpSimpleInput
             // 
-            grpSimpleInput.Controls.Add(cboSimpleCommandOptions);
-            grpSimpleInput.Controls.Add(btnSimpleSendCommand);
-            grpSimpleInput.Controls.Add(lblSimpleExtraData);
-            grpSimpleInput.Controls.Add(cboSimpleCommandGroupOptions);
-            grpSimpleInput.Controls.Add(lblSimpleCommand);
-            grpSimpleInput.Controls.Add(numSimpleCommandInput);
-            grpSimpleInput.Controls.Add(txtSimpleCommandInput);
-            grpSimpleInput.Controls.Add(cboSimpleCommandInput);
-            grpSimpleInput.Location = new Point(6, 6);
-            grpSimpleInput.Name = "grpSimpleInput";
-            grpSimpleInput.Size = new Size(483, 79);
-            grpSimpleInput.TabIndex = 8;
-            grpSimpleInput.TabStop = false;
-            grpSimpleInput.Text = "Input Data";
+            GrpSimpleInput.Controls.Add(CboSimpleCommandOptions);
+            GrpSimpleInput.Controls.Add(BtnSimpleSendCommand);
+            GrpSimpleInput.Controls.Add(LblSimpleExtraData);
+            GrpSimpleInput.Controls.Add(CboSimpleCommandGroupOptions);
+            GrpSimpleInput.Controls.Add(LblSimpleCommand);
+            GrpSimpleInput.Controls.Add(TxtSimpleCommandInput);
+            GrpSimpleInput.Controls.Add(CboSimpleCommandInput);
+            GrpSimpleInput.Controls.Add(NumSimpleCommandInput);
+            GrpSimpleInput.Location = new Point(6, 6);
+            GrpSimpleInput.Name = "GrpSimpleInput";
+            GrpSimpleInput.Size = new Size(483, 79);
+            GrpSimpleInput.TabIndex = 8;
+            GrpSimpleInput.TabStop = false;
+            GrpSimpleInput.Text = "Input Data";
             // 
-            // cboSimpleCommandInput
+            // CboSimpleCommandOptions
             // 
-            cboSimpleCommandInput.FormattingEnabled = true;
-            cboSimpleCommandInput.Location = new Point(106, 45);
-            cboSimpleCommandInput.Name = "cboSimpleCommandInput";
-            cboSimpleCommandInput.Size = new Size(227, 23);
-            cboSimpleCommandInput.TabIndex = 4;
-            cboSimpleCommandInput.SelectedIndexChanged += cboSimpleCommandInput_SelectedIndexChanged;
+            CboSimpleCommandOptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            CboSimpleCommandOptions.FormattingEnabled = true;
+            CboSimpleCommandOptions.Location = new Point(203, 16);
+            CboSimpleCommandOptions.Name = "CboSimpleCommandOptions";
+            CboSimpleCommandOptions.Size = new Size(248, 23);
+            CboSimpleCommandOptions.TabIndex = 3;
+            CboSimpleCommandOptions.SelectedIndexChanged += CboSimpleCommandOptions_SelectedIndexChanged;
             // 
-            // numSimpleCommandInput
+            // BtnSimpleSendCommand
             // 
-            numSimpleCommandInput.Location = new Point(106, 45);
-            numSimpleCommandInput.Name = "numSimpleCommandInput";
-            numSimpleCommandInput.Size = new Size(227, 23);
-            numSimpleCommandInput.TabIndex = 5;
-            numSimpleCommandInput.ValueChanged += numSimpleCommandInput_ValueChanged;
+            BtnSimpleSendCommand.Location = new Point(339, 45);
+            BtnSimpleSendCommand.Name = "BtnSimpleSendCommand";
+            BtnSimpleSendCommand.Size = new Size(112, 23);
+            BtnSimpleSendCommand.TabIndex = 7;
+            BtnSimpleSendCommand.Text = "Send Command";
+            BtnSimpleSendCommand.UseVisualStyleBackColor = true;
+            BtnSimpleSendCommand.Click += BtnSimpleSendCommand_Click;
             // 
-            // cboSimpleCommandOptions
+            // LblSimpleExtraData
             // 
-            cboSimpleCommandOptions.FormattingEnabled = true;
-            cboSimpleCommandOptions.Location = new Point(203, 16);
-            cboSimpleCommandOptions.Name = "cboSimpleCommandOptions";
-            cboSimpleCommandOptions.Size = new Size(248, 23);
-            cboSimpleCommandOptions.TabIndex = 3;
-            cboSimpleCommandOptions.SelectedIndexChanged += cboSimpleCommandOptions_SelectedIndexChanged;
+            LblSimpleExtraData.AutoSize = true;
+            LblSimpleExtraData.Location = new Point(6, 48);
+            LblSimpleExtraData.Name = "LblSimpleExtraData";
+            LblSimpleExtraData.Size = new Size(94, 15);
+            LblSimpleExtraData.TabIndex = 10;
+            LblSimpleExtraData.Text = "Command Data:";
+            LblSimpleExtraData.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // btnSimpleSendCommand
+            // CboSimpleCommandGroupOptions
             // 
-            btnSimpleSendCommand.Location = new Point(339, 45);
-            btnSimpleSendCommand.Name = "btnSimpleSendCommand";
-            btnSimpleSendCommand.Size = new Size(112, 23);
-            btnSimpleSendCommand.TabIndex = 7;
-            btnSimpleSendCommand.Text = "Send Command";
-            btnSimpleSendCommand.UseVisualStyleBackColor = true;
-            btnSimpleSendCommand.Click += btnSimpleSendCommand_Click;
+            CboSimpleCommandGroupOptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            CboSimpleCommandGroupOptions.FormattingEnabled = true;
+            CboSimpleCommandGroupOptions.Location = new Point(106, 16);
+            CboSimpleCommandGroupOptions.Name = "CboSimpleCommandGroupOptions";
+            CboSimpleCommandGroupOptions.Size = new Size(91, 23);
+            CboSimpleCommandGroupOptions.TabIndex = 2;
+            CboSimpleCommandGroupOptions.SelectedIndexChanged += CboSimpleCommandGroupOptions_SelectedIndexChanged;
             // 
-            // txtSimpleCommandInput
+            // LblSimpleCommand
             // 
-            txtSimpleCommandInput.Location = new Point(106, 45);
-            txtSimpleCommandInput.Name = "txtSimpleCommandInput";
-            txtSimpleCommandInput.Size = new Size(227, 23);
-            txtSimpleCommandInput.TabIndex = 6;
+            LblSimpleCommand.AutoSize = true;
+            LblSimpleCommand.Location = new Point(33, 19);
+            LblSimpleCommand.Name = "LblSimpleCommand";
+            LblSimpleCommand.Size = new Size(67, 15);
+            LblSimpleCommand.TabIndex = 9;
+            LblSimpleCommand.Text = "Command:";
             // 
-            // lblSimpleExtraData
+            // CboSimpleCommandInput
             // 
-            lblSimpleExtraData.AutoSize = true;
-            lblSimpleExtraData.Location = new Point(6, 48);
-            lblSimpleExtraData.Name = "lblSimpleExtraData";
-            lblSimpleExtraData.Size = new Size(94, 15);
-            lblSimpleExtraData.TabIndex = 10;
-            lblSimpleExtraData.Text = "Command Data:";
-            lblSimpleExtraData.TextAlign = ContentAlignment.MiddleRight;
+            CboSimpleCommandInput.DropDownStyle = ComboBoxStyle.DropDownList;
+            CboSimpleCommandInput.FormattingEnabled = true;
+            CboSimpleCommandInput.Location = new Point(106, 45);
+            CboSimpleCommandInput.Name = "CboSimpleCommandInput";
+            CboSimpleCommandInput.Size = new Size(227, 23);
+            CboSimpleCommandInput.TabIndex = 4;
+            CboSimpleCommandInput.SelectedIndexChanged += CboSimpleCommandInput_SelectedIndexChanged;
             // 
-            // cboSimpleCommandGroupOptions
+            // NumSimpleCommandInput
             // 
-            cboSimpleCommandGroupOptions.FormattingEnabled = true;
-            cboSimpleCommandGroupOptions.Location = new Point(106, 16);
-            cboSimpleCommandGroupOptions.Name = "cboSimpleCommandGroupOptions";
-            cboSimpleCommandGroupOptions.Size = new Size(91, 23);
-            cboSimpleCommandGroupOptions.TabIndex = 2;
-            cboSimpleCommandGroupOptions.SelectedIndexChanged += cboSimpleCommandGroupOptions_SelectedIndexChanged;
+            NumSimpleCommandInput.Location = new Point(106, 45);
+            NumSimpleCommandInput.Name = "NumSimpleCommandInput";
+            NumSimpleCommandInput.Size = new Size(227, 23);
+            NumSimpleCommandInput.TabIndex = 5;
+            NumSimpleCommandInput.ValueChanged += NumSimpleCommandInput_ValueChanged;
             // 
-            // lblSimpleCommand
+            // TxtSimpleCommandInput
             // 
-            lblSimpleCommand.AutoSize = true;
-            lblSimpleCommand.Location = new Point(33, 19);
-            lblSimpleCommand.Name = "lblSimpleCommand";
-            lblSimpleCommand.Size = new Size(67, 15);
-            lblSimpleCommand.TabIndex = 9;
-            lblSimpleCommand.Text = "Command:";
+            TxtSimpleCommandInput.Location = new Point(106, 45);
+            TxtSimpleCommandInput.Name = "TxtSimpleCommandInput";
+            TxtSimpleCommandInput.Size = new Size(227, 23);
+            TxtSimpleCommandInput.TabIndex = 6;
             // 
             // tabAdvanced
             // 
-            tabAdvanced.Controls.Add(lblTodo1);
+            tabAdvanced.Controls.Add(LblTodo1);
             tabAdvanced.Location = new Point(4, 24);
             tabAdvanced.Name = "tabAdvanced";
             tabAdvanced.Padding = new Padding(3);
@@ -227,18 +230,18 @@
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
-            // lblTodo1
+            // LblTodo1
             // 
-            lblTodo1.AutoSize = true;
-            lblTodo1.Location = new Point(311, 231);
-            lblTodo1.Name = "lblTodo1";
-            lblTodo1.Size = new Size(123, 15);
-            lblTodo1.TabIndex = 0;
-            lblTodo1.Text = "Not yet implemented!";
+            LblTodo1.AutoSize = true;
+            LblTodo1.Location = new Point(311, 231);
+            LblTodo1.Name = "LblTodo1";
+            LblTodo1.Size = new Size(123, 15);
+            LblTodo1.TabIndex = 0;
+            LblTodo1.Text = "Not yet implemented!";
             // 
             // tabGraphical
             // 
-            tabGraphical.Controls.Add(lblTodo2);
+            tabGraphical.Controls.Add(LblTodo2);
             tabGraphical.Location = new Point(4, 24);
             tabGraphical.Name = "tabGraphical";
             tabGraphical.Size = new Size(761, 469);
@@ -246,51 +249,52 @@
             tabGraphical.Text = "Graphical";
             tabGraphical.UseVisualStyleBackColor = true;
             // 
-            // lblTodo2
+            // LblTodo2
             // 
-            lblTodo2.AutoSize = true;
-            lblTodo2.Location = new Point(305, 223);
-            lblTodo2.Name = "lblTodo2";
-            lblTodo2.Size = new Size(123, 15);
-            lblTodo2.TabIndex = 0;
-            lblTodo2.Text = "Not yet implemented!";
+            LblTodo2.AutoSize = true;
+            LblTodo2.Location = new Point(305, 223);
+            LblTodo2.Name = "LblTodo2";
+            LblTodo2.Size = new Size(123, 15);
+            LblTodo2.TabIndex = 0;
+            LblTodo2.Text = "Not yet implemented!";
             // 
-            // cboSerialOptions
+            // CboSerialOptions
             // 
-            cboSerialOptions.FormattingEnabled = true;
-            cboSerialOptions.Location = new Point(81, 6);
-            cboSerialOptions.Name = "cboSerialOptions";
-            cboSerialOptions.Size = new Size(121, 23);
-            cboSerialOptions.TabIndex = 0;
+            CboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            CboSerialOptions.FormattingEnabled = true;
+            CboSerialOptions.Location = new Point(81, 6);
+            CboSerialOptions.Name = "CboSerialOptions";
+            CboSerialOptions.Size = new Size(121, 23);
+            CboSerialOptions.TabIndex = 0;
             // 
-            // lblSerialOptions
+            // LblSerialOptions
             // 
-            lblSerialOptions.AutoSize = true;
-            lblSerialOptions.Location = new Point(12, 9);
-            lblSerialOptions.Name = "lblSerialOptions";
-            lblSerialOptions.Size = new Size(63, 15);
-            lblSerialOptions.TabIndex = 1;
-            lblSerialOptions.Text = "Serial Port:";
+            LblSerialOptions.AutoSize = true;
+            LblSerialOptions.Location = new Point(12, 9);
+            LblSerialOptions.Name = "LblSerialOptions";
+            LblSerialOptions.Size = new Size(63, 15);
+            LblSerialOptions.TabIndex = 1;
+            LblSerialOptions.Text = "Serial Port:";
             // 
-            // lblConnectionStatus
+            // LblConnectionStatus
             // 
-            lblConnectionStatus.AutoSize = true;
-            lblConnectionStatus.Location = new Point(603, 9);
-            lblConnectionStatus.Name = "lblConnectionStatus";
-            lblConnectionStatus.Size = new Size(88, 15);
-            lblConnectionStatus.TabIndex = 2;
-            lblConnectionStatus.Text = "Not Connected";
-            lblConnectionStatus.TextAlign = ContentAlignment.MiddleRight;
+            LblConnectionStatus.AutoSize = true;
+            LblConnectionStatus.Location = new Point(603, 9);
+            LblConnectionStatus.Name = "LblConnectionStatus";
+            LblConnectionStatus.Size = new Size(88, 15);
+            LblConnectionStatus.TabIndex = 2;
+            LblConnectionStatus.Text = "Not Connected";
+            LblConnectionStatus.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // btnConnect
+            // BtnConnect
             // 
-            btnConnect.Location = new Point(697, 6);
-            btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(84, 23);
-            btnConnect.TabIndex = 1;
-            btnConnect.Text = "Connect";
-            btnConnect.UseVisualStyleBackColor = true;
-            btnConnect.Click += btnConnect_Click;
+            BtnConnect.Location = new Point(697, 6);
+            BtnConnect.Name = "BtnConnect";
+            BtnConnect.Size = new Size(84, 23);
+            BtnConnect.TabIndex = 1;
+            BtnConnect.Text = "Connect";
+            BtnConnect.UseVisualStyleBackColor = true;
+            BtnConnect.Click += BtnConnect_Click;
             // 
             // BtnRefreshSerialPorts
             // 
@@ -308,19 +312,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(793, 544);
             Controls.Add(BtnRefreshSerialPorts);
-            Controls.Add(btnConnect);
+            Controls.Add(BtnConnect);
             Controls.Add(tabMain);
-            Controls.Add(lblConnectionStatus);
-            Controls.Add(lblSerialOptions);
-            Controls.Add(cboSerialOptions);
+            Controls.Add(LblConnectionStatus);
+            Controls.Add(LblSerialOptions);
+            Controls.Add(CboSerialOptions);
             Name = "FrmMainForm";
             Text = "Statimatic STM Testing Suite";
             tabMain.ResumeLayout(false);
-            tabSimple.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvSimpleLog).EndInit();
-            grpSimpleInput.ResumeLayout(false);
-            grpSimpleInput.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numSimpleCommandInput).EndInit();
+            TabSimple.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).EndInit();
+            GrpSimpleInput.ResumeLayout(false);
+            GrpSimpleInput.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
             tabAdvanced.PerformLayout();
             tabGraphical.ResumeLayout(false);
@@ -332,29 +336,29 @@
         #endregion
 
         private TabControl tabMain;
-        private TabPage tabSimple;
+        private TabPage TabSimple;
         private TabPage tabAdvanced;
-        private ComboBox cboSerialOptions;
-        private Label lblSerialOptions;
-        private Label lblConnectionStatus;
+        private ComboBox CboSerialOptions;
+        private Label LblSerialOptions;
+        private Label LblConnectionStatus;
         private TabPage tabGraphical;
-        private Label lblTodo1;
-        private Label lblTodo2;
-        private GroupBox grpSimpleInput;
-        private TextBox txtSimpleCommandInput;
-        private Label lblSimpleExtraData;
-        private ComboBox cboSimpleCommandGroupOptions;
-        private Label lblSimpleCommand;
-        private Button btnSimpleSendCommand;
-        private DataGridView dgvSimpleLog;
-        private Button btnSimpleClearLog;
+        private Label LblTodo1;
+        private Label LblTodo2;
+        private GroupBox GrpSimpleInput;
+        private TextBox TxtSimpleCommandInput;
+        private Label LblSimpleExtraData;
+        private ComboBox CboSimpleCommandGroupOptions;
+        private Label LblSimpleCommand;
+        private Button BtnSimpleSendCommand;
+        private DataGridView DgvSimpleLog;
+        private Button BtnSimpleClearLog;
         private DataGridViewTextBoxColumn cmnSimpleTime;
         private DataGridViewTextBoxColumn cmnSimpleSent;
         private DataGridViewTextBoxColumn cmnSimpleReceived;
-        private Button btnConnect;
-        private ComboBox cboSimpleCommandOptions;
-        private NumericUpDown numSimpleCommandInput;
-        private ComboBox cboSimpleCommandInput;
+        private Button BtnConnect;
+        private ComboBox CboSimpleCommandOptions;
+        private NumericUpDown NumSimpleCommandInput;
+        private ComboBox CboSimpleCommandInput;
         private Button BtnRefreshSerialPorts;
     }
 }
