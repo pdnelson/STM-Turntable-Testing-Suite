@@ -1,5 +1,6 @@
 using StmTestingSuite.Command;
 using StmTestingSuite.Command.Base;
+using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
 
@@ -197,8 +198,23 @@ namespace StmTestingSuite
                     BtnConnect.Text = "Disconnect";
                     BtnSimpleSendCommand.Enabled = true;
                     CboSerialOptions.Enabled = false;
-                    ExecuteSimpleCommand(new CmdConnectionTest(Conn));
                     BtnRefreshSerialPorts.Enabled = false;
+
+                    Task commandTask = new(async () =>
+                    {
+                        var connTestResult = (StmCommandResult<bool>?)new CmdConnectionTest(Conn).Execute().Result;
+
+                        if (connTestResult?.Result != true)
+                        {
+                            MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            Utilities.WriteToUiFromThread(this, () =>
+                            {
+                                ToggleConnection();
+                            });
+                        }
+                    });
+
+                    commandTask.Start();
                 }
                 else if (comPort is null)
                 {
@@ -207,6 +223,7 @@ namespace StmTestingSuite
                 }
             }
         }
+
 
         private void ExecuteSimpleCommand(BaseStmCommand command)
         {
