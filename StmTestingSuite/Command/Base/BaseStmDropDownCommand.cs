@@ -2,7 +2,7 @@
 
 namespace StmTestingSuite.Command.Base
 {
-    abstract class BaseStmDropDownCommand(StmConnector conn) : BaseStmInputCommand(conn)
+    abstract class BaseStmDropDownCommand(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
     {
         public override StmExternalCommandInputType InputType => StmExternalCommandInputType.DROP_DOWN;
 

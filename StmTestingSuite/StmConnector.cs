@@ -1,16 +1,11 @@
-﻿using StmTestingSuite.Command.Base;
-using StmTestingSuite.Model.Command.Group;
-using System.IO.Ports;
-using System.Text;
+﻿using System.IO.Ports;
 
 namespace StmTestingSuite
 {
-    internal class StmConnector(DataGridView logger, Form form)
+    internal class StmConnector
     {
         SerialPort? Port { get; set; }
         public bool Connected { get; private set; } = false;
-        DataGridView Logger { get; } = logger;
-        Form Form { get; } = form;
 
         public bool OpenCommunication(string port)
         {
@@ -82,49 +77,6 @@ namespace StmTestingSuite
             }
 
             return response;
-        }
-
-        public void LogCommand(BaseStmCommand command, string? responseData)
-        {
-            string timestamp = DateTime.Now.ToString("HH:mm:ss");
-
-            StringBuilder commandSent = new();
-
-            if(command.GroupType != StmExternalCommandGroupType.OTHER && command.GroupType != StmExternalCommandGroupType.ACTION)
-            {
-                var actionType = new StmExternalCommandGroup(command.GroupType).Name[..3];
-
-                commandSent.Append(actionType + " ");
-            }
-
-            commandSent.Append(command.Name);
-
-            if(command is BaseStmInputCommand inputCommand)
-            {
-                commandSent.Append(": ");
-                commandSent.Append(inputCommand.ReadableInputData + " " + inputCommand.FieldName);
-            }
-
-            string response = "";
-
-            if(responseData != null)
-            {
-                response = responseData;
-            } else if(responseData == null && command.ResponseSize > 0)
-            {
-                response = "Response timed out";
-            }
-
-            Utilities.WriteToUiFromThread(Form, () =>
-            {
-                Logger.Rows.Add(timestamp, commandSent.ToString(), response);
-                Logger.FirstDisplayedScrollingRowIndex = Logger.RowCount - 1;
-            });
-        }
-
-        public void ClearLog()
-        {
-            Logger.Rows.Clear();
         }
     }
 }

@@ -5,7 +5,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command.Base
 {
-    abstract class BaseStmCommand(StmConnector conn)
+    abstract class BaseStmCommand(StmConnector conn, StmLogger? logger)
     {
         public abstract StmExternalCommandGroupType GroupType { get; }
         public abstract ExternalCommand ExternalCommandType { get; }
@@ -13,6 +13,7 @@ namespace StmTestingSuite.Command.Base
         public abstract string Name { get; }
         public abstract ushort ResponseSize { get; }
         public StmConnector Conn { get; } = conn;
+        public StmLogger? Logger { get; } = logger;
 
         public virtual async Task<IStmCommandResult?> Execute() {
             int dataSize = 2; // key + command
@@ -53,7 +54,7 @@ namespace StmTestingSuite.Command.Base
 
             }
 
-            Conn.LogCommand(this, response?.ResultString);
+            Logger?.LogCommand(this, response?.ResultString);
 
             return response;
         }

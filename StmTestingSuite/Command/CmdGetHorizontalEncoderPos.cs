@@ -6,7 +6,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdGetHorizontalEncoderPos(StmConnector conn) : BaseStmCommand(conn)
+    internal class CmdGetHorizontalEncoderPos(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
 

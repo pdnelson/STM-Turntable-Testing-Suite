@@ -5,7 +5,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdSetClearActionCommand(StmConnector conn) : BaseStmCommand(conn)
+    internal class CmdSetClearActionCommand(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.SET;
 

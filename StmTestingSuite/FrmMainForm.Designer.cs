@@ -41,9 +41,9 @@
             LblSimpleExtraData = new Label();
             CboSimpleCommandGroupOptions = new ComboBox();
             LblSimpleCommand = new Label();
+            TxtSimpleCommandInput = new TextBox();
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
-            TxtSimpleCommandInput = new TextBox();
             tabAdvanced = new TabPage();
             LblTodo1 = new Label();
             tabGraphical = new TabPage();
@@ -194,6 +194,13 @@
             LblSimpleCommand.TabIndex = 9;
             LblSimpleCommand.Text = "Command:";
             // 
+            // TxtSimpleCommandInput
+            // 
+            TxtSimpleCommandInput.Location = new Point(106, 45);
+            TxtSimpleCommandInput.Name = "TxtSimpleCommandInput";
+            TxtSimpleCommandInput.Size = new Size(227, 23);
+            TxtSimpleCommandInput.TabIndex = 6;
+            // 
             // CboSimpleCommandInput
             // 
             CboSimpleCommandInput.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -211,13 +218,6 @@
             NumSimpleCommandInput.Size = new Size(227, 23);
             NumSimpleCommandInput.TabIndex = 5;
             NumSimpleCommandInput.ValueChanged += NumSimpleCommandInput_ValueChanged;
-            // 
-            // TxtSimpleCommandInput
-            // 
-            TxtSimpleCommandInput.Location = new Point(106, 45);
-            TxtSimpleCommandInput.Name = "TxtSimpleCommandInput";
-            TxtSimpleCommandInput.Size = new Size(227, 23);
-            TxtSimpleCommandInput.TabIndex = 6;
             // 
             // tabAdvanced
             // 
@@ -317,6 +317,7 @@
             Controls.Add(LblConnectionStatus);
             Controls.Add(LblSerialOptions);
             Controls.Add(CboSerialOptions);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "FrmMainForm";
             Text = "Statimatic STM Testing Suite";
             tabMain.ResumeLayout(false);

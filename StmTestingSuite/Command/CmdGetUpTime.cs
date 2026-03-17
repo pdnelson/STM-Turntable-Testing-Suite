@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdGetUpTime(StmConnector conn) : BaseStmCommand(conn)
+    internal class CmdGetUpTime(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
 

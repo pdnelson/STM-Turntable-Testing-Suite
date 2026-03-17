@@ -6,7 +6,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdConnectionTest(StmConnector comm) : BaseStmCommand(comm)
+    internal class CmdConnectionTest(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.OTHER;
         public override ExternalCommand ExternalCommandType => ExternalCommand.CONNECTION_TEST;

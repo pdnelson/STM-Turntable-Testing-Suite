@@ -5,7 +5,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdSetSpeed(StmConnector conn) : BaseStmDropDownCommand(conn)
+    internal class CmdSetSpeed(StmConnector comm, StmLogger? logger) : BaseStmDropDownCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.SET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.SET_SPEED;

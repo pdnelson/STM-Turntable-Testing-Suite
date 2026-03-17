@@ -5,7 +5,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdSetCustomSpeed(StmConnector conn) : BaseStmInputCommand(conn)
+    internal class CmdSetCustomSpeed(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
     {
         public override string FieldName => "RPM";
 

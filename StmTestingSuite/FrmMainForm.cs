@@ -11,13 +11,15 @@ namespace StmTestingSuite
     public partial class FrmMainForm : Form
     {
         private readonly StmConnector Conn;
+        private readonly StmLogger Logger;
         private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
         {
             InitializeComponent();
 
-            Conn = new StmConnector(DgvSimpleLog, this);
+            Conn = new StmConnector();
+            Logger = new StmLogger(DgvSimpleLog, this);
             RefreshSerialOptions();
             RegisterCommands();
 
@@ -30,7 +32,7 @@ namespace StmTestingSuite
             CboSimpleCommandGroupOptions.DataSource = groupOptions;
             CboSimpleCommandGroupOptions.DisplayMember = "Name";
 
-            BtnSimpleSendCommand.Enabled = false;
+            GrpSimpleInput.Enabled = false;
         }
 
         private void CboSimpleCommandGroupOptions_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,7 +106,7 @@ namespace StmTestingSuite
 
         private void BtnSimpleClearLog_Click(object sender, EventArgs e)
         {
-            Conn.ClearLog();
+            Logger.ClearLog();
         }
 
         private void BtnRefreshSerialPorts_Click(object sender, EventArgs e)
@@ -154,25 +156,25 @@ namespace StmTestingSuite
             Commands =
             [
                 // other
-                new CmdConnectionTest(Conn),
+                new CmdConnectionTest(Conn, Logger),
 
                 // action
-                new CmdPauseUnpause(Conn),
+                new CmdPauseUnpause(Conn, Logger),
 
                 // set
-                new CmdSetClearActionCommand(Conn),
-                new CmdSetCustomSpeed(Conn),
-                new CmdSetSize(Conn),
-                new CmdSetSpeed(Conn),
+                new CmdSetClearActionCommand(Conn, Logger),
+                new CmdSetCustomSpeed(Conn, Logger),
+                new CmdSetSize(Conn, Logger),
+                new CmdSetSpeed(Conn, Logger),
 
                 // get
-                new CmdGetCurrentCommand(Conn),
-                new CmdGetErrorCode(Conn),
-                new CmdGetHomeStatus(Conn),
-                new CmdGetHorizontalEncoderPos(Conn),
-                new CmdGetLiftStatus(Conn),
-                new CmdGetUpTime(Conn),
-                new CmdGetVerticalEncoderPos(Conn)
+                new CmdGetCurrentCommand(Conn, Logger),
+                new CmdGetErrorCode(Conn, Logger),
+                new CmdGetHomeStatus(Conn, Logger),
+                new CmdGetHorizontalEncoderPos(Conn, Logger),
+                new CmdGetLiftStatus(Conn, Logger),
+                new CmdGetUpTime(Conn, Logger),
+                new CmdGetVerticalEncoderPos(Conn, Logger)
             ];
         }
         private void ToggleConnection()
@@ -183,7 +185,7 @@ namespace StmTestingSuite
                 {
                     LblConnectionStatus.Text = "Not Connected";
                     BtnConnect.Text = "Connect";
-                    BtnSimpleSendCommand.Enabled = false;
+                    GrpSimpleInput.Enabled = false;
                     CboSerialOptions.Enabled = true;
                     BtnRefreshSerialPorts.Enabled = true;
                 }
@@ -194,22 +196,35 @@ namespace StmTestingSuite
 
                 if (comPort is not null && Conn.OpenCommunication(comPort))
                 {
-                    LblConnectionStatus.Text = "Connected";
-                    BtnConnect.Text = "Disconnect";
-                    BtnSimpleSendCommand.Enabled = true;
-                    CboSerialOptions.Enabled = false;
-                    BtnRefreshSerialPorts.Enabled = false;
-
+                    // Execute the CmdConnectionTest command when connecting to the COM port. If this is successful, then we know a Statimatic STM turntable
+                    // is on the other end. If it fails, then either the connection is bad, or it's another random serial device.
                     Task commandTask = new(async () =>
                     {
-                        var connTestResult = (StmCommandResult<bool>?)new CmdConnectionTest(Conn).Execute().Result;
+                        bool successfulConnection = ((StmCommandResult<bool>?)new CmdConnectionTest(Conn, null).Execute().Result)?.Result == true;
+                        string connectMessageTitle = "Connect to " + comPort + " port";
 
-                        if (connTestResult?.Result != true)
+                        // Connection failed
+                        if (!successfulConnection)
                         {
+                            Logger.LogMessage(connectMessageTitle, "Connection failed");
                             MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             Utilities.WriteToUiFromThread(this, () =>
                             {
                                 ToggleConnection();
+                            });
+                        } 
+                        
+                        // Connection succeeded
+                        else
+                        {
+                            Logger.LogMessage(connectMessageTitle, "Connection successful");
+                            Utilities.WriteToUiFromThread(this, () =>
+                            {
+                                LblConnectionStatus.Text = "Connected";
+                                BtnConnect.Text = "Disconnect";
+                                GrpSimpleInput.Enabled = true;
+                                CboSerialOptions.Enabled = false;
+                                BtnRefreshSerialPorts.Enabled = false;
                             });
                         }
                     });

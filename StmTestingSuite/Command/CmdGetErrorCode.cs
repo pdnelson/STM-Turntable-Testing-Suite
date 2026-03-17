@@ -6,7 +6,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdGetErrorCode(StmConnector conn) : BaseStmCommand(conn)
+    internal class CmdGetErrorCode(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
 

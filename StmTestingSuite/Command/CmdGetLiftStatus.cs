@@ -6,7 +6,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdGetLiftStatus(StmConnector conn) : BaseStmCommand(conn)
+    internal class CmdGetLiftStatus(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
 

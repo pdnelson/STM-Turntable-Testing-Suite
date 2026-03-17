@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Command.Base
 {
-    abstract class BaseStmInputCommand(StmConnector conn) : BaseStmCommand(conn)
+    abstract class BaseStmInputCommand(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public abstract string FieldName { get; }
         public abstract string? ReadableInputData { get; set; }

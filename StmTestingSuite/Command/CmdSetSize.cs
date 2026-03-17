@@ -5,7 +5,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdSetSize(StmConnector conn) : BaseStmDropDownCommand(conn)
+    internal class CmdSetSize(StmConnector comm, StmLogger? logger) : BaseStmDropDownCommand(comm, logger)
     {
         public override List<StmExternalCommandInputOption> Options => [
             new("7", (byte)SizeOption.IN_7),
