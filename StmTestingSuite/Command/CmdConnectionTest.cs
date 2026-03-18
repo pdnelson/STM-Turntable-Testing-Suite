@@ -24,5 +24,10 @@ namespace StmTestingSuite.Command
 
             return new StmCommandResult<bool>(response == Constants.ConnectionTestSuccessResponse, stringResponse);
         }
+
+        public async Task<bool?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<bool>?)Execute().Result)?.Result;
+        }
     }
 }

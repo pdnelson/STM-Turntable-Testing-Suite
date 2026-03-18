@@ -26,5 +26,10 @@ namespace StmTestingSuite.Command
 
             return new StmCommandResult<HomeStatus>((HomeStatus)rawData[0], homeStatus);
         }
+
+        public async Task<HomeStatus?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<HomeStatus>?)Execute().Result)?.Result;
+        }
     }
 }

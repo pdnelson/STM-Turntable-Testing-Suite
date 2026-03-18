@@ -21,5 +21,10 @@ namespace StmTestingSuite.Command
 
             return new StmCommandResult<ushort>(finalInt, finalInt.ToString());
         }
+
+        public async Task<ushort?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<ushort>?)Execute().Result)?.Result;
+        }
     }
 }

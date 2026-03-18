@@ -200,7 +200,7 @@ namespace StmTestingSuite
                     // is on the other end. If it fails, then either the connection is bad, or it's another random serial device.
                     Task commandTask = new(async () =>
                     {
-                        bool successfulConnection = ((StmCommandResult<bool>?)new CmdConnectionTest(Conn, null).Execute().Result)?.Result == true;
+                        bool successfulConnection = new CmdConnectionTest(Conn, null).ExecuteWithResult().Result == true;
                         string connectMessageTitle = "Connect to " + comPort + " port";
 
                         // Connection failed

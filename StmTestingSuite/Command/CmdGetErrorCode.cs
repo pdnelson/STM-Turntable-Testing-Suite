@@ -28,5 +28,10 @@ namespace StmTestingSuite.Command
 
             return new StmCommandResult<CommandError>((CommandError)rawData[0], errorCode);
         }
+
+        public async Task<CommandError?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<CommandError>?)Execute().Result)?.Result;
+        }
     }
 }

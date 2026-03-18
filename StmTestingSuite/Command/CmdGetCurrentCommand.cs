@@ -32,5 +32,10 @@ namespace StmTestingSuite.Command
 
             return new StmCommandResult<ActionCommand>((ActionCommand)rawData[0], currentCommand);
         }
+
+        public async Task<ActionCommand?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<ActionCommand>?)Execute().Result)?.Result;
+        }
     }
 }

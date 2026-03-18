@@ -26,5 +26,10 @@ namespace StmTestingSuite.Command
 
             return new StmCommandResult<LiftStatus>((LiftStatus)rawData[0], liftStatus);
         }
+
+        public async Task<LiftStatus?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<LiftStatus>?)Execute().Result)?.Result;
+        }
     }
 }
