@@ -19,7 +19,5 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandInputType InputType => StmExternalCommandInputType.NUMERIC_DEC;
 
         public override string Name => "Speed (Custom)";
-
-        public override ushort ResponseSize => 0;
     }
 }

@@ -24,7 +24,5 @@ namespace StmTestingSuite.Command
         public override ExternalCommand ExternalCommandType => ExternalCommand.SET_SIZE;
 
         public override string Name => "Size";
-
-        public override ushort ResponseSize => 0;
     }
 }

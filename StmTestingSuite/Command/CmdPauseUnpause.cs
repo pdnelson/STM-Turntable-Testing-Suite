@@ -1,6 +1,5 @@
 ﻿using StmTestingSuite.Command.Base;
 using StmTestingSuite.Model.Command.Group;
-using StmTestingSuite.Model.Command.Input;
 using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
@@ -9,8 +8,6 @@ namespace StmTestingSuite.Command
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
         public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_PAUSE_UNPAUSE;
-        public override StmExternalCommandInputType InputType => StmExternalCommandInputType.NONE;
         public override string Name => "Pause/Unpause";
-        public override ushort ResponseSize => 0;
     }
 }

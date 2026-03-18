@@ -9,9 +9,9 @@ namespace StmTestingSuite.Command.Base
     {
         public abstract StmExternalCommandGroupType GroupType { get; }
         public abstract ExternalCommand ExternalCommandType { get; }
-        public abstract StmExternalCommandInputType InputType { get; }
+        public virtual StmExternalCommandInputType InputType { get; } = StmExternalCommandInputType.NONE;
         public abstract string Name { get; }
-        public abstract ushort ResponseSize { get; }
+        public virtual ushort ResponseSize { get; } = 0;
         public StmConnector Conn { get; } = conn;
         public StmLogger? Logger { get; } = logger;
 

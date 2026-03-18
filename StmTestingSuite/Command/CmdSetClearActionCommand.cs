@@ -1,6 +1,5 @@
 ﻿using StmTestingSuite.Command.Base;
 using StmTestingSuite.Model.Command.Group;
-using StmTestingSuite.Model.Command.Input;
 using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
@@ -11,10 +10,6 @@ namespace StmTestingSuite.Command
 
         public override ExternalCommand ExternalCommandType => ExternalCommand.SET_CLEAR_ACTION_COMMAND;
 
-        public override StmExternalCommandInputType InputType => StmExternalCommandInputType.NONE;
-
         public override string Name => "Clear Errors/Current Command";
-
-        public override ushort ResponseSize => 0;
     }
 }
