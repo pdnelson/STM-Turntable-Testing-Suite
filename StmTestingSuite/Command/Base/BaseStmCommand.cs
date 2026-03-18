@@ -51,7 +51,6 @@ namespace StmTestingSuite.Command.Base
             if(ResponseSize > 0 && rawData != null)
             {
                 response = InterpretResponseData(rawData);
-
             }
 
             Logger?.LogCommand(this, response?.ResultString);

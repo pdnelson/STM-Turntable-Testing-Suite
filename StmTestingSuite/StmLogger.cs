@@ -42,7 +42,7 @@ namespace StmTestingSuite
             }
             else if (responseData == null && command.ResponseSize > 0)
             {
-                response = "Response timed out";
+                response = "Error: The turntable did not respond in time";
             }
 
             Utilities.WriteToUiFromThread(Form, () =>
