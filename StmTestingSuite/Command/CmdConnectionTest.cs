@@ -14,9 +14,9 @@ namespace StmTestingSuite.Command
         public override string Name => "Connection Test";
         public override ushort ResponseSize => 1;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var response = rawData?.First();
+            var response = rawData.First();
 
             string stringResponse = response switch
             {

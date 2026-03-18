@@ -18,16 +18,16 @@ namespace StmTestingSuite.Command
 
         public override ushort ResponseSize => 1;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var liftStatus = rawData?[0] switch
+            var liftStatus = rawData[0] switch
             {
                 (byte)LiftStatus.LIFTED => "Lifted",
                 (byte)LiftStatus.SET_DOWN => "Set Down",
                 _ => "Invalid Data Received"
             };
 
-            return new StmCommandResult<LiftStatus?>((LiftStatus?)rawData?[0], liftStatus);
+            return new StmCommandResult<LiftStatus>((LiftStatus)rawData[0], liftStatus);
         }
     }
 }

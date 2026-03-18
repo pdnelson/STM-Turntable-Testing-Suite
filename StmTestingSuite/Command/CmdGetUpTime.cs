@@ -19,10 +19,8 @@ namespace StmTestingSuite.Command
 
         public override ushort ResponseSize => 4;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            if (rawData == null) return new StmCommandResult<uint?>(null, "");
-
             uint finalInt = BitConverter.ToUInt32(rawData);
 
             TimeSpan timeSpan = TimeSpan.FromSeconds(finalInt);

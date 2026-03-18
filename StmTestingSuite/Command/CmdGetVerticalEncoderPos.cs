@@ -18,13 +18,11 @@ namespace StmTestingSuite.Command
 
         public override ushort ResponseSize => 2;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            if(rawData == null) return new StmCommandResult<UInt16?>(null, "");
+            ushort finalInt = BitConverter.ToUInt16(rawData);
 
-            UInt16 finalInt = BitConverter.ToUInt16(rawData);
-
-            return new StmCommandResult<UInt16>(finalInt, finalInt.ToString());
+            return new StmCommandResult<ushort>(finalInt, finalInt.ToString());
         }
     }
 }

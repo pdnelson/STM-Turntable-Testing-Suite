@@ -59,7 +59,7 @@ namespace StmTestingSuite.Command.Base
             return response;
         }
 
-        public virtual IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public virtual IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             throw new NotImplementedException("Tried to parse response data, but no implementation was present.");
         }

@@ -18,7 +18,7 @@ namespace StmTestingSuite.Command
 
         public override ushort ResponseSize => 1;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             var homeStatus = rawData[0] switch
             {
@@ -27,7 +27,7 @@ namespace StmTestingSuite.Command
                 _ => "Invalid Data Received"
             };
 
-            return new StmCommandResult<HomeStatus?>((HomeStatus?)rawData?[0], homeStatus);
+            return new StmCommandResult<HomeStatus>((HomeStatus)rawData[0], homeStatus);
         }
     }
 }

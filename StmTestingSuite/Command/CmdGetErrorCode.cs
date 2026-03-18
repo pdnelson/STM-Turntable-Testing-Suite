@@ -18,9 +18,9 @@ namespace StmTestingSuite.Command
 
         public override ushort ResponseSize => 1;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var errorCode = rawData?[0] switch
+            var errorCode = rawData[0] switch
             {
                 (byte)CommandError.NO_ERROR => "No error",
                 (byte)CommandError.LIFT_STALLED_MOVING_UP => "Lift error: Stalled moving up",
@@ -29,7 +29,7 @@ namespace StmTestingSuite.Command
                 _ => "Invalid Data Received"
             };
 
-            return new StmCommandResult<CommandError?>((CommandError?)rawData?[0], errorCode);
+            return new StmCommandResult<CommandError>((CommandError)rawData[0], errorCode);
         }
     }
 }

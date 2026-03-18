@@ -18,7 +18,7 @@ namespace StmTestingSuite.Command
 
         public override ushort ResponseSize => 2;
 
-        public override IStmCommandResult InterpretResponseData(byte[]? rawData)
+        public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             // TODO!!!!
 
