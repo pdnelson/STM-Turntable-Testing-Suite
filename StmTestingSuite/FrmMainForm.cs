@@ -236,6 +236,10 @@ namespace StmTestingSuite
                     MessageBox.Show("No COM ports are available. Is the turntable connected to the computer?", "No COM Ports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     RefreshSerialOptions();
                 }
+                else
+                {
+                    RefreshSerialOptions();
+                }
             }
         }
 
@@ -275,7 +279,7 @@ namespace StmTestingSuite
 
         private void RefreshSerialOptions()
         {
-            CboSerialOptions.DataSource = SerialPort.GetPortNames().ToList();
+            CboSerialOptions.DataSource = SerialPort.GetPortNames().OrderBy(x => x).ToList();
         }
     }
 }

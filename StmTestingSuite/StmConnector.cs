@@ -16,7 +16,13 @@ namespace StmTestingSuite
                 Port?.Open();
                 Connected = true;
                 return true;
-            } catch (Exception ex)
+            } 
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show(port + " does not appear to be connected.", "Error Opening Connection", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error Opening Connection", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
