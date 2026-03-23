@@ -13,7 +13,8 @@ All commands sent through this software are logged, making it easy to trace back
 ## Simple View
 Simple View is the simplest test tab: You can execute commands, one at a time, manually. This is primarily useful for testing a brand new command, before advancing functionality to the other tabs.
 
-<img width="795" height="578" alt="image" src="https://github.com/user-attachments/assets/0040d9d8-2767-485b-a21d-38ea2cdbe37b" />
+<img width="795" height="578" alt="image" src="https://github.com/user-attachments/assets/09d0667f-91a2-47ba-8fa3-ee7a1481b4b5" />
+
 
 ## Advanced View
 Coming soon...
