@@ -134,14 +134,15 @@ namespace StmTestingSuite
         {
             BaseStmInputCommand? command = (BaseStmInputCommand?)CboSimpleCommandOptions.SelectedValue;
 
-            if(command is not null)
+            if (command is not null)
             {
                 decimal value = NumSimpleCommandInput.Value;
 
                 if (command.InputType == StmExternalCommandInputType.NUMERIC_INT)
                 {
                     command.UpdateInputData(Decimal.ToUInt16(value));
-                } else
+                }
+                else
                 {
                     command.UpdateInputData(Decimal.ToSingle(value));
                 }
@@ -178,13 +179,19 @@ namespace StmTestingSuite
                 new CmdGetVerticalEncoderPos(Conn, Logger)
             ];
         }
-        private void ToggleConnection()
+        private void ToggleConnection(bool explicitDisconnect = true)
         {
             // Disconnect
             if (Conn.Connected)
             {
                 if (Conn.CloseCommunication())
                 {
+                    ComOption? comPort = (ComOption?)CboSerialOptions.SelectedValue;
+                    if (explicitDisconnect && comPort != null)
+                    {
+                        Logger.LogMessage("Disconnect from " + comPort.Name, "Disconnection successful");
+                    }
+
                     LblConnectionStatus.Text = "Not Connected";
                     BtnConnect.Text = "Connect";
                     GrpSimpleInput.Enabled = false;
@@ -202,8 +209,8 @@ namespace StmTestingSuite
                 if (comPort is not null)
                 {
                     Conn.Key = comPort.Key;
-                    
-                    if(Conn.OpenCommunication(comPort.ComName))
+
+                    if (Conn.OpenCommunication(comPort.ComName))
                     {
                         // Execute the CmdConnectionTest command when connecting to the COM port. If this is successful, then we know a Statimatic STM turntable
                         // is on the other end. If it fails, then either the connection is bad, or it's another random serial device.
@@ -219,7 +226,7 @@ namespace StmTestingSuite
                                 MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 Utilities.WriteToUiFromThread(this, () =>
                                 {
-                                    ToggleConnection();
+                                    ToggleConnection(false);
                                 });
                             }
 
@@ -301,25 +308,27 @@ namespace StmTestingSuite
                     {
                         var success = Conn.OpenCommunication(port, false);
 
-                        if(success)
+                        if (success)
                         {
                             var result = await new CmdInit(Conn).Execute();
 
                             if (result != null)
                             {
                                 comOptions.Add(result);
-                            } else
+                            }
+                            else
                             {
                                 success = false;
                             }
                         }
 
                         // If the COM port didn't succeed, add it anyway, just so we can see it in the list.
-                        if(!success)
+                        if (!success)
                         {
                             comOptions.Add(new ComOption(port));
                         }
-                    } finally
+                    }
+                    finally
                     {
                         Conn.CloseCommunication();
                     }
