@@ -10,6 +10,18 @@ namespace StmTestingSuite.Model.Com
 
         public string Version { get; } = version;
 
+        private string KeyName
+        {
+            get
+            {
+                return Key switch
+                {
+                    ModelKey.STM_01 => "STM-01",
+                    _ => ""
+                };
+            }
+        }
+
         public string Name 
         { 
             get
@@ -17,18 +29,9 @@ namespace StmTestingSuite.Model.Com
                 if(Key == ModelKey.NONE) return ComName;
                 else
                 {
-                    return ComName + " - " + KeyName(key) + " (v" + version + ")";
+                    return ComName + " - " + KeyName + " (v" + Version + ")";
                 }
             }
-        }
-
-        private static string KeyName(ModelKey key)
-        {
-            return key switch
-            {
-                ModelKey.STM_01 => "STM-01",
-                _ => ""
-            };
         }
 
         public ComOption(string comName) : this(comName, ModelKey.NONE, "") {}
