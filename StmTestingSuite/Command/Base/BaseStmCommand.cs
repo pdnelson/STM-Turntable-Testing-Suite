@@ -16,7 +16,7 @@ namespace StmTestingSuite.Command.Base
         public StmLogger? Logger { get; } = logger;
 
         public virtual async Task<IStmCommandResult?> Execute() {
-            int dataSize = 2; // key + command
+            int dataSize = 1; // command
             byte[]? inputData = null;
 
             // If it's an input command, check the data size there
@@ -33,14 +33,13 @@ namespace StmTestingSuite.Command.Base
             byte[] dataToSend = new byte[dataSize];
 
             // Build the command
-            dataToSend[0] = Constants.CommandKey;
-            dataToSend[1] = (byte)ExternalCommandType;
+            dataToSend[0] = (byte)ExternalCommandType;
 
             if(inputData is not null)
             {
-                for (int i = 2; i < dataToSend.Length; i++)
+                for (int i = 1; i < dataToSend.Length; i++)
                 {
-                    dataToSend[i] = inputData[i - 2];
+                    dataToSend[i] = inputData[i - 1];
                 }
             }
 

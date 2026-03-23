@@ -1,4 +1,5 @@
-﻿using System.IO.Ports;
+﻿using StmTestingSuite.Model.Key;
+using System.IO.Ports;
 
 namespace StmTestingSuite
 {
@@ -7,7 +8,11 @@ namespace StmTestingSuite
         SerialPort? Port { get; set; }
         public bool Connected { get; private set; } = false;
 
-        public bool OpenCommunication(string port)
+        public ModelKey Key { get; set; } = ModelKey.INIT;
+
+        public string PortName { get; private set; } = "";
+
+        public bool OpenCommunication(string port, bool alertWhenFailed = true)
         {
             Port = new SerialPort(port, Constants.BaudRate);
             Port?.ReadTimeout = Constants.CommandTimeoutTimeMs;
@@ -15,16 +20,19 @@ namespace StmTestingSuite
             {
                 Port?.Open();
                 Connected = true;
+                PortName = port;
                 return true;
             } 
             catch (FileNotFoundException)
             {
-                MessageBox.Show(port + " does not appear to be connected.", "Error Opening Connection", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                PortName = "";
+                if(alertWhenFailed) MessageBox.Show(port + " does not appear to be connected.", "Error Opening Connection", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error Opening Connection", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                PortName = "";
+                if (alertWhenFailed) MessageBox.Show(ex.ToString(), "Error Opening Connection", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
         }
@@ -37,6 +45,7 @@ namespace StmTestingSuite
                 try
                 {
                     Port.Close();
+                    PortName = "";
                     Port = null;
                     return true;
                 } catch(Exception ex)
@@ -54,6 +63,16 @@ namespace StmTestingSuite
         {
             if (Port is null) return null;
 
+            // build key + data
+            byte[] dataToSend = new byte[data.Length + 1];
+
+            dataToSend[0] = (byte)Key;
+
+            for (int i = 1; i < dataToSend.Length; i++)
+            {
+                dataToSend[i] = data[i - 1];
+            }
+
             // Clear out the buffer before sending a command, just in case
             // some other junk from another command accidentally got left over.
             Port?.DiscardInBuffer();
@@ -61,7 +80,7 @@ namespace StmTestingSuite
 
             await Task.Delay(Constants.CommandResponseTimeMs);
 
-            Port?.Write(data, 0, data.Length);
+            Port?.Write(dataToSend, 0, dataToSend.Length);
 
             byte[]? response = null;
 

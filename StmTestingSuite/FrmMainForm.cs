@@ -1,9 +1,10 @@
 using StmTestingSuite.Command;
 using StmTestingSuite.Command.Base;
+using StmTestingSuite.Model.Com;
 using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
-
+using StmTestingSuite.Model.Key;
 using System.IO.Ports;
 
 namespace StmTestingSuite
@@ -179,6 +180,7 @@ namespace StmTestingSuite
         }
         private void ToggleConnection()
         {
+            // Disconnect
             if (Conn.Connected)
             {
                 if (Conn.CloseCommunication())
@@ -188,48 +190,56 @@ namespace StmTestingSuite
                     GrpSimpleInput.Enabled = false;
                     CboSerialOptions.Enabled = true;
                     BtnRefreshSerialPorts.Enabled = true;
+                    Conn.Key = ModelKey.INIT;
                 }
             }
+
+            // Connect
             else
             {
-                string? comPort = (string?)CboSerialOptions.SelectedValue;
+                ComOption? comPort = (ComOption?)CboSerialOptions.SelectedValue;
 
-                if (comPort is not null && Conn.OpenCommunication(comPort))
+                if (comPort is not null)
                 {
-                    // Execute the CmdConnectionTest command when connecting to the COM port. If this is successful, then we know a Statimatic STM turntable
-                    // is on the other end. If it fails, then either the connection is bad, or it's another random serial device.
-                    Task commandTask = new(async () =>
+                    Conn.Key = comPort.Key;
+                    
+                    if(Conn.OpenCommunication(comPort.ComName))
                     {
-                        bool successfulConnection = new CmdConnectionTest(Conn, null).ExecuteWithResult().Result == true;
-                        string connectMessageTitle = "Connect to " + comPort + " port";
-
-                        // Connection failed
-                        if (!successfulConnection)
+                        // Execute the CmdConnectionTest command when connecting to the COM port. If this is successful, then we know a Statimatic STM turntable
+                        // is on the other end. If it fails, then either the connection is bad, or it's another random serial device.
+                        Task commandTask = new(async () =>
                         {
-                            Logger.LogMessage(connectMessageTitle, "Connection failed");
-                            MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            Utilities.WriteToUiFromThread(this, () =>
-                            {
-                                ToggleConnection();
-                            });
-                        } 
-                        
-                        // Connection succeeded
-                        else
-                        {
-                            Logger.LogMessage(connectMessageTitle, "Connection successful");
-                            Utilities.WriteToUiFromThread(this, () =>
-                            {
-                                LblConnectionStatus.Text = "Connected";
-                                BtnConnect.Text = "Disconnect";
-                                GrpSimpleInput.Enabled = true;
-                                CboSerialOptions.Enabled = false;
-                                BtnRefreshSerialPorts.Enabled = false;
-                            });
-                        }
-                    });
+                            bool successfulConnection = new CmdConnectionTest(Conn, null).ExecuteWithResult().Result == true;
+                            string connectMessageTitle = "Connect to " + comPort.Name;
 
-                    commandTask.Start();
+                            // Connection failed
+                            if (!successfulConnection)
+                            {
+                                Logger.LogMessage(connectMessageTitle, "Connection failed");
+                                MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                Utilities.WriteToUiFromThread(this, () =>
+                                {
+                                    ToggleConnection();
+                                });
+                            }
+
+                            // Connection succeeded
+                            else
+                            {
+                                Logger.LogMessage(connectMessageTitle, "Connection successful");
+                                Utilities.WriteToUiFromThread(this, () =>
+                                {
+                                    LblConnectionStatus.Text = "Connected";
+                                    BtnConnect.Text = "Disconnect";
+                                    GrpSimpleInput.Enabled = true;
+                                    CboSerialOptions.Enabled = false;
+                                    BtnRefreshSerialPorts.Enabled = false;
+                                });
+                            }
+                        });
+
+                        commandTask.Start();
+                    }
                 }
                 else if (comPort is null)
                 {
@@ -279,7 +289,50 @@ namespace StmTestingSuite
 
         private void RefreshSerialOptions()
         {
-            CboSerialOptions.DataSource = SerialPort.GetPortNames().OrderBy(x => x).ToList();
+            Conn.Key = ModelKey.INIT;
+
+            Task initTask = new(async () =>
+            {
+                List<ComOption> comOptions = [];
+
+                foreach (string port in SerialPort.GetPortNames())
+                {
+                    try
+                    {
+                        var success = Conn.OpenCommunication(port, false);
+
+                        if(success)
+                        {
+                            var result = await new CmdInit(Conn).Execute();
+
+                            if (result != null)
+                            {
+                                comOptions.Add(result);
+                            } else
+                            {
+                                success = false;
+                            }
+                        }
+
+                        // If the COM port didn't succeed, add it anyway, just so we can see it in the list.
+                        if(!success)
+                        {
+                            comOptions.Add(new ComOption(port));
+                        }
+                    } finally
+                    {
+                        Conn.CloseCommunication();
+                    }
+                }
+
+                Utilities.WriteToUiFromThread(this, () =>
+                {
+                    CboSerialOptions.DataSource = comOptions.OrderBy(x => x.Name).ToList();
+                    CboSerialOptions.DisplayMember = "Name";
+                });
+            });
+
+            initTask.Start();
         }
     }
 }

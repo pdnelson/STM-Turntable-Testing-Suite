@@ -264,7 +264,7 @@
             CboSerialOptions.FormattingEnabled = true;
             CboSerialOptions.Location = new Point(81, 6);
             CboSerialOptions.Name = "CboSerialOptions";
-            CboSerialOptions.Size = new Size(121, 23);
+            CboSerialOptions.Size = new Size(209, 23);
             CboSerialOptions.TabIndex = 0;
             // 
             // LblSerialOptions
@@ -298,7 +298,7 @@
             // 
             // BtnRefreshSerialPorts
             // 
-            BtnRefreshSerialPorts.Location = new Point(208, 6);
+            BtnRefreshSerialPorts.Location = new Point(296, 6);
             BtnRefreshSerialPorts.Name = "BtnRefreshSerialPorts";
             BtnRefreshSerialPorts.Size = new Size(59, 23);
             BtnRefreshSerialPorts.TabIndex = 10;
