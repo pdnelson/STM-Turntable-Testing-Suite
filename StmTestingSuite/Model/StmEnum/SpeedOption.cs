@@ -6,5 +6,6 @@
         RPM_45 = 1,
         RPM_78 = 2,
         AUTO = 3,
+        CUSTOM = 4,
     }
 }

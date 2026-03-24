@@ -11,6 +11,7 @@
         SET_SPEED = 31,
         SET_SIZE = 32,
         SET_CUSTOM_SPEED = 33,
+        SET_ROTATE_SPEED = 34,
         SET_CLEAR_ACTION_COMMAND = 35,
 
         // Get commands
@@ -20,6 +21,8 @@
         GET_HOME_STATUS = 103,
         GET_CURRENT_COMMAND = 104,
         GET_ERROR_CODE = 105,
-        GET_UP_TIME = 106
+        GET_UP_TIME = 106,
+        GET_SPEED_SETTING = 107,
+        GET_SPEED_TARGET = 108
     }
 }

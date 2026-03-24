@@ -168,6 +168,7 @@ namespace StmTestingSuite
                 new CmdSetCustomSpeed(Conn, Logger),
                 new CmdSetSize(Conn, Logger),
                 new CmdSetSpeed(Conn, Logger),
+                new CmdSetRotateSpeed(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
@@ -175,6 +176,8 @@ namespace StmTestingSuite
                 new CmdGetHomeStatus(Conn, Logger),
                 new CmdGetHorizontalEncoderPos(Conn, Logger),
                 new CmdGetLiftStatus(Conn, Logger),
+                new CmdGetSpeedSetting(Conn, Logger),
+                new CmdGetTargetSpeed(Conn, Logger),
                 new CmdGetUpTime(Conn, Logger),
                 new CmdGetVerticalEncoderPos(Conn, Logger)
             ];
@@ -216,7 +219,7 @@ namespace StmTestingSuite
                         // is on the other end. If it fails, then either the connection is bad, or it's another random serial device.
                         Task commandTask = new(async () =>
                         {
-                            bool successfulConnection = new CmdConnectionTest(Conn, null).ExecuteWithResult().Result == true;
+                            bool successfulConnection = await new CmdConnectionTest(Conn, null).ExecuteWithResult() == true;
                             string connectMessageTitle = "Connect to " + comPort.Name;
 
                             // Connection failed
@@ -241,6 +244,7 @@ namespace StmTestingSuite
                                     GrpSimpleInput.Enabled = true;
                                     CboSerialOptions.Enabled = false;
                                     BtnRefreshSerialPorts.Enabled = false;
+                                    BtnSimpleSendCommand.Enabled = true;
                                 });
                             }
                         });
@@ -302,7 +306,7 @@ namespace StmTestingSuite
             {
                 List<ComOption> comOptions = [];
 
-                foreach (string port in SerialPort.GetPortNames())
+                foreach (string port in SerialPort.GetPortNames().Distinct())
                 {
                     try
                     {
