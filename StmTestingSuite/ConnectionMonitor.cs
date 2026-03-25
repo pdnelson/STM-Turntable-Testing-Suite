@@ -6,7 +6,7 @@ using System.IO.Ports;
 namespace StmTestingSuite
 {
     internal class ConnectionMonitor(
-        Form form,
+        Form mainForm,
         StmConnector conn, 
         StmLogger logger, 
         ComboBox serialOptions, 
@@ -17,7 +17,7 @@ namespace StmTestingSuite
         Button btnSimpleSendCommand
         )
     {
-        Form form { get; } = form;
+        Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
         StmLogger Logger { get; } = logger;
         ComboBox CboSerialOptions { get; } = serialOptions;
@@ -77,7 +77,7 @@ namespace StmTestingSuite
                             {
                                 Logger.LogMessage(connectMessageTitle, "Connection failed");
                                 MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                Utilities.WriteToUiFromThread(form, () =>
+                                Utilities.WriteToUiFromThread(Form, () =>
                                 {
                                     ToggleConnection(false);
                                 });
@@ -87,7 +87,7 @@ namespace StmTestingSuite
                             else
                             {
                                 Logger.LogMessage(connectMessageTitle, "Connection successful");
-                                Utilities.WriteToUiFromThread(form, () =>
+                                Utilities.WriteToUiFromThread(Form, () =>
                                 {
                                     LblConnectionStatus.Text = "Connected";
                                     BtnConnect.Text = "Disconnect";
@@ -181,7 +181,7 @@ namespace StmTestingSuite
                     }
                 }
 
-                Utilities.WriteToUiFromThread(form, () =>
+                Utilities.WriteToUiFromThread(Form, () =>
                 {
                     CboSerialOptions.DataSource = comOptions.OrderBy(x => x.Name).ToList();
                     CboSerialOptions.DisplayMember = "Name";
@@ -194,12 +194,12 @@ namespace StmTestingSuite
         public void DeviceDisconnected()
         {
             Monitoring = false;
-            Utilities.WriteToUiFromThread(form, () =>
+            Utilities.WriteToUiFromThread(Form, () =>
             {
                 ToggleConnection();
             });
             MessageBox.Show("The device has been disconnected", "Device Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            Utilities.WriteToUiFromThread(form, () =>
+            Utilities.WriteToUiFromThread(Form, () =>
             {
                 RefreshSerialOptions();
             });

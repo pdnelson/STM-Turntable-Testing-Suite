@@ -7,19 +7,21 @@ namespace StmTestingSuite
 {
     public partial class FrmMainForm : Form
     {
+        private readonly Semaphore CommSem;
         private readonly StmConnector Conn;
         private readonly StmLogger Logger;
-        private readonly ConnectionMonitor Monitor;
+        private readonly ConnectionMonitor ConnMonitor;
         private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
         {
             InitializeComponent();
-
-            Conn = new StmConnector();
+            CommSem = new Semaphore(0, 2);
+            CommSem.Release();
+            Conn = new StmConnector(CommSem);
             Logger = new StmLogger(DgvSimpleLog, this);
-            Monitor = new ConnectionMonitor(this, Conn, Logger, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
-            Monitor.RefreshSerialOptions();
+            ConnMonitor = new ConnectionMonitor(this, Conn, Logger, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
+            ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
 
             // Populate command group list items
@@ -100,7 +102,7 @@ namespace StmTestingSuite
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
-            Monitor.ToggleConnection();
+            ConnMonitor.ToggleConnection();
         }
 
         private void BtnSimpleClearLog_Click(object sender, EventArgs e)
@@ -110,7 +112,7 @@ namespace StmTestingSuite
 
         private void BtnRefreshSerialPorts_Click(object sender, EventArgs e)
         {
-            Monitor.RefreshSerialOptions();
+            ConnMonitor.RefreshSerialOptions();
         }
 
         private void CboSimpleCommandInput_SelectedIndexChanged(object sender, EventArgs e)
@@ -204,7 +206,7 @@ namespace StmTestingSuite
                 }
                 catch (InvalidOperationException)
                 {
-                    Monitor.DeviceDisconnected();
+                    ConnMonitor.DeviceDisconnected();
                 }
             });
 

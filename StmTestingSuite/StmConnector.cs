@@ -3,7 +3,7 @@ using System.IO.Ports;
 
 namespace StmTestingSuite
 {
-    internal class StmConnector
+    internal class StmConnector(Semaphore sem)
     {
         SerialPort? Port { get; set; }
         public bool Connected { get; private set; } = false;
@@ -11,6 +11,8 @@ namespace StmTestingSuite
         public ModelKey Key { get; set; } = ModelKey.INIT;
 
         public string PortName { get; private set; } = "";
+
+        Semaphore Sem { get; } = sem;
 
         public bool OpenCommunication(string port, bool alertWhenFailed = true)
         {
@@ -61,6 +63,8 @@ namespace StmTestingSuite
 
         public async Task<byte[]?> SendCommand(byte[] data, ushort responseDataSize)
         {
+            Sem.WaitOne();
+
             if (Port is null) return null;
 
             // build key + data
@@ -100,6 +104,8 @@ namespace StmTestingSuite
                     response = null;
                 }
             }
+
+            Sem.Release();
 
             return response;
         }
