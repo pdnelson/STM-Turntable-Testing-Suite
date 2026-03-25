@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>thumbnail.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="thumbnail.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.IO.Ports" Version="10.0.5" />

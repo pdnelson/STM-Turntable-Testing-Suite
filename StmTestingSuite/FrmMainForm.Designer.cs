@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainForm));
             tabMain = new TabControl();
             TabSimple = new TabPage();
             BtnSimpleClearLog = new Button();
             DgvSimpleLog = new DataGridView();
+            cmnSimpleTime = new DataGridViewTextBoxColumn();
+            cmnSimpleSent = new DataGridViewTextBoxColumn();
+            cmnSimpleReceived = new DataGridViewTextBoxColumn();
             GrpSimpleInput = new GroupBox();
             CboSimpleCommandOptions = new ComboBox();
             BtnSimpleSendCommand = new Button();
@@ -50,9 +54,6 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            cmnSimpleTime = new DataGridViewTextBoxColumn();
-            cmnSimpleSent = new DataGridViewTextBoxColumn();
-            cmnSimpleReceived = new DataGridViewTextBoxColumn();
             tabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -107,6 +108,27 @@
             DgvSimpleLog.ReadOnly = true;
             DgvSimpleLog.Size = new Size(749, 372);
             DgvSimpleLog.TabIndex = 9;
+            // 
+            // cmnSimpleTime
+            // 
+            cmnSimpleTime.HeaderText = "Time";
+            cmnSimpleTime.Name = "cmnSimpleTime";
+            cmnSimpleTime.ReadOnly = true;
+            cmnSimpleTime.Width = 75;
+            // 
+            // cmnSimpleSent
+            // 
+            cmnSimpleSent.HeaderText = "Sent";
+            cmnSimpleSent.Name = "cmnSimpleSent";
+            cmnSimpleSent.ReadOnly = true;
+            cmnSimpleSent.Width = 250;
+            // 
+            // cmnSimpleReceived
+            // 
+            cmnSimpleReceived.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            cmnSimpleReceived.HeaderText = "Received";
+            cmnSimpleReceived.Name = "cmnSimpleReceived";
+            cmnSimpleReceived.ReadOnly = true;
             // 
             // GrpSimpleInput
             // 
@@ -286,27 +308,6 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // cmnSimpleTime
-            // 
-            cmnSimpleTime.HeaderText = "Time";
-            cmnSimpleTime.Name = "cmnSimpleTime";
-            cmnSimpleTime.ReadOnly = true;
-            cmnSimpleTime.Width = 75;
-            // 
-            // cmnSimpleSent
-            // 
-            cmnSimpleSent.HeaderText = "Sent";
-            cmnSimpleSent.Name = "cmnSimpleSent";
-            cmnSimpleSent.ReadOnly = true;
-            cmnSimpleSent.Width = 250;
-            // 
-            // cmnSimpleReceived
-            // 
-            cmnSimpleReceived.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            cmnSimpleReceived.HeaderText = "Received";
-            cmnSimpleReceived.Name = "cmnSimpleReceived";
-            cmnSimpleReceived.ReadOnly = true;
-            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -319,6 +320,7 @@
             Controls.Add(LblSerialOptions);
             Controls.Add(CboSerialOptions);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmMainForm";
             Text = "Statimatic STM Testing Suite";
             tabMain.ResumeLayout(false);
