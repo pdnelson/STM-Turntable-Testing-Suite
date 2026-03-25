@@ -47,6 +47,7 @@ namespace StmTestingSuite
                 try
                 {
                     Port.Close();
+                    Port.Dispose();
                     PortName = "";
                     Port = null;
                     return true;

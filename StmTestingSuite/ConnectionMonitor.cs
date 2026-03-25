@@ -168,12 +168,6 @@ namespace StmTestingSuite
                                 success = false;
                             }
                         }
-
-                        // If the COM port didn't succeed, add it anyway, just so we can see it in the list.
-                        if (!success)
-                        {
-                            comOptions.Add(new ComOption(port));
-                        }
                     }
                     finally
                     {
