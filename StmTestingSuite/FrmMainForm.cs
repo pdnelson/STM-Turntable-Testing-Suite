@@ -168,6 +168,7 @@ namespace StmTestingSuite
                 new CmdSetCustomSpeed(Conn, Logger),
                 new CmdSetSize(Conn, Logger),
                 new CmdSetSpeed(Conn, Logger),
+                new CmdSetRotateSize(Conn, Logger),
                 new CmdSetRotateSpeed(Conn, Logger),
 
                 // get
@@ -176,6 +177,7 @@ namespace StmTestingSuite
                 new CmdGetHomeStatus(Conn, Logger),
                 new CmdGetHorizontalEncoderPos(Conn, Logger),
                 new CmdGetLiftStatus(Conn, Logger),
+                new CmdGetSizeSetting(Conn, Logger),
                 new CmdGetSpeedSetting(Conn, Logger),
                 new CmdGetTargetSpeed(Conn, Logger),
                 new CmdGetUpTime(Conn, Logger),

@@ -13,6 +13,7 @@
         SET_CUSTOM_SPEED = 33,
         SET_ROTATE_SPEED = 34,
         SET_CLEAR_ACTION_COMMAND = 35,
+        SET_ROTATE_SIZE = 36,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,
@@ -23,6 +24,7 @@
         GET_ERROR_CODE = 105,
         GET_UP_TIME = 106,
         GET_SPEED_SETTING = 107,
-        GET_SPEED_TARGET = 108
+        GET_SPEED_TARGET = 108,
+        GET_SIZE_SETTING = 109
     }
 }
