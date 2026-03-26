@@ -29,7 +29,7 @@ namespace StmTestingSuite
 
         Task? MonitorTask { get; set; }
 
-        bool Monitoring { get; set; } = true;
+        private bool Monitoring { get; set; } = true;
 
         public void ToggleConnection(bool explicitDisconnect = true)
         {
@@ -76,7 +76,7 @@ namespace StmTestingSuite
                             if (!successfulConnection)
                             {
                                 Logger.LogMessage(connectMessageTitle, "Connection failed");
-                                MessageBox.Show(comPort + " is not a valid STM turntable, or the connection failed.", "Invalid COM Port", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("Connection to " + comPort.Name + " failed.", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 Utilities.WriteToUiFromThread(Form, () =>
                                 {
                                     ToggleConnection(false);
@@ -100,8 +100,11 @@ namespace StmTestingSuite
 
                                 MonitorTask?.Dispose();
                                 Monitoring = true;
+                                var failedResultCount = 0;
+
                                 MonitorTask = new(async () =>
                                 {
+
                                     // Check that the connection is still active every second
                                     while(Monitoring)
                                     {
@@ -110,15 +113,24 @@ namespace StmTestingSuite
                                         try
                                         {
                                             result = await new CmdConnectionTest(Conn, null).ExecuteWithResult() == true;
-                                        } catch (InvalidOperationException) {  /* do nothing */ }
-                                        catch (AggregateException) {  /* do nothing */ }
+                                        } catch (Exception) {  /* do nothing */ }
 
                                         if (!result)
                                         {
-                                            DeviceDisconnected();
+                                            // After 3 consecutive failures, we will presume the device disconnected.
+                                            if(failedResultCount <= 2)
+                                            {
+                                                failedResultCount++;
+                                            } else
+                                            {
+                                                DeviceDisconnected();
+                                            }
+                                        } else
+                                        {
+                                            failedResultCount = 0;
                                         }
 
-                                        await Task.Delay(1000);
+                                        await Task.Delay(300);
                                     }
                                 });
 
@@ -191,10 +203,6 @@ namespace StmTestingSuite
             Utilities.WriteToUiFromThread(Form, () =>
             {
                 ToggleConnection();
-            });
-            MessageBox.Show("The device has been disconnected", "Device Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            Utilities.WriteToUiFromThread(Form, () =>
-            {
                 RefreshSerialOptions();
             });
         }

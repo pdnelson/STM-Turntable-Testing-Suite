@@ -7,7 +7,6 @@ namespace StmTestingSuite
 {
     public partial class FrmMainForm : Form
     {
-        private readonly Semaphore CommSem;
         private readonly StmConnector Conn;
         private readonly StmLogger Logger;
         private readonly ConnectionMonitor ConnMonitor;
@@ -16,9 +15,7 @@ namespace StmTestingSuite
         public FrmMainForm()
         {
             InitializeComponent();
-            CommSem = new Semaphore(0, 2);
-            CommSem.Release();
-            Conn = new StmConnector(CommSem);
+            Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();

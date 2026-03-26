@@ -3,7 +3,7 @@ using System.IO.Ports;
 
 namespace StmTestingSuite
 {
-    internal class StmConnector(Semaphore sem)
+    internal class StmConnector
     {
         SerialPort? Port { get; set; }
         public bool Connected { get; private set; } = false;
@@ -12,7 +12,13 @@ namespace StmTestingSuite
 
         public string PortName { get; private set; } = "";
 
-        Semaphore Sem { get; } = sem;
+        Semaphore Sem { get; }
+
+        public StmConnector()
+        {
+            Sem = new Semaphore(0, 2);
+            Sem.Release();
+        }
 
         public bool OpenCommunication(string port, bool alertWhenFailed = true)
         {
@@ -80,12 +86,26 @@ namespace StmTestingSuite
 
             // Clear out the buffer before sending a command, just in case
             // some other junk from another command accidentally got left over.
-            Port?.DiscardInBuffer();
-            Port?.DiscardOutBuffer();
+            try
+            {
+                Port?.DiscardInBuffer();
+                Port?.DiscardOutBuffer();
+            } catch(Exception)
+            {
+                Sem.Release();
+                return null;
+            }
 
             await Task.Delay(Constants.CommandResponseTimeMs);
 
-            Port?.Write(dataToSend, 0, dataToSend.Length);
+            try
+            {
+                Port?.Write(dataToSend, 0, dataToSend.Length);
+            } catch(Exception)
+            {
+                Sem.Release();
+                return null;
+            }
 
             byte[]? response = null;
 
@@ -100,7 +120,7 @@ namespace StmTestingSuite
                 {
                     Port?.Read(response, 0, response.Length);
                 }
-                catch (TimeoutException)
+                catch (Exception)
                 {
                     response = null;
                 }
