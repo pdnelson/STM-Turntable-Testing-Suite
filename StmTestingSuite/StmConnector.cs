@@ -126,6 +126,9 @@ namespace StmTestingSuite
                 }
             }
 
+            // Hold off for a bit more so another command can't be executed immediately after the port is read.
+            await Task.Delay(Constants.CommandResponseTimeMs);
+
             Sem.Release();
 
             return response;
