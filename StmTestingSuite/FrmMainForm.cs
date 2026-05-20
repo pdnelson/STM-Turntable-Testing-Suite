@@ -59,6 +59,7 @@ namespace StmTestingSuite
             CboSimpleCommandInput.Visible = false;
             NumSimpleCommandInput.Visible = false;
             LblSimpleExtraData.Visible = false;
+            BtnSimpleSendCommand.Enabled = true;
 
             if (selectedCommand.InputType != StmExternalCommandInputType.NONE)
             {
@@ -82,6 +83,11 @@ namespace StmTestingSuite
                         CboSimpleCommandInput.DisplayMember = "Name";
                         CboSimpleCommandInput.SelectedIndex = 0;
                         CboSimpleCommandInput.Visible = true;
+                        break;
+                    case StmExternalCommandInputType.CUSTOM:
+                        TxtSimpleCommandInput.Text = "";
+                        TxtSimpleCommandInput.Visible = true;
+                        BtnSimpleSendCommand.Enabled = false;
                         break;
                 }
             }
@@ -146,6 +152,25 @@ namespace StmTestingSuite
             }
         }
 
+        private void TxtSimpleCommandInput_TextChanged(object sender, EventArgs e)
+        {
+            BaseStmInputCommand? command = (BaseStmInputCommand?)CboSimpleCommandOptions.SelectedValue;
+
+            if (command is not null)
+            {
+                string error = command.UpdateInputData(TxtSimpleCommandInput.Text);
+
+                if (error.Length == 0)
+                {
+                    BtnSimpleSendCommand.Enabled = true;
+                }
+                else
+                {
+                    BtnSimpleSendCommand.Enabled = false;
+                }
+            }
+        }
+
         /**
          * Beyond here lie helper methods.
          **/
@@ -159,6 +184,7 @@ namespace StmTestingSuite
 
                 // action
                 new CmdPauseUnpause(Conn, Logger),
+                new CmdProtoPlay(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -208,6 +234,11 @@ namespace StmTestingSuite
             });
 
             commandTask.Start();
+        }
+
+        private void BtnCancelCommand_Click_1(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdSetClearActionCommand(Conn, Logger));
         }
     }
 }

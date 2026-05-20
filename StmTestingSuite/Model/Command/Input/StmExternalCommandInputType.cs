@@ -5,6 +5,7 @@
         NONE,
         NUMERIC_INT,
         NUMERIC_DEC,
-        DROP_DOWN
+        DROP_DOWN,
+        CUSTOM
     }
 }

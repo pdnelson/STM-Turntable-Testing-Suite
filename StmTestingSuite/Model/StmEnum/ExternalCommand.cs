@@ -6,6 +6,7 @@
 
         // Actions
         ACTION_PAUSE_UNPAUSE = 1,
+        ACTION_PROTO_PLAY = 2,
 
         // Set commands
         SET_SPEED = 31,

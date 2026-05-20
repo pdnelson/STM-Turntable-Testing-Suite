@@ -22,5 +22,10 @@
             ReadableInputData = readableData.ToString();
             InputData = BitConverter.GetBytes(readableData);
         }
+
+        public virtual string UpdateInputData(string readableData)
+        {
+            return ""; // Do nothing; must be overrided by inheriting class if desired.
+        }
     }
 }

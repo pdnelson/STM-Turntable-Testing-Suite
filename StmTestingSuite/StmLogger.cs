@@ -31,7 +31,17 @@ namespace StmTestingSuite
             if (command is BaseStmInputCommand inputCommand)
             {
                 commandSent.Append(": ");
-                commandSent.Append(inputCommand.ReadableInputData + " " + inputCommand.FieldName);
+
+                // If the field name contains a comma, don't write the field name at the end of the readable input data. 
+                // In this scenario, the ReadableInputData will be formatted in a special, readable way.
+                if(inputCommand.FieldName.Contains(','))
+                {
+                    commandSent.Append(inputCommand.ReadableInputData);
+                } 
+                else
+                {
+                    commandSent.Append(inputCommand.ReadableInputData + " " + inputCommand.FieldName);
+                }
             }
 
             string response = "";

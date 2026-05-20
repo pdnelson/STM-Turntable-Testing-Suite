@@ -54,6 +54,7 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
+            BtnCancelCommand = new Button();
             tabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -132,6 +133,7 @@
             // 
             // GrpSimpleInput
             // 
+            GrpSimpleInput.Controls.Add(BtnCancelCommand);
             GrpSimpleInput.Controls.Add(CboSimpleCommandOptions);
             GrpSimpleInput.Controls.Add(BtnSimpleSendCommand);
             GrpSimpleInput.Controls.Add(LblSimpleExtraData);
@@ -142,7 +144,7 @@
             GrpSimpleInput.Controls.Add(NumSimpleCommandInput);
             GrpSimpleInput.Location = new Point(6, 6);
             GrpSimpleInput.Name = "GrpSimpleInput";
-            GrpSimpleInput.Size = new Size(483, 79);
+            GrpSimpleInput.Size = new Size(521, 79);
             GrpSimpleInput.TabIndex = 8;
             GrpSimpleInput.TabStop = false;
             GrpSimpleInput.Text = "Input Data";
@@ -202,6 +204,7 @@
             TxtSimpleCommandInput.Name = "TxtSimpleCommandInput";
             TxtSimpleCommandInput.Size = new Size(227, 23);
             TxtSimpleCommandInput.TabIndex = 6;
+            TxtSimpleCommandInput.TextChanged += TxtSimpleCommandInput_TextChanged;
             // 
             // CboSimpleCommandInput
             // 
@@ -308,6 +311,19 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
+            // BtnCancelCommand
+            // 
+            BtnCancelCommand.BackColor = Color.FromArgb(237, 44, 44);
+            BtnCancelCommand.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnCancelCommand.ForeColor = Color.White;
+            BtnCancelCommand.Location = new Point(457, 19);
+            BtnCancelCommand.Name = "BtnCancelCommand";
+            BtnCancelCommand.Size = new Size(56, 50);
+            BtnCancelCommand.TabIndex = 11;
+            BtnCancelCommand.Text = "■";
+            BtnCancelCommand.UseVisualStyleBackColor = false;
+            BtnCancelCommand.Click += BtnCancelCommand_Click_1;
+            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -364,5 +380,6 @@
         private DataGridViewTextBoxColumn cmnSimpleTime;
         private DataGridViewTextBoxColumn cmnSimpleSent;
         private DataGridViewTextBoxColumn cmnSimpleReceived;
+        private Button BtnCancelCommand;
     }
 }
