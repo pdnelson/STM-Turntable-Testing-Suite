@@ -30,7 +30,7 @@ namespace StmTestingSuite.Command
             if(commandParts.Length != 2)
             {
                 return "Invalid format; must be steps,speed";
-            } else if (!commandParts[1].All(char.IsNumber) || commandParts[0].Equals("") || commandParts[1].Equals("")) {
+            } else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1])) {
                 return "Both sides of comma must be valid numbers";
             }
 
