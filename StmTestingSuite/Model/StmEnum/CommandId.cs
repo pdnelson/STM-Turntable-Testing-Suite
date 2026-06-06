@@ -1,8 +1,8 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum ActionCommand : byte
+    enum CommandId : byte
     {
-        NO_ACTION = 0,
+        NONE = 0,
         PAUSE = 1,
         UNPAUSE = 2,
         PLAY = 3,

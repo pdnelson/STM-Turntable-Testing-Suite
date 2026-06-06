@@ -19,23 +19,23 @@ namespace StmTestingSuite.Command
         {
             var currentCommand = rawData[0] switch
             {
-                (byte)ActionCommand.NO_ACTION => "Idle",
-                (byte)ActionCommand.PAUSE => "Pause",
-                (byte)ActionCommand.UNPAUSE => "Unpause",
-                (byte)ActionCommand.PLAY => "Play",
-                (byte)ActionCommand.HOME => "Home",
-                (byte)ActionCommand.CALIBRATION => "Calibration",
-                (byte)ActionCommand.TEST_MODE => "Test Mode",
-                (byte)ActionCommand.ERROR => "Error",
+                (byte)CommandId.NONE => "Idle",
+                (byte)CommandId.PAUSE => "Pause",
+                (byte)CommandId.UNPAUSE => "Unpause",
+                (byte)CommandId.PLAY => "Play",
+                (byte)CommandId.HOME => "Home",
+                (byte)CommandId.CALIBRATION => "Calibration",
+                (byte)CommandId.TEST_MODE => "Test Mode",
+                (byte)CommandId.ERROR => "Error",
                 _ => "Invalid Data Received"
             };
 
-            return new StmCommandResult<ActionCommand>((ActionCommand)rawData[0], currentCommand);
+            return new StmCommandResult<CommandId>((CommandId)rawData[0], currentCommand);
         }
 
-        public async Task<ActionCommand?> ExecuteWithResult()
+        public async Task<CommandId?> ExecuteWithResult()
         {
-            return ((StmCommandResult<ActionCommand>?)Execute().Result)?.Result;
+            return ((StmCommandResult<CommandId>?)Execute().Result)?.Result;
         }
     }
 }
