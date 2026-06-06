@@ -211,6 +211,7 @@ namespace StmTestingSuite
 
         private void ExecuteSimpleCommand(BaseStmCommand command)
         {
+            BtnCancelCommand.Enabled = false;
             BtnSimpleSendCommand.Enabled = false;
 
             Task commandTask = new(async () =>
@@ -224,6 +225,7 @@ namespace StmTestingSuite
                     Utilities.WriteToUiFromThread(this, () =>
                     {
                         BtnSimpleSendCommand.Enabled = true;
+                        BtnCancelCommand.Enabled = true;
                         BtnSimpleSendCommand.Focus();
                     });
 
