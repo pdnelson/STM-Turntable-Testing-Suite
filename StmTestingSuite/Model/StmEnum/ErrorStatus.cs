@@ -1,8 +1,8 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum CommandStatus : byte
+    enum ErrorStatus : byte
     {
-        RUNNING = 0,
+        NONE = 0,
         SUCCESS = 1,
         LIFT_STALLED_MOVING_UP = 2,
         LIFT_STALLED_MOVING_DOWN = 3,

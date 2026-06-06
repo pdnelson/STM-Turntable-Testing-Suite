@@ -26,6 +26,7 @@
         GET_UP_TIME = 106,
         GET_SPEED_SETTING = 107,
         GET_SPEED_TARGET = 108,
-        GET_SIZE_SETTING = 109
+        GET_SIZE_SETTING = 109,
+        GET_CURRENT_SUB_COMMAND = 110
     }
 }
