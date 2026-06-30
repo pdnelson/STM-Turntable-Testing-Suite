@@ -9,6 +9,8 @@
         HOME = 4,
         CALIBRATION = 5,
         TEST_MODE = 6,
-        ERROR = 7
+        ERROR = 7,
+        TOGGLE_CLUTCH = 8,
+        STEP_H_MOTOR = 9
     }
 }
