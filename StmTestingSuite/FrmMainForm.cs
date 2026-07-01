@@ -185,6 +185,7 @@ namespace StmTestingSuite
                 // action
                 new CmdPauseUnpause(Conn, Logger),
                 new CmdProtoPlay(Conn, Logger),
+                new CmdStepHorizontally(Conn, Logger),
                 new CmdToggleClutch(Conn, Logger),
 
                 // set
