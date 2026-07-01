@@ -11,6 +11,7 @@
         TEST_MODE = 6,
         ERROR = 7,
         TOGGLE_CLUTCH = 8,
-        STEP_H_MOTOR = 9
+        STEP_H_MOTOR = 9,
+        GO_TO_POSITION = 10
     }
 }

@@ -27,6 +27,9 @@ namespace StmTestingSuite.Command
                 (byte)CommandId.CALIBRATION => "Calibration",
                 (byte)CommandId.TEST_MODE => "Test Mode",
                 (byte)CommandId.ERROR => "Error",
+                (byte)CommandId.TOGGLE_CLUTCH => "Toggle Clutch",
+                (byte)CommandId.STEP_H_MOTOR => "Step Horizontal Motor",
+                (byte)CommandId.GO_TO_POSITION => "Go To Position",
                 _ => "Invalid Data Received"
             };
 

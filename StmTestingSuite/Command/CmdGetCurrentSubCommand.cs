@@ -26,6 +26,7 @@ namespace StmTestingSuite.Command
                 (byte)SubCommandId.SET_DOWN_TONEARM => "Set Down Tonearm",
                 (byte)SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps Horizontally",
                 (byte)SubCommandId.ERROR => "Error",
+                (byte)SubCommandId.GO_TO_POSITION => "Go To Position",
                 _ => "Invalid Data Received"
             };
 
