@@ -47,13 +47,13 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
+            NumMoveToPositionInput = new NumericUpDown();
             GrpAdvancedMovement = new GroupBox();
+            NumMoveNStepsInput = new NumericUpDown();
             LblMoveToPosition = new Label();
             LblMoveNSteps = new Label();
             BtnMoveToPositionSend = new Button();
             BtnMoveNStepsSend = new Button();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
             LblAdvSpeedData = new Label();
             LblAdvSpeed = new Label();
             TrkAdvMovementSpeed = new TrackBar();
@@ -107,13 +107,16 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
+            BtnAdvancedEStop = new Button();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
             GrpSimpleInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).BeginInit();
             GrpAdvancedMovement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumMoveNStepsInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TrkAdvMovementSpeed).BeginInit();
             GrpManualMovement.SuspendLayout();
             GrpCurrentCommand.SuspendLayout();
@@ -302,6 +305,8 @@
             // 
             // tabAdvanced
             // 
+            tabAdvanced.Controls.Add(BtnAdvancedEStop);
+            tabAdvanced.Controls.Add(NumMoveToPositionInput);
             tabAdvanced.Controls.Add(GrpAdvancedMovement);
             tabAdvanced.Controls.Add(GrpManualMovement);
             tabAdvanced.Controls.Add(GrpCurrentCommand);
@@ -318,14 +323,20 @@
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
+            // NumMoveToPositionInput
+            // 
+            NumMoveToPositionInput.Location = new Point(469, 241);
+            NumMoveToPositionInput.Name = "NumMoveToPositionInput";
+            NumMoveToPositionInput.Size = new Size(72, 23);
+            NumMoveToPositionInput.TabIndex = 10;
+            // 
             // GrpAdvancedMovement
             // 
+            GrpAdvancedMovement.Controls.Add(NumMoveNStepsInput);
             GrpAdvancedMovement.Controls.Add(LblMoveToPosition);
             GrpAdvancedMovement.Controls.Add(LblMoveNSteps);
             GrpAdvancedMovement.Controls.Add(BtnMoveToPositionSend);
             GrpAdvancedMovement.Controls.Add(BtnMoveNStepsSend);
-            GrpAdvancedMovement.Controls.Add(textBox2);
-            GrpAdvancedMovement.Controls.Add(textBox1);
             GrpAdvancedMovement.Controls.Add(LblAdvSpeedData);
             GrpAdvancedMovement.Controls.Add(LblAdvSpeed);
             GrpAdvancedMovement.Controls.Add(TrkAdvMovementSpeed);
@@ -335,6 +346,15 @@
             GrpAdvancedMovement.TabIndex = 7;
             GrpAdvancedMovement.TabStop = false;
             GrpAdvancedMovement.Text = "Advanced Azimuth Movement";
+            // 
+            // NumMoveNStepsInput
+            // 
+            NumMoveNStepsInput.Location = new Point(6, 102);
+            NumMoveNStepsInput.Maximum = new decimal(new int[] { 400, 0, 0, 0 });
+            NumMoveNStepsInput.Minimum = new decimal(new int[] { 400, 0, 0, int.MinValue });
+            NumMoveNStepsInput.Name = "NumMoveNStepsInput";
+            NumMoveNStepsInput.Size = new Size(72, 23);
+            NumMoveNStepsInput.TabIndex = 9;
             // 
             // LblMoveToPosition
             // 
@@ -362,6 +382,7 @@
             BtnMoveToPositionSend.TabIndex = 6;
             BtnMoveToPositionSend.Text = "Send";
             BtnMoveToPositionSend.UseVisualStyleBackColor = true;
+            BtnMoveToPositionSend.Click += BtnMoveToPositionSend_Click;
             // 
             // BtnMoveNStepsSend
             // 
@@ -371,34 +392,21 @@
             BtnMoveNStepsSend.TabIndex = 5;
             BtnMoveNStepsSend.Text = "Send";
             BtnMoveNStepsSend.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(286, 102);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(72, 23);
-            textBox2.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(6, 102);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(72, 23);
-            textBox1.TabIndex = 3;
+            BtnMoveNStepsSend.Click += BtnMoveNStepsSend_Click;
             // 
             // LblAdvSpeedData
             // 
             LblAdvSpeedData.AutoSize = true;
-            LblAdvSpeedData.Location = new Point(177, 49);
+            LblAdvSpeedData.Location = new Point(45, 49);
             LblAdvSpeedData.Name = "LblAdvSpeedData";
-            LblAdvSpeedData.Size = new Size(46, 15);
+            LblAdvSpeedData.Size = new Size(13, 15);
             LblAdvSpeedData.TabIndex = 2;
-            LblAdvSpeedData.Text = "[speed]";
+            LblAdvSpeedData.Text = "8";
             // 
             // LblAdvSpeed
             // 
             LblAdvSpeed.AutoSize = true;
-            LblAdvSpeed.Location = new Point(138, 49);
+            LblAdvSpeed.Location = new Point(6, 49);
             LblAdvSpeed.Name = "LblAdvSpeed";
             LblAdvSpeed.Size = new Size(42, 15);
             LblAdvSpeed.TabIndex = 1;
@@ -412,7 +420,8 @@
             TrkAdvMovementSpeed.Name = "TrkAdvMovementSpeed";
             TrkAdvMovementSpeed.Size = new Size(352, 45);
             TrkAdvMovementSpeed.TabIndex = 0;
-            TrkAdvMovementSpeed.Value = 1;
+            TrkAdvMovementSpeed.Value = 8;
+            TrkAdvMovementSpeed.Scroll += TrkAdvMovementSpeed_Scroll;
             // 
             // GrpManualMovement
             // 
@@ -925,6 +934,19 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
+            // BtnAdvancedEStop
+            // 
+            BtnAdvancedEStop.BackColor = Color.FromArgb(237, 44, 44);
+            BtnAdvancedEStop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnAdvancedEStop.ForeColor = Color.White;
+            BtnAdvancedEStop.Location = new Point(3, 416);
+            BtnAdvancedEStop.Name = "BtnAdvancedEStop";
+            BtnAdvancedEStop.Size = new Size(56, 50);
+            BtnAdvancedEStop.TabIndex = 12;
+            BtnAdvancedEStop.Text = "■";
+            BtnAdvancedEStop.UseVisualStyleBackColor = false;
+            BtnAdvancedEStop.Click += BtnCancelCommand_Click_1;
+            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -947,8 +969,10 @@
             GrpSimpleInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).EndInit();
             GrpAdvancedMovement.ResumeLayout(false);
             GrpAdvancedMovement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumMoveNStepsInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)TrkAdvMovementSpeed).EndInit();
             GrpManualMovement.ResumeLayout(false);
             GrpCurrentCommand.ResumeLayout(false);
@@ -1046,11 +1070,12 @@
         private Label LblMoveNSteps;
         private Button BtnMoveToPositionSend;
         private Button BtnMoveNStepsSend;
-        private TextBox textBox2;
-        private TextBox textBox1;
         private TabControl TabMain;
         private Label LblCurrSubCommandData;
         private Label LblCurrCommandStatusData;
         private NumericUpDown NumSpeed;
+        private NumericUpDown NumMoveToPositionInput;
+        private NumericUpDown NumMoveNStepsInput;
+        private Button BtnAdvancedEStop;
     }
 }

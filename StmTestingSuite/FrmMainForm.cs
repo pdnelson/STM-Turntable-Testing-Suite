@@ -367,5 +367,35 @@ namespace StmTestingSuite
 
             ExecuteSimpleCommand(command);
         }
+
+        private void TrkAdvMovementSpeed_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar = (TrackBar)sender;
+            LblAdvSpeedData.Text = trackBar.Value.ToString();
+        }
+
+        private void BtnMoveNStepsSend_Click(object sender, EventArgs e)
+        {
+            var speed = TrkAdvMovementSpeed.Value;
+            var steps = NumMoveNStepsInput.Value;
+
+            if (steps != 0)
+            {
+                var command = new CmdProtoPlay(Conn, Logger);
+                command.UpdateInputData($"{steps},{speed}");
+
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void BtnMoveToPositionSend_Click(object sender, EventArgs e)
+        {
+            var speed = TrkAdvMovementSpeed.Value;
+            var position = NumMoveNStepsInput.Value;
+            var command = new CmdActionGoToPositionH(Conn, Logger);
+            command.UpdateInputData($"{position},{speed}");
+
+            ExecuteSimpleCommand(command);
+        }
     }
 }
