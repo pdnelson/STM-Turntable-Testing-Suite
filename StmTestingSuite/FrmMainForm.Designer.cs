@@ -95,7 +95,6 @@
             LblTargetSpeedData = new Label();
             LblSpeedSettingData = new Label();
             BtnSubmitSpeed = new Button();
-            TxtNewSpeed = new TextBox();
             LblNewSpeed = new Label();
             LblActualSpeed = new Label();
             LblTargetSpeed = new Label();
@@ -107,6 +106,7 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
+            NumSpeed = new NumericUpDown();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -123,6 +123,7 @@
             GrpSizeGroup.SuspendLayout();
             GrpSpeedGroup.SuspendLayout();
             tabGraphical.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumSpeed).BeginInit();
             SuspendLayout();
             // 
             // TabMain
@@ -660,6 +661,7 @@
             BtnRotateSpeed.TabIndex = 3;
             BtnRotateSpeed.Text = "Rotate Speed";
             BtnRotateSpeed.UseVisualStyleBackColor = true;
+            BtnRotateSpeed.Click += BtnRotateSpeed_Click;
             // 
             // btnRotateSize
             // 
@@ -669,6 +671,7 @@
             btnRotateSize.TabIndex = 2;
             btnRotateSize.Text = "Rotate Size";
             btnRotateSize.UseVisualStyleBackColor = true;
+            btnRotateSize.Click += btnRotateSize_Click;
             // 
             // BtnPause
             // 
@@ -678,6 +681,7 @@
             BtnPause.TabIndex = 1;
             BtnPause.Text = "Pause";
             BtnPause.UseVisualStyleBackColor = true;
+            BtnPause.Click += BtnPause_Click;
             // 
             // BtnPlay
             // 
@@ -687,6 +691,7 @@
             BtnPlay.TabIndex = 0;
             BtnPlay.Text = "Play";
             BtnPlay.UseVisualStyleBackColor = true;
+            BtnPlay.Click += BtnPlay_Click;
             // 
             // GrpSizeGroup
             // 
@@ -711,6 +716,7 @@
             RadSizeAuto.TabStop = true;
             RadSizeAuto.Text = "Automatic";
             RadSizeAuto.UseVisualStyleBackColor = true;
+            RadSizeAuto.CheckedChanged += RadSizeAuto_CheckedChanged;
             // 
             // RadSize12In
             // 
@@ -722,6 +728,7 @@
             RadSize12In.TabStop = true;
             RadSize12In.Text = "12\"";
             RadSize12In.UseVisualStyleBackColor = true;
+            RadSize12In.CheckedChanged += RadSize12In_CheckedChanged;
             // 
             // RadSize10In
             // 
@@ -733,6 +740,7 @@
             RadSize10In.TabStop = true;
             RadSize10In.Text = "10\"";
             RadSize10In.UseVisualStyleBackColor = true;
+            RadSize10In.CheckedChanged += RadSize10In_CheckedChanged;
             // 
             // RadSize7In
             // 
@@ -744,14 +752,15 @@
             RadSize7In.TabStop = true;
             RadSize7In.Text = "7\"";
             RadSize7In.UseVisualStyleBackColor = true;
+            RadSize7In.CheckedChanged += RadSize7In_CheckedChanged;
             // 
             // GrpSpeedGroup
             // 
+            GrpSpeedGroup.Controls.Add(NumSpeed);
             GrpSpeedGroup.Controls.Add(LblActualSpeedData);
             GrpSpeedGroup.Controls.Add(LblTargetSpeedData);
             GrpSpeedGroup.Controls.Add(LblSpeedSettingData);
             GrpSpeedGroup.Controls.Add(BtnSubmitSpeed);
-            GrpSpeedGroup.Controls.Add(TxtNewSpeed);
             GrpSpeedGroup.Controls.Add(LblNewSpeed);
             GrpSpeedGroup.Controls.Add(LblActualSpeed);
             GrpSpeedGroup.Controls.Add(LblTargetSpeed);
@@ -798,18 +807,12 @@
             BtnSubmitSpeed.TabIndex = 5;
             BtnSubmitSpeed.Text = "Save";
             BtnSubmitSpeed.UseVisualStyleBackColor = true;
-            // 
-            // TxtNewSpeed
-            // 
-            TxtNewSpeed.Location = new Point(96, 70);
-            TxtNewSpeed.Name = "TxtNewSpeed";
-            TxtNewSpeed.Size = new Size(100, 23);
-            TxtNewSpeed.TabIndex = 4;
+            BtnSubmitSpeed.Click += BtnSubmitSpeed_Click;
             // 
             // LblNewSpeed
             // 
             LblNewSpeed.AutoSize = true;
-            LblNewSpeed.Location = new Point(24, 73);
+            LblNewSpeed.Location = new Point(24, 76);
             LblNewSpeed.Name = "LblNewSpeed";
             LblNewSpeed.Size = new Size(69, 15);
             LblNewSpeed.TabIndex = 3;
@@ -909,6 +912,16 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
+            // NumSpeed
+            // 
+            NumSpeed.DecimalPlaces = 4;
+            NumSpeed.Location = new Point(92, 73);
+            NumSpeed.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            NumSpeed.Name = "NumSpeed";
+            NumSpeed.Size = new Size(104, 23);
+            NumSpeed.TabIndex = 8;
+            NumSpeed.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -948,6 +961,7 @@
             GrpSpeedGroup.PerformLayout();
             tabGraphical.ResumeLayout(false);
             tabGraphical.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumSpeed).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -988,7 +1002,6 @@
         private Label LblActualSpeed;
         private Label LblTargetSpeed;
         private Label LblSpeedSetting;
-        private TextBox TxtNewSpeed;
         private Label LblNewSpeed;
         private Button BtnSubmitSpeed;
         private Label LblActualSpeedData;
@@ -1035,5 +1048,6 @@
         private TabControl TabMain;
         private Label LblCurrSubCommandData;
         private Label LblCurrCommandStatusData;
+        private NumericUpDown NumSpeed;
     }
 }

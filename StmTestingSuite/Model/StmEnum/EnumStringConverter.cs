@@ -24,7 +24,7 @@
                 CommandId.NONE => "Idle",
                 CommandId.PAUSE => "Pause",
                 CommandId.UNPAUSE => "Unpause",
-                CommandId.PLAY => "Play",
+                CommandId.MOVE_N_STEPS_H => "Move n Steps Horizontally",
                 CommandId.HOME => "Home",
                 CommandId.CALIBRATION => "Calibration",
                 CommandId.TEST_MODE => "Test Mode",

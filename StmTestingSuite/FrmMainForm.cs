@@ -2,6 +2,7 @@ using StmTestingSuite.Command;
 using StmTestingSuite.Command.Base;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
+using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite
 {
@@ -255,22 +256,95 @@ namespace StmTestingSuite
             TabPage? current = ((TabControl)sender).SelectedTab;
 
             // Don't let the user change tabs if the turntable isn't connected
-            if(current != null)
+            if (current != null)
             {
-                if(current.Text != "Simple" && !Conn.Connected)
+                if (current.Text != "Simple" && !Conn.Connected)
                 {
                     e.Cancel = true;
                     MessageBox.Show("Must connnect to a turntable before changing tabs.", "Cannot Change Tabs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                } 
-                else if(current.Text == "Advanced")
+                }
+                else if (current.Text == "Advanced")
                 {
                     AdvTabMonitor.Start();
                 }
-                else if(current.Text != "Advanced")
+                else if (current.Text != "Advanced")
                 {
                     AdvTabMonitor.Stop();
                 }
             }
+        }
+
+        private void BtnPlay_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdProtoPlay(Conn, Logger));
+        }
+
+        private void BtnPause_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdPauseUnpause(Conn, Logger));
+        }
+
+        private void BtnRotateSpeed_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdSetRotateSpeed(Conn, Logger));
+        }
+
+        private void btnRotateSize_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdSetRotateSize(Conn, Logger));
+        }
+
+        private void RadSize7In_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                var command = new CmdSetSize(Conn, Logger);
+                command.UpdateInputData((byte)SizeOption.IN_7);
+
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void RadSize10In_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                var command = new CmdSetSize(Conn, Logger);
+                command.UpdateInputData((byte)SizeOption.IN_10);
+
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void RadSize12In_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                var command = new CmdSetSize(Conn, Logger);
+                command.UpdateInputData((byte)SizeOption.IN_12);
+
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void RadSizeAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                var command = new CmdSetSize(Conn, Logger);
+                command.UpdateInputData((byte)SizeOption.AUTO);
+
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void BtnSubmitSpeed_Click(object sender, EventArgs e)
+        {
+            var command = new CmdSetCustomSpeed(Conn, Logger);
+            decimal value = NumSpeed.Value;
+            command.UpdateInputData(Decimal.ToSingle(value));
+
+            ExecuteSimpleCommand(command);
         }
     }
 }
