@@ -91,6 +91,7 @@
             RadSize10In = new RadioButton();
             RadSize7In = new RadioButton();
             GrpSpeedGroup = new GroupBox();
+            NumSpeed = new NumericUpDown();
             LblActualSpeedData = new Label();
             LblTargetSpeedData = new Label();
             LblSpeedSettingData = new Label();
@@ -106,7 +107,6 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            NumSpeed = new NumericUpDown();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -122,8 +122,8 @@
             GrpSimpleCommands.SuspendLayout();
             GrpSizeGroup.SuspendLayout();
             GrpSpeedGroup.SuspendLayout();
-            tabGraphical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSpeed).BeginInit();
+            tabGraphical.SuspendLayout();
             SuspendLayout();
             // 
             // TabMain
@@ -434,6 +434,7 @@
             BtnStepCounterClockwise.TabIndex = 2;
             BtnStepCounterClockwise.Text = "Step CCW";
             BtnStepCounterClockwise.UseVisualStyleBackColor = true;
+            BtnStepCounterClockwise.Click += BtnStepCounterClockwise_Click;
             // 
             // BtnStepClockwise
             // 
@@ -443,6 +444,7 @@
             BtnStepClockwise.TabIndex = 1;
             BtnStepClockwise.Text = "Step CW";
             BtnStepClockwise.UseVisualStyleBackColor = true;
+            BtnStepClockwise.Click += BtnStepClockwise_Click;
             // 
             // BtnToggleClutch
             // 
@@ -452,6 +454,7 @@
             BtnToggleClutch.TabIndex = 0;
             BtnToggleClutch.Text = "Toggle Clutch";
             BtnToggleClutch.UseVisualStyleBackColor = true;
+            BtnToggleClutch.Click += BtnToggleClutch_Click;
             // 
             // GrpCurrentCommand
             // 
@@ -772,6 +775,16 @@
             GrpSpeedGroup.TabStop = false;
             GrpSpeedGroup.Text = "Speed";
             // 
+            // NumSpeed
+            // 
+            NumSpeed.DecimalPlaces = 4;
+            NumSpeed.Location = new Point(92, 73);
+            NumSpeed.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            NumSpeed.Name = "NumSpeed";
+            NumSpeed.Size = new Size(104, 23);
+            NumSpeed.TabIndex = 8;
+            NumSpeed.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
             // LblActualSpeedData
             // 
             LblActualSpeedData.AutoSize = true;
@@ -912,16 +925,6 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // NumSpeed
-            // 
-            NumSpeed.DecimalPlaces = 4;
-            NumSpeed.Location = new Point(92, 73);
-            NumSpeed.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            NumSpeed.Name = "NumSpeed";
-            NumSpeed.Size = new Size(104, 23);
-            NumSpeed.TabIndex = 8;
-            NumSpeed.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -959,9 +962,9 @@
             GrpSizeGroup.PerformLayout();
             GrpSpeedGroup.ResumeLayout(false);
             GrpSpeedGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumSpeed).EndInit();
             tabGraphical.ResumeLayout(false);
             tabGraphical.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)NumSpeed).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

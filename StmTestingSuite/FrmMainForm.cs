@@ -346,5 +346,26 @@ namespace StmTestingSuite
 
             ExecuteSimpleCommand(command);
         }
+
+        private void BtnToggleClutch_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdToggleClutch(Conn, Logger));
+        }
+
+        private void BtnStepClockwise_Click(object sender, EventArgs e)
+        {
+            var command = new CmdStepHorizontally(Conn, Logger);
+            command.UpdateInputData("1,14");
+
+            ExecuteSimpleCommand(command);
+        }
+
+        private void BtnStepCounterClockwise_Click(object sender, EventArgs e)
+        {
+            var command = new CmdStepHorizontally(Conn, Logger);
+            command.UpdateInputData("-1,14");
+
+            ExecuteSimpleCommand(command);
+        }
     }
 }
