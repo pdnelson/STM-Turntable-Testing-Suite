@@ -208,7 +208,8 @@ namespace StmTestingSuite
                 new CmdGetSpeedSetting(Conn, Logger),
                 new CmdGetTargetSpeed(Conn, Logger),
                 new CmdGetUpTime(Conn, Logger),
-                new CmdGetVerticalEncoderPos(Conn, Logger)
+                new CmdGetVerticalEncoderPos(Conn, Logger),
+                new CmdGetAdvancedSuiteData(Conn, Logger)
             ];
         }
 
