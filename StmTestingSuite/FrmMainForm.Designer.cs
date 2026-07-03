@@ -430,12 +430,12 @@
             // TrkAdvMovementSpeed
             // 
             TrkAdvMovementSpeed.Location = new Point(6, 19);
-            TrkAdvMovementSpeed.Maximum = 15;
+            TrkAdvMovementSpeed.Maximum = 14;
             TrkAdvMovementSpeed.Minimum = 1;
             TrkAdvMovementSpeed.Name = "TrkAdvMovementSpeed";
             TrkAdvMovementSpeed.Size = new Size(352, 45);
             TrkAdvMovementSpeed.TabIndex = 0;
-            TrkAdvMovementSpeed.Value = 8;
+            TrkAdvMovementSpeed.Value = 14;
             TrkAdvMovementSpeed.Scroll += TrkAdvMovementSpeed_Scroll;
             // 
             // GrpManualMovement

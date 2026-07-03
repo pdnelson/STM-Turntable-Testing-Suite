@@ -11,6 +11,10 @@ namespace StmTestingSuite
         Form mainForm,
         StmConnector conn,
 
+        // Buttons
+        Button btnPlay,
+        Button btnPause,
+
         // Size
         RadioButton rad7In,
         RadioButton rad10In,
@@ -39,6 +43,10 @@ namespace StmTestingSuite
     {
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
+
+        // Buttons
+        Button BtnPlay { get; } = btnPlay;
+        Button BtnPause { get; } = btnPause;
 
         // Size
         RadioButton Rad7In { get; } = rad7In;
@@ -100,6 +108,23 @@ namespace StmTestingSuite
         {
             Utilities.WriteToUiFromThread(Form, () =>
             {
+                // Buttons
+                if(data.LiftStatus == LiftStatus.LIFTED)
+                {
+                    BtnPause.Text = "Lower";
+                } else
+                {
+                    BtnPause.Text = "Lift";
+                }
+
+                if(data.HomeStatus == HomeStatus.HOMED)
+                {
+                    BtnPlay.Text = "Play";
+                } else
+                {
+                    BtnPlay.Text = "Return";
+                }
+
                 // Size
                 Rad7In.Checked = data.SizeSetting == SizeOption.IN_7;
                 Rad10In.Checked = data.SizeSetting == SizeOption.IN_10;

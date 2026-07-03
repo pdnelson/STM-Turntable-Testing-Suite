@@ -19,7 +19,7 @@ namespace StmTestingSuite
             InitializeComponent();
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
-            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
+            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -377,7 +377,7 @@ namespace StmTestingSuite
         private void BtnMoveNStepsSend_Click(object sender, EventArgs e)
         {
             var speed = TrkAdvMovementSpeed.Value;
-            var steps = NumMoveNStepsInput.Value;
+            var steps = (int)NumMoveNStepsInput.Value;
 
             if (steps != 0)
             {
