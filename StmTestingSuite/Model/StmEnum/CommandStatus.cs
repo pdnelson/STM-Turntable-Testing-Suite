@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum ErrorStatus : byte
+    public enum CommandStatus : byte
     {
         NONE = 0,
         SUCCESS = 1,

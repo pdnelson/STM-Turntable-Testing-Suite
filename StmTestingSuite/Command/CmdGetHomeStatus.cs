@@ -17,14 +17,10 @@ namespace StmTestingSuite.Command
 
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var homeStatus = rawData[0] switch
-            {
-                (byte)HomeStatus.HOMED => "Homed",
-                (byte)HomeStatus.NOT_HOMED => "Not Homed",
-                _ => "Invalid Data Received"
-            };
+            var homeStatus = (HomeStatus)rawData[0];
+            var homeStatusString = homeStatus.GetString();
 
-            return new StmCommandResult<HomeStatus>((HomeStatus)rawData[0], homeStatus);
+            return new StmCommandResult<HomeStatus>((HomeStatus)rawData[0], homeStatusString);
         }
 
         public async Task<HomeStatus?> ExecuteWithResult()

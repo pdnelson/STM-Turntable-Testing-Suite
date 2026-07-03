@@ -17,17 +17,10 @@ namespace StmTestingSuite.Command
 
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var liftStatus = rawData[0] switch
-            {
-                (byte)SpeedOption.RPM_33 => "33 RPM",
-                (byte)SpeedOption.RPM_45 => "45 RPM",
-                (byte)SpeedOption.RPM_78 => "78 RPM",
-                (byte)SpeedOption.AUTO => "Automatic",
-                (byte)SpeedOption.CUSTOM => "Custom",
-                _ => "Invalid Data Received"
-            };
+            var speedOption = (SpeedOption)rawData[0];
+            var speedOptionString = speedOption.GetString();
 
-            return new StmCommandResult<SpeedOption>((SpeedOption)rawData[0], liftStatus);
+            return new StmCommandResult<SpeedOption>(speedOption, speedOptionString);
         }
 
         public async Task<SpeedOption?> ExecuteWithResult()

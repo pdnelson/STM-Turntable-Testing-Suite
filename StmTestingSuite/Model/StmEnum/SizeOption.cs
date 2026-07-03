@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum SizeOption : byte
+    public enum SizeOption : byte
     {
         IN_7 = 0,
         IN_10 = 1,

@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum CommandId : byte
+    public enum CommandId : byte
     {
         NONE = 0,
         PAUSE = 1,

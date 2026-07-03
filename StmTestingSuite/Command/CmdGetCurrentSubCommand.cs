@@ -17,20 +17,10 @@ namespace StmTestingSuite.Command
 
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var currentCommand = rawData[0] switch
-            {
-                (byte)SubCommandId.NONE => "Idle",
-                (byte)SubCommandId.DISENGAGE_AZ_CLUTCH => "Disengage Azimuth Clutch",
-                (byte)SubCommandId.ENGAGE_AZ_CLUTCH => "Engage Azimuth Clutch",
-                (byte)SubCommandId.LIFT_TONEARM => "Lift Tonearm",
-                (byte)SubCommandId.SET_DOWN_TONEARM => "Set Down Tonearm",
-                (byte)SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps Horizontally",
-                (byte)SubCommandId.ERROR => "Error",
-                (byte)SubCommandId.GO_TO_POSITION => "Go To Position",
-                _ => "Invalid Data Received"
-            };
+            var subCommandId = (SubCommandId)rawData[0];
+            var subCommandString = subCommandId.GetString();
 
-            return new StmCommandResult<CommandId>((CommandId)rawData[0], currentCommand);
+            return new StmCommandResult<SubCommandId>(subCommandId, subCommandString);
         }
 
         public async Task<CommandId?> ExecuteWithResult()

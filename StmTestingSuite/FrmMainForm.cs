@@ -200,7 +200,7 @@ namespace StmTestingSuite
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
                 new CmdGetCurrentSubCommand(Conn, Logger),
-                new CmdGetErrorStatus(Conn, Logger),
+                new CmdGetCommandStatus(Conn, Logger),
                 new CmdGetHomeStatus(Conn, Logger),
                 new CmdGetHorizontalEncoderPos(Conn, Logger),
                 new CmdGetLiftStatus(Conn, Logger),

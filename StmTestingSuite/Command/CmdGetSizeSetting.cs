@@ -17,16 +17,10 @@ namespace StmTestingSuite.Command
 
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var liftStatus = rawData[0] switch
-            {
-                (byte)SizeOption.IN_7 => "7\"",
-                (byte)SizeOption.IN_10 => "10\"",
-                (byte)SizeOption.IN_12 => "12\"",
-                (byte)SizeOption.AUTO => "Automatic",
-                _ => "Invalid Data Received"
-            };
+            var sizeOption = (SizeOption)rawData[0];
+            var sizeOptionString = sizeOption.GetString();
 
-            return new StmCommandResult<SizeOption>((SizeOption)rawData[0], liftStatus);
+            return new StmCommandResult<SizeOption>(sizeOption, sizeOptionString);
         }
 
         public async Task<SizeOption?> ExecuteWithResult()

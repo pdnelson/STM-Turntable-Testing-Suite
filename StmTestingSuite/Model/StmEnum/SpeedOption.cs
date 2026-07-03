@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum SpeedOption : byte
+    public enum SpeedOption : byte
     {
         RPM_33 = 0,
         RPM_45 = 1,
