@@ -9,6 +9,7 @@ namespace StmTestingSuite
         Form mainForm,
         StmConnector conn, 
         StmLogger logger, 
+        TabControl tabs,
         ComboBox serialOptions, 
         Label lblConnectionStatus,
         Button btnConnect,
@@ -20,6 +21,7 @@ namespace StmTestingSuite
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
         StmLogger Logger { get; } = logger;
+        TabControl Tabs { get; } = tabs;
         ComboBox CboSerialOptions { get; } = serialOptions;
         Label LblConnectionStatus { get; } = lblConnectionStatus;
         Button BtnConnect { get; } = btnConnect;
@@ -51,6 +53,10 @@ namespace StmTestingSuite
                     CboSerialOptions.Enabled = true;
                     BtnRefreshSerialPorts.Enabled = true;
                     Conn.Key = ModelKey.INIT;
+                    Utilities.WriteToUiFromThread(Form, () =>
+                    {
+                        Tabs.SelectedIndex = 0;
+                    });
                 }
             }
 

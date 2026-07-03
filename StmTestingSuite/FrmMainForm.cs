@@ -17,7 +17,7 @@ namespace StmTestingSuite
             InitializeComponent();
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
-            ConnMonitor = new ConnectionMonitor(this, Conn, Logger, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
+            ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
 
@@ -246,6 +246,29 @@ namespace StmTestingSuite
         private void BtnCancelCommand_Click_1(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdSetClearActionCommand(Conn, Logger));
+        }
+
+        private void TabMain_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            TabPage? current = ((TabControl)sender).SelectedTab;
+
+            // Don't let the user change tabs if the turntable isn't connected
+            if(current != null)
+            {
+                if(current.Text != "Simple" && !Conn.Connected)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Must connnect to a turntable before changing tabs.", "Cannot Change Tabs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                } 
+                else if(current.Text == "Advanced")
+                {
+                    // todo: start advanced monitoring routine
+                }
+                else if(current.Text != "Advanced")
+                {
+                    // todo: stop advanced monitoring routine
+                }
+            }
         }
     }
 }
