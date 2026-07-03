@@ -10,6 +10,7 @@
         ACTION_TOGGLE_CLUTCH = 3,
         ACTION_STEP_HORIZONTALLY = 4,
         ACTION_GO_TO_POSITION_H = 5,
+        ACTION_PLAY_RETURN = 6,
 
         // Set commands
         SET_SPEED = 31,

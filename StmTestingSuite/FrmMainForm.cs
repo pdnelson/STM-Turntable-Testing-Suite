@@ -276,7 +276,7 @@ namespace StmTestingSuite
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            ExecuteSimpleCommand(new CmdProtoPlay(Conn, Logger));
+            ExecuteSimpleCommand(new CmdPlayOrReturn(Conn, Logger));
         }
 
         private void BtnPause_Click(object sender, EventArgs e)
