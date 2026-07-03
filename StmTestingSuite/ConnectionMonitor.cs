@@ -122,8 +122,8 @@ namespace StmTestingSuite
 
                                         if (!result)
                                         {
-                                            // After 3 consecutive failures, we will presume the device disconnected.
-                                            if(failedResultCount <= 2)
+                                            // After 2 consecutive failures, we will presume the device disconnected.
+                                            if(failedResultCount <= 1)
                                             {
                                                 failedResultCount++;
                                             } else
@@ -135,7 +135,7 @@ namespace StmTestingSuite
                                             failedResultCount = 0;
                                         }
 
-                                        await Task.Delay(300);
+                                        await Task.Delay(Constants.ConnectionMonitorPollMs);
                                     }
                                 });
 
