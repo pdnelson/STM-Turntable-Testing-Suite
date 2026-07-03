@@ -13,7 +13,7 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_ADVANCED_SUITE_DATA;
         public override string Name => "Advanced Suite Data";
-        public override ushort ResponseSize => 19;
+        public override ushort ResponseSize => 20;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             var response = new Response(rawData);
@@ -51,6 +51,8 @@ namespace StmTestingSuite.Command
                 SpeedTarget = BitConverter.ToSingle(speedTargetBytes);
 
                 SizeSetting = (SizeOption)rawData[18];
+
+                ClutchStatus = (ClutchStatus)rawData[19];
             }
 
             public ushort VerticalPosition { get; }
@@ -64,10 +66,11 @@ namespace StmTestingSuite.Command
             public SpeedOption SpeedSetting { get; }
             public float SpeedTarget { get; }
             public SizeOption SizeSetting { get; }
+            public ClutchStatus ClutchStatus { get; }
 
             public readonly override string ToString()
             {
-                return $"({VerticalPosition}, {HorizontalPosition}, {LiftStatus}, {HomeStatus}, {CommandId}, {SubCommandId}, {CommandStatus}, {UpTimeSeconds}, {SpeedSetting}, {SpeedTarget}, {SizeSetting})";
+                return $"({VerticalPosition}, {HorizontalPosition}, {LiftStatus}, {HomeStatus}, {ClutchStatus}, {CommandId}, {SubCommandId}, {CommandStatus}, {UpTimeSeconds}, {SpeedSetting}, {SpeedTarget}, {SizeSetting})";
             }
         }
     }

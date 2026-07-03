@@ -96,5 +96,15 @@
                 _ => "Invalid Data Received"
             };
         }
+
+        public static String GetString(this ClutchStatus speedOption)
+        {
+            return speedOption switch
+            {
+                ClutchStatus.ENGAGED => "Engaged",
+                ClutchStatus.DISENGAGED => "Disengaged",
+                _ => "Invalid Data Received"
+            };
+        }
     }
 }

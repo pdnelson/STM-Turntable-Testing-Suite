@@ -47,6 +47,7 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
+            BtnAdvancedEStop = new Button();
             NumMoveToPositionInput = new NumericUpDown();
             GrpAdvancedMovement = new GroupBox();
             NumMoveNStepsInput = new NumericUpDown();
@@ -69,6 +70,8 @@
             LblSubCommand = new Label();
             LblCurrCommand = new Label();
             GrpPosition = new GroupBox();
+            LblClutchData = new Label();
+            LblClutch = new Label();
             LblHomeStatusData = new Label();
             LblLiftStatusData = new Label();
             LblHorizontalPositionData = new Label();
@@ -107,7 +110,6 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            BtnAdvancedEStop = new Button();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -323,6 +325,19 @@
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
+            // BtnAdvancedEStop
+            // 
+            BtnAdvancedEStop.BackColor = Color.FromArgb(237, 44, 44);
+            BtnAdvancedEStop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnAdvancedEStop.ForeColor = Color.White;
+            BtnAdvancedEStop.Location = new Point(3, 416);
+            BtnAdvancedEStop.Name = "BtnAdvancedEStop";
+            BtnAdvancedEStop.Size = new Size(56, 50);
+            BtnAdvancedEStop.TabIndex = 12;
+            BtnAdvancedEStop.Text = "■";
+            BtnAdvancedEStop.UseVisualStyleBackColor = false;
+            BtnAdvancedEStop.Click += BtnCancelCommand_Click_1;
+            // 
             // NumMoveToPositionInput
             // 
             NumMoveToPositionInput.Location = new Point(469, 241);
@@ -473,7 +488,7 @@
             GrpCurrentCommand.Controls.Add(LblCommandStatus);
             GrpCurrentCommand.Controls.Add(LblSubCommand);
             GrpCurrentCommand.Controls.Add(LblCurrCommand);
-            GrpCurrentCommand.Location = new Point(553, 105);
+            GrpCurrentCommand.Location = new Point(553, 138);
             GrpCurrentCommand.Name = "GrpCurrentCommand";
             GrpCurrentCommand.Size = new Size(200, 81);
             GrpCurrentCommand.TabIndex = 5;
@@ -536,6 +551,8 @@
             // 
             // GrpPosition
             // 
+            GrpPosition.Controls.Add(LblClutchData);
+            GrpPosition.Controls.Add(LblClutch);
             GrpPosition.Controls.Add(LblHomeStatusData);
             GrpPosition.Controls.Add(LblLiftStatusData);
             GrpPosition.Controls.Add(LblHorizontalPositionData);
@@ -546,10 +563,28 @@
             GrpPosition.Controls.Add(LblVerticalPosition);
             GrpPosition.Location = new Point(553, 6);
             GrpPosition.Name = "GrpPosition";
-            GrpPosition.Size = new Size(200, 93);
+            GrpPosition.Size = new Size(200, 126);
             GrpPosition.TabIndex = 4;
             GrpPosition.TabStop = false;
             GrpPosition.Text = "Position";
+            // 
+            // LblClutchData
+            // 
+            LblClutchData.AutoSize = true;
+            LblClutchData.Location = new Point(77, 92);
+            LblClutchData.Name = "LblClutchData";
+            LblClutchData.Size = new Size(82, 15);
+            LblClutchData.TabIndex = 9;
+            LblClutchData.Text = "[clutch status]";
+            // 
+            // LblClutch
+            // 
+            LblClutch.AutoSize = true;
+            LblClutch.Location = new Point(14, 92);
+            LblClutch.Name = "LblClutch";
+            LblClutch.Size = new Size(57, 15);
+            LblClutch.TabIndex = 8;
+            LblClutch.Text = "H Clutch:";
             // 
             // LblHomeStatusData
             // 
@@ -627,9 +662,9 @@
             // 
             GrpStatistics.Controls.Add(LblUpTimeData);
             GrpStatistics.Controls.Add(LblUpTime);
-            GrpStatistics.Location = new Point(553, 192);
+            GrpStatistics.Location = new Point(553, 222);
             GrpStatistics.Name = "GrpStatistics";
-            GrpStatistics.Size = new Size(200, 271);
+            GrpStatistics.Size = new Size(200, 241);
             GrpStatistics.TabIndex = 3;
             GrpStatistics.TabStop = false;
             GrpStatistics.Text = "Statistics";
@@ -934,19 +969,6 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // BtnAdvancedEStop
-            // 
-            BtnAdvancedEStop.BackColor = Color.FromArgb(237, 44, 44);
-            BtnAdvancedEStop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BtnAdvancedEStop.ForeColor = Color.White;
-            BtnAdvancedEStop.Location = new Point(3, 416);
-            BtnAdvancedEStop.Name = "BtnAdvancedEStop";
-            BtnAdvancedEStop.Size = new Size(56, 50);
-            BtnAdvancedEStop.TabIndex = 12;
-            BtnAdvancedEStop.Text = "■";
-            BtnAdvancedEStop.UseVisualStyleBackColor = false;
-            BtnAdvancedEStop.Click += BtnCancelCommand_Click_1;
-            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1077,5 +1099,7 @@
         private NumericUpDown NumMoveToPositionInput;
         private NumericUpDown NumMoveNStepsInput;
         private Button BtnAdvancedEStop;
+        private Label LblClutch;
+        private Label LblClutchData;
     }
 }

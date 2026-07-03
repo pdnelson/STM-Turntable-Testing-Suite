@@ -27,6 +27,7 @@ namespace StmTestingSuite
         Label lblHorizontalPos,
         Label lblLiftStatus,
         Label lblHomeStatus,
+        Label lblClutchStatus,
 
         // Current Command
         Label lblCurrCommand,
@@ -55,6 +56,7 @@ namespace StmTestingSuite
         Label LblHorizontalPos { get; } = lblHorizontalPos;
         Label LblLiftStatus { get; } = lblLiftStatus;
         Label LblHomeStatus { get; } = lblHomeStatus;
+        Label LblClutchStatus { get; } = lblClutchStatus;
 
         // Current Command
         Label LblCurrCommand { get; } = lblCurrCommand;
@@ -114,6 +116,7 @@ namespace StmTestingSuite
                 LblHorizontalPos.Text = data.HorizontalPosition.ToString();
                 LblLiftStatus.Text = data.LiftStatus.GetString();
                 LblHomeStatus.Text = data.HomeStatus.GetString();
+                LblClutchStatus.Text = data.ClutchStatus.GetString();
 
                 // Current Command
                 LblCurrCommand.Text = data.CommandId.GetString();

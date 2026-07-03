@@ -19,7 +19,7 @@ namespace StmTestingSuite
             InitializeComponent();
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
-            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
+            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
