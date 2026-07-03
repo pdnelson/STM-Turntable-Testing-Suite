@@ -8,5 +8,6 @@
         public const int CommandResponseTimeMs = 1;
         public const int CommandTimeoutTimeMs = 2;
         public const int SendCommandDebounceMs = 10;
+        public const int AdvancedTabDataPollMs = 500;
     }
 }

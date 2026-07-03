@@ -20,12 +20,7 @@ namespace StmTestingSuite.Command
         {
             uint finalInt = BitConverter.ToUInt32(rawData);
 
-            TimeSpan timeSpan = TimeSpan.FromSeconds(finalInt);
-
-            StringBuilder finalString = new();
-
-            if (timeSpan.Days > 0) finalString.Append(timeSpan.Days + "d, ");
-            finalString.Append(timeSpan.Hours.ToString("D2") + ":" + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2"));
+            string finalString = Utilities.secondsToTimeString(finalInt);
 
             return new StmCommandResult<uint>(finalInt, finalString.ToString());
         }

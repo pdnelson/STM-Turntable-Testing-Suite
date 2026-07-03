@@ -21,6 +21,11 @@ namespace StmTestingSuite.Command
             return new StmCommandResult<Response>(response, response.ToString());
         }
 
+        public async Task<Response?> ExecuteWithResult()
+        {
+            return ((StmCommandResult<Response>?)Execute().Result)?.Result;
+        }
+
         public struct Response
         {
             public Response(byte[] rawData)
@@ -55,7 +60,7 @@ namespace StmTestingSuite.Command
             public CommandId CommandId { get; }
             public SubCommandId SubCommandId { get; }
             public CommandStatus CommandStatus { get; }
-            public ulong UpTimeSeconds { get; }
+            public uint UpTimeSeconds { get; }
             public SpeedOption SpeedSetting { get; }
             public float SpeedTarget { get; }
             public SizeOption SizeSetting { get; }
