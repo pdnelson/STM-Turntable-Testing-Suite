@@ -10,6 +10,7 @@ namespace StmTestingSuite
         private readonly StmConnector Conn;
         private readonly StmLogger Logger;
         private readonly ConnectionMonitor ConnMonitor;
+        private readonly AdvancedTabMonitor AdvTabMonitor;
         private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
@@ -17,6 +18,7 @@ namespace StmTestingSuite
             InitializeComponent();
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
+            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -262,11 +264,11 @@ namespace StmTestingSuite
                 } 
                 else if(current.Text == "Advanced")
                 {
-                    // todo: start advanced monitoring routine
+                    AdvTabMonitor.Start();
                 }
                 else if(current.Text != "Advanced")
                 {
-                    // todo: stop advanced monitoring routine
+                    AdvTabMonitor.Stop();
                 }
             }
         }

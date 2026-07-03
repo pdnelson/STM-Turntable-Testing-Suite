@@ -15,8 +15,7 @@ namespace StmTestingSuite
         Button btnConnect,
         GroupBox grpSimpleInput,
         Button btnRefreshSerial,
-        Button btnSimpleSendCommand
-        )
+        Button btnSimpleSendCommand)
     {
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;

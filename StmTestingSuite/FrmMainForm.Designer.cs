@@ -62,8 +62,8 @@
             BtnStepClockwise = new Button();
             BtnToggleClutch = new Button();
             GrpCurrentCommand = new GroupBox();
-            LblCurrCommandStatus = new Label();
-            LblCurrSubCommand = new Label();
+            LblCurrCommandStatusData = new Label();
+            LblCurrSubCommandData = new Label();
             LblCurrCommandData = new Label();
             LblCommandStatus = new Label();
             LblSubCommand = new Label();
@@ -454,8 +454,8 @@
             // 
             // GrpCurrentCommand
             // 
-            GrpCurrentCommand.Controls.Add(LblCurrCommandStatus);
-            GrpCurrentCommand.Controls.Add(LblCurrSubCommand);
+            GrpCurrentCommand.Controls.Add(LblCurrCommandStatusData);
+            GrpCurrentCommand.Controls.Add(LblCurrSubCommandData);
             GrpCurrentCommand.Controls.Add(LblCurrCommandData);
             GrpCurrentCommand.Controls.Add(LblCommandStatus);
             GrpCurrentCommand.Controls.Add(LblSubCommand);
@@ -467,23 +467,23 @@
             GrpCurrentCommand.TabStop = false;
             GrpCurrentCommand.Text = "Current Command";
             // 
-            // LblCurrCommandStatus
+            // LblCurrCommandStatusData
             // 
-            LblCurrCommandStatus.AutoSize = true;
-            LblCurrCommandStatus.Location = new Point(102, 55);
-            LblCurrCommandStatus.Name = "LblCurrCommandStatus";
-            LblCurrCommandStatus.Size = new Size(46, 15);
-            LblCurrCommandStatus.TabIndex = 5;
-            LblCurrCommandStatus.Text = "[status]";
+            LblCurrCommandStatusData.AutoSize = true;
+            LblCurrCommandStatusData.Location = new Point(102, 55);
+            LblCurrCommandStatusData.Name = "LblCurrCommandStatusData";
+            LblCurrCommandStatusData.Size = new Size(46, 15);
+            LblCurrCommandStatusData.TabIndex = 5;
+            LblCurrCommandStatusData.Text = "[status]";
             // 
-            // LblCurrSubCommand
+            // LblCurrSubCommandData
             // 
-            LblCurrSubCommand.AutoSize = true;
-            LblCurrSubCommand.Location = new Point(102, 37);
-            LblCurrSubCommand.Name = "LblCurrSubCommand";
-            LblCurrSubCommand.Size = new Size(89, 15);
-            LblCurrSubCommand.TabIndex = 4;
-            LblCurrSubCommand.Text = "[subcommand]";
+            LblCurrSubCommandData.AutoSize = true;
+            LblCurrSubCommandData.Location = new Point(102, 37);
+            LblCurrSubCommandData.Name = "LblCurrSubCommandData";
+            LblCurrSubCommandData.Size = new Size(89, 15);
+            LblCurrSubCommandData.TabIndex = 4;
+            LblCurrSubCommandData.Text = "[subcommand]";
             // 
             // LblCurrCommandData
             // 
@@ -1033,5 +1033,7 @@
         private TextBox textBox2;
         private TextBox textBox1;
         private TabControl TabMain;
+        private Label LblCurrSubCommandData;
+        private Label LblCurrCommandStatusData;
     }
 }
