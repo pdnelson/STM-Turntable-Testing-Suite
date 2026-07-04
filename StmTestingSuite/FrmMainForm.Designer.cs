@@ -47,7 +47,6 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
-            BtnAdvancedEStop = new Button();
             NumMoveToPositionInput = new NumericUpDown();
             GrpAdvancedMovement = new GroupBox();
             NumMoveNStepsInput = new NumericUpDown();
@@ -63,6 +62,7 @@
             BtnStepClockwise = new Button();
             BtnToggleClutch = new Button();
             GrpCurrentCommand = new GroupBox();
+            BtnAdvancedEStop = new Button();
             LblCurrCommandStatusData = new Label();
             LblCurrSubCommandData = new Label();
             LblCurrCommandData = new Label();
@@ -324,19 +324,6 @@
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
-            // BtnAdvancedEStop
-            // 
-            BtnAdvancedEStop.BackColor = Color.FromArgb(237, 44, 44);
-            BtnAdvancedEStop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BtnAdvancedEStop.ForeColor = Color.White;
-            BtnAdvancedEStop.Location = new Point(6, 73);
-            BtnAdvancedEStop.Name = "BtnAdvancedEStop";
-            BtnAdvancedEStop.Size = new Size(188, 50);
-            BtnAdvancedEStop.TabIndex = 12;
-            BtnAdvancedEStop.Text = "■";
-            BtnAdvancedEStop.UseVisualStyleBackColor = false;
-            BtnAdvancedEStop.Click += BtnCancelCommand_Click_1;
-            // 
             // NumMoveToPositionInput
             // 
             NumMoveToPositionInput.Location = new Point(469, 241);
@@ -494,6 +481,19 @@
             GrpCurrentCommand.TabIndex = 5;
             GrpCurrentCommand.TabStop = false;
             GrpCurrentCommand.Text = "Current Command";
+            // 
+            // BtnAdvancedEStop
+            // 
+            BtnAdvancedEStop.BackColor = Color.FromArgb(237, 44, 44);
+            BtnAdvancedEStop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnAdvancedEStop.ForeColor = Color.White;
+            BtnAdvancedEStop.Location = new Point(6, 73);
+            BtnAdvancedEStop.Name = "BtnAdvancedEStop";
+            BtnAdvancedEStop.Size = new Size(188, 50);
+            BtnAdvancedEStop.TabIndex = 12;
+            BtnAdvancedEStop.Text = "■";
+            BtnAdvancedEStop.UseVisualStyleBackColor = false;
+            BtnAdvancedEStop.Click += BtnCancelCommand_Click_1;
             // 
             // LblCurrCommandStatusData
             // 
@@ -763,7 +763,7 @@
             RadSizeAuto.TabStop = true;
             RadSizeAuto.Text = "Automatic";
             RadSizeAuto.UseVisualStyleBackColor = true;
-            RadSizeAuto.CheckedChanged += RadSizeAuto_CheckedChanged;
+            RadSizeAuto.Click += RadSizeAuto_Click;
             // 
             // RadSize12In
             // 
@@ -775,7 +775,7 @@
             RadSize12In.TabStop = true;
             RadSize12In.Text = "12\"";
             RadSize12In.UseVisualStyleBackColor = true;
-            RadSize12In.CheckedChanged += RadSize12In_CheckedChanged;
+            RadSize12In.Click += RadSize12In_Click;
             // 
             // RadSize10In
             // 
@@ -787,7 +787,7 @@
             RadSize10In.TabStop = true;
             RadSize10In.Text = "10\"";
             RadSize10In.UseVisualStyleBackColor = true;
-            RadSize10In.CheckedChanged += RadSize10In_CheckedChanged;
+            RadSize10In.Click += RadSize10In_Click;
             // 
             // RadSize7In
             // 
@@ -799,7 +799,7 @@
             RadSize7In.TabStop = true;
             RadSize7In.Text = "7\"";
             RadSize7In.UseVisualStyleBackColor = true;
-            RadSize7In.CheckedChanged += RadSize7In_CheckedChanged;
+            RadSize7In.Click += RadSize7In_Click;
             // 
             // GrpSpeedGroup
             // 

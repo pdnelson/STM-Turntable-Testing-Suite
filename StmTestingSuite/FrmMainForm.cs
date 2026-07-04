@@ -294,7 +294,7 @@ namespace StmTestingSuite
             ExecuteSimpleCommand(new CmdSetRotateSize(Conn, Logger));
         }
 
-        private void RadSize7In_CheckedChanged(object sender, EventArgs e)
+        private void RadSize7In_Click(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked)
             {
@@ -305,7 +305,7 @@ namespace StmTestingSuite
             }
         }
 
-        private void RadSize10In_CheckedChanged(object sender, EventArgs e)
+        private void RadSize10In_Click(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked)
             {
@@ -316,7 +316,7 @@ namespace StmTestingSuite
             }
         }
 
-        private void RadSize12In_CheckedChanged(object sender, EventArgs e)
+        private void RadSize12In_Click(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked)
             {
@@ -327,7 +327,7 @@ namespace StmTestingSuite
             }
         }
 
-        private void RadSizeAuto_CheckedChanged(object sender, EventArgs e)
+        private void RadSizeAuto_Click(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked)
             {
