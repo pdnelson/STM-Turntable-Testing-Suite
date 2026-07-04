@@ -17,7 +17,10 @@ Simple View is the simplest test tab: You can execute commands, one at a time, m
 
 
 ## Advanced View
-Coming soon...
+Advanced view lets you see all aspects of the turntable's state, including vertical and horizontal positioning, the current speed, and so on. Functions are also available to allow you to execute advanced movements, while concurrently monitoring the state.
+
+<img width="793" height="576" alt="image" src="https://github.com/user-attachments/assets/e2e94d23-eeb6-43b9-9f39-64f4e5454ad3" />
+
 
 ## Graphical View
 Coming soon...
