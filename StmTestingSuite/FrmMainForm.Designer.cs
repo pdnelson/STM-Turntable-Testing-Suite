@@ -347,7 +347,6 @@
             NumMoveToPositionInput.Name = "NumMoveToPositionInput";
             NumMoveToPositionInput.Size = new Size(72, 23);
             NumMoveToPositionInput.TabIndex = 10;
-            NumMoveToPositionInput.ValueChanged += NumMoveToPositionInput_ValueChanged;
             // 
             // NumMoveNStepsInput
             // 

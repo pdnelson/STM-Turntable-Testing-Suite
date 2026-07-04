@@ -266,10 +266,12 @@ namespace StmTestingSuite
                 else if (current.Text == "Advanced")
                 {
                     AdvTabMonitor.Start();
+                    Logger.LogMessage("Advanced Tab", "Started monitoring");
                 }
                 else if (current.Text != "Advanced")
                 {
                     AdvTabMonitor.Stop();
+                    Logger.LogMessage("Advanced Tab", "Ended monitoring");
                 }
             }
         }
@@ -396,11 +398,6 @@ namespace StmTestingSuite
             command.UpdateInputData($"{position},{speed}");
 
             ExecuteSimpleCommand(command);
-        }
-
-        private void NumMoveToPositionInput_ValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
