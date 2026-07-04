@@ -397,5 +397,10 @@ namespace StmTestingSuite
 
             ExecuteSimpleCommand(command);
         }
+
+        private void NumMoveToPositionInput_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

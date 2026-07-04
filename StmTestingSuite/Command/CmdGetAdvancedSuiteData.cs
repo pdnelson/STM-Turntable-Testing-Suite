@@ -13,46 +13,54 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_ADVANCED_SUITE_DATA;
         public override string Name => "Advanced Suite Data";
-        public override ushort ResponseSize => 20;
+        public override ushort ResponseSize => 22;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
-            var response = new Response(rawData);
+            Response? response = null;
+            string responseString = "";
 
-            return new StmCommandResult<Response>(response, response.ToString());
+            // Verify both the start and end key are intact. If they aren't, then throw out the whole response.
+            if (rawData[0] == Constants.AdvancedDataStartKey && rawData[21] == Constants.AdvancedDataEndKey)
+            {
+                response = new Response(rawData);
+                responseString = ((Response)response).ToString();
+            }
+
+            return new StmCommandResult<Response?>(response, responseString);
         }
 
         public async Task<Response?> ExecuteWithResult()
         {
-            return ((StmCommandResult<Response>?)Execute().Result)?.Result;
+            return ((StmCommandResult<Response?>?)Execute().Result)?.Result;
         }
 
         public struct Response
         {
             public Response(byte[] rawData)
             {
-                byte[] verticalBytes = { rawData[0], rawData[1] };
+                byte[] verticalBytes = { rawData[1], rawData[2] };
                 VerticalPosition = BitConverter.ToUInt16(verticalBytes);
 
-                byte[] horizontalBytes = { rawData[2], rawData[3] };
+                byte[] horizontalBytes = { rawData[3], rawData[4] };
                 HorizontalPosition = BitConverter.ToUInt16(horizontalBytes);
 
-                LiftStatus = (LiftStatus)rawData[4];
-                HomeStatus = (HomeStatus)rawData[5];
-                CommandId = (CommandId)rawData[6];
-                SubCommandId = (SubCommandId)rawData[7];
-                CommandStatus = (CommandStatus)rawData[8];
+                LiftStatus = (LiftStatus)rawData[5];
+                HomeStatus = (HomeStatus)rawData[6];
+                CommandId = (CommandId)rawData[7];
+                SubCommandId = (SubCommandId)rawData[8];
+                CommandStatus = (CommandStatus)rawData[9];
 
-                byte[] upTimeBytes = { rawData[9], rawData[10], rawData[11], rawData[12] };
+                byte[] upTimeBytes = { rawData[10], rawData[11], rawData[12], rawData[13] };
                 UpTimeSeconds = BitConverter.ToUInt32(upTimeBytes);
 
-                SpeedSetting = (SpeedOption)rawData[13];
+                SpeedSetting = (SpeedOption)rawData[14];
 
-                byte[] speedTargetBytes = { rawData[14], rawData[15], rawData[16], rawData[17] };
+                byte[] speedTargetBytes = { rawData[15], rawData[16], rawData[17], rawData[18] };
                 SpeedTarget = BitConverter.ToSingle(speedTargetBytes);
 
-                SizeSetting = (SizeOption)rawData[18];
+                SizeSetting = (SizeOption)rawData[19];
 
-                ClutchStatus = (ClutchStatus)rawData[19];
+                ClutchStatus = (ClutchStatus)rawData[20];
             }
 
             public ushort VerticalPosition { get; }

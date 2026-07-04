@@ -47,8 +47,8 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
-            NumMoveToPositionInput = new NumericUpDown();
             GrpAdvancedMovement = new GroupBox();
+            NumMoveToPositionInput = new NumericUpDown();
             NumMoveNStepsInput = new NumericUpDown();
             LblMoveToPosition = new Label();
             LblMoveNSteps = new Label();
@@ -116,8 +116,8 @@
             GrpSimpleInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).BeginInit();
             GrpAdvancedMovement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveNStepsInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TrkAdvMovementSpeed).BeginInit();
             GrpManualMovement.SuspendLayout();
@@ -307,7 +307,6 @@
             // 
             // tabAdvanced
             // 
-            tabAdvanced.Controls.Add(NumMoveToPositionInput);
             tabAdvanced.Controls.Add(GrpAdvancedMovement);
             tabAdvanced.Controls.Add(GrpManualMovement);
             tabAdvanced.Controls.Add(GrpCurrentCommand);
@@ -324,15 +323,9 @@
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
-            // NumMoveToPositionInput
-            // 
-            NumMoveToPositionInput.Location = new Point(469, 241);
-            NumMoveToPositionInput.Name = "NumMoveToPositionInput";
-            NumMoveToPositionInput.Size = new Size(72, 23);
-            NumMoveToPositionInput.TabIndex = 10;
-            // 
             // GrpAdvancedMovement
             // 
+            GrpAdvancedMovement.Controls.Add(NumMoveToPositionInput);
             GrpAdvancedMovement.Controls.Add(NumMoveNStepsInput);
             GrpAdvancedMovement.Controls.Add(LblMoveToPosition);
             GrpAdvancedMovement.Controls.Add(LblMoveNSteps);
@@ -341,12 +334,20 @@
             GrpAdvancedMovement.Controls.Add(LblAdvSpeedData);
             GrpAdvancedMovement.Controls.Add(LblAdvSpeed);
             GrpAdvancedMovement.Controls.Add(TrkAdvMovementSpeed);
-            GrpAdvancedMovement.Location = new Point(214, 138);
+            GrpAdvancedMovement.Location = new Point(184, 138);
             GrpAdvancedMovement.Name = "GrpAdvancedMovement";
-            GrpAdvancedMovement.Size = new Size(333, 132);
+            GrpAdvancedMovement.Size = new Size(275, 132);
             GrpAdvancedMovement.TabIndex = 7;
             GrpAdvancedMovement.TabStop = false;
             GrpAdvancedMovement.Text = "Advanced Azimuth Movement";
+            // 
+            // NumMoveToPositionInput
+            // 
+            NumMoveToPositionInput.Location = new Point(197, 104);
+            NumMoveToPositionInput.Name = "NumMoveToPositionInput";
+            NumMoveToPositionInput.Size = new Size(72, 23);
+            NumMoveToPositionInput.TabIndex = 10;
+            NumMoveToPositionInput.ValueChanged += NumMoveToPositionInput_ValueChanged;
             // 
             // NumMoveNStepsInput
             // 
@@ -360,7 +361,7 @@
             // LblMoveToPosition
             // 
             LblMoveToPosition.AutoSize = true;
-            LblMoveToPosition.Location = new Point(228, 85);
+            LblMoveToPosition.Location = new Point(170, 86);
             LblMoveToPosition.Name = "LblMoveToPosition";
             LblMoveToPosition.Size = new Size(99, 15);
             LblMoveToPosition.TabIndex = 8;
@@ -377,7 +378,7 @@
             // 
             // BtnMoveToPositionSend
             // 
-            BtnMoveToPositionSend.Location = new Point(202, 102);
+            BtnMoveToPositionSend.Location = new Point(146, 104);
             BtnMoveToPositionSend.Name = "BtnMoveToPositionSend";
             BtnMoveToPositionSend.Size = new Size(47, 23);
             BtnMoveToPositionSend.TabIndex = 6;
@@ -419,7 +420,7 @@
             TrkAdvMovementSpeed.Maximum = 14;
             TrkAdvMovementSpeed.Minimum = 1;
             TrkAdvMovementSpeed.Name = "TrkAdvMovementSpeed";
-            TrkAdvMovementSpeed.Size = new Size(321, 45);
+            TrkAdvMovementSpeed.Size = new Size(266, 45);
             TrkAdvMovementSpeed.TabIndex = 0;
             TrkAdvMovementSpeed.Value = 14;
             TrkAdvMovementSpeed.Scroll += TrkAdvMovementSpeed_Scroll;
@@ -431,16 +432,16 @@
             GrpManualMovement.Controls.Add(BtnToggleClutch);
             GrpManualMovement.Location = new Point(6, 138);
             GrpManualMovement.Name = "GrpManualMovement";
-            GrpManualMovement.Size = new Size(202, 132);
+            GrpManualMovement.Size = new Size(172, 132);
             GrpManualMovement.TabIndex = 6;
             GrpManualMovement.TabStop = false;
             GrpManualMovement.Text = "Manual Azimuth Movement";
             // 
             // BtnStepCounterClockwise
             // 
-            BtnStepCounterClockwise.Location = new Point(103, 78);
+            BtnStepCounterClockwise.Location = new Point(97, 79);
             BtnStepCounterClockwise.Name = "BtnStepCounterClockwise";
-            BtnStepCounterClockwise.Size = new Size(93, 47);
+            BtnStepCounterClockwise.Size = new Size(69, 47);
             BtnStepCounterClockwise.TabIndex = 2;
             BtnStepCounterClockwise.Text = "Step CCW";
             BtnStepCounterClockwise.UseVisualStyleBackColor = true;
@@ -450,7 +451,7 @@
             // 
             BtnStepClockwise.Location = new Point(6, 78);
             BtnStepClockwise.Name = "BtnStepClockwise";
-            BtnStepClockwise.Size = new Size(93, 47);
+            BtnStepClockwise.Size = new Size(69, 47);
             BtnStepClockwise.TabIndex = 1;
             BtnStepClockwise.Text = "Step CW";
             BtnStepClockwise.UseVisualStyleBackColor = true;
@@ -460,7 +461,7 @@
             // 
             BtnToggleClutch.Location = new Point(6, 19);
             BtnToggleClutch.Name = "BtnToggleClutch";
-            BtnToggleClutch.Size = new Size(190, 58);
+            BtnToggleClutch.Size = new Size(160, 58);
             BtnToggleClutch.TabIndex = 0;
             BtnToggleClutch.Text = "Toggle Clutch";
             BtnToggleClutch.UseVisualStyleBackColor = true;
@@ -475,9 +476,9 @@
             GrpCurrentCommand.Controls.Add(LblCommandStatus);
             GrpCurrentCommand.Controls.Add(LblSubCommand);
             GrpCurrentCommand.Controls.Add(LblCurrCommand);
-            GrpCurrentCommand.Location = new Point(553, 138);
+            GrpCurrentCommand.Location = new Point(465, 138);
             GrpCurrentCommand.Name = "GrpCurrentCommand";
-            GrpCurrentCommand.Size = new Size(200, 132);
+            GrpCurrentCommand.Size = new Size(288, 132);
             GrpCurrentCommand.TabIndex = 5;
             GrpCurrentCommand.TabStop = false;
             GrpCurrentCommand.Text = "Current Command";
@@ -489,7 +490,7 @@
             BtnAdvancedEStop.ForeColor = Color.White;
             BtnAdvancedEStop.Location = new Point(6, 73);
             BtnAdvancedEStop.Name = "BtnAdvancedEStop";
-            BtnAdvancedEStop.Size = new Size(188, 50);
+            BtnAdvancedEStop.Size = new Size(273, 50);
             BtnAdvancedEStop.TabIndex = 12;
             BtnAdvancedEStop.Text = "■";
             BtnAdvancedEStop.UseVisualStyleBackColor = false;
@@ -498,7 +499,7 @@
             // LblCurrCommandStatusData
             // 
             LblCurrCommandStatusData.AutoSize = true;
-            LblCurrCommandStatusData.Location = new Point(102, 55);
+            LblCurrCommandStatusData.Location = new Point(91, 59);
             LblCurrCommandStatusData.Name = "LblCurrCommandStatusData";
             LblCurrCommandStatusData.Size = new Size(46, 15);
             LblCurrCommandStatusData.TabIndex = 5;
@@ -507,7 +508,7 @@
             // LblCurrSubCommandData
             // 
             LblCurrSubCommandData.AutoSize = true;
-            LblCurrSubCommandData.Location = new Point(102, 37);
+            LblCurrSubCommandData.Location = new Point(91, 41);
             LblCurrSubCommandData.Name = "LblCurrSubCommandData";
             LblCurrSubCommandData.Size = new Size(89, 15);
             LblCurrSubCommandData.TabIndex = 4;
@@ -516,7 +517,7 @@
             // LblCurrCommandData
             // 
             LblCurrCommandData.AutoSize = true;
-            LblCurrCommandData.Location = new Point(102, 19);
+            LblCurrCommandData.Location = new Point(91, 23);
             LblCurrCommandData.Name = "LblCurrCommandData";
             LblCurrCommandData.Size = new Size(70, 15);
             LblCurrCommandData.TabIndex = 3;
@@ -525,7 +526,7 @@
             // LblCommandStatus
             // 
             LblCommandStatus.AutoSize = true;
-            LblCommandStatus.Location = new Point(56, 55);
+            LblCommandStatus.Location = new Point(45, 59);
             LblCommandStatus.Name = "LblCommandStatus";
             LblCommandStatus.Size = new Size(42, 15);
             LblCommandStatus.TabIndex = 2;
@@ -534,7 +535,7 @@
             // LblSubCommand
             // 
             LblSubCommand.AutoSize = true;
-            LblSubCommand.Location = new Point(11, 37);
+            LblSubCommand.Location = new Point(0, 41);
             LblSubCommand.Name = "LblSubCommand";
             LblSubCommand.Size = new Size(87, 15);
             LblSubCommand.TabIndex = 1;
@@ -543,7 +544,7 @@
             // LblCurrCommand
             // 
             LblCurrCommand.AutoSize = true;
-            LblCurrCommand.Location = new Point(31, 19);
+            LblCurrCommand.Location = new Point(20, 23);
             LblCurrCommand.Name = "LblCurrCommand";
             LblCurrCommand.Size = new Size(67, 15);
             LblCurrCommand.TabIndex = 0;
@@ -991,9 +992,9 @@
             GrpSimpleInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).EndInit();
             GrpAdvancedMovement.ResumeLayout(false);
             GrpAdvancedMovement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveNStepsInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)TrkAdvMovementSpeed).EndInit();
             GrpManualMovement.ResumeLayout(false);
