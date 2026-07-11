@@ -393,9 +393,10 @@ namespace StmTestingSuite
         private void BtnMoveToPositionSend_Click(object sender, EventArgs e)
         {
             var speed = TrkAdvMovementSpeed.Value;
+            var tolerance = NumAdvancedMTPTolerance.Value;
             var position = NumMoveNStepsInput.Value;
             var command = new CmdActionGoToPositionH(Conn, Logger);
-            command.UpdateInputData($"{position},{speed}");
+            command.UpdateInputData($"{position},{tolerance},{speed}");
 
             ExecuteSimpleCommand(command);
         }

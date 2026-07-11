@@ -14,7 +14,7 @@ namespace StmTestingSuite.Command
         [GeneratedRegex(@"\s+")]
         private static partial Regex RemoveSpaces();
 
-        public override string FieldName => "Position,Delta,Speed";
+        public override string FieldName => "Position,Tolerance,Speed";
         public override string? ReadableInputData { get; set; }
         public override byte[]? InputData { get; set; }
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
@@ -32,7 +32,7 @@ namespace StmTestingSuite.Command
 
             if (commandParts.Length != 3)
             {
-                return "Invalid format; must be position,delta,speed";
+                return "Invalid format; must be position,tolerance,speed";
             }
             else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1]) || !Validator.validInt(commandParts[2]))
             {
@@ -40,7 +40,7 @@ namespace StmTestingSuite.Command
             }
 
             Int16 position = Int16.Parse(commandParts[0]);
-            ushort delta = ushort.Parse(commandParts[1]);
+            ushort tolerance = ushort.Parse(commandParts[1]);
             ushort speed = ushort.Parse(commandParts[2]);
 
             if (speed < 1)
@@ -52,13 +52,13 @@ namespace StmTestingSuite.Command
                 return "Speed cannot exceed 14";
             }
 
-            if(delta < 0)
+            if(tolerance < 0)
             {
-                return "Delta must be greater than 0.";
+                return "Tolerance must be greater than 0.";
             }
-            else if(delta >= 255)
+            else if(tolerance >= 255)
             {
-                return "Delta must be less than 256";
+                return "Tolerance must be less than 256";
             }
 
             if (position > 16384)
@@ -71,11 +71,11 @@ namespace StmTestingSuite.Command
             }
 
             byte[] stepBytes = BitConverter.GetBytes(position);
-            byte[] deltaBytes = BitConverter.GetBytes(delta);
+            byte[] toleranceBytes = BitConverter.GetBytes(tolerance);
             byte[] speedBytes = BitConverter.GetBytes(speed);
-            byte[] data = [stepBytes[0], stepBytes[1], deltaBytes[0], speedBytes[0]];
+            byte[] data = [stepBytes[0], stepBytes[1], toleranceBytes[0], speedBytes[0]];
 
-            ReadableInputData = "Position: " + position + "; Delta: " + delta + "; Speed: " + speed;
+            ReadableInputData = "Position: " + position + "; Delta: " + tolerance + "; Speed: " + speed;
             InputData = data;
 
             return "";

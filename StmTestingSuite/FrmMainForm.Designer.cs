@@ -48,6 +48,8 @@
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
             GrpAdvancedMovement = new GroupBox();
+            LblTolerance = new Label();
+            NumAdvancedMTPTolerance = new NumericUpDown();
             NumMoveToPositionInput = new NumericUpDown();
             NumMoveNStepsInput = new NumericUpDown();
             LblMoveToPosition = new Label();
@@ -117,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
             GrpAdvancedMovement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumAdvancedMTPTolerance).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveNStepsInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TrkAdvMovementSpeed).BeginInit();
@@ -136,10 +139,11 @@
             TabMain.Controls.Add(TabSimple);
             TabMain.Controls.Add(tabAdvanced);
             TabMain.Controls.Add(tabGraphical);
-            TabMain.Location = new Point(12, 35);
+            TabMain.Location = new Point(14, 47);
+            TabMain.Margin = new Padding(3, 4, 3, 4);
             TabMain.Name = "TabMain";
             TabMain.SelectedIndex = 0;
-            TabMain.Size = new Size(769, 497);
+            TabMain.Size = new Size(879, 663);
             TabMain.TabIndex = 4;
             TabMain.Selecting += TabMain_Selecting;
             // 
@@ -148,19 +152,21 @@
             TabSimple.Controls.Add(BtnSimpleClearLog);
             TabSimple.Controls.Add(DgvSimpleLog);
             TabSimple.Controls.Add(GrpSimpleInput);
-            TabSimple.Location = new Point(4, 24);
+            TabSimple.Location = new Point(4, 29);
+            TabSimple.Margin = new Padding(3, 4, 3, 4);
             TabSimple.Name = "TabSimple";
-            TabSimple.Padding = new Padding(3);
-            TabSimple.Size = new Size(761, 469);
+            TabSimple.Padding = new Padding(3, 4, 3, 4);
+            TabSimple.Size = new Size(871, 630);
             TabSimple.TabIndex = 0;
             TabSimple.Text = "Simple";
             TabSimple.UseVisualStyleBackColor = true;
             // 
             // BtnSimpleClearLog
             // 
-            BtnSimpleClearLog.Location = new Point(640, 62);
+            BtnSimpleClearLog.Location = new Point(731, 83);
+            BtnSimpleClearLog.Margin = new Padding(3, 4, 3, 4);
             BtnSimpleClearLog.Name = "BtnSimpleClearLog";
-            BtnSimpleClearLog.Size = new Size(115, 23);
+            BtnSimpleClearLog.Size = new Size(131, 31);
             BtnSimpleClearLog.TabIndex = 8;
             BtnSimpleClearLog.Text = "Clear Log";
             BtnSimpleClearLog.UseVisualStyleBackColor = true;
@@ -172,15 +178,18 @@
             DgvSimpleLog.AllowUserToDeleteRows = false;
             DgvSimpleLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvSimpleLog.Columns.AddRange(new DataGridViewColumn[] { cmnSimpleTime, cmnSimpleSent, cmnSimpleReceived });
-            DgvSimpleLog.Location = new Point(6, 91);
+            DgvSimpleLog.Location = new Point(7, 121);
+            DgvSimpleLog.Margin = new Padding(3, 4, 3, 4);
             DgvSimpleLog.Name = "DgvSimpleLog";
             DgvSimpleLog.ReadOnly = true;
-            DgvSimpleLog.Size = new Size(749, 372);
+            DgvSimpleLog.RowHeadersWidth = 51;
+            DgvSimpleLog.Size = new Size(856, 496);
             DgvSimpleLog.TabIndex = 9;
             // 
             // cmnSimpleTime
             // 
             cmnSimpleTime.HeaderText = "Time";
+            cmnSimpleTime.MinimumWidth = 6;
             cmnSimpleTime.Name = "cmnSimpleTime";
             cmnSimpleTime.ReadOnly = true;
             cmnSimpleTime.Width = 75;
@@ -188,6 +197,7 @@
             // cmnSimpleSent
             // 
             cmnSimpleSent.HeaderText = "Sent";
+            cmnSimpleSent.MinimumWidth = 6;
             cmnSimpleSent.Name = "cmnSimpleSent";
             cmnSimpleSent.ReadOnly = true;
             cmnSimpleSent.Width = 250;
@@ -196,6 +206,7 @@
             // 
             cmnSimpleReceived.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             cmnSimpleReceived.HeaderText = "Received";
+            cmnSimpleReceived.MinimumWidth = 6;
             cmnSimpleReceived.Name = "cmnSimpleReceived";
             cmnSimpleReceived.ReadOnly = true;
             // 
@@ -210,9 +221,11 @@
             GrpSimpleInput.Controls.Add(TxtSimpleCommandInput);
             GrpSimpleInput.Controls.Add(CboSimpleCommandInput);
             GrpSimpleInput.Controls.Add(NumSimpleCommandInput);
-            GrpSimpleInput.Location = new Point(6, 6);
+            GrpSimpleInput.Location = new Point(7, 8);
+            GrpSimpleInput.Margin = new Padding(3, 4, 3, 4);
             GrpSimpleInput.Name = "GrpSimpleInput";
-            GrpSimpleInput.Size = new Size(521, 79);
+            GrpSimpleInput.Padding = new Padding(3, 4, 3, 4);
+            GrpSimpleInput.Size = new Size(718, 105);
             GrpSimpleInput.TabIndex = 8;
             GrpSimpleInput.TabStop = false;
             GrpSimpleInput.Text = "Input Data";
@@ -222,9 +235,10 @@
             BtnCancelCommand.BackColor = Color.FromArgb(237, 44, 44);
             BtnCancelCommand.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BtnCancelCommand.ForeColor = Color.White;
-            BtnCancelCommand.Location = new Point(457, 19);
+            BtnCancelCommand.Location = new Point(648, 25);
+            BtnCancelCommand.Margin = new Padding(3, 4, 3, 4);
             BtnCancelCommand.Name = "BtnCancelCommand";
-            BtnCancelCommand.Size = new Size(56, 50);
+            BtnCancelCommand.Size = new Size(64, 67);
             BtnCancelCommand.TabIndex = 11;
             BtnCancelCommand.Text = "■";
             BtnCancelCommand.UseVisualStyleBackColor = false;
@@ -234,17 +248,19 @@
             // 
             CboSimpleCommandOptions.DropDownStyle = ComboBoxStyle.DropDownList;
             CboSimpleCommandOptions.FormattingEnabled = true;
-            CboSimpleCommandOptions.Location = new Point(203, 16);
+            CboSimpleCommandOptions.Location = new Point(232, 21);
+            CboSimpleCommandOptions.Margin = new Padding(3, 4, 3, 4);
             CboSimpleCommandOptions.Name = "CboSimpleCommandOptions";
-            CboSimpleCommandOptions.Size = new Size(248, 23);
+            CboSimpleCommandOptions.Size = new Size(410, 28);
             CboSimpleCommandOptions.TabIndex = 3;
             CboSimpleCommandOptions.SelectedIndexChanged += CboSimpleCommandOptions_SelectedIndexChanged;
             // 
             // BtnSimpleSendCommand
             // 
-            BtnSimpleSendCommand.Location = new Point(339, 45);
+            BtnSimpleSendCommand.Location = new Point(514, 61);
+            BtnSimpleSendCommand.Margin = new Padding(3, 4, 3, 4);
             BtnSimpleSendCommand.Name = "BtnSimpleSendCommand";
-            BtnSimpleSendCommand.Size = new Size(112, 23);
+            BtnSimpleSendCommand.Size = new Size(128, 31);
             BtnSimpleSendCommand.TabIndex = 7;
             BtnSimpleSendCommand.Text = "Send Command";
             BtnSimpleSendCommand.UseVisualStyleBackColor = true;
@@ -253,9 +269,9 @@
             // LblSimpleExtraData
             // 
             LblSimpleExtraData.AutoSize = true;
-            LblSimpleExtraData.Location = new Point(6, 48);
+            LblSimpleExtraData.Location = new Point(7, 64);
             LblSimpleExtraData.Name = "LblSimpleExtraData";
-            LblSimpleExtraData.Size = new Size(94, 15);
+            LblSimpleExtraData.Size = new Size(117, 20);
             LblSimpleExtraData.TabIndex = 10;
             LblSimpleExtraData.Text = "Command Data:";
             LblSimpleExtraData.TextAlign = ContentAlignment.MiddleRight;
@@ -264,26 +280,28 @@
             // 
             CboSimpleCommandGroupOptions.DropDownStyle = ComboBoxStyle.DropDownList;
             CboSimpleCommandGroupOptions.FormattingEnabled = true;
-            CboSimpleCommandGroupOptions.Location = new Point(106, 16);
+            CboSimpleCommandGroupOptions.Location = new Point(121, 21);
+            CboSimpleCommandGroupOptions.Margin = new Padding(3, 4, 3, 4);
             CboSimpleCommandGroupOptions.Name = "CboSimpleCommandGroupOptions";
-            CboSimpleCommandGroupOptions.Size = new Size(91, 23);
+            CboSimpleCommandGroupOptions.Size = new Size(103, 28);
             CboSimpleCommandGroupOptions.TabIndex = 2;
             CboSimpleCommandGroupOptions.SelectedIndexChanged += CboSimpleCommandGroupOptions_SelectedIndexChanged;
             // 
             // LblSimpleCommand
             // 
             LblSimpleCommand.AutoSize = true;
-            LblSimpleCommand.Location = new Point(33, 19);
+            LblSimpleCommand.Location = new Point(38, 25);
             LblSimpleCommand.Name = "LblSimpleCommand";
-            LblSimpleCommand.Size = new Size(67, 15);
+            LblSimpleCommand.Size = new Size(81, 20);
             LblSimpleCommand.TabIndex = 9;
             LblSimpleCommand.Text = "Command:";
             // 
             // TxtSimpleCommandInput
             // 
-            TxtSimpleCommandInput.Location = new Point(106, 45);
+            TxtSimpleCommandInput.Location = new Point(249, 63);
+            TxtSimpleCommandInput.Margin = new Padding(3, 4, 3, 4);
             TxtSimpleCommandInput.Name = "TxtSimpleCommandInput";
-            TxtSimpleCommandInput.Size = new Size(227, 23);
+            TxtSimpleCommandInput.Size = new Size(259, 27);
             TxtSimpleCommandInput.TabIndex = 6;
             TxtSimpleCommandInput.TextChanged += TxtSimpleCommandInput_TextChanged;
             // 
@@ -291,17 +309,19 @@
             // 
             CboSimpleCommandInput.DropDownStyle = ComboBoxStyle.DropDownList;
             CboSimpleCommandInput.FormattingEnabled = true;
-            CboSimpleCommandInput.Location = new Point(106, 45);
+            CboSimpleCommandInput.Location = new Point(249, 64);
+            CboSimpleCommandInput.Margin = new Padding(3, 4, 3, 4);
             CboSimpleCommandInput.Name = "CboSimpleCommandInput";
-            CboSimpleCommandInput.Size = new Size(227, 23);
+            CboSimpleCommandInput.Size = new Size(259, 28);
             CboSimpleCommandInput.TabIndex = 4;
             CboSimpleCommandInput.SelectedIndexChanged += CboSimpleCommandInput_SelectedIndexChanged;
             // 
             // NumSimpleCommandInput
             // 
-            NumSimpleCommandInput.Location = new Point(106, 45);
+            NumSimpleCommandInput.Location = new Point(249, 64);
+            NumSimpleCommandInput.Margin = new Padding(3, 4, 3, 4);
             NumSimpleCommandInput.Name = "NumSimpleCommandInput";
-            NumSimpleCommandInput.Size = new Size(227, 23);
+            NumSimpleCommandInput.Size = new Size(259, 27);
             NumSimpleCommandInput.TabIndex = 5;
             NumSimpleCommandInput.ValueChanged += NumSimpleCommandInput_ValueChanged;
             // 
@@ -315,16 +335,19 @@
             tabAdvanced.Controls.Add(GrpSimpleCommands);
             tabAdvanced.Controls.Add(GrpSizeGroup);
             tabAdvanced.Controls.Add(GrpSpeedGroup);
-            tabAdvanced.Location = new Point(4, 24);
+            tabAdvanced.Location = new Point(4, 29);
+            tabAdvanced.Margin = new Padding(3, 4, 3, 4);
             tabAdvanced.Name = "tabAdvanced";
-            tabAdvanced.Padding = new Padding(3);
-            tabAdvanced.Size = new Size(761, 469);
+            tabAdvanced.Padding = new Padding(3, 4, 3, 4);
+            tabAdvanced.Size = new Size(871, 630);
             tabAdvanced.TabIndex = 1;
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
             // GrpAdvancedMovement
             // 
+            GrpAdvancedMovement.Controls.Add(LblTolerance);
+            GrpAdvancedMovement.Controls.Add(NumAdvancedMTPTolerance);
             GrpAdvancedMovement.Controls.Add(NumMoveToPositionInput);
             GrpAdvancedMovement.Controls.Add(NumMoveNStepsInput);
             GrpAdvancedMovement.Controls.Add(LblMoveToPosition);
@@ -334,52 +357,75 @@
             GrpAdvancedMovement.Controls.Add(LblAdvSpeedData);
             GrpAdvancedMovement.Controls.Add(LblAdvSpeed);
             GrpAdvancedMovement.Controls.Add(TrkAdvMovementSpeed);
-            GrpAdvancedMovement.Location = new Point(184, 138);
+            GrpAdvancedMovement.Location = new Point(210, 184);
+            GrpAdvancedMovement.Margin = new Padding(3, 4, 3, 4);
             GrpAdvancedMovement.Name = "GrpAdvancedMovement";
-            GrpAdvancedMovement.Size = new Size(275, 132);
+            GrpAdvancedMovement.Padding = new Padding(3, 4, 3, 4);
+            GrpAdvancedMovement.Size = new Size(314, 176);
             GrpAdvancedMovement.TabIndex = 7;
             GrpAdvancedMovement.TabStop = false;
             GrpAdvancedMovement.Text = "Advanced Azimuth Movement";
             // 
+            // LblTolerance
+            // 
+            LblTolerance.AutoSize = true;
+            LblTolerance.Location = new Point(145, 115);
+            LblTolerance.Name = "LblTolerance";
+            LblTolerance.Size = new Size(76, 20);
+            LblTolerance.TabIndex = 12;
+            LblTolerance.Text = "Tolerance:";
+            // 
+            // NumAdvancedMTPTolerance
+            // 
+            NumAdvancedMTPTolerance.Location = new Point(225, 111);
+            NumAdvancedMTPTolerance.Margin = new Padding(3, 4, 3, 4);
+            NumAdvancedMTPTolerance.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            NumAdvancedMTPTolerance.Name = "NumAdvancedMTPTolerance";
+            NumAdvancedMTPTolerance.Size = new Size(82, 27);
+            NumAdvancedMTPTolerance.TabIndex = 11;
+            // 
             // NumMoveToPositionInput
             // 
-            NumMoveToPositionInput.Location = new Point(197, 104);
+            NumMoveToPositionInput.Location = new Point(225, 139);
+            NumMoveToPositionInput.Margin = new Padding(3, 4, 3, 4);
             NumMoveToPositionInput.Name = "NumMoveToPositionInput";
-            NumMoveToPositionInput.Size = new Size(72, 23);
+            NumMoveToPositionInput.Size = new Size(82, 27);
             NumMoveToPositionInput.TabIndex = 10;
             // 
             // NumMoveNStepsInput
             // 
-            NumMoveNStepsInput.Location = new Point(6, 103);
+            NumMoveNStepsInput.Location = new Point(7, 137);
+            NumMoveNStepsInput.Margin = new Padding(3, 4, 3, 4);
             NumMoveNStepsInput.Maximum = new decimal(new int[] { 400, 0, 0, 0 });
             NumMoveNStepsInput.Minimum = new decimal(new int[] { 400, 0, 0, int.MinValue });
             NumMoveNStepsInput.Name = "NumMoveNStepsInput";
-            NumMoveNStepsInput.Size = new Size(72, 23);
+            NumMoveNStepsInput.Size = new Size(82, 27);
             NumMoveNStepsInput.TabIndex = 9;
             // 
             // LblMoveToPosition
             // 
             LblMoveToPosition.AutoSize = true;
-            LblMoveToPosition.Location = new Point(170, 86);
+            LblMoveToPosition.Location = new Point(186, 87);
             LblMoveToPosition.Name = "LblMoveToPosition";
-            LblMoveToPosition.Size = new Size(99, 15);
+            LblMoveToPosition.Size = new Size(122, 20);
             LblMoveToPosition.TabIndex = 8;
             LblMoveToPosition.Text = "Move To Position";
             // 
             // LblMoveNSteps
             // 
             LblMoveNSteps.AutoSize = true;
-            LblMoveNSteps.Location = new Point(4, 85);
+            LblMoveNSteps.Location = new Point(6, 87);
             LblMoveNSteps.Name = "LblMoveNSteps";
-            LblMoveNSteps.Size = new Size(80, 15);
+            LblMoveNSteps.Size = new Size(101, 20);
             LblMoveNSteps.TabIndex = 7;
             LblMoveNSteps.Text = "Move N Steps";
             // 
             // BtnMoveToPositionSend
             // 
-            BtnMoveToPositionSend.Location = new Point(146, 104);
+            BtnMoveToPositionSend.Location = new Point(167, 139);
+            BtnMoveToPositionSend.Margin = new Padding(3, 4, 3, 4);
             BtnMoveToPositionSend.Name = "BtnMoveToPositionSend";
-            BtnMoveToPositionSend.Size = new Size(47, 23);
+            BtnMoveToPositionSend.Size = new Size(54, 31);
             BtnMoveToPositionSend.TabIndex = 6;
             BtnMoveToPositionSend.Text = "Send";
             BtnMoveToPositionSend.UseVisualStyleBackColor = true;
@@ -387,9 +433,10 @@
             // 
             // BtnMoveNStepsSend
             // 
-            BtnMoveNStepsSend.Location = new Point(84, 104);
+            BtnMoveNStepsSend.Location = new Point(96, 139);
+            BtnMoveNStepsSend.Margin = new Padding(3, 4, 3, 4);
             BtnMoveNStepsSend.Name = "BtnMoveNStepsSend";
-            BtnMoveNStepsSend.Size = new Size(47, 23);
+            BtnMoveNStepsSend.Size = new Size(54, 31);
             BtnMoveNStepsSend.TabIndex = 5;
             BtnMoveNStepsSend.Text = "Send";
             BtnMoveNStepsSend.UseVisualStyleBackColor = true;
@@ -398,28 +445,29 @@
             // LblAdvSpeedData
             // 
             LblAdvSpeedData.AutoSize = true;
-            LblAdvSpeedData.Location = new Point(45, 49);
+            LblAdvSpeedData.Location = new Point(57, 65);
             LblAdvSpeedData.Name = "LblAdvSpeedData";
-            LblAdvSpeedData.Size = new Size(19, 15);
+            LblAdvSpeedData.Size = new Size(25, 20);
             LblAdvSpeedData.TabIndex = 2;
             LblAdvSpeedData.Text = "14";
             // 
             // LblAdvSpeed
             // 
             LblAdvSpeed.AutoSize = true;
-            LblAdvSpeed.Location = new Point(6, 49);
+            LblAdvSpeed.Location = new Point(7, 65);
             LblAdvSpeed.Name = "LblAdvSpeed";
-            LblAdvSpeed.Size = new Size(42, 15);
+            LblAdvSpeed.Size = new Size(54, 20);
             LblAdvSpeed.TabIndex = 1;
             LblAdvSpeed.Text = "Speed:";
             // 
             // TrkAdvMovementSpeed
             // 
-            TrkAdvMovementSpeed.Location = new Point(6, 19);
+            TrkAdvMovementSpeed.Location = new Point(7, 25);
+            TrkAdvMovementSpeed.Margin = new Padding(3, 4, 3, 4);
             TrkAdvMovementSpeed.Maximum = 14;
             TrkAdvMovementSpeed.Minimum = 1;
             TrkAdvMovementSpeed.Name = "TrkAdvMovementSpeed";
-            TrkAdvMovementSpeed.Size = new Size(266, 45);
+            TrkAdvMovementSpeed.Size = new Size(304, 56);
             TrkAdvMovementSpeed.TabIndex = 0;
             TrkAdvMovementSpeed.Value = 14;
             TrkAdvMovementSpeed.Scroll += TrkAdvMovementSpeed_Scroll;
@@ -429,18 +477,21 @@
             GrpManualMovement.Controls.Add(BtnStepCounterClockwise);
             GrpManualMovement.Controls.Add(BtnStepClockwise);
             GrpManualMovement.Controls.Add(BtnToggleClutch);
-            GrpManualMovement.Location = new Point(6, 138);
+            GrpManualMovement.Location = new Point(7, 184);
+            GrpManualMovement.Margin = new Padding(3, 4, 3, 4);
             GrpManualMovement.Name = "GrpManualMovement";
-            GrpManualMovement.Size = new Size(172, 132);
+            GrpManualMovement.Padding = new Padding(3, 4, 3, 4);
+            GrpManualMovement.Size = new Size(197, 176);
             GrpManualMovement.TabIndex = 6;
             GrpManualMovement.TabStop = false;
             GrpManualMovement.Text = "Manual Azimuth Movement";
             // 
             // BtnStepCounterClockwise
             // 
-            BtnStepCounterClockwise.Location = new Point(97, 79);
+            BtnStepCounterClockwise.Location = new Point(111, 105);
+            BtnStepCounterClockwise.Margin = new Padding(3, 4, 3, 4);
             BtnStepCounterClockwise.Name = "BtnStepCounterClockwise";
-            BtnStepCounterClockwise.Size = new Size(69, 47);
+            BtnStepCounterClockwise.Size = new Size(79, 63);
             BtnStepCounterClockwise.TabIndex = 2;
             BtnStepCounterClockwise.Text = "Step CCW";
             BtnStepCounterClockwise.UseVisualStyleBackColor = true;
@@ -448,9 +499,10 @@
             // 
             // BtnStepClockwise
             // 
-            BtnStepClockwise.Location = new Point(6, 78);
+            BtnStepClockwise.Location = new Point(7, 104);
+            BtnStepClockwise.Margin = new Padding(3, 4, 3, 4);
             BtnStepClockwise.Name = "BtnStepClockwise";
-            BtnStepClockwise.Size = new Size(69, 47);
+            BtnStepClockwise.Size = new Size(79, 63);
             BtnStepClockwise.TabIndex = 1;
             BtnStepClockwise.Text = "Step CW";
             BtnStepClockwise.UseVisualStyleBackColor = true;
@@ -458,9 +510,10 @@
             // 
             // BtnToggleClutch
             // 
-            BtnToggleClutch.Location = new Point(6, 19);
+            BtnToggleClutch.Location = new Point(7, 25);
+            BtnToggleClutch.Margin = new Padding(3, 4, 3, 4);
             BtnToggleClutch.Name = "BtnToggleClutch";
-            BtnToggleClutch.Size = new Size(160, 58);
+            BtnToggleClutch.Size = new Size(183, 77);
             BtnToggleClutch.TabIndex = 0;
             BtnToggleClutch.Text = "Toggle Clutch";
             BtnToggleClutch.UseVisualStyleBackColor = true;
@@ -475,9 +528,11 @@
             GrpCurrentCommand.Controls.Add(LblCommandStatus);
             GrpCurrentCommand.Controls.Add(LblSubCommand);
             GrpCurrentCommand.Controls.Add(LblCurrCommand);
-            GrpCurrentCommand.Location = new Point(465, 138);
+            GrpCurrentCommand.Location = new Point(531, 184);
+            GrpCurrentCommand.Margin = new Padding(3, 4, 3, 4);
             GrpCurrentCommand.Name = "GrpCurrentCommand";
-            GrpCurrentCommand.Size = new Size(288, 132);
+            GrpCurrentCommand.Padding = new Padding(3, 4, 3, 4);
+            GrpCurrentCommand.Size = new Size(329, 176);
             GrpCurrentCommand.TabIndex = 5;
             GrpCurrentCommand.TabStop = false;
             GrpCurrentCommand.Text = "Current Command";
@@ -487,9 +542,10 @@
             BtnAdvancedEStop.BackColor = Color.FromArgb(237, 44, 44);
             BtnAdvancedEStop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BtnAdvancedEStop.ForeColor = Color.White;
-            BtnAdvancedEStop.Location = new Point(6, 73);
+            BtnAdvancedEStop.Location = new Point(7, 97);
+            BtnAdvancedEStop.Margin = new Padding(3, 4, 3, 4);
             BtnAdvancedEStop.Name = "BtnAdvancedEStop";
-            BtnAdvancedEStop.Size = new Size(273, 50);
+            BtnAdvancedEStop.Size = new Size(312, 67);
             BtnAdvancedEStop.TabIndex = 12;
             BtnAdvancedEStop.Text = "■";
             BtnAdvancedEStop.UseVisualStyleBackColor = false;
@@ -498,54 +554,54 @@
             // LblCurrCommandStatusData
             // 
             LblCurrCommandStatusData.AutoSize = true;
-            LblCurrCommandStatusData.Location = new Point(91, 59);
+            LblCurrCommandStatusData.Location = new Point(104, 79);
             LblCurrCommandStatusData.Name = "LblCurrCommandStatusData";
-            LblCurrCommandStatusData.Size = new Size(46, 15);
+            LblCurrCommandStatusData.Size = new Size(57, 20);
             LblCurrCommandStatusData.TabIndex = 5;
             LblCurrCommandStatusData.Text = "[status]";
             // 
             // LblCurrSubCommandData
             // 
             LblCurrSubCommandData.AutoSize = true;
-            LblCurrSubCommandData.Location = new Point(91, 41);
+            LblCurrSubCommandData.Location = new Point(104, 55);
             LblCurrSubCommandData.Name = "LblCurrSubCommandData";
-            LblCurrSubCommandData.Size = new Size(89, 15);
+            LblCurrSubCommandData.Size = new Size(109, 20);
             LblCurrSubCommandData.TabIndex = 4;
             LblCurrSubCommandData.Text = "[subcommand]";
             // 
             // LblCurrCommandData
             // 
             LblCurrCommandData.AutoSize = true;
-            LblCurrCommandData.Location = new Point(91, 23);
+            LblCurrCommandData.Location = new Point(104, 31);
             LblCurrCommandData.Name = "LblCurrCommandData";
-            LblCurrCommandData.Size = new Size(70, 15);
+            LblCurrCommandData.Size = new Size(86, 20);
             LblCurrCommandData.TabIndex = 3;
             LblCurrCommandData.Text = "[command]";
             // 
             // LblCommandStatus
             // 
             LblCommandStatus.AutoSize = true;
-            LblCommandStatus.Location = new Point(45, 59);
+            LblCommandStatus.Location = new Point(51, 79);
             LblCommandStatus.Name = "LblCommandStatus";
-            LblCommandStatus.Size = new Size(42, 15);
+            LblCommandStatus.Size = new Size(52, 20);
             LblCommandStatus.TabIndex = 2;
             LblCommandStatus.Text = "Status:";
             // 
             // LblSubCommand
             // 
             LblSubCommand.AutoSize = true;
-            LblSubCommand.Location = new Point(0, 41);
+            LblSubCommand.Location = new Point(0, 55);
             LblSubCommand.Name = "LblSubCommand";
-            LblSubCommand.Size = new Size(87, 15);
+            LblSubCommand.Size = new Size(106, 20);
             LblSubCommand.TabIndex = 1;
             LblSubCommand.Text = "SubCommand:";
             // 
             // LblCurrCommand
             // 
             LblCurrCommand.AutoSize = true;
-            LblCurrCommand.Location = new Point(20, 23);
+            LblCurrCommand.Location = new Point(23, 31);
             LblCurrCommand.Name = "LblCurrCommand";
-            LblCurrCommand.Size = new Size(67, 15);
+            LblCurrCommand.Size = new Size(81, 20);
             LblCurrCommand.TabIndex = 0;
             LblCurrCommand.Text = "Command:";
             // 
@@ -561,9 +617,11 @@
             GrpPosition.Controls.Add(LblLiftStatus);
             GrpPosition.Controls.Add(LblHorizontalPosition);
             GrpPosition.Controls.Add(LblVerticalPosition);
-            GrpPosition.Location = new Point(553, 6);
+            GrpPosition.Location = new Point(632, 8);
+            GrpPosition.Margin = new Padding(3, 4, 3, 4);
             GrpPosition.Name = "GrpPosition";
-            GrpPosition.Size = new Size(200, 126);
+            GrpPosition.Padding = new Padding(3, 4, 3, 4);
+            GrpPosition.Size = new Size(229, 168);
             GrpPosition.TabIndex = 4;
             GrpPosition.TabStop = false;
             GrpPosition.Text = "Position";
@@ -571,90 +629,90 @@
             // LblClutchData
             // 
             LblClutchData.AutoSize = true;
-            LblClutchData.Location = new Point(77, 92);
+            LblClutchData.Location = new Point(88, 123);
             LblClutchData.Name = "LblClutchData";
-            LblClutchData.Size = new Size(82, 15);
+            LblClutchData.Size = new Size(100, 20);
             LblClutchData.TabIndex = 9;
             LblClutchData.Text = "[clutch status]";
             // 
             // LblClutch
             // 
             LblClutch.AutoSize = true;
-            LblClutch.Location = new Point(14, 92);
+            LblClutch.Location = new Point(16, 123);
             LblClutch.Name = "LblClutch";
-            LblClutch.Size = new Size(57, 15);
+            LblClutch.Size = new Size(68, 20);
             LblClutch.TabIndex = 8;
             LblClutch.Text = "H Clutch:";
             // 
             // LblHomeStatusData
             // 
             LblHomeStatusData.AutoSize = true;
-            LblHomeStatusData.Location = new Point(77, 74);
+            LblHomeStatusData.Location = new Point(88, 99);
             LblHomeStatusData.Name = "LblHomeStatusData";
-            LblHomeStatusData.Size = new Size(80, 15);
+            LblHomeStatusData.Size = new Size(99, 20);
             LblHomeStatusData.TabIndex = 7;
             LblHomeStatusData.Text = "[home status]";
             // 
             // LblLiftStatusData
             // 
             LblLiftStatusData.AutoSize = true;
-            LblLiftStatusData.Location = new Point(77, 55);
+            LblLiftStatusData.Location = new Point(88, 73);
             LblLiftStatusData.Name = "LblLiftStatusData";
-            LblLiftStatusData.Size = new Size(63, 15);
+            LblLiftStatusData.Size = new Size(79, 20);
             LblLiftStatusData.TabIndex = 6;
             LblLiftStatusData.Text = "[lift status]";
             // 
             // LblHorizontalPositionData
             // 
             LblHorizontalPositionData.AutoSize = true;
-            LblHorizontalPositionData.Location = new Point(77, 37);
+            LblHorizontalPositionData.Location = new Point(88, 49);
             LblHorizontalPositionData.Name = "LblHorizontalPositionData";
-            LblHorizontalPositionData.Size = new Size(114, 15);
+            LblHorizontalPositionData.Size = new Size(144, 20);
             LblHorizontalPositionData.TabIndex = 5;
             LblHorizontalPositionData.Text = "[horizontal position]";
             // 
             // LblVerticalPositionData
             // 
             LblVerticalPositionData.AutoSize = true;
-            LblVerticalPositionData.Location = new Point(77, 18);
+            LblVerticalPositionData.Location = new Point(88, 24);
             LblVerticalPositionData.Name = "LblVerticalPositionData";
-            LblVerticalPositionData.Size = new Size(99, 15);
+            LblVerticalPositionData.Size = new Size(125, 20);
             LblVerticalPositionData.TabIndex = 4;
             LblVerticalPositionData.Text = "[vertical position]";
             // 
             // LblHomeStatus
             // 
             LblHomeStatus.AutoSize = true;
-            LblHomeStatus.Location = new Point(28, 74);
+            LblHomeStatus.Location = new Point(32, 99);
             LblHomeStatus.Name = "LblHomeStatus";
-            LblHomeStatus.Size = new Size(43, 15);
+            LblHomeStatus.Size = new Size(53, 20);
             LblHomeStatus.TabIndex = 3;
             LblHomeStatus.Text = "Home:";
             // 
             // LblLiftStatus
             // 
             LblLiftStatus.AutoSize = true;
-            LblLiftStatus.Location = new Point(44, 55);
+            LblLiftStatus.Location = new Point(50, 73);
             LblLiftStatus.Name = "LblLiftStatus";
-            LblLiftStatus.Size = new Size(27, 15);
+            LblLiftStatus.Size = new Size(33, 20);
             LblLiftStatus.TabIndex = 2;
             LblLiftStatus.Text = "Lift:";
             // 
             // LblHorizontalPosition
             // 
             LblHorizontalPosition.AutoSize = true;
-            LblHorizontalPosition.Location = new Point(6, 37);
+            LblHorizontalPosition.Location = new Point(7, 49);
             LblHorizontalPosition.Name = "LblHorizontalPosition";
-            LblHorizontalPosition.Size = new Size(65, 15);
+            LblHorizontalPosition.Size = new Size(82, 20);
             LblHorizontalPosition.TabIndex = 1;
             LblHorizontalPosition.Text = "Horizontal:";
             // 
             // LblVerticalPosition
             // 
             LblVerticalPosition.AutoSize = true;
-            LblVerticalPosition.Location = new Point(23, 18);
+            LblVerticalPosition.Location = new Point(26, 24);
             LblVerticalPosition.Name = "LblVerticalPosition";
-            LblVerticalPosition.Size = new Size(48, 15);
+            LblVerticalPosition.Size = new Size(61, 20);
             LblVerticalPosition.TabIndex = 0;
             LblVerticalPosition.Text = "Vertical:";
             // 
@@ -662,9 +720,11 @@
             // 
             GrpStatistics.Controls.Add(LblUpTimeData);
             GrpStatistics.Controls.Add(LblUpTime);
-            GrpStatistics.Location = new Point(553, 276);
+            GrpStatistics.Location = new Point(632, 368);
+            GrpStatistics.Margin = new Padding(3, 4, 3, 4);
             GrpStatistics.Name = "GrpStatistics";
-            GrpStatistics.Size = new Size(200, 187);
+            GrpStatistics.Padding = new Padding(3, 4, 3, 4);
+            GrpStatistics.Size = new Size(229, 249);
             GrpStatistics.TabIndex = 3;
             GrpStatistics.TabStop = false;
             GrpStatistics.Text = "Statistics";
@@ -672,18 +732,18 @@
             // LblUpTimeData
             // 
             LblUpTimeData.AutoSize = true;
-            LblUpTimeData.Location = new Point(66, 18);
+            LblUpTimeData.Location = new Point(75, 24);
             LblUpTimeData.Name = "LblUpTimeData";
-            LblUpTimeData.Size = new Size(56, 15);
+            LblUpTimeData.Size = new Size(70, 20);
             LblUpTimeData.TabIndex = 1;
             LblUpTimeData.Text = "[up time]";
             // 
             // LblUpTime
             // 
             LblUpTime.AutoSize = true;
-            LblUpTime.Location = new Point(6, 18);
+            LblUpTime.Location = new Point(7, 24);
             LblUpTime.Name = "LblUpTime";
-            LblUpTime.Size = new Size(55, 15);
+            LblUpTime.Size = new Size(68, 20);
             LblUpTime.TabIndex = 0;
             LblUpTime.Text = "Up Time:";
             // 
@@ -693,18 +753,21 @@
             GrpSimpleCommands.Controls.Add(btnRotateSize);
             GrpSimpleCommands.Controls.Add(BtnPause);
             GrpSimpleCommands.Controls.Add(BtnPlay);
-            GrpSimpleCommands.Location = new Point(6, 6);
+            GrpSimpleCommands.Location = new Point(7, 8);
+            GrpSimpleCommands.Margin = new Padding(3, 4, 3, 4);
             GrpSimpleCommands.Name = "GrpSimpleCommands";
-            GrpSimpleCommands.Size = new Size(202, 126);
+            GrpSimpleCommands.Padding = new Padding(3, 4, 3, 4);
+            GrpSimpleCommands.Size = new Size(231, 168);
             GrpSimpleCommands.TabIndex = 2;
             GrpSimpleCommands.TabStop = false;
             GrpSimpleCommands.Text = "Simple Commands";
             // 
             // BtnRotateSpeed
             // 
-            BtnRotateSpeed.Location = new Point(103, 19);
+            BtnRotateSpeed.Location = new Point(118, 25);
+            BtnRotateSpeed.Margin = new Padding(3, 4, 3, 4);
             BtnRotateSpeed.Name = "BtnRotateSpeed";
-            BtnRotateSpeed.Size = new Size(93, 47);
+            BtnRotateSpeed.Size = new Size(106, 63);
             BtnRotateSpeed.TabIndex = 3;
             BtnRotateSpeed.Text = "Rotate Speed";
             BtnRotateSpeed.UseVisualStyleBackColor = true;
@@ -712,9 +775,10 @@
             // 
             // btnRotateSize
             // 
-            btnRotateSize.Location = new Point(103, 73);
+            btnRotateSize.Location = new Point(118, 97);
+            btnRotateSize.Margin = new Padding(3, 4, 3, 4);
             btnRotateSize.Name = "btnRotateSize";
-            btnRotateSize.Size = new Size(93, 47);
+            btnRotateSize.Size = new Size(106, 63);
             btnRotateSize.TabIndex = 2;
             btnRotateSize.Text = "Rotate Size";
             btnRotateSize.UseVisualStyleBackColor = true;
@@ -722,9 +786,10 @@
             // 
             // BtnPause
             // 
-            BtnPause.Location = new Point(6, 72);
+            BtnPause.Location = new Point(7, 96);
+            BtnPause.Margin = new Padding(3, 4, 3, 4);
             BtnPause.Name = "BtnPause";
-            BtnPause.Size = new Size(93, 48);
+            BtnPause.Size = new Size(106, 64);
             BtnPause.TabIndex = 1;
             BtnPause.Text = "Pause";
             BtnPause.UseVisualStyleBackColor = true;
@@ -732,9 +797,10 @@
             // 
             // BtnPlay
             // 
-            BtnPlay.Location = new Point(6, 18);
+            BtnPlay.Location = new Point(7, 24);
+            BtnPlay.Margin = new Padding(3, 4, 3, 4);
             BtnPlay.Name = "BtnPlay";
-            BtnPlay.Size = new Size(93, 48);
+            BtnPlay.Size = new Size(106, 64);
             BtnPlay.TabIndex = 0;
             BtnPlay.Text = "Play";
             BtnPlay.UseVisualStyleBackColor = true;
@@ -746,9 +812,11 @@
             GrpSizeGroup.Controls.Add(RadSize12In);
             GrpSizeGroup.Controls.Add(RadSize10In);
             GrpSizeGroup.Controls.Add(RadSize7In);
-            GrpSizeGroup.Location = new Point(214, 6);
+            GrpSizeGroup.Location = new Point(245, 8);
+            GrpSizeGroup.Margin = new Padding(3, 4, 3, 4);
             GrpSizeGroup.Name = "GrpSizeGroup";
-            GrpSizeGroup.Size = new Size(125, 126);
+            GrpSizeGroup.Padding = new Padding(3, 4, 3, 4);
+            GrpSizeGroup.Size = new Size(143, 168);
             GrpSizeGroup.TabIndex = 1;
             GrpSizeGroup.TabStop = false;
             GrpSizeGroup.Text = "Size";
@@ -756,9 +824,10 @@
             // RadSizeAuto
             // 
             RadSizeAuto.AutoSize = true;
-            RadSizeAuto.Location = new Point(11, 97);
+            RadSizeAuto.Location = new Point(13, 129);
+            RadSizeAuto.Margin = new Padding(3, 4, 3, 4);
             RadSizeAuto.Name = "RadSizeAuto";
-            RadSizeAuto.Size = new Size(81, 19);
+            RadSizeAuto.Size = new Size(99, 24);
             RadSizeAuto.TabIndex = 3;
             RadSizeAuto.TabStop = true;
             RadSizeAuto.Text = "Automatic";
@@ -768,9 +837,10 @@
             // RadSize12In
             // 
             RadSize12In.AutoSize = true;
-            RadSize12In.Location = new Point(11, 72);
+            RadSize12In.Location = new Point(13, 96);
+            RadSize12In.Margin = new Padding(3, 4, 3, 4);
             RadSize12In.Name = "RadSize12In";
-            RadSize12In.Size = new Size(42, 19);
+            RadSize12In.Size = new Size(52, 24);
             RadSize12In.TabIndex = 2;
             RadSize12In.TabStop = true;
             RadSize12In.Text = "12\"";
@@ -780,9 +850,10 @@
             // RadSize10In
             // 
             RadSize10In.AutoSize = true;
-            RadSize10In.Location = new Point(11, 47);
+            RadSize10In.Location = new Point(13, 63);
+            RadSize10In.Margin = new Padding(3, 4, 3, 4);
             RadSize10In.Name = "RadSize10In";
-            RadSize10In.Size = new Size(42, 19);
+            RadSize10In.Size = new Size(52, 24);
             RadSize10In.TabIndex = 1;
             RadSize10In.TabStop = true;
             RadSize10In.Text = "10\"";
@@ -792,9 +863,10 @@
             // RadSize7In
             // 
             RadSize7In.AutoSize = true;
-            RadSize7In.Location = new Point(11, 22);
+            RadSize7In.Location = new Point(13, 29);
+            RadSize7In.Margin = new Padding(3, 4, 3, 4);
             RadSize7In.Name = "RadSize7In";
-            RadSize7In.Size = new Size(36, 19);
+            RadSize7In.Size = new Size(44, 24);
             RadSize7In.TabIndex = 0;
             RadSize7In.TabStop = true;
             RadSize7In.Text = "7\"";
@@ -812,9 +884,11 @@
             GrpSpeedGroup.Controls.Add(LblActualSpeed);
             GrpSpeedGroup.Controls.Add(LblTargetSpeed);
             GrpSpeedGroup.Controls.Add(LblSpeedSetting);
-            GrpSpeedGroup.Location = new Point(345, 6);
+            GrpSpeedGroup.Location = new Point(394, 8);
+            GrpSpeedGroup.Margin = new Padding(3, 4, 3, 4);
             GrpSpeedGroup.Name = "GrpSpeedGroup";
-            GrpSpeedGroup.Size = new Size(202, 126);
+            GrpSpeedGroup.Padding = new Padding(3, 4, 3, 4);
+            GrpSpeedGroup.Size = new Size(231, 168);
             GrpSpeedGroup.TabIndex = 0;
             GrpSpeedGroup.TabStop = false;
             GrpSpeedGroup.Text = "Speed";
@@ -822,45 +896,47 @@
             // NumSpeed
             // 
             NumSpeed.DecimalPlaces = 4;
-            NumSpeed.Location = new Point(92, 73);
+            NumSpeed.Location = new Point(105, 97);
+            NumSpeed.Margin = new Padding(3, 4, 3, 4);
             NumSpeed.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             NumSpeed.Name = "NumSpeed";
-            NumSpeed.Size = new Size(104, 23);
+            NumSpeed.Size = new Size(119, 27);
             NumSpeed.TabIndex = 8;
             NumSpeed.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // LblActualSpeedData
             // 
             LblActualSpeedData.AutoSize = true;
-            LblActualSpeedData.Location = new Point(92, 55);
+            LblActualSpeedData.Location = new Point(105, 73);
             LblActualSpeedData.Name = "LblActualSpeedData";
-            LblActualSpeedData.Size = new Size(81, 15);
+            LblActualSpeedData.Size = new Size(103, 20);
             LblActualSpeedData.TabIndex = 2;
             LblActualSpeedData.Text = "[actual speed]";
             // 
             // LblTargetSpeedData
             // 
             LblTargetSpeedData.AutoSize = true;
-            LblTargetSpeedData.Location = new Point(92, 37);
+            LblTargetSpeedData.Location = new Point(105, 49);
             LblTargetSpeedData.Name = "LblTargetSpeedData";
-            LblTargetSpeedData.Size = new Size(80, 15);
+            LblTargetSpeedData.Size = new Size(103, 20);
             LblTargetSpeedData.TabIndex = 7;
             LblTargetSpeedData.Text = "[target speed]";
             // 
             // LblSpeedSettingData
             // 
             LblSpeedSettingData.AutoSize = true;
-            LblSpeedSettingData.Location = new Point(92, 19);
+            LblSpeedSettingData.Location = new Point(105, 25);
             LblSpeedSettingData.Name = "LblSpeedSettingData";
-            LblSpeedSettingData.Size = new Size(85, 15);
+            LblSpeedSettingData.Size = new Size(108, 20);
             LblSpeedSettingData.TabIndex = 6;
             LblSpeedSettingData.Text = "[speed setting]";
             // 
             // BtnSubmitSpeed
             // 
-            BtnSubmitSpeed.Location = new Point(69, 97);
+            BtnSubmitSpeed.Location = new Point(79, 129);
+            BtnSubmitSpeed.Margin = new Padding(3, 4, 3, 4);
             BtnSubmitSpeed.Name = "BtnSubmitSpeed";
-            BtnSubmitSpeed.Size = new Size(75, 23);
+            BtnSubmitSpeed.Size = new Size(86, 31);
             BtnSubmitSpeed.TabIndex = 5;
             BtnSubmitSpeed.Text = "Save";
             BtnSubmitSpeed.UseVisualStyleBackColor = true;
@@ -869,45 +945,46 @@
             // LblNewSpeed
             // 
             LblNewSpeed.AutoSize = true;
-            LblNewSpeed.Location = new Point(24, 76);
+            LblNewSpeed.Location = new Point(27, 101);
             LblNewSpeed.Name = "LblNewSpeed";
-            LblNewSpeed.Size = new Size(69, 15);
+            LblNewSpeed.Size = new Size(88, 20);
             LblNewSpeed.TabIndex = 3;
             LblNewSpeed.Text = "New Speed:";
             // 
             // LblActualSpeed
             // 
             LblActualSpeed.AutoSize = true;
-            LblActualSpeed.Location = new Point(14, 55);
+            LblActualSpeed.Location = new Point(16, 73);
             LblActualSpeed.Name = "LblActualSpeed";
-            LblActualSpeed.Size = new Size(79, 15);
+            LblActualSpeed.Size = new Size(100, 20);
             LblActualSpeed.TabIndex = 2;
             LblActualSpeed.Text = "Actual Speed:";
             // 
             // LblTargetSpeed
             // 
             LblTargetSpeed.AutoSize = true;
-            LblTargetSpeed.Location = new Point(15, 37);
+            LblTargetSpeed.Location = new Point(17, 49);
             LblTargetSpeed.Name = "LblTargetSpeed";
-            LblTargetSpeed.Size = new Size(78, 15);
+            LblTargetSpeed.Size = new Size(99, 20);
             LblTargetSpeed.TabIndex = 1;
             LblTargetSpeed.Text = "Target Speed:";
             // 
             // LblSpeedSetting
             // 
             LblSpeedSetting.AutoSize = true;
-            LblSpeedSetting.Location = new Point(11, 19);
+            LblSpeedSetting.Location = new Point(13, 25);
             LblSpeedSetting.Name = "LblSpeedSetting";
-            LblSpeedSetting.Size = new Size(82, 15);
+            LblSpeedSetting.Size = new Size(105, 20);
             LblSpeedSetting.TabIndex = 0;
             LblSpeedSetting.Text = "Speed Setting:";
             // 
             // tabGraphical
             // 
             tabGraphical.Controls.Add(LblTodo2);
-            tabGraphical.Location = new Point(4, 24);
+            tabGraphical.Location = new Point(4, 29);
+            tabGraphical.Margin = new Padding(3, 4, 3, 4);
             tabGraphical.Name = "tabGraphical";
-            tabGraphical.Size = new Size(761, 469);
+            tabGraphical.Size = new Size(871, 630);
             tabGraphical.TabIndex = 2;
             tabGraphical.Text = "Graphical";
             tabGraphical.UseVisualStyleBackColor = true;
@@ -915,9 +992,9 @@
             // LblTodo2
             // 
             LblTodo2.AutoSize = true;
-            LblTodo2.Location = new Point(305, 223);
+            LblTodo2.Location = new Point(349, 297);
             LblTodo2.Name = "LblTodo2";
-            LblTodo2.Size = new Size(123, 15);
+            LblTodo2.Size = new Size(155, 20);
             LblTodo2.TabIndex = 0;
             LblTodo2.Text = "Not yet implemented!";
             // 
@@ -925,35 +1002,37 @@
             // 
             CboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
             CboSerialOptions.FormattingEnabled = true;
-            CboSerialOptions.Location = new Point(81, 6);
+            CboSerialOptions.Location = new Point(93, 8);
+            CboSerialOptions.Margin = new Padding(3, 4, 3, 4);
             CboSerialOptions.Name = "CboSerialOptions";
-            CboSerialOptions.Size = new Size(209, 23);
+            CboSerialOptions.Size = new Size(238, 28);
             CboSerialOptions.TabIndex = 0;
             // 
             // LblSerialOptions
             // 
             LblSerialOptions.AutoSize = true;
-            LblSerialOptions.Location = new Point(12, 9);
+            LblSerialOptions.Location = new Point(14, 12);
             LblSerialOptions.Name = "LblSerialOptions";
-            LblSerialOptions.Size = new Size(63, 15);
+            LblSerialOptions.Size = new Size(79, 20);
             LblSerialOptions.TabIndex = 1;
             LblSerialOptions.Text = "Serial Port:";
             // 
             // LblConnectionStatus
             // 
             LblConnectionStatus.AutoSize = true;
-            LblConnectionStatus.Location = new Point(603, 9);
+            LblConnectionStatus.Location = new Point(689, 12);
             LblConnectionStatus.Name = "LblConnectionStatus";
-            LblConnectionStatus.Size = new Size(88, 15);
+            LblConnectionStatus.Size = new Size(109, 20);
             LblConnectionStatus.TabIndex = 2;
             LblConnectionStatus.Text = "Not Connected";
             LblConnectionStatus.TextAlign = ContentAlignment.MiddleRight;
             // 
             // BtnConnect
             // 
-            BtnConnect.Location = new Point(697, 6);
+            BtnConnect.Location = new Point(797, 8);
+            BtnConnect.Margin = new Padding(3, 4, 3, 4);
             BtnConnect.Name = "BtnConnect";
-            BtnConnect.Size = new Size(84, 23);
+            BtnConnect.Size = new Size(96, 31);
             BtnConnect.TabIndex = 1;
             BtnConnect.Text = "Connect";
             BtnConnect.UseVisualStyleBackColor = true;
@@ -961,9 +1040,10 @@
             // 
             // BtnRefreshSerialPorts
             // 
-            BtnRefreshSerialPorts.Location = new Point(296, 6);
+            BtnRefreshSerialPorts.Location = new Point(338, 8);
+            BtnRefreshSerialPorts.Margin = new Padding(3, 4, 3, 4);
             BtnRefreshSerialPorts.Name = "BtnRefreshSerialPorts";
-            BtnRefreshSerialPorts.Size = new Size(59, 23);
+            BtnRefreshSerialPorts.Size = new Size(67, 31);
             BtnRefreshSerialPorts.TabIndex = 10;
             BtnRefreshSerialPorts.Text = "Refresh";
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
@@ -971,9 +1051,9 @@
             // 
             // FrmMainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(793, 544);
+            ClientSize = new Size(906, 725);
             Controls.Add(BtnRefreshSerialPorts);
             Controls.Add(BtnConnect);
             Controls.Add(TabMain);
@@ -982,6 +1062,7 @@
             Controls.Add(CboSerialOptions);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmMainForm";
             Text = "Statimatic STM Testing Suite";
             TabMain.ResumeLayout(false);
@@ -993,6 +1074,7 @@
             tabAdvanced.ResumeLayout(false);
             GrpAdvancedMovement.ResumeLayout(false);
             GrpAdvancedMovement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumAdvancedMTPTolerance).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveNStepsInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)TrkAdvMovementSpeed).EndInit();
@@ -1101,5 +1183,7 @@
         private Button BtnAdvancedEStop;
         private Label LblClutch;
         private Label LblClutchData;
+        private Label LblTolerance;
+        private NumericUpDown NumAdvancedMTPTolerance;
     }
 }
