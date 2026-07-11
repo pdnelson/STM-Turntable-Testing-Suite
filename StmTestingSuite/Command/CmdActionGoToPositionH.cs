@@ -14,7 +14,7 @@ namespace StmTestingSuite.Command
         [GeneratedRegex(@"\s+")]
         private static partial Regex RemoveSpaces();
 
-        public override string FieldName => "Position,Speed";
+        public override string FieldName => "Position,Delta,Speed";
         public override string? ReadableInputData { get; set; }
         public override byte[]? InputData { get; set; }
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
@@ -30,17 +30,18 @@ namespace StmTestingSuite.Command
             string normalizedString = RemoveSpaces().Replace(readableData, "");
             string[] commandParts = normalizedString.Split(',');
 
-            if (commandParts.Length != 2)
+            if (commandParts.Length != 3)
             {
-                return "Invalid format; must be position,speed";
+                return "Invalid format; must be position,delta,speed";
             }
-            else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1]))
+            else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1]) || !Validator.validInt(commandParts[2]))
             {
-                return "Both sides of comma must be valid numbers";
+                return "All values must be valid numbers";
             }
 
             Int16 position = Int16.Parse(commandParts[0]);
-            ushort speed = ushort.Parse(commandParts[1]);
+            ushort delta = ushort.Parse(commandParts[1]);
+            ushort speed = ushort.Parse(commandParts[2]);
 
             if (speed < 1)
             {
@@ -49,6 +50,15 @@ namespace StmTestingSuite.Command
             else if (speed > 14)
             {
                 return "Speed cannot exceed 14";
+            }
+
+            if(delta < 0)
+            {
+                return "Delta must be greater than 0.";
+            }
+            else if(delta >= 255)
+            {
+                return "Delta must be less than 256";
             }
 
             if (position > 16384)
@@ -61,10 +71,11 @@ namespace StmTestingSuite.Command
             }
 
             byte[] stepBytes = BitConverter.GetBytes(position);
+            byte[] deltaBytes = BitConverter.GetBytes(delta);
             byte[] speedBytes = BitConverter.GetBytes(speed);
-            byte[] data = [stepBytes[0], stepBytes[1], speedBytes[0]];
+            byte[] data = [stepBytes[0], stepBytes[1], deltaBytes[0], speedBytes[0]];
 
-            ReadableInputData = "Position: " + position + "; Speed: " + speed;
+            ReadableInputData = "Position: " + position + "; Delta: " + delta + "; Speed: " + speed;
             InputData = data;
 
             return "";
