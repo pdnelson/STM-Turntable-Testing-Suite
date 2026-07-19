@@ -9,6 +9,8 @@
         LIFT_TONEARM = 4,
         SET_DOWN_TONEARM = 5,
         MOVE_N_STEPS_HORIZONTALLY = 6,
-        GO_TO_POSITION = 7
+        GO_TO_POSITION = 7,
+        DELAY = 8,
+        SET_MOVEMENT_VERTICAL = 9
     }
 }

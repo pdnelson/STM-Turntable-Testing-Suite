@@ -48,6 +48,8 @@
                 SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps Horizontally",
                 SubCommandId.ERROR => "Error",
                 SubCommandId.GO_TO_POSITION => "Go To Position",
+                SubCommandId.DELAY => "Delay",
+                SubCommandId.SET_MOVEMENT_VERTICAL => "Set Movement To Vertical",
                 _ => "Invalid Data Received"
             };
         }

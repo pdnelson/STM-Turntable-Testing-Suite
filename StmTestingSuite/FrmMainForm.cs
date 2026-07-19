@@ -394,7 +394,7 @@ namespace StmTestingSuite
         {
             var speed = TrkAdvMovementSpeed.Value;
             var tolerance = NumAdvancedMTPTolerance.Value;
-            var position = NumMoveNStepsInput.Value;
+            var position = NumMoveToPositionInput.Value;
             var command = new CmdActionGoToPositionH(Conn, Logger);
             command.UpdateInputData($"{position},{tolerance},{speed}");
 
