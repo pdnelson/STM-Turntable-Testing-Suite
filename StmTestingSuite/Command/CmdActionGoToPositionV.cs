@@ -9,18 +9,18 @@ using System.Text.RegularExpressions;
 
 namespace StmTestingSuite.Command
 {
-    internal partial class CmdActionGoToPositionH(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
+    internal partial class CmdActionGoToPositionV(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
     {
         [GeneratedRegex(@"\s+")]
         private static partial Regex RemoveSpaces();
 
-        public override string FieldName => "Position,Tolerance,Speed";
+        public override string FieldName => "Position,Speed";
         public override string? ReadableInputData { get; set; }
         public override byte[]? InputData { get; set; }
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
-        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_GO_TO_POSITION_H;
+        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_GO_TO_POSITION_V;
         public override StmExternalCommandInputType InputType => StmExternalCommandInputType.CUSTOM;
-        public override string Name => "Go To Position (Horizontal)";
+        public override string Name => "Go To Position (Vertical)";
 
         /**
          * Returns a string if there's a validation error. Otherwise, nothing.
@@ -30,18 +30,17 @@ namespace StmTestingSuite.Command
             string normalizedString = RemoveSpaces().Replace(readableData, "");
             string[] commandParts = normalizedString.Split(',');
 
-            if (commandParts.Length != 3)
+            if (commandParts.Length != 2)
             {
-                return "Invalid format; must be position,tolerance,speed";
+                return "Invalid format; must be position,speed";
             }
-            else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1]) || !Validator.validInt(commandParts[2]))
+            else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1]))
             {
                 return "All values must be valid numbers";
             }
 
             Int16 position = Int16.Parse(commandParts[0]);
-            ushort tolerance = ushort.Parse(commandParts[1]);
-            ushort speed = ushort.Parse(commandParts[2]);
+            ushort speed = ushort.Parse(commandParts[1]);
 
             if (speed < 1)
             {
@@ -52,30 +51,20 @@ namespace StmTestingSuite.Command
                 return "Speed cannot exceed 14";
             }
 
-            if(tolerance < 0)
+            if (position > 1024)
             {
-                return "Tolerance must be greater than 0.";
-            }
-            else if(tolerance >= 255)
-            {
-                return "Tolerance must be less than 256";
-            }
-
-            if (position > 16384)
-            {
-                return "Cannot exceed 1000 steps.";
+                return "Cannot exceed position 1024.";
             }
             else if (position < 0)
             {
-                return "Steps cannot be below -1000.";
+                return "Position cannot be below 0.";
             }
 
             byte[] stepBytes = BitConverter.GetBytes(position);
-            byte[] toleranceBytes = BitConverter.GetBytes(tolerance);
             byte[] speedBytes = BitConverter.GetBytes(speed);
-            byte[] data = [stepBytes[0], stepBytes[1], toleranceBytes[0], speedBytes[0]];
+            byte[] data = [stepBytes[0], stepBytes[1], speedBytes[0]];
 
-            ReadableInputData = "Position: " + position + "; Tolerance: " + tolerance + "; Speed: " + speed;
+            ReadableInputData = "Position: " + position + "; Speed: " + speed;
             InputData = data;
 
             return "";

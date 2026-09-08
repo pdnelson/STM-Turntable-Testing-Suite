@@ -186,7 +186,9 @@ namespace StmTestingSuite
                 new CmdConnectionTest(Conn, Logger),
 
                 // action
+                new CmdActionCalibration(Conn, Logger),
                 new CmdActionGoToPositionH(Conn, Logger),
+                new CmdActionGoToPositionV(Conn, Logger),
                 new CmdPauseUnpause(Conn, Logger),
                 new CmdProtoPlay(Conn, Logger),
                 new CmdStepHorizontally(Conn, Logger),

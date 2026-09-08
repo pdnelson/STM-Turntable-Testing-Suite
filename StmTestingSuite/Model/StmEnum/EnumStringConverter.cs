@@ -50,6 +50,9 @@
                 SubCommandId.GO_TO_POSITION => "Go To Position",
                 SubCommandId.DELAY => "Delay",
                 SubCommandId.SET_MOVEMENT_VERTICAL => "Set Movement To Vertical",
+                SubCommandId.CALIBRATE_7_IN => "Calibrate 7\" size",
+                SubCommandId.CALIBRATE_10_IN => "Calibrate 10\" size",
+                SubCommandId.CALIBRATE_12_IN => "Calibrate 12\" size",
                 _ => "Invalid Data Received"
             };
         }

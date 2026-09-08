@@ -12,6 +12,7 @@
         ACTION_GO_TO_POSITION_H = 5,
         ACTION_PLAY_RETURN = 6,
         ACTION_CALIBRATE = 7,
+        ACTION_GO_TO_POSITION_V = 8,
 
         // Set commands
         SET_SPEED = 31,
