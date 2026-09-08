@@ -31,7 +31,8 @@
                 CommandId.ERROR => "Error",
                 CommandId.TOGGLE_CLUTCH => "Toggle Clutch",
                 CommandId.STEP_H_MOTOR => "Step Horizontal Motor",
-                CommandId.GO_TO_POSITION => "Go To Position",
+                CommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
+                CommandId.GO_TO_POSITION_V => "Go To Position (Vertical)",
                 _ => "Invalid Data Received"
             };
         }
@@ -47,12 +48,14 @@
                 SubCommandId.SET_DOWN_TONEARM => "Set Down Tonearm",
                 SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps Horizontally",
                 SubCommandId.ERROR => "Error",
-                SubCommandId.GO_TO_POSITION => "Go To Position",
+                SubCommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
                 SubCommandId.DELAY => "Delay",
                 SubCommandId.SET_MOVEMENT_VERTICAL => "Set Movement To Vertical",
                 SubCommandId.CALIBRATE_7_IN => "Calibrate 7\" size",
                 SubCommandId.CALIBRATE_10_IN => "Calibrate 10\" size",
                 SubCommandId.CALIBRATE_12_IN => "Calibrate 12\" size",
+                SubCommandId.CALIBRATE_HOME => "Calibrate home position",
+                SubCommandId.GO_TO_POSITION_V => "Go To Position (Horizontal)",
                 _ => "Invalid Data Received"
             };
         }

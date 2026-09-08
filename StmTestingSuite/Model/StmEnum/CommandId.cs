@@ -12,6 +12,7 @@
         ERROR = 7,
         TOGGLE_CLUTCH = 8,
         STEP_H_MOTOR = 9,
-        GO_TO_POSITION = 10
+        GO_TO_POSITION_H = 10,
+        GO_TO_POSITION_V = 11
     }
 }
