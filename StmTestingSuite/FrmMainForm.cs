@@ -403,5 +403,51 @@ namespace StmTestingSuite
 
             ExecuteSimpleCommand(command);
         }
+
+        private void BtnVerticalMoveNStepsSend_Click(object sender, EventArgs e)
+        {
+            var speed = TrkVerticalAdvMovementSpeed.Value;
+            var steps = (int)NumVerticalMoveNStepsInput.Value;
+
+            if (steps != 0)
+            {
+                var command = new CmdActionMoveNStepsV(Conn, Logger);
+                command.UpdateInputData($"{steps},{speed},1");
+
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void BtnVerticalMoveToPositionSend_Click(object sender, EventArgs e)
+        {
+            var speed = TrkVerticalAdvMovementSpeed.Value;
+            var position = NumVerticalMoveToPositionInput.Value;
+            var command = new CmdActionGoToPositionV(Conn, Logger);
+            command.UpdateInputData($"{position},{speed}");
+
+            ExecuteSimpleCommand(command);
+        }
+
+        private void TrkVerticalAdvMovementSpeed_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar = (TrackBar)sender;
+            LblVerticalAdvSpeedData.Text = trackBar.Value.ToString();
+        }
+
+        private void BtnStepUp_Click(object sender, EventArgs e)
+        {
+            var command = new CmdActionMoveNStepsV(Conn, Logger);
+            command.UpdateInputData("1,14,0");
+
+            ExecuteSimpleCommand(command);
+        }
+
+        private void BtnStepDown_Click(object sender, EventArgs e)
+        {
+            var command = new CmdActionMoveNStepsV(Conn, Logger);
+            command.UpdateInputData("-1,14,0");
+
+            ExecuteSimpleCommand(command);
+        }
     }
 }

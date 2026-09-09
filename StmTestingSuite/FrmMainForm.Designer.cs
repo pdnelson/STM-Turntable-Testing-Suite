@@ -47,6 +47,19 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
+            GrpVerticalManualMovement = new GroupBox();
+            BtnStepDown = new Button();
+            BtnStepUp = new Button();
+            GrpAdvancedVerticalMovement = new GroupBox();
+            NumVerticalMoveToPositionInput = new NumericUpDown();
+            NumVerticalMoveNStepsInput = new NumericUpDown();
+            LblVerticalMoveToPosition = new Label();
+            LblVerticalMoveNSteps = new Label();
+            BtnVerticalMoveToPositionSend = new Button();
+            BtnVerticalMoveNStepsSend = new Button();
+            LblVerticalAdvSpeedData = new Label();
+            LblVerticalAdvSpeed = new Label();
+            TrkVerticalAdvMovementSpeed = new TrackBar();
             GrpAdvancedMovement = new GroupBox();
             LblTolerance = new Label();
             NumAdvancedMTPTolerance = new NumericUpDown();
@@ -118,6 +131,11 @@
             GrpSimpleInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
+            GrpVerticalManualMovement.SuspendLayout();
+            GrpAdvancedVerticalMovement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NumVerticalMoveToPositionInput).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumVerticalMoveNStepsInput).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TrkVerticalAdvMovementSpeed).BeginInit();
             GrpAdvancedMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumAdvancedMTPTolerance).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumMoveToPositionInput).BeginInit();
@@ -153,7 +171,7 @@
             TabSimple.Controls.Add(GrpSimpleInput);
             TabSimple.Location = new Point(4, 24);
             TabSimple.Name = "TabSimple";
-            TabSimple.Padding = new Padding(3, 3, 3, 3);
+            TabSimple.Padding = new Padding(3);
             TabSimple.Size = new Size(761, 469);
             TabSimple.TabIndex = 0;
             TabSimple.Text = "Simple";
@@ -314,6 +332,8 @@
             // 
             // tabAdvanced
             // 
+            tabAdvanced.Controls.Add(GrpVerticalManualMovement);
+            tabAdvanced.Controls.Add(GrpAdvancedVerticalMovement);
             tabAdvanced.Controls.Add(GrpAdvancedMovement);
             tabAdvanced.Controls.Add(GrpManualMovement);
             tabAdvanced.Controls.Add(GrpCurrentCommand);
@@ -324,11 +344,144 @@
             tabAdvanced.Controls.Add(GrpSpeedGroup);
             tabAdvanced.Location = new Point(4, 24);
             tabAdvanced.Name = "tabAdvanced";
-            tabAdvanced.Padding = new Padding(3, 3, 3, 3);
+            tabAdvanced.Padding = new Padding(3);
             tabAdvanced.Size = new Size(761, 469);
             tabAdvanced.TabIndex = 1;
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // GrpVerticalManualMovement
+            // 
+            GrpVerticalManualMovement.Controls.Add(BtnStepDown);
+            GrpVerticalManualMovement.Controls.Add(BtnStepUp);
+            GrpVerticalManualMovement.Location = new Point(6, 276);
+            GrpVerticalManualMovement.Name = "GrpVerticalManualMovement";
+            GrpVerticalManualMovement.Size = new Size(172, 112);
+            GrpVerticalManualMovement.TabIndex = 7;
+            GrpVerticalManualMovement.TabStop = false;
+            GrpVerticalManualMovement.Text = "Manual Vertical Movement";
+            // 
+            // BtnStepDown
+            // 
+            BtnStepDown.Location = new Point(97, 22);
+            BtnStepDown.Name = "BtnStepDown";
+            BtnStepDown.Size = new Size(69, 83);
+            BtnStepDown.TabIndex = 2;
+            BtnStepDown.Text = "Step Down";
+            BtnStepDown.UseVisualStyleBackColor = true;
+            BtnStepDown.Click += BtnStepDown_Click;
+            // 
+            // BtnStepUp
+            // 
+            BtnStepUp.Location = new Point(6, 22);
+            BtnStepUp.Name = "BtnStepUp";
+            BtnStepUp.Size = new Size(69, 83);
+            BtnStepUp.TabIndex = 1;
+            BtnStepUp.Text = "Step Up";
+            BtnStepUp.UseVisualStyleBackColor = true;
+            BtnStepUp.Click += BtnStepUp_Click;
+            // 
+            // GrpAdvancedVerticalMovement
+            // 
+            GrpAdvancedVerticalMovement.Controls.Add(NumVerticalMoveToPositionInput);
+            GrpAdvancedVerticalMovement.Controls.Add(NumVerticalMoveNStepsInput);
+            GrpAdvancedVerticalMovement.Controls.Add(LblVerticalMoveToPosition);
+            GrpAdvancedVerticalMovement.Controls.Add(LblVerticalMoveNSteps);
+            GrpAdvancedVerticalMovement.Controls.Add(BtnVerticalMoveToPositionSend);
+            GrpAdvancedVerticalMovement.Controls.Add(BtnVerticalMoveNStepsSend);
+            GrpAdvancedVerticalMovement.Controls.Add(LblVerticalAdvSpeedData);
+            GrpAdvancedVerticalMovement.Controls.Add(LblVerticalAdvSpeed);
+            GrpAdvancedVerticalMovement.Controls.Add(TrkVerticalAdvMovementSpeed);
+            GrpAdvancedVerticalMovement.Location = new Point(184, 276);
+            GrpAdvancedVerticalMovement.Name = "GrpAdvancedVerticalMovement";
+            GrpAdvancedVerticalMovement.Size = new Size(275, 112);
+            GrpAdvancedVerticalMovement.TabIndex = 13;
+            GrpAdvancedVerticalMovement.TabStop = false;
+            GrpAdvancedVerticalMovement.Text = "Advanced Vertical Movement";
+            // 
+            // NumVerticalMoveToPositionInput
+            // 
+            NumVerticalMoveToPositionInput.Location = new Point(197, 83);
+            NumVerticalMoveToPositionInput.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            NumVerticalMoveToPositionInput.Name = "NumVerticalMoveToPositionInput";
+            NumVerticalMoveToPositionInput.Size = new Size(72, 23);
+            NumVerticalMoveToPositionInput.TabIndex = 10;
+            // 
+            // NumVerticalMoveNStepsInput
+            // 
+            NumVerticalMoveNStepsInput.Location = new Point(6, 82);
+            NumVerticalMoveNStepsInput.Maximum = new decimal(new int[] { 400, 0, 0, 0 });
+            NumVerticalMoveNStepsInput.Minimum = new decimal(new int[] { 400, 0, 0, int.MinValue });
+            NumVerticalMoveNStepsInput.Name = "NumVerticalMoveNStepsInput";
+            NumVerticalMoveNStepsInput.Size = new Size(72, 23);
+            NumVerticalMoveNStepsInput.TabIndex = 9;
+            // 
+            // LblVerticalMoveToPosition
+            // 
+            LblVerticalMoveToPosition.AutoSize = true;
+            LblVerticalMoveToPosition.Location = new Point(163, 65);
+            LblVerticalMoveToPosition.Name = "LblVerticalMoveToPosition";
+            LblVerticalMoveToPosition.Size = new Size(99, 15);
+            LblVerticalMoveToPosition.TabIndex = 8;
+            LblVerticalMoveToPosition.Text = "Move To Position";
+            // 
+            // LblVerticalMoveNSteps
+            // 
+            LblVerticalMoveNSteps.AutoSize = true;
+            LblVerticalMoveNSteps.Location = new Point(5, 65);
+            LblVerticalMoveNSteps.Name = "LblVerticalMoveNSteps";
+            LblVerticalMoveNSteps.Size = new Size(80, 15);
+            LblVerticalMoveNSteps.TabIndex = 7;
+            LblVerticalMoveNSteps.Text = "Move N Steps";
+            // 
+            // BtnVerticalMoveToPositionSend
+            // 
+            BtnVerticalMoveToPositionSend.Location = new Point(146, 83);
+            BtnVerticalMoveToPositionSend.Name = "BtnVerticalMoveToPositionSend";
+            BtnVerticalMoveToPositionSend.Size = new Size(47, 23);
+            BtnVerticalMoveToPositionSend.TabIndex = 6;
+            BtnVerticalMoveToPositionSend.Text = "Send";
+            BtnVerticalMoveToPositionSend.UseVisualStyleBackColor = true;
+            BtnVerticalMoveToPositionSend.Click += BtnVerticalMoveToPositionSend_Click;
+            // 
+            // BtnVerticalMoveNStepsSend
+            // 
+            BtnVerticalMoveNStepsSend.Location = new Point(84, 83);
+            BtnVerticalMoveNStepsSend.Name = "BtnVerticalMoveNStepsSend";
+            BtnVerticalMoveNStepsSend.Size = new Size(47, 23);
+            BtnVerticalMoveNStepsSend.TabIndex = 5;
+            BtnVerticalMoveNStepsSend.Text = "Send";
+            BtnVerticalMoveNStepsSend.UseVisualStyleBackColor = true;
+            BtnVerticalMoveNStepsSend.Click += BtnVerticalMoveNStepsSend_Click;
+            // 
+            // LblVerticalAdvSpeedData
+            // 
+            LblVerticalAdvSpeedData.AutoSize = true;
+            LblVerticalAdvSpeedData.Location = new Point(50, 49);
+            LblVerticalAdvSpeedData.Name = "LblVerticalAdvSpeedData";
+            LblVerticalAdvSpeedData.Size = new Size(19, 15);
+            LblVerticalAdvSpeedData.TabIndex = 2;
+            LblVerticalAdvSpeedData.Text = "14";
+            // 
+            // LblVerticalAdvSpeed
+            // 
+            LblVerticalAdvSpeed.AutoSize = true;
+            LblVerticalAdvSpeed.Location = new Point(6, 49);
+            LblVerticalAdvSpeed.Name = "LblVerticalAdvSpeed";
+            LblVerticalAdvSpeed.Size = new Size(42, 15);
+            LblVerticalAdvSpeed.TabIndex = 1;
+            LblVerticalAdvSpeed.Text = "Speed:";
+            // 
+            // TrkVerticalAdvMovementSpeed
+            // 
+            TrkVerticalAdvMovementSpeed.Location = new Point(6, 19);
+            TrkVerticalAdvMovementSpeed.Maximum = 14;
+            TrkVerticalAdvMovementSpeed.Minimum = 1;
+            TrkVerticalAdvMovementSpeed.Name = "TrkVerticalAdvMovementSpeed";
+            TrkVerticalAdvMovementSpeed.Size = new Size(266, 45);
+            TrkVerticalAdvMovementSpeed.TabIndex = 0;
+            TrkVerticalAdvMovementSpeed.Value = 14;
+            TrkVerticalAdvMovementSpeed.Scroll += TrkVerticalAdvMovementSpeed_Scroll;
             // 
             // GrpAdvancedMovement
             // 
@@ -689,9 +842,9 @@
             // 
             GrpStatistics.Controls.Add(LblUpTimeData);
             GrpStatistics.Controls.Add(LblUpTime);
-            GrpStatistics.Location = new Point(553, 276);
+            GrpStatistics.Location = new Point(465, 276);
             GrpStatistics.Name = "GrpStatistics";
-            GrpStatistics.Size = new Size(200, 187);
+            GrpStatistics.Size = new Size(288, 112);
             GrpStatistics.TabIndex = 3;
             GrpStatistics.TabStop = false;
             GrpStatistics.Text = "Statistics";
@@ -1018,6 +1171,12 @@
             GrpSimpleInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
+            GrpVerticalManualMovement.ResumeLayout(false);
+            GrpAdvancedVerticalMovement.ResumeLayout(false);
+            GrpAdvancedVerticalMovement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NumVerticalMoveToPositionInput).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumVerticalMoveNStepsInput).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TrkVerticalAdvMovementSpeed).EndInit();
             GrpAdvancedMovement.ResumeLayout(false);
             GrpAdvancedMovement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumAdvancedMTPTolerance).EndInit();
@@ -1131,5 +1290,18 @@
         private Label LblClutchData;
         private Label LblTolerance;
         private NumericUpDown NumAdvancedMTPTolerance;
+        private GroupBox GrpAdvancedVerticalMovement;
+        private NumericUpDown NumVerticalMoveToPositionInput;
+        private NumericUpDown NumVerticalMoveNStepsInput;
+        private Label LblVerticalMoveToPosition;
+        private Label LblVerticalMoveNSteps;
+        private Button BtnVerticalMoveToPositionSend;
+        private Button BtnVerticalMoveNStepsSend;
+        private Label LblVerticalAdvSpeedData;
+        private Label LblVerticalAdvSpeed;
+        private TrackBar TrkVerticalAdvMovementSpeed;
+        private GroupBox GrpVerticalManualMovement;
+        private Button BtnStepDown;
+        private Button BtnStepUp;
     }
 }
