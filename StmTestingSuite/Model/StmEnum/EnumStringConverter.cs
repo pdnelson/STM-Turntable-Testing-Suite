@@ -24,7 +24,7 @@
                 CommandId.NONE => "Idle",
                 CommandId.PAUSE => "Pause",
                 CommandId.UNPAUSE => "Unpause",
-                CommandId.MOVE_N_STEPS_H => "Move n Steps Horizontally",
+                CommandId.MOVE_N_STEPS_H => "Move n Steps (Horizontal)",
                 CommandId.HOME => "Home",
                 CommandId.CALIBRATION => "Calibration",
                 CommandId.TEST_MODE => "Test Mode",
@@ -33,6 +33,7 @@
                 CommandId.STEP_H_MOTOR => "Step Horizontal Motor",
                 CommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
                 CommandId.GO_TO_POSITION_V => "Go To Position (Vertical)",
+                CommandId.MOVE_N_STEPS_V => "Move n Steps (Vertical)",
                 _ => "Invalid Data Received"
             };
         }
@@ -44,9 +45,7 @@
                 SubCommandId.NONE => "Idle",
                 SubCommandId.DISENGAGE_AZ_CLUTCH => "Disengage Azimuth Clutch",
                 SubCommandId.ENGAGE_AZ_CLUTCH => "Engage Azimuth Clutch",
-                SubCommandId.LIFT_TONEARM => "Lift Tonearm",
-                SubCommandId.SET_DOWN_TONEARM => "Set Down Tonearm",
-                SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps Horizontally",
+                SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps (Horizontal)",
                 SubCommandId.ERROR => "Error",
                 SubCommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
                 SubCommandId.DELAY => "Delay",
@@ -56,6 +55,7 @@
                 SubCommandId.CALIBRATE_12_IN => "Calibrate 12\" size",
                 SubCommandId.CALIBRATE_HOME => "Calibrate home position",
                 SubCommandId.GO_TO_POSITION_V => "Go To Position (Horizontal)",
+                SubCommandId.MOVE_N_STEPS_V => "Move n Steps (Vertical)",
                 _ => "Invalid Data Received"
             };
         }

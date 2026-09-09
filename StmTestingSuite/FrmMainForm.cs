@@ -189,10 +189,11 @@ namespace StmTestingSuite
                 new CmdActionCalibration(Conn, Logger),
                 new CmdActionGoToPositionH(Conn, Logger),
                 new CmdActionGoToPositionV(Conn, Logger),
-                new CmdPauseUnpause(Conn, Logger),
-                new CmdProtoPlay(Conn, Logger),
-                new CmdStepHorizontally(Conn, Logger),
-                new CmdToggleClutch(Conn, Logger),
+                new CmdActionMoveNStepsH(Conn, Logger),
+                new CmdActionMoveNStepsV(Conn, Logger),
+                new CmdActionPauseUnpause(Conn, Logger),
+                new CmdActionStepHorizontally(Conn, Logger),
+                new CmdActionToggleClutch(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -280,12 +281,12 @@ namespace StmTestingSuite
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            ExecuteSimpleCommand(new CmdPlayOrReturn(Conn, Logger));
+            ExecuteSimpleCommand(new CmdActionPlayOrReturn(Conn, Logger));
         }
 
         private void BtnPause_Click(object sender, EventArgs e)
         {
-            ExecuteSimpleCommand(new CmdPauseUnpause(Conn, Logger));
+            ExecuteSimpleCommand(new CmdActionPauseUnpause(Conn, Logger));
         }
 
         private void BtnRotateSpeed_Click(object sender, EventArgs e)
@@ -353,12 +354,12 @@ namespace StmTestingSuite
 
         private void BtnToggleClutch_Click(object sender, EventArgs e)
         {
-            ExecuteSimpleCommand(new CmdToggleClutch(Conn, Logger));
+            ExecuteSimpleCommand(new CmdActionToggleClutch(Conn, Logger));
         }
 
         private void BtnStepClockwise_Click(object sender, EventArgs e)
         {
-            var command = new CmdStepHorizontally(Conn, Logger);
+            var command = new CmdActionStepHorizontally(Conn, Logger);
             command.UpdateInputData("1,14");
 
             ExecuteSimpleCommand(command);
@@ -366,7 +367,7 @@ namespace StmTestingSuite
 
         private void BtnStepCounterClockwise_Click(object sender, EventArgs e)
         {
-            var command = new CmdStepHorizontally(Conn, Logger);
+            var command = new CmdActionStepHorizontally(Conn, Logger);
             command.UpdateInputData("-1,14");
 
             ExecuteSimpleCommand(command);
@@ -385,7 +386,7 @@ namespace StmTestingSuite
 
             if (steps != 0)
             {
-                var command = new CmdProtoPlay(Conn, Logger);
+                var command = new CmdActionMoveNStepsH(Conn, Logger);
                 command.UpdateInputData($"{steps},{speed}");
 
                 ExecuteSimpleCommand(command);

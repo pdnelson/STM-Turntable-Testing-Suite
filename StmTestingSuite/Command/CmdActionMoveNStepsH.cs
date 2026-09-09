@@ -6,18 +6,18 @@ using System.Text.RegularExpressions;
 
 namespace StmTestingSuite.Command
 {
-    internal partial class CmdActionGoToPositionV(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
+    internal partial class CmdActionMoveNStepsH(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
     {
         [GeneratedRegex(@"\s+")]
         private static partial Regex RemoveSpaces();
 
-        public override string FieldName => "Position,Speed";
+        public override string FieldName => "Steps,Speed";
         public override string? ReadableInputData { get; set; }
         public override byte[]? InputData { get; set; }
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
-        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_GO_TO_POSITION_V;
+        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_MOVE_N_STEPS_H;
         public override StmExternalCommandInputType InputType => StmExternalCommandInputType.CUSTOM;
-        public override string Name => "Go To Position (Vertical)";
+        public override string Name => "Move N Steps (Horizontal)";
 
         /**
          * Returns a string if there's a validation error. Otherwise, nothing.
@@ -27,41 +27,38 @@ namespace StmTestingSuite.Command
             string normalizedString = RemoveSpaces().Replace(readableData, "");
             string[] commandParts = normalizedString.Split(',');
 
-            if (commandParts.Length != 2)
+            if(commandParts.Length != 2)
             {
-                return "Invalid format; must be position,speed";
-            }
-            else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1]))
-            {
-                return "All values must be valid numbers";
+                return "Invalid format; must be steps,speed";
+            } else if (!Validator.validInt(commandParts[0]) || !Validator.validInt(commandParts[1])) {
+                return "Both sides of comma must be valid numbers";
             }
 
-            Int16 position = Int16.Parse(commandParts[0]);
+            Int16 steps = Int16.Parse(commandParts[0]);
             ushort speed = ushort.Parse(commandParts[1]);
 
-            if (speed < 1)
+            if(speed < 1)
             {
                 return "Speed must be greater than 0.";
-            }
-            else if (speed > 14)
-            {
+            } 
+            else if(speed > 14) {
                 return "Speed cannot exceed 14";
             }
 
-            if (position > 1024)
+            if(steps > 1000)
             {
-                return "Cannot exceed position 1024.";
+                return "Cannot exceed 1000 steps.";
             }
-            else if (position < 0)
+            else if(steps < -1000)
             {
-                return "Position cannot be below 0.";
+                return "Steps cannot be below -1000.";
             }
 
-            byte[] stepBytes = BitConverter.GetBytes(position);
+            byte[] stepBytes = BitConverter.GetBytes(steps);
             byte[] speedBytes = BitConverter.GetBytes(speed);
             byte[] data = [stepBytes[0], stepBytes[1], speedBytes[0]];
 
-            ReadableInputData = "Position: " + position + "; Speed: " + speed;
+            ReadableInputData = "Steps: " + steps + "; Speed: " + speed;
             InputData = data;
 
             return "";

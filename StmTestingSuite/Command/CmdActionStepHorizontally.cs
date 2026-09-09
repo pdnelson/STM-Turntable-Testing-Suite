@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace StmTestingSuite.Command
 {
-    internal partial class CmdProtoPlay(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
+    internal partial class CmdActionStepHorizontally(StmConnector comm, StmLogger? logger) : BaseStmInputCommand(comm, logger)
     {
         [GeneratedRegex(@"\s+")]
         private static partial Regex RemoveSpaces();
@@ -15,9 +15,9 @@ namespace StmTestingSuite.Command
         public override string? ReadableInputData { get; set; }
         public override byte[]? InputData { get; set; }
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
-        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_PROTO_PLAY;
+        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_STEP_HORIZONTALLY;
         public override StmExternalCommandInputType InputType => StmExternalCommandInputType.CUSTOM;
-        public override string Name => "Play (Prototype)";
+        public override string Name => "Step Horizontally (Prototype)";
 
         /**
          * Returns a string if there's a validation error. Otherwise, nothing.

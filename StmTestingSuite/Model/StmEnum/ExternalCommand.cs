@@ -6,13 +6,14 @@
 
         // Actions
         ACTION_PAUSE_UNPAUSE = 1,
-        ACTION_PROTO_PLAY = 2,
+        ACTION_MOVE_N_STEPS_H = 2,
         ACTION_TOGGLE_CLUTCH = 3,
         ACTION_STEP_HORIZONTALLY = 4,
         ACTION_GO_TO_POSITION_H = 5,
         ACTION_PLAY_RETURN = 6,
         ACTION_CALIBRATE = 7,
         ACTION_GO_TO_POSITION_V = 8,
+        ACTION_MOVE_N_STEPS_V = 9,
 
         // Set commands
         SET_SPEED = 31,

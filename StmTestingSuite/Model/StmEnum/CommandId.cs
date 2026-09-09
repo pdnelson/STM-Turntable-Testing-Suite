@@ -13,6 +13,7 @@
         TOGGLE_CLUTCH = 8,
         STEP_H_MOTOR = 9,
         GO_TO_POSITION_H = 10,
-        GO_TO_POSITION_V = 11
+        GO_TO_POSITION_V = 11,
+        MOVE_N_STEPS_V = 12
     }
 }

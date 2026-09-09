@@ -7,10 +7,10 @@ using System.Text;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdPlayOrReturn(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
+    internal class CmdActionToggleClutch(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.ACTION;
-        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_PLAY_RETURN;
-        public override string Name => "Play/Return";
+        public override ExternalCommand ExternalCommandType => ExternalCommand.ACTION_TOGGLE_CLUTCH;
+        public override string Name => "Toggle Clutch";
     }
 }
