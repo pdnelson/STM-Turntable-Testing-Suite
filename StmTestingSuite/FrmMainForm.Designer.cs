@@ -410,7 +410,7 @@
             // 
             // BtnCalRefresh
             // 
-            BtnCalRefresh.Location = new Point(213, 83);
+            BtnCalRefresh.Location = new Point(207, 83);
             BtnCalRefresh.Name = "BtnCalRefresh";
             BtnCalRefresh.Size = new Size(75, 23);
             BtnCalRefresh.TabIndex = 16;
