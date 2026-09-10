@@ -30,5 +30,22 @@ namespace StmTestingSuite
 
             return finalString.ToString();
         }
+
+        public static void CommandWrapper(ConnectionMonitor connMonitor, Action commandBlock)
+        {
+            Task commandTask = new(async () =>
+            {
+                try
+                {
+                    commandBlock();
+                } 
+                catch(InvalidOperationException)
+                {
+                    connMonitor.DeviceDisconnected();
+                }
+            });
+
+            commandTask.Start();
+        }
     }
 }

@@ -50,12 +50,16 @@
                 SubCommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
                 SubCommandId.DELAY => "Delay",
                 SubCommandId.SET_MOVEMENT_VERTICAL => "Set Movement To Vertical",
-                SubCommandId.CALIBRATE_7_IN => "Calibrate 7\" size",
-                SubCommandId.CALIBRATE_10_IN => "Calibrate 10\" size",
-                SubCommandId.CALIBRATE_12_IN => "Calibrate 12\" size",
-                SubCommandId.CALIBRATE_HOME => "Calibrate home position",
+                SubCommandId.CALIBRATE_7_IN => "Calibrate 7\" Size",
+                SubCommandId.CALIBRATE_10_IN => "Calibrate 10\" Size",
+                SubCommandId.CALIBRATE_12_IN => "Calibrate 12\" Size",
+                SubCommandId.CALIBRATE_HOME => "Calibrate Home Position",
                 SubCommandId.GO_TO_POSITION_V => "Go To Position (Horizontal)",
                 SubCommandId.MOVE_N_STEPS_V => "Move n Steps (Vertical)",
+                SubCommandId.CALIBRATE_HORIZONTAL_POLARITY => "Calibrate Horizontal Polarity",
+                SubCommandId.CALIBRATE_PLATTER_HEIGHT => "Calibrate Platter Height",
+                SubCommandId.CALIBRATE_HOME_HEIGHT => "Calibrate Home Height",
+                SubCommandId.CALIBRATE_VERTICAL_BOUNDS => "Calibrate Vertical Bounds",
                 _ => "Invalid Data Received"
             };
         }
@@ -111,6 +115,15 @@
             {
                 ClutchStatus.ENGAGED => "Engaged",
                 ClutchStatus.DISENGAGED => "Disengaged",
+                _ => "Invalid Data Received"
+            };
+        }
+
+        public static String GetString(this EncoderPolarity polarity)
+        {
+            return polarity switch { 
+                EncoderPolarity.NORMAL => "Normal",
+                EncoderPolarity.REVERSED => "Reversed",
                 _ => "Invalid Data Received"
             };
         }

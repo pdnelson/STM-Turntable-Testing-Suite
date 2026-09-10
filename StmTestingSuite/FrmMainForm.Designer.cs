@@ -47,6 +47,25 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
+            grpCalibration = new GroupBox();
+            BtnCalibrate = new Button();
+            BtnCalRefresh = new Button();
+            LblCal12InData = new Label();
+            LblCal10InData = new Label();
+            LblCal7InData = new Label();
+            LblCal12In = new Label();
+            LblCal10In = new Label();
+            LblCal7In = new Label();
+            LblHomeData = new Label();
+            LblLowerLimitData = new Label();
+            LblUpperLimitData = new Label();
+            LblHome = new Label();
+            LblLowerLimit = new Label();
+            LblUpperLimit = new Label();
+            LblVPolarityData = new Label();
+            LblVPolarity = new Label();
+            LblHPolarityData = new Label();
+            LblHPolarity = new Label();
             GrpVerticalManualMovement = new GroupBox();
             BtnStepDown = new Button();
             BtnStepUp = new Button();
@@ -131,6 +150,7 @@
             GrpSimpleInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
+            grpCalibration.SuspendLayout();
             GrpVerticalManualMovement.SuspendLayout();
             GrpAdvancedVerticalMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumVerticalMoveToPositionInput).BeginInit();
@@ -160,7 +180,7 @@
             TabMain.Location = new Point(12, 35);
             TabMain.Name = "TabMain";
             TabMain.SelectedIndex = 0;
-            TabMain.Size = new Size(769, 497);
+            TabMain.Size = new Size(769, 537);
             TabMain.TabIndex = 4;
             TabMain.Selecting += TabMain_Selecting;
             // 
@@ -172,7 +192,7 @@
             TabSimple.Location = new Point(4, 24);
             TabSimple.Name = "TabSimple";
             TabSimple.Padding = new Padding(3);
-            TabSimple.Size = new Size(761, 469);
+            TabSimple.Size = new Size(761, 509);
             TabSimple.TabIndex = 0;
             TabSimple.Text = "Simple";
             TabSimple.UseVisualStyleBackColor = true;
@@ -332,6 +352,7 @@
             // 
             // tabAdvanced
             // 
+            tabAdvanced.Controls.Add(grpCalibration);
             tabAdvanced.Controls.Add(GrpVerticalManualMovement);
             tabAdvanced.Controls.Add(GrpAdvancedVerticalMovement);
             tabAdvanced.Controls.Add(GrpAdvancedMovement);
@@ -345,10 +366,201 @@
             tabAdvanced.Location = new Point(4, 24);
             tabAdvanced.Name = "tabAdvanced";
             tabAdvanced.Padding = new Padding(3);
-            tabAdvanced.Size = new Size(761, 469);
+            tabAdvanced.Size = new Size(761, 509);
             tabAdvanced.TabIndex = 1;
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // grpCalibration
+            // 
+            grpCalibration.Controls.Add(BtnCalibrate);
+            grpCalibration.Controls.Add(BtnCalRefresh);
+            grpCalibration.Controls.Add(LblCal12InData);
+            grpCalibration.Controls.Add(LblCal10InData);
+            grpCalibration.Controls.Add(LblCal7InData);
+            grpCalibration.Controls.Add(LblCal12In);
+            grpCalibration.Controls.Add(LblCal10In);
+            grpCalibration.Controls.Add(LblCal7In);
+            grpCalibration.Controls.Add(LblHomeData);
+            grpCalibration.Controls.Add(LblLowerLimitData);
+            grpCalibration.Controls.Add(LblUpperLimitData);
+            grpCalibration.Controls.Add(LblHome);
+            grpCalibration.Controls.Add(LblLowerLimit);
+            grpCalibration.Controls.Add(LblUpperLimit);
+            grpCalibration.Controls.Add(LblVPolarityData);
+            grpCalibration.Controls.Add(LblVPolarity);
+            grpCalibration.Controls.Add(LblHPolarityData);
+            grpCalibration.Controls.Add(LblHPolarity);
+            grpCalibration.Location = new Point(465, 394);
+            grpCalibration.Name = "grpCalibration";
+            grpCalibration.Size = new Size(288, 112);
+            grpCalibration.TabIndex = 4;
+            grpCalibration.TabStop = false;
+            grpCalibration.Text = "Calibration Values";
+            // 
+            // BtnCalibrate
+            // 
+            BtnCalibrate.Location = new Point(7, 83);
+            BtnCalibrate.Name = "BtnCalibrate";
+            BtnCalibrate.Size = new Size(75, 23);
+            BtnCalibrate.TabIndex = 17;
+            BtnCalibrate.Text = "Calibrate";
+            BtnCalibrate.UseVisualStyleBackColor = true;
+            BtnCalibrate.Click += BtnCalibrate_Click;
+            // 
+            // BtnCalRefresh
+            // 
+            BtnCalRefresh.Location = new Point(213, 83);
+            BtnCalRefresh.Name = "BtnCalRefresh";
+            BtnCalRefresh.Size = new Size(75, 23);
+            BtnCalRefresh.TabIndex = 16;
+            BtnCalRefresh.Text = "Refresh";
+            BtnCalRefresh.UseVisualStyleBackColor = true;
+            BtnCalRefresh.Click += BtnCalRefresh_Click;
+            // 
+            // LblCal12InData
+            // 
+            LblCal12InData.AutoSize = true;
+            LblCal12InData.Location = new Point(203, 63);
+            LblCal12InData.Name = "LblCal12InData";
+            LblCal12InData.Size = new Size(76, 15);
+            LblCal12InData.TabIndex = 15;
+            LblCal12InData.Text = "[not fetched]";
+            // 
+            // LblCal10InData
+            // 
+            LblCal10InData.AutoSize = true;
+            LblCal10InData.Location = new Point(203, 48);
+            LblCal10InData.Name = "LblCal10InData";
+            LblCal10InData.Size = new Size(76, 15);
+            LblCal10InData.TabIndex = 14;
+            LblCal10InData.Text = "[not fetched]";
+            // 
+            // LblCal7InData
+            // 
+            LblCal7InData.AutoSize = true;
+            LblCal7InData.Location = new Point(203, 33);
+            LblCal7InData.Name = "LblCal7InData";
+            LblCal7InData.Size = new Size(76, 15);
+            LblCal7InData.TabIndex = 13;
+            LblCal7InData.Text = "[not fetched]";
+            // 
+            // LblCal12In
+            // 
+            LblCal12In.AutoSize = true;
+            LblCal12In.Location = new Point(179, 63);
+            LblCal12In.Name = "LblCal12In";
+            LblCal12In.Size = new Size(27, 15);
+            LblCal12In.TabIndex = 12;
+            LblCal12In.Text = "12\":";
+            // 
+            // LblCal10In
+            // 
+            LblCal10In.AutoSize = true;
+            LblCal10In.Location = new Point(179, 48);
+            LblCal10In.Name = "LblCal10In";
+            LblCal10In.Size = new Size(27, 15);
+            LblCal10In.TabIndex = 11;
+            LblCal10In.Text = "10\":";
+            // 
+            // LblCal7In
+            // 
+            LblCal7In.AutoSize = true;
+            LblCal7In.Location = new Point(185, 33);
+            LblCal7In.Name = "LblCal7In";
+            LblCal7In.Size = new Size(21, 15);
+            LblCal7In.TabIndex = 10;
+            LblCal7In.Text = "7\":";
+            // 
+            // LblHomeData
+            // 
+            LblHomeData.AutoSize = true;
+            LblHomeData.Location = new Point(203, 18);
+            LblHomeData.Name = "LblHomeData";
+            LblHomeData.Size = new Size(76, 15);
+            LblHomeData.TabIndex = 9;
+            LblHomeData.Text = "[not fetched]";
+            // 
+            // LblLowerLimitData
+            // 
+            LblLowerLimitData.AutoSize = true;
+            LblLowerLimitData.Location = new Point(84, 63);
+            LblLowerLimitData.Name = "LblLowerLimitData";
+            LblLowerLimitData.Size = new Size(76, 15);
+            LblLowerLimitData.TabIndex = 8;
+            LblLowerLimitData.Text = "[not fetched]";
+            // 
+            // LblUpperLimitData
+            // 
+            LblUpperLimitData.AutoSize = true;
+            LblUpperLimitData.Location = new Point(84, 48);
+            LblUpperLimitData.Name = "LblUpperLimitData";
+            LblUpperLimitData.Size = new Size(76, 15);
+            LblUpperLimitData.TabIndex = 7;
+            LblUpperLimitData.Text = "[not fetched]";
+            // 
+            // LblHome
+            // 
+            LblHome.AutoSize = true;
+            LblHome.Location = new Point(163, 18);
+            LblHome.Name = "LblHome";
+            LblHome.Size = new Size(43, 15);
+            LblHome.TabIndex = 6;
+            LblHome.Text = "Home:";
+            // 
+            // LblLowerLimit
+            // 
+            LblLowerLimit.AutoSize = true;
+            LblLowerLimit.Location = new Point(10, 63);
+            LblLowerLimit.Name = "LblLowerLimit";
+            LblLowerLimit.Size = new Size(72, 15);
+            LblLowerLimit.TabIndex = 5;
+            LblLowerLimit.Text = "Lower Limit:";
+            // 
+            // LblUpperLimit
+            // 
+            LblUpperLimit.AutoSize = true;
+            LblUpperLimit.Location = new Point(10, 48);
+            LblUpperLimit.Name = "LblUpperLimit";
+            LblUpperLimit.Size = new Size(72, 15);
+            LblUpperLimit.TabIndex = 4;
+            LblUpperLimit.Text = "Upper Limit:";
+            // 
+            // LblVPolarityData
+            // 
+            LblVPolarityData.AutoSize = true;
+            LblVPolarityData.Location = new Point(84, 33);
+            LblVPolarityData.Name = "LblVPolarityData";
+            LblVPolarityData.Size = new Size(76, 15);
+            LblVPolarityData.TabIndex = 3;
+            LblVPolarityData.Text = "[not fetched]";
+            // 
+            // LblVPolarity
+            // 
+            LblVPolarity.AutoSize = true;
+            LblVPolarity.Location = new Point(20, 33);
+            LblVPolarity.Name = "LblVPolarity";
+            LblVPolarity.Size = new Size(62, 15);
+            LblVPolarity.TabIndex = 2;
+            LblVPolarity.Text = "V-Polarity:";
+            // 
+            // LblHPolarityData
+            // 
+            LblHPolarityData.AutoSize = true;
+            LblHPolarityData.Location = new Point(84, 18);
+            LblHPolarityData.Name = "LblHPolarityData";
+            LblHPolarityData.Size = new Size(76, 15);
+            LblHPolarityData.TabIndex = 1;
+            LblHPolarityData.Text = "[not fetched]";
+            // 
+            // LblHPolarity
+            // 
+            LblHPolarity.AutoSize = true;
+            LblHPolarity.Location = new Point(18, 18);
+            LblHPolarity.Name = "LblHPolarity";
+            LblHPolarity.Size = new Size(64, 15);
+            LblHPolarity.TabIndex = 0;
+            LblHPolarity.Text = "H-Polarity:";
             // 
             // GrpVerticalManualMovement
             // 
@@ -1087,7 +1299,7 @@
             tabGraphical.Controls.Add(LblTodo2);
             tabGraphical.Location = new Point(4, 24);
             tabGraphical.Name = "tabGraphical";
-            tabGraphical.Size = new Size(761, 469);
+            tabGraphical.Size = new Size(761, 509);
             tabGraphical.TabIndex = 2;
             tabGraphical.Text = "Graphical";
             tabGraphical.UseVisualStyleBackColor = true;
@@ -1153,7 +1365,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(793, 544);
+            ClientSize = new Size(793, 575);
             Controls.Add(BtnRefreshSerialPorts);
             Controls.Add(BtnConnect);
             Controls.Add(TabMain);
@@ -1171,6 +1383,8 @@
             GrpSimpleInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
+            grpCalibration.ResumeLayout(false);
+            grpCalibration.PerformLayout();
             GrpVerticalManualMovement.ResumeLayout(false);
             GrpAdvancedVerticalMovement.ResumeLayout(false);
             GrpAdvancedVerticalMovement.PerformLayout();
@@ -1303,5 +1517,24 @@
         private GroupBox GrpVerticalManualMovement;
         private Button BtnStepDown;
         private Button BtnStepUp;
+        private GroupBox grpCalibration;
+        private Label LblHPolarityData;
+        private Label LblHPolarity;
+        private Label LblVPolarityData;
+        private Label LblVPolarity;
+        private Label LblHomeData;
+        private Label LblLowerLimitData;
+        private Label LblUpperLimitData;
+        private Label LblHome;
+        private Label LblLowerLimit;
+        private Label LblUpperLimit;
+        private Label LblCal10In;
+        private Label LblCal7In;
+        private Button BtnCalRefresh;
+        private Label LblCal12InData;
+        private Label LblCal10InData;
+        private Label LblCal7InData;
+        private Label LblCal12In;
+        private Button BtnCalibrate;
     }
 }

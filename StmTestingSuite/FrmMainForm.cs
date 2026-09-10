@@ -215,7 +215,8 @@ namespace StmTestingSuite
                 new CmdGetTargetSpeed(Conn, Logger),
                 new CmdGetUpTime(Conn, Logger),
                 new CmdGetVerticalEncoderPos(Conn, Logger),
-                new CmdGetAdvancedSuiteData(Conn, Logger)
+                new CmdGetAdvancedSuiteData(Conn, Logger),
+                new CmdGetCalibrationValues(Conn, Logger)
             ];
         }
 
@@ -224,29 +225,19 @@ namespace StmTestingSuite
             BtnCancelCommand.Enabled = false;
             BtnSimpleSendCommand.Enabled = false;
 
-            Task commandTask = new(async () =>
+            Utilities.CommandWrapper(ConnMonitor, async () =>
             {
-                try
+                await command.Execute();
+
+                await Task.Delay(Constants.SendCommandDebounceMs);
+
+                Utilities.WriteToUiFromThread(this, () =>
                 {
-                    await command.Execute();
-
-                    await Task.Delay(Constants.SendCommandDebounceMs);
-
-                    Utilities.WriteToUiFromThread(this, () =>
-                    {
-                        BtnSimpleSendCommand.Enabled = true;
-                        BtnCancelCommand.Enabled = true;
-                        BtnSimpleSendCommand.Focus();
-                    });
-
-                }
-                catch (InvalidOperationException)
-                {
-                    ConnMonitor.DeviceDisconnected();
-                }
+                    BtnSimpleSendCommand.Enabled = true;
+                    BtnCancelCommand.Enabled = true;
+                    BtnSimpleSendCommand.Focus();
+                });
             });
-
-            commandTask.Start();
         }
 
         private void BtnCancelCommand_Click_1(object sender, EventArgs e)
@@ -269,6 +260,7 @@ namespace StmTestingSuite
                 else if (current.Text == "Advanced")
                 {
                     AdvTabMonitor.Start();
+                    BtnCalRefresh_Click(sender, e);
                     Logger.LogMessage("Advanced Tab", "Started monitoring");
                 }
                 else if (current.Text != "Advanced")
@@ -448,6 +440,37 @@ namespace StmTestingSuite
             command.UpdateInputData("-1,14,0");
 
             ExecuteSimpleCommand(command);
+        }
+
+        private void BtnCalRefresh_Click(object sender, EventArgs e)
+        {
+            Utilities.CommandWrapper(ConnMonitor, async () =>
+            {
+                var nullResult = await new CmdGetCalibrationValues(Conn, Logger).ExecuteWithResult();
+
+                if (nullResult != null)
+                {
+                    var result = (CmdGetCalibrationValues.Response)nullResult;
+
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        LblHPolarityData.Text = EnumStringConverter.GetString(result.HorizontalPolarity);
+                        LblVPolarityData.Text = EnumStringConverter.GetString(result.VerticalPolarity);
+
+                        LblUpperLimitData.Text = result.UpperLimit.ToString();
+                        LblLowerLimitData.Text = result.LowerLimit.ToString();
+                        LblHomeData.Text = result.Home.ToString();
+                        LblCal7InData.Text = result.In7.ToString();
+                        LblCal10InData.Text = result.In10.ToString();
+                        LblCal12InData.Text = result.In12.ToString();
+                    });
+                }
+            });
+        }
+
+        private void BtnCalibrate_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdActionCalibration(Conn, Logger));
         }
     }
 }
