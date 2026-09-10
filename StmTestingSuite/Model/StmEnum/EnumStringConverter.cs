@@ -13,6 +13,8 @@
                 CommandStatus.NOT_LIFTED => "Lift error: Not lifted at the end of \"Pause\" routine",
                 CommandStatus.CLUTCH_FAILED_TO_ENGAGE => "Azimuth clutch failed to engage",
                 CommandStatus.CLUTCH_FAILED_TO_DISENGAGE => "Azimuth clutch failed to disengage",
+                CommandStatus.FAILED_TO_SET_VERTICAL_POLARITY => "Failed to set vertical polarity",
+                CommandStatus.FAILED_TO_SET_HORIZONTAL_POLARITY => "Failed to set horizontal polarity",
                 _ => "Invalid Data Received"
             };
         }
@@ -60,6 +62,7 @@
                 SubCommandId.CALIBRATE_PLATTER_HEIGHT => "Calibrate Platter Height",
                 SubCommandId.CALIBRATE_HOME_HEIGHT => "Calibrate Home Height",
                 SubCommandId.CALIBRATE_VERTICAL_BOUNDS => "Calibrate Vertical Bounds",
+                SubCommandId.NORMALIZE_AZ_ENCODER => "Normalize Azimuth Encoder",
                 _ => "Invalid Data Received"
             };
         }
