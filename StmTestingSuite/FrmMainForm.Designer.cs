@@ -223,7 +223,7 @@
             DgvSimpleLog.Name = "DgvSimpleLog";
             DgvSimpleLog.ReadOnly = true;
             DgvSimpleLog.RowHeadersWidth = 51;
-            DgvSimpleLog.Size = new Size(749, 372);
+            DgvSimpleLog.Size = new Size(749, 438);
             DgvSimpleLog.TabIndex = 9;
             // 
             // cmnSimpleTime
