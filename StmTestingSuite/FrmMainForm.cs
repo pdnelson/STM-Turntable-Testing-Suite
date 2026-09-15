@@ -203,6 +203,7 @@ namespace StmTestingSuite
                 new CmdSetRotateSize(Conn, Logger),
                 new CmdSetRotateSpeed(Conn, Logger),
                 new CmdSetAzEncoderZero(Conn, Logger),
+                new CmdSetSaveSettings(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),

@@ -23,6 +23,7 @@
         SET_CLEAR_ACTION_COMMAND = 35,
         SET_ROTATE_SIZE = 36,
         SET_AZ_ENCODER_ZERO = 37,
+        SET_SAVE_SETTINGS = 38,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,
