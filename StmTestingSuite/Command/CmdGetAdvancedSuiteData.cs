@@ -13,14 +13,14 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_ADVANCED_SUITE_DATA;
         public override string Name => "Advanced Suite Data";
-        public override ushort ResponseSize => 22;
+        public override ushort ResponseSize => 24;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             Response? response = null;
             string responseString = "";
 
             // Verify both the start and end key are intact. If they aren't, then throw out the whole response.
-            if (rawData[0] == Constants.AdvancedDataStartKey && rawData[21] == Constants.AdvancedDataEndKey)
+            if (rawData[0] == Constants.AdvancedDataStartKey && rawData[ResponseSize - 1] == Constants.AdvancedDataEndKey)
             {
                 response = new Response(rawData);
                 responseString = ((Response)response).ToString();
@@ -41,8 +41,8 @@ namespace StmTestingSuite.Command
                 byte[] verticalBytes = { rawData[1], rawData[2] };
                 VerticalPosition = BitConverter.ToUInt16(verticalBytes);
 
-                byte[] horizontalBytes = { rawData[3], rawData[4] };
-                HorizontalPosition = BitConverter.ToUInt16(horizontalBytes);
+                byte[] normHorizontalBytes = { rawData[3], rawData[4] };
+                NormalizedHorizontalPosition = BitConverter.ToUInt16(normHorizontalBytes);
 
                 LiftStatus = (LiftStatus)rawData[5];
                 HomeStatus = (HomeStatus)rawData[6];
@@ -61,10 +61,14 @@ namespace StmTestingSuite.Command
                 SizeSetting = (SizeOption)rawData[19];
 
                 ClutchStatus = (ClutchStatus)rawData[20];
+
+                byte[] actHorizontalBytes = { rawData[21], rawData[22] };
+                ActualHorizontalPosition = BitConverter.ToUInt16(actHorizontalBytes);
             }
 
             public ushort VerticalPosition { get; }
-            public ushort HorizontalPosition { get; }
+            public ushort NormalizedHorizontalPosition { get; }
+            public ushort ActualHorizontalPosition { get; }
             public LiftStatus LiftStatus { get; }
             public HomeStatus HomeStatus { get; }
             public CommandId CommandId { get; }
@@ -78,7 +82,7 @@ namespace StmTestingSuite.Command
 
             public readonly override string ToString()
             {
-                return $"({VerticalPosition}, {HorizontalPosition}, {LiftStatus}, {HomeStatus}, {ClutchStatus}, {CommandId}, {SubCommandId}, {CommandStatus}, {UpTimeSeconds}, {SpeedSetting}, {SpeedTarget}, {SizeSetting})";
+                return $"({VerticalPosition}, {NormalizedHorizontalPosition}, {ActualHorizontalPosition} {LiftStatus}, {HomeStatus}, {ClutchStatus}, {CommandId}, {SubCommandId}, {CommandStatus}, {UpTimeSeconds}, {SpeedSetting}, {SpeedTarget}, {SizeSetting})";
             }
         }
     }

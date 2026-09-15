@@ -29,6 +29,7 @@ namespace StmTestingSuite
         // Positioning
         Label lblVerticalPos,
         Label lblHorizontalPos,
+        Label lblActualHorizontalPos,
         Label lblLiftStatus,
         Label lblHomeStatus,
         Label lblClutchStatus,
@@ -62,6 +63,7 @@ namespace StmTestingSuite
         // Positioning
         Label LblVerticalPos { get; } = lblVerticalPos;
         Label LblHorizontalPos { get; } = lblHorizontalPos;
+        Label LblActualHorizontalPos { get; } = lblActualHorizontalPos;
         Label LblLiftStatus { get; } = lblLiftStatus;
         Label LblHomeStatus { get; } = lblHomeStatus;
         Label LblClutchStatus { get; } = lblClutchStatus;
@@ -138,7 +140,8 @@ namespace StmTestingSuite
 
                 // Positioning
                 LblVerticalPos.Text = data.VerticalPosition.ToString();
-                LblHorizontalPos.Text = data.HorizontalPosition.ToString();
+                LblHorizontalPos.Text = data.NormalizedHorizontalPosition.ToString();
+                LblActualHorizontalPos.Text = data.ActualHorizontalPosition.ToString();
                 LblLiftStatus.Text = data.LiftStatus.GetString();
                 LblHomeStatus.Text = data.HomeStatus.GetString();
                 LblClutchStatus.Text = data.ClutchStatus.GetString();

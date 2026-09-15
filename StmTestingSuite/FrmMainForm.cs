@@ -19,7 +19,7 @@ namespace StmTestingSuite
             InitializeComponent();
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
-            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
+            AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblActualHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -202,6 +202,7 @@ namespace StmTestingSuite
                 new CmdSetSpeed(Conn, Logger),
                 new CmdSetRotateSize(Conn, Logger),
                 new CmdSetRotateSpeed(Conn, Logger),
+                new CmdSetAzEncoderZero(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
@@ -471,6 +472,15 @@ namespace StmTestingSuite
         private void BtnCalibrate_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdActionCalibration(Conn, Logger));
+        }
+
+        private void BtnZeroAzEncoder_Click(object sender, EventArgs e)
+        {
+            var command = new CmdSetAzEncoderZero(Conn, Logger);
+            decimal value = NumZeroAzEncoder.Value;
+            command.UpdateInputData(Decimal.ToUInt16(value));
+
+            ExecuteSimpleCommand(command);
         }
     }
 }
