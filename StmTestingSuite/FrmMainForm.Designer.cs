@@ -772,7 +772,7 @@
             // NumMoveToPositionInput
             // 
             NumMoveToPositionInput.Location = new Point(197, 104);
-            NumMoveToPositionInput.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            NumMoveToPositionInput.Maximum = new decimal(new int[] { 16383, 0, 0, 0 });
             NumMoveToPositionInput.Name = "NumMoveToPositionInput";
             NumMoveToPositionInput.Size = new Size(72, 23);
             NumMoveToPositionInput.TabIndex = 10;
@@ -780,8 +780,8 @@
             // NumMoveNStepsInput
             // 
             NumMoveNStepsInput.Location = new Point(6, 103);
-            NumMoveNStepsInput.Maximum = new decimal(new int[] { 400, 0, 0, 0 });
-            NumMoveNStepsInput.Minimum = new decimal(new int[] { 400, 0, 0, int.MinValue });
+            NumMoveNStepsInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            NumMoveNStepsInput.Minimum = new decimal(new int[] { 1000, 0, 0, int.MinValue });
             NumMoveNStepsInput.Name = "NumMoveNStepsInput";
             NumMoveNStepsInput.Size = new Size(72, 23);
             NumMoveNStepsInput.TabIndex = 9;
@@ -831,7 +831,7 @@
             LblAdvSpeedData.Name = "LblAdvSpeedData";
             LblAdvSpeedData.Size = new Size(19, 15);
             LblAdvSpeedData.TabIndex = 2;
-            LblAdvSpeedData.Text = "14";
+            LblAdvSpeedData.Text = "25";
             // 
             // LblAdvSpeed
             // 
@@ -845,12 +845,12 @@
             // TrkAdvMovementSpeed
             // 
             TrkAdvMovementSpeed.Location = new Point(6, 19);
-            TrkAdvMovementSpeed.Maximum = 14;
+            TrkAdvMovementSpeed.Maximum = 50;
             TrkAdvMovementSpeed.Minimum = 1;
             TrkAdvMovementSpeed.Name = "TrkAdvMovementSpeed";
             TrkAdvMovementSpeed.Size = new Size(266, 45);
             TrkAdvMovementSpeed.TabIndex = 0;
-            TrkAdvMovementSpeed.Value = 14;
+            TrkAdvMovementSpeed.Value = 25;
             TrkAdvMovementSpeed.Scroll += TrkAdvMovementSpeed_Scroll;
             // 
             // GrpManualMovement

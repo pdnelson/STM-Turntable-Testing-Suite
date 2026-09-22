@@ -41,8 +41,8 @@ namespace StmTestingSuite.Command
             {
                 return "Speed must be greater than 0.";
             } 
-            else if(speed > 14) {
-                return "Speed cannot exceed 14";
+            else if(speed > 50) {
+                return "Speed RPM cannot exceed 50";
             }
 
             if(steps > 1000)
