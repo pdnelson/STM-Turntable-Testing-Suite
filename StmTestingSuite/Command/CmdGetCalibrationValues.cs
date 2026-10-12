@@ -10,14 +10,14 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_CALIBRATION_VALUES;
         public override string Name => "Calibration Values";
-        public override ushort ResponseSize => 16;
+        public override ushort ResponseSize => 17;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             Response? response = null;
             string responseString = "";
 
             // Verify both the start and end key are intact. If they aren't, then throw out the whole response.
-            if (rawData[0] == Constants.AdvancedDataStartKey && rawData[15] == Constants.AdvancedDataEndKey)
+            if (rawData[0] == Constants.AdvancedDataStartKey && rawData[ResponseSize - 1] == Constants.AdvancedDataEndKey)
             {
                 response = new Response(rawData);
                 responseString = ((Response)response).ToString();
@@ -35,28 +35,29 @@ namespace StmTestingSuite.Command
         {
             public Response(byte[] rawData)
             {
-                HorizontalPolarity = (EncoderPolarity)rawData[1];
-                VerticalPolarity = (EncoderPolarity)rawData[2];
+                HorizontalMotorPolarity = (EncoderPolarity)rawData[1];
+                HorizontalPolarity = (EncoderPolarity)rawData[2];
+                VerticalPolarity = (EncoderPolarity)rawData[3];
 
-                byte[] homeBytes = { rawData[3], rawData[4] };
+                byte[] homeBytes = { rawData[4], rawData[5] };
                 Home = BitConverter.ToUInt16(homeBytes);
 
-                byte[] upperLimitBytes = { rawData[5], rawData[6] };
+                byte[] upperLimitBytes = { rawData[6], rawData[7] };
                 UpperLimit = BitConverter.ToUInt16(upperLimitBytes);
 
-                byte[] lowerLimitBytes = { rawData[7], rawData[8] };
+                byte[] lowerLimitBytes = { rawData[8], rawData[9] };
                 LowerLimit = BitConverter.ToUInt16(lowerLimitBytes);
 
-                byte[] in7Bytes = { rawData[9], rawData[10] };
+                byte[] in7Bytes = { rawData[10], rawData[11] };
                 In7 = BitConverter.ToUInt16(in7Bytes);
 
-                byte[] in10Bytes = { rawData[11], rawData[12] };
+                byte[] in10Bytes = { rawData[12], rawData[13] };
                 In10 = BitConverter.ToUInt16(in10Bytes);
 
-                byte[] in12Bytes = { rawData[13], rawData[14] };
+                byte[] in12Bytes = { rawData[14], rawData[15] };
                 In12 = BitConverter.ToUInt16(in12Bytes);
             }
-
+            public EncoderPolarity HorizontalMotorPolarity { get; }
             public EncoderPolarity HorizontalPolarity { get; }
             public EncoderPolarity VerticalPolarity { get; }
             public ushort Home { get; }
@@ -68,7 +69,7 @@ namespace StmTestingSuite.Command
 
             public readonly override string ToString()
             {
-                return $"({HorizontalPolarity}, {VerticalPolarity}, {Home}, {UpperLimit}, {LowerLimit}, {In7}, {In10}, {In12})";
+                return $"({HorizontalMotorPolarity}, {HorizontalPolarity}, {VerticalPolarity}, {Home}, {UpperLimit}, {LowerLimit}, {In7}, {In10}, {In12})";
             }
         }
     }

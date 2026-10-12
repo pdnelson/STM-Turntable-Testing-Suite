@@ -456,6 +456,7 @@ namespace StmTestingSuite
 
                     Utilities.WriteToUiFromThread(this, () =>
                     {
+                        LblHMotorPolarityData.Text = EnumStringConverter.GetString(result.HorizontalMotorPolarity);
                         LblHPolarityData.Text = EnumStringConverter.GetString(result.HorizontalPolarity);
                         LblVPolarityData.Text = EnumStringConverter.GetString(result.VerticalPolarity);
 

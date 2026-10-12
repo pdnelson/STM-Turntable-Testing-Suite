@@ -48,6 +48,7 @@
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
             GrpCalibration = new GroupBox();
+            LblHMotorPolarity = new Label();
             LblZeroAzEncoder = new Label();
             NumZeroAzEncoder = new NumericUpDown();
             BtnZeroAzEncoder = new Button();
@@ -149,6 +150,7 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
+            LblHMotorPolarityData = new Label();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -186,7 +188,7 @@
             TabMain.Location = new Point(12, 35);
             TabMain.Name = "TabMain";
             TabMain.SelectedIndex = 0;
-            TabMain.Size = new Size(769, 563);
+            TabMain.Size = new Size(769, 583);
             TabMain.TabIndex = 4;
             TabMain.Selecting += TabMain_Selecting;
             // 
@@ -198,7 +200,7 @@
             TabSimple.Location = new Point(4, 24);
             TabSimple.Name = "TabSimple";
             TabSimple.Padding = new Padding(3);
-            TabSimple.Size = new Size(761, 535);
+            TabSimple.Size = new Size(761, 555);
             TabSimple.TabIndex = 0;
             TabSimple.Text = "Simple";
             TabSimple.UseVisualStyleBackColor = true;
@@ -223,7 +225,7 @@
             DgvSimpleLog.Name = "DgvSimpleLog";
             DgvSimpleLog.ReadOnly = true;
             DgvSimpleLog.RowHeadersWidth = 51;
-            DgvSimpleLog.Size = new Size(749, 438);
+            DgvSimpleLog.Size = new Size(749, 458);
             DgvSimpleLog.TabIndex = 9;
             // 
             // cmnSimpleTime
@@ -373,13 +375,15 @@
             tabAdvanced.Location = new Point(4, 24);
             tabAdvanced.Name = "tabAdvanced";
             tabAdvanced.Padding = new Padding(3);
-            tabAdvanced.Size = new Size(761, 535);
+            tabAdvanced.Size = new Size(761, 555);
             tabAdvanced.TabIndex = 1;
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
             // 
             // GrpCalibration
             // 
+            GrpCalibration.Controls.Add(LblHMotorPolarityData);
+            GrpCalibration.Controls.Add(LblHMotorPolarity);
             GrpCalibration.Controls.Add(LblZeroAzEncoder);
             GrpCalibration.Controls.Add(NumZeroAzEncoder);
             GrpCalibration.Controls.Add(BtnZeroAzEncoder);
@@ -403,15 +407,24 @@
             GrpCalibration.Controls.Add(LblHPolarity);
             GrpCalibration.Location = new Point(465, 394);
             GrpCalibration.Name = "GrpCalibration";
-            GrpCalibration.Size = new Size(288, 133);
+            GrpCalibration.Size = new Size(288, 155);
             GrpCalibration.TabIndex = 4;
             GrpCalibration.TabStop = false;
             GrpCalibration.Text = "Calibration Values";
             // 
+            // LblHMotorPolarity
+            // 
+            LblHMotorPolarity.AutoSize = true;
+            LblHMotorPolarity.Location = new Point(18, 18);
+            LblHMotorPolarity.Name = "LblHMotorPolarity";
+            LblHMotorPolarity.Size = new Size(100, 15);
+            LblHMotorPolarity.TabIndex = 21;
+            LblHMotorPolarity.Text = "H-Motor Polarity:";
+            // 
             // LblZeroAzEncoder
             // 
             LblZeroAzEncoder.AutoSize = true;
-            LblZeroAzEncoder.Location = new Point(6, 85);
+            LblZeroAzEncoder.Location = new Point(6, 108);
             LblZeroAzEncoder.Name = "LblZeroAzEncoder";
             LblZeroAzEncoder.Size = new Size(98, 15);
             LblZeroAzEncoder.TabIndex = 20;
@@ -419,7 +432,7 @@
             // 
             // NumZeroAzEncoder
             // 
-            NumZeroAzEncoder.Location = new Point(6, 103);
+            NumZeroAzEncoder.Location = new Point(6, 126);
             NumZeroAzEncoder.Maximum = new decimal(new int[] { 16383, 0, 0, 0 });
             NumZeroAzEncoder.Name = "NumZeroAzEncoder";
             NumZeroAzEncoder.Size = new Size(65, 23);
@@ -427,7 +440,7 @@
             // 
             // BtnZeroAzEncoder
             // 
-            BtnZeroAzEncoder.Location = new Point(77, 103);
+            BtnZeroAzEncoder.Location = new Point(77, 126);
             BtnZeroAzEncoder.Name = "BtnZeroAzEncoder";
             BtnZeroAzEncoder.Size = new Size(45, 23);
             BtnZeroAzEncoder.TabIndex = 18;
@@ -437,7 +450,7 @@
             // 
             // BtnCalibrate
             // 
-            BtnCalibrate.Location = new Point(141, 103);
+            BtnCalibrate.Location = new Point(141, 126);
             BtnCalibrate.Name = "BtnCalibrate";
             BtnCalibrate.Size = new Size(69, 23);
             BtnCalibrate.TabIndex = 17;
@@ -447,7 +460,7 @@
             // 
             // BtnCalRefresh
             // 
-            BtnCalRefresh.Location = new Point(213, 103);
+            BtnCalRefresh.Location = new Point(213, 126);
             BtnCalRefresh.Name = "BtnCalRefresh";
             BtnCalRefresh.Size = new Size(69, 23);
             BtnCalRefresh.TabIndex = 16;
@@ -458,34 +471,34 @@
             // LblCal12InData
             // 
             LblCal12InData.AutoSize = true;
-            LblCal12InData.Location = new Point(203, 63);
+            LblCal12InData.Location = new Point(238, 63);
             LblCal12InData.Name = "LblCal12InData";
-            LblCal12InData.Size = new Size(76, 15);
+            LblCal12InData.Size = new Size(25, 15);
             LblCal12InData.TabIndex = 15;
-            LblCal12InData.Text = "[not fetched]";
+            LblCal12InData.Text = "n/a";
             // 
             // LblCal10InData
             // 
             LblCal10InData.AutoSize = true;
-            LblCal10InData.Location = new Point(203, 48);
+            LblCal10InData.Location = new Point(238, 48);
             LblCal10InData.Name = "LblCal10InData";
-            LblCal10InData.Size = new Size(76, 15);
+            LblCal10InData.Size = new Size(25, 15);
             LblCal10InData.TabIndex = 14;
-            LblCal10InData.Text = "[not fetched]";
+            LblCal10InData.Text = "n/a";
             // 
             // LblCal7InData
             // 
             LblCal7InData.AutoSize = true;
-            LblCal7InData.Location = new Point(203, 33);
+            LblCal7InData.Location = new Point(238, 33);
             LblCal7InData.Name = "LblCal7InData";
-            LblCal7InData.Size = new Size(76, 15);
+            LblCal7InData.Size = new Size(25, 15);
             LblCal7InData.TabIndex = 13;
-            LblCal7InData.Text = "[not fetched]";
+            LblCal7InData.Text = "n/a";
             // 
             // LblCal12In
             // 
             LblCal12In.AutoSize = true;
-            LblCal12In.Location = new Point(179, 63);
+            LblCal12In.Location = new Point(214, 63);
             LblCal12In.Name = "LblCal12In";
             LblCal12In.Size = new Size(27, 15);
             LblCal12In.TabIndex = 12;
@@ -494,7 +507,7 @@
             // LblCal10In
             // 
             LblCal10In.AutoSize = true;
-            LblCal10In.Location = new Point(179, 48);
+            LblCal10In.Location = new Point(214, 48);
             LblCal10In.Name = "LblCal10In";
             LblCal10In.Size = new Size(27, 15);
             LblCal10In.TabIndex = 11;
@@ -503,7 +516,7 @@
             // LblCal7In
             // 
             LblCal7In.AutoSize = true;
-            LblCal7In.Location = new Point(185, 33);
+            LblCal7In.Location = new Point(220, 33);
             LblCal7In.Name = "LblCal7In";
             LblCal7In.Size = new Size(21, 15);
             LblCal7In.TabIndex = 10;
@@ -512,34 +525,34 @@
             // LblHomeData
             // 
             LblHomeData.AutoSize = true;
-            LblHomeData.Location = new Point(203, 18);
+            LblHomeData.Location = new Point(238, 18);
             LblHomeData.Name = "LblHomeData";
-            LblHomeData.Size = new Size(76, 15);
+            LblHomeData.Size = new Size(25, 15);
             LblHomeData.TabIndex = 9;
-            LblHomeData.Text = "[not fetched]";
+            LblHomeData.Text = "n/a";
             // 
             // LblLowerLimitData
             // 
             LblLowerLimitData.AutoSize = true;
-            LblLowerLimitData.Location = new Point(84, 63);
+            LblLowerLimitData.Location = new Point(120, 78);
             LblLowerLimitData.Name = "LblLowerLimitData";
-            LblLowerLimitData.Size = new Size(76, 15);
+            LblLowerLimitData.Size = new Size(25, 15);
             LblLowerLimitData.TabIndex = 8;
-            LblLowerLimitData.Text = "[not fetched]";
+            LblLowerLimitData.Text = "n/a";
             // 
             // LblUpperLimitData
             // 
             LblUpperLimitData.AutoSize = true;
-            LblUpperLimitData.Location = new Point(84, 48);
+            LblUpperLimitData.Location = new Point(120, 63);
             LblUpperLimitData.Name = "LblUpperLimitData";
-            LblUpperLimitData.Size = new Size(76, 15);
+            LblUpperLimitData.Size = new Size(25, 15);
             LblUpperLimitData.TabIndex = 7;
-            LblUpperLimitData.Text = "[not fetched]";
+            LblUpperLimitData.Text = "n/a";
             // 
             // LblHome
             // 
             LblHome.AutoSize = true;
-            LblHome.Location = new Point(163, 18);
+            LblHome.Location = new Point(198, 18);
             LblHome.Name = "LblHome";
             LblHome.Size = new Size(43, 15);
             LblHome.TabIndex = 6;
@@ -548,7 +561,7 @@
             // LblLowerLimit
             // 
             LblLowerLimit.AutoSize = true;
-            LblLowerLimit.Location = new Point(10, 63);
+            LblLowerLimit.Location = new Point(46, 78);
             LblLowerLimit.Name = "LblLowerLimit";
             LblLowerLimit.Size = new Size(72, 15);
             LblLowerLimit.TabIndex = 5;
@@ -557,7 +570,7 @@
             // LblUpperLimit
             // 
             LblUpperLimit.AutoSize = true;
-            LblUpperLimit.Location = new Point(10, 48);
+            LblUpperLimit.Location = new Point(46, 63);
             LblUpperLimit.Name = "LblUpperLimit";
             LblUpperLimit.Size = new Size(72, 15);
             LblUpperLimit.TabIndex = 4;
@@ -566,16 +579,16 @@
             // LblVPolarityData
             // 
             LblVPolarityData.AutoSize = true;
-            LblVPolarityData.Location = new Point(84, 33);
+            LblVPolarityData.Location = new Point(120, 48);
             LblVPolarityData.Name = "LblVPolarityData";
-            LblVPolarityData.Size = new Size(76, 15);
+            LblVPolarityData.Size = new Size(25, 15);
             LblVPolarityData.TabIndex = 3;
-            LblVPolarityData.Text = "[not fetched]";
+            LblVPolarityData.Text = "n/a";
             // 
             // LblVPolarity
             // 
             LblVPolarity.AutoSize = true;
-            LblVPolarity.Location = new Point(20, 33);
+            LblVPolarity.Location = new Point(56, 48);
             LblVPolarity.Name = "LblVPolarity";
             LblVPolarity.Size = new Size(62, 15);
             LblVPolarity.TabIndex = 2;
@@ -584,16 +597,16 @@
             // LblHPolarityData
             // 
             LblHPolarityData.AutoSize = true;
-            LblHPolarityData.Location = new Point(84, 18);
+            LblHPolarityData.Location = new Point(120, 33);
             LblHPolarityData.Name = "LblHPolarityData";
-            LblHPolarityData.Size = new Size(76, 15);
+            LblHPolarityData.Size = new Size(25, 15);
             LblHPolarityData.TabIndex = 1;
-            LblHPolarityData.Text = "[not fetched]";
+            LblHPolarityData.Text = "n/a";
             // 
             // LblHPolarity
             // 
             LblHPolarity.AutoSize = true;
-            LblHPolarity.Location = new Point(18, 18);
+            LblHPolarity.Location = new Point(54, 33);
             LblHPolarity.Name = "LblHPolarity";
             LblHPolarity.Size = new Size(64, 15);
             LblHPolarity.TabIndex = 0;
@@ -1356,7 +1369,7 @@
             tabGraphical.Controls.Add(LblTodo2);
             tabGraphical.Location = new Point(4, 24);
             tabGraphical.Name = "tabGraphical";
-            tabGraphical.Size = new Size(761, 535);
+            tabGraphical.Size = new Size(761, 555);
             tabGraphical.TabIndex = 2;
             tabGraphical.Text = "Graphical";
             tabGraphical.UseVisualStyleBackColor = true;
@@ -1418,11 +1431,20 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
+            // LblHMotorPolarityData
+            // 
+            LblHMotorPolarityData.AutoSize = true;
+            LblHMotorPolarityData.Location = new Point(120, 18);
+            LblHMotorPolarityData.Name = "LblHMotorPolarityData";
+            LblHMotorPolarityData.Size = new Size(25, 15);
+            LblHMotorPolarityData.TabIndex = 22;
+            LblHMotorPolarityData.Text = "n/a";
+            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(793, 611);
+            ClientSize = new Size(793, 630);
             Controls.Add(BtnRefreshSerialPorts);
             Controls.Add(BtnConnect);
             Controls.Add(TabMain);
@@ -1599,5 +1621,7 @@
         private NumericUpDown NumZeroAzEncoder;
         private Button BtnZeroAzEncoder;
         private Label LblZeroAzEncoder;
+        private Label LblHMotorPolarity;
+        private Label LblHMotorPolarityData;
     }
 }
