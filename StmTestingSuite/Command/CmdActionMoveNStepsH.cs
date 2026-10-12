@@ -45,13 +45,13 @@ namespace StmTestingSuite.Command
                 return "Speed RPM cannot exceed 50";
             }
 
-            if(steps > 1000)
+            if(steps > Int16.MaxValue)
             {
-                return "Cannot exceed 1000 steps.";
+                return $"Cannot exceed {Int16.MaxValue} steps.";
             }
-            else if(steps < -1000)
+            else if(steps < Int16.MinValue)
             {
-                return "Steps cannot be below -1000.";
+                return $"Steps cannot be below {Int16.MinValue}.";
             }
 
             byte[] stepBytes = BitConverter.GetBytes(steps);

@@ -780,8 +780,8 @@
             // NumMoveNStepsInput
             // 
             NumMoveNStepsInput.Location = new Point(6, 103);
-            NumMoveNStepsInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            NumMoveNStepsInput.Minimum = new decimal(new int[] { 1000, 0, 0, int.MinValue });
+            NumMoveNStepsInput.Maximum = new decimal(new int[] { 16000, 0, 0, 0 });
+            NumMoveNStepsInput.Minimum = new decimal(new int[] { 16000, 0, 0, int.MinValue });
             NumMoveNStepsInput.Name = "NumMoveNStepsInput";
             NumMoveNStepsInput.Size = new Size(72, 23);
             NumMoveNStepsInput.TabIndex = 9;

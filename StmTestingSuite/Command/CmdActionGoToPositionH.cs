@@ -63,11 +63,11 @@ namespace StmTestingSuite.Command
 
             if (position > 16384)
             {
-                return "Cannot exceed 1000 steps.";
+                return "Cannot exceed position 16384.";
             }
             else if (position < 0)
             {
-                return "Steps cannot be below -1000.";
+                return "Steps cannot be below position 0.";
             }
 
             byte[] stepBytes = BitConverter.GetBytes(position);
