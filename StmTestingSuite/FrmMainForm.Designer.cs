@@ -48,6 +48,7 @@
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
             GrpCalibration = new GroupBox();
+            LblHMotorPolarityData = new Label();
             LblHMotorPolarity = new Label();
             LblZeroAzEncoder = new Label();
             NumZeroAzEncoder = new NumericUpDown();
@@ -150,7 +151,7 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            LblHMotorPolarityData = new Label();
+            BtnHomeClutch = new Button();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -411,6 +412,15 @@
             GrpCalibration.TabIndex = 4;
             GrpCalibration.TabStop = false;
             GrpCalibration.Text = "Calibration Values";
+            // 
+            // LblHMotorPolarityData
+            // 
+            LblHMotorPolarityData.AutoSize = true;
+            LblHMotorPolarityData.Location = new Point(120, 18);
+            LblHMotorPolarityData.Name = "LblHMotorPolarityData";
+            LblHMotorPolarityData.Size = new Size(25, 15);
+            LblHMotorPolarityData.TabIndex = 22;
+            LblHMotorPolarityData.Text = "n/a";
             // 
             // LblHMotorPolarity
             // 
@@ -868,6 +878,7 @@
             // 
             // GrpManualMovement
             // 
+            GrpManualMovement.Controls.Add(BtnHomeClutch);
             GrpManualMovement.Controls.Add(BtnStepCounterClockwise);
             GrpManualMovement.Controls.Add(BtnStepClockwise);
             GrpManualMovement.Controls.Add(BtnToggleClutch);
@@ -900,9 +911,9 @@
             // 
             // BtnToggleClutch
             // 
-            BtnToggleClutch.Location = new Point(6, 19);
+            BtnToggleClutch.Location = new Point(6, 49);
             BtnToggleClutch.Name = "BtnToggleClutch";
-            BtnToggleClutch.Size = new Size(160, 58);
+            BtnToggleClutch.Size = new Size(160, 28);
             BtnToggleClutch.TabIndex = 0;
             BtnToggleClutch.Text = "Toggle Clutch";
             BtnToggleClutch.UseVisualStyleBackColor = true;
@@ -1431,14 +1442,15 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // LblHMotorPolarityData
+            // BtnHomeClutch
             // 
-            LblHMotorPolarityData.AutoSize = true;
-            LblHMotorPolarityData.Location = new Point(120, 18);
-            LblHMotorPolarityData.Name = "LblHMotorPolarityData";
-            LblHMotorPolarityData.Size = new Size(25, 15);
-            LblHMotorPolarityData.TabIndex = 22;
-            LblHMotorPolarityData.Text = "n/a";
+            BtnHomeClutch.Location = new Point(6, 19);
+            BtnHomeClutch.Name = "BtnHomeClutch";
+            BtnHomeClutch.Size = new Size(160, 28);
+            BtnHomeClutch.TabIndex = 3;
+            BtnHomeClutch.Text = "Home Clutch";
+            BtnHomeClutch.UseVisualStyleBackColor = true;
+            BtnHomeClutch.Click += BtnHomeClutch_Click;
             // 
             // FrmMainForm
             // 
@@ -1623,5 +1635,6 @@
         private Label LblZeroAzEncoder;
         private Label LblHMotorPolarity;
         private Label LblHMotorPolarityData;
+        private Button BtnHomeClutch;
     }
 }

@@ -14,6 +14,7 @@
         ACTION_CALIBRATE = 7,
         ACTION_GO_TO_POSITION_V = 8,
         ACTION_MOVE_N_STEPS_V = 9,
+        ACTION_HOME_CLUTCH = 10,
 
         // Set commands
         SET_SPEED = 31,

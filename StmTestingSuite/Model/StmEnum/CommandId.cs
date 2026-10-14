@@ -14,6 +14,8 @@
         STEP_H_MOTOR = 9,
         GO_TO_POSITION_H = 10,
         GO_TO_POSITION_V = 11,
-        MOVE_N_STEPS_V = 12
+        MOVE_N_STEPS_V = 12,
+        HOME_CLUTCH = 13,
+        SET_CLUTCH = 14
     }
 }

@@ -194,6 +194,7 @@ namespace StmTestingSuite
                 new CmdActionPauseUnpause(Conn, Logger),
                 new CmdActionStepHorizontally(Conn, Logger),
                 new CmdActionToggleClutch(Conn, Logger),
+                new CmdActionHomeClutch(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -483,6 +484,11 @@ namespace StmTestingSuite
             command.UpdateInputData(Decimal.ToUInt16(value));
 
             ExecuteSimpleCommand(command);
+        }
+
+        private void BtnHomeClutch_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdActionToggleClutch(Conn, Logger));
         }
     }
 }

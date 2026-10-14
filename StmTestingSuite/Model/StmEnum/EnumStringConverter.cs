@@ -11,8 +11,7 @@
                 CommandStatus.LIFT_STALLED_MOVING_UP => "Lift error: Stalled moving up",
                 CommandStatus.LIFT_STALLED_MOVING_DOWN => "Lift error: Stalled moving down",
                 CommandStatus.NOT_LIFTED => "Lift error: Not lifted at the end of \"Pause\" routine",
-                CommandStatus.CLUTCH_FAILED_TO_ENGAGE => "Azimuth clutch failed to engage",
-                CommandStatus.CLUTCH_FAILED_TO_DISENGAGE => "Azimuth clutch failed to disengage",
+                CommandStatus.CLUTCH_FAILED_TO_HOME => "Azimuth clutch failed to home",
                 CommandStatus.FAILED_TO_SET_VERTICAL_POLARITY => "Failed to set vertical polarity",
                 CommandStatus.FAILED_TO_SET_HORIZONTAL_POLARITY => "Failed to set horizontal polarity",
                 _ => "Invalid Data Received"
@@ -36,6 +35,8 @@
                 CommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
                 CommandId.GO_TO_POSITION_V => "Go To Position (Vertical)",
                 CommandId.MOVE_N_STEPS_V => "Move n Steps (Vertical)",
+                CommandId.HOME_CLUTCH => "Home Clutch",
+                CommandId.SET_CLUTCH => "Set Clutch",
                 _ => "Invalid Data Received"
             };
         }
@@ -45,8 +46,7 @@
             return subCommandId switch
             {
                 SubCommandId.NONE => "Idle",
-                SubCommandId.DISENGAGE_AZ_CLUTCH => "Disengage Azimuth Clutch",
-                SubCommandId.ENGAGE_AZ_CLUTCH => "Engage Azimuth Clutch",
+                SubCommandId.SET_AZ_CLUTCH => "Set Azimuth Clutch",
                 SubCommandId.MOVE_N_STEPS_HORIZONTALLY => "Move n Steps (Horizontal)",
                 SubCommandId.ERROR => "Error",
                 SubCommandId.GO_TO_POSITION_H => "Go To Position (Horizontal)",
@@ -63,6 +63,8 @@
                 SubCommandId.CALIBRATE_HOME_HEIGHT => "Calibrate Home Height",
                 SubCommandId.CALIBRATE_VERTICAL_BOUNDS => "Calibrate Vertical Bounds",
                 SubCommandId.NORMALIZE_AZ_ENCODER => "Normalize Azimuth Encoder",
+                SubCommandId.SET_H_MOTOR_POLARITY => "Set Horizontal Motor Polarity",
+                SubCommandId.SET_POLL_SPEED => "Set Horizontal Encoder Poll Speed",
                 _ => "Invalid Data Received"
             };
         }

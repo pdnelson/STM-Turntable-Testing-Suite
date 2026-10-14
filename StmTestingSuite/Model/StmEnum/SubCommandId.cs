@@ -4,8 +4,7 @@
     {
         NONE = 0,
         ERROR = 1,
-        DISENGAGE_AZ_CLUTCH = 2,
-        ENGAGE_AZ_CLUTCH = 3,
+        SET_AZ_CLUTCH = 2,
         MOVE_N_STEPS_HORIZONTALLY = 6,
         GO_TO_POSITION_H = 7,
         DELAY = 8,
@@ -20,6 +19,8 @@
         CALIBRATE_PLATTER_HEIGHT = 17,
         CALIBRATE_HOME_HEIGHT = 18,
         CALIBRATE_VERTICAL_BOUNDS = 19,
-        NORMALIZE_AZ_ENCODER = 20
+        NORMALIZE_AZ_ENCODER = 20,
+        SET_H_MOTOR_POLARITY = 21,
+        SET_POLL_SPEED = 22
     }
 }
