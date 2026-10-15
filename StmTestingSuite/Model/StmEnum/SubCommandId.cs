@@ -21,6 +21,9 @@
         CALIBRATE_VERTICAL_BOUNDS = 19,
         NORMALIZE_AZ_ENCODER = 20,
         SET_H_MOTOR_POLARITY = 21,
-        SET_POLL_SPEED = 22
+        SET_POLL_SPEED = 22,
+        MOVE_CLUTCH_TO_HOME = 23,
+        MOVE_CLUTCH_TO_LIMIT = 24,
+        H_ERROR_CORRECT = 25
     }
 }

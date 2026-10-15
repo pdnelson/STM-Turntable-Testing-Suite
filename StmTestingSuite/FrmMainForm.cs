@@ -488,7 +488,7 @@ namespace StmTestingSuite
 
         private void BtnHomeClutch_Click(object sender, EventArgs e)
         {
-            ExecuteSimpleCommand(new CmdActionToggleClutch(Conn, Logger));
+            ExecuteSimpleCommand(new CmdActionHomeClutch(Conn, Logger));
         }
     }
 }
