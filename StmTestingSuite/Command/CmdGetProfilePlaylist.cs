@@ -7,7 +7,7 @@ namespace StmTestingSuite.Command
 {
     internal class CmdGetProfilePlaylist(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
-        private const ushort KnownDataSize = 5;
+        private const ushort KnownDataSize = 7;
 
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_PROFILE_PLAYLIST;
@@ -67,15 +67,19 @@ namespace StmTestingSuite.Command
                 {
                     Playlist[i - playlistStart] = rawData[i];
                 }
+
+                byte[] normHorizontalBytes = { rawData[4], rawData[5] };
+                CurrentPosition = BitConverter.ToUInt16(normHorizontalBytes);
             }
 
+            public ushort CurrentPosition { get; }
             public short CurrentPlaylistIndex { get; }
             public ushort[] NormalizedProfile { get; }
             public short[] Playlist { get; }
 
             public readonly override string ToString()
             {
-                return $"{CurrentPlaylistIndex}, {{ {string.Join(", ", NormalizedProfile)} }}, {{ {string.Join(", ", Playlist)} }}";
+                return $"{CurrentPosition}, {CurrentPlaylistIndex}, {{ {string.Join(", ", NormalizedProfile)} }}, {{ {string.Join(", ", Playlist)} }}";
             }
         }
     }
