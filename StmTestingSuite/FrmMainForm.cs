@@ -490,5 +490,10 @@ namespace StmTestingSuite
         {
             ExecuteSimpleCommand(new CmdActionHomeClutch(Conn, Logger));
         }
+
+        private void BtnSkipForward_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

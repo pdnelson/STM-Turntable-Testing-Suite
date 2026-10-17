@@ -97,6 +97,7 @@
             LblAdvSpeed = new Label();
             TrkAdvMovementSpeed = new TrackBar();
             GrpManualMovement = new GroupBox();
+            BtnHomeClutch = new Button();
             BtnStepCounterClockwise = new Button();
             BtnStepClockwise = new Button();
             BtnToggleClutch = new Button();
@@ -144,14 +145,42 @@
             LblActualSpeed = new Label();
             LblTargetSpeed = new Label();
             LblSpeedSetting = new Label();
-            tabGraphical = new TabPage();
-            LblTodo2 = new Label();
+            tabTrackSelect = new TabPage();
+            GrpTsNowPlaying = new GroupBox();
+            BtnSkipForward = new Button();
+            BtnTsSkipBackwards = new Button();
+            PrgTsPlaylistProgress = new ProgressBar();
+            LblTsPlaylistProgress = new Label();
+            PrgTsNowPlaying = new ProgressBar();
+            LblTsCurrentTrack = new Label();
+            GrpTsIr = new GroupBox();
+            lblTsComingSoon = new Label();
+            GrpPlaylist = new GroupBox();
+            DgvPlaylist = new DataGridView();
+            GrpTsProfile = new GroupBox();
+            BtnTsClearProfile = new Button();
+            BtnTsAddAllToPlaylist = new Button();
+            BtnTsExportProfile = new Button();
+            LblTsProfileWarning = new Label();
+            BtnTsLoadProfile = new Button();
+            BtnTsAddTrack = new Button();
+            DgvProfile = new DataGridView();
+            CmnTsPosition = new DataGridViewTextBoxColumn();
+            CmnTrackNumber = new DataGridViewTextBoxColumn();
+            CmnTsName = new DataGridViewTextBoxColumn();
+            CmnTsAddToPlaylist = new DataGridViewButtonColumn();
+            CmnTsRemove = new DataGridViewButtonColumn();
             CboSerialOptions = new ComboBox();
             LblSerialOptions = new Label();
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            BtnHomeClutch = new Button();
+            BtnClearPlaylist = new Button();
+            CmnTsIndex = new DataGridViewTextBoxColumn();
+            CmnTsPlaylistTrackNumber = new DataGridViewTextBoxColumn();
+            CmnTsPlaylistName = new DataGridViewTextBoxColumn();
+            CmnRemove = new DataGridViewButtonColumn();
+            button1 = new Button();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -178,14 +207,20 @@
             GrpSizeGroup.SuspendLayout();
             GrpSpeedGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSpeed).BeginInit();
-            tabGraphical.SuspendLayout();
+            tabTrackSelect.SuspendLayout();
+            GrpTsNowPlaying.SuspendLayout();
+            GrpTsIr.SuspendLayout();
+            GrpPlaylist.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvPlaylist).BeginInit();
+            GrpTsProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvProfile).BeginInit();
             SuspendLayout();
             // 
             // TabMain
             // 
             TabMain.Controls.Add(TabSimple);
             TabMain.Controls.Add(tabAdvanced);
-            TabMain.Controls.Add(tabGraphical);
+            TabMain.Controls.Add(tabTrackSelect);
             TabMain.Location = new Point(12, 35);
             TabMain.Name = "TabMain";
             TabMain.SelectedIndex = 0;
@@ -889,6 +924,16 @@
             GrpManualMovement.TabStop = false;
             GrpManualMovement.Text = "Manual Azimuth Movement";
             // 
+            // BtnHomeClutch
+            // 
+            BtnHomeClutch.Location = new Point(6, 19);
+            BtnHomeClutch.Name = "BtnHomeClutch";
+            BtnHomeClutch.Size = new Size(160, 28);
+            BtnHomeClutch.TabIndex = 3;
+            BtnHomeClutch.Text = "Home Clutch";
+            BtnHomeClutch.UseVisualStyleBackColor = true;
+            BtnHomeClutch.Click += BtnHomeClutch_Click;
+            // 
             // BtnStepCounterClockwise
             // 
             BtnStepCounterClockwise.Location = new Point(97, 79);
@@ -1375,24 +1420,237 @@
             LblSpeedSetting.TabIndex = 0;
             LblSpeedSetting.Text = "Speed Setting:";
             // 
-            // tabGraphical
+            // tabTrackSelect
             // 
-            tabGraphical.Controls.Add(LblTodo2);
-            tabGraphical.Location = new Point(4, 24);
-            tabGraphical.Name = "tabGraphical";
-            tabGraphical.Size = new Size(761, 555);
-            tabGraphical.TabIndex = 2;
-            tabGraphical.Text = "Graphical";
-            tabGraphical.UseVisualStyleBackColor = true;
+            tabTrackSelect.Controls.Add(GrpTsNowPlaying);
+            tabTrackSelect.Controls.Add(GrpTsIr);
+            tabTrackSelect.Controls.Add(GrpPlaylist);
+            tabTrackSelect.Controls.Add(GrpTsProfile);
+            tabTrackSelect.Location = new Point(4, 24);
+            tabTrackSelect.Name = "tabTrackSelect";
+            tabTrackSelect.Size = new Size(761, 555);
+            tabTrackSelect.TabIndex = 2;
+            tabTrackSelect.Text = "Track Select";
+            tabTrackSelect.UseVisualStyleBackColor = true;
             // 
-            // LblTodo2
+            // GrpTsNowPlaying
             // 
-            LblTodo2.AutoSize = true;
-            LblTodo2.Location = new Point(305, 223);
-            LblTodo2.Name = "LblTodo2";
-            LblTodo2.Size = new Size(123, 15);
-            LblTodo2.TabIndex = 0;
-            LblTodo2.Text = "Not yet implemented!";
+            GrpTsNowPlaying.Controls.Add(BtnSkipForward);
+            GrpTsNowPlaying.Controls.Add(BtnTsSkipBackwards);
+            GrpTsNowPlaying.Controls.Add(PrgTsPlaylistProgress);
+            GrpTsNowPlaying.Controls.Add(LblTsPlaylistProgress);
+            GrpTsNowPlaying.Controls.Add(PrgTsNowPlaying);
+            GrpTsNowPlaying.Controls.Add(LblTsCurrentTrack);
+            GrpTsNowPlaying.Location = new Point(390, 232);
+            GrpTsNowPlaying.Name = "GrpTsNowPlaying";
+            GrpTsNowPlaying.Size = new Size(362, 169);
+            GrpTsNowPlaying.TabIndex = 4;
+            GrpTsNowPlaying.TabStop = false;
+            GrpTsNowPlaying.Text = "Control Panel";
+            // 
+            // BtnSkipForward
+            // 
+            BtnSkipForward.Location = new Point(264, 140);
+            BtnSkipForward.Name = "BtnSkipForward";
+            BtnSkipForward.Size = new Size(92, 23);
+            BtnSkipForward.TabIndex = 5;
+            BtnSkipForward.Text = "Skip Forward";
+            BtnSkipForward.UseVisualStyleBackColor = true;
+            BtnSkipForward.Click += BtnSkipForward_Click;
+            // 
+            // BtnTsSkipBackwards
+            // 
+            BtnTsSkipBackwards.Location = new Point(166, 140);
+            BtnTsSkipBackwards.Name = "BtnTsSkipBackwards";
+            BtnTsSkipBackwards.Size = new Size(92, 23);
+            BtnTsSkipBackwards.TabIndex = 4;
+            BtnTsSkipBackwards.Text = "Skip Backward";
+            BtnTsSkipBackwards.UseVisualStyleBackColor = true;
+            // 
+            // PrgTsPlaylistProgress
+            // 
+            PrgTsPlaylistProgress.Location = new Point(6, 81);
+            PrgTsPlaylistProgress.Name = "PrgTsPlaylistProgress";
+            PrgTsPlaylistProgress.Size = new Size(350, 23);
+            PrgTsPlaylistProgress.TabIndex = 3;
+            // 
+            // LblTsPlaylistProgress
+            // 
+            LblTsPlaylistProgress.AutoSize = true;
+            LblTsPlaylistProgress.Location = new Point(6, 63);
+            LblTsPlaylistProgress.Name = "LblTsPlaylistProgress";
+            LblTsPlaylistProgress.Size = new Size(44, 15);
+            LblTsPlaylistProgress.TabIndex = 2;
+            LblTsPlaylistProgress.Text = "Playlist";
+            // 
+            // PrgTsNowPlaying
+            // 
+            PrgTsNowPlaying.Location = new Point(6, 37);
+            PrgTsNowPlaying.Name = "PrgTsNowPlaying";
+            PrgTsNowPlaying.Size = new Size(350, 23);
+            PrgTsNowPlaying.TabIndex = 1;
+            // 
+            // LblTsCurrentTrack
+            // 
+            LblTsCurrentTrack.AutoSize = true;
+            LblTsCurrentTrack.Location = new Point(6, 19);
+            LblTsCurrentTrack.Name = "LblTsCurrentTrack";
+            LblTsCurrentTrack.Size = new Size(85, 15);
+            LblTsCurrentTrack.TabIndex = 0;
+            LblTsCurrentTrack.Text = "- Not Playing -";
+            // 
+            // GrpTsIr
+            // 
+            GrpTsIr.Controls.Add(lblTsComingSoon);
+            GrpTsIr.Location = new Point(-4, 407);
+            GrpTsIr.Name = "GrpTsIr";
+            GrpTsIr.Size = new Size(756, 145);
+            GrpTsIr.TabIndex = 3;
+            GrpTsIr.TabStop = false;
+            GrpTsIr.Text = "IR Sensor";
+            // 
+            // lblTsComingSoon
+            // 
+            lblTsComingSoon.AutoSize = true;
+            lblTsComingSoon.Location = new Point(210, 113);
+            lblTsComingSoon.Name = "lblTsComingSoon";
+            lblTsComingSoon.Size = new Size(82, 15);
+            lblTsComingSoon.TabIndex = 0;
+            lblTsComingSoon.Text = "Coming soon!";
+            // 
+            // GrpPlaylist
+            // 
+            GrpPlaylist.Controls.Add(button1);
+            GrpPlaylist.Controls.Add(BtnClearPlaylist);
+            GrpPlaylist.Controls.Add(DgvPlaylist);
+            GrpPlaylist.Location = new Point(3, 232);
+            GrpPlaylist.Name = "GrpPlaylist";
+            GrpPlaylist.Size = new Size(381, 169);
+            GrpPlaylist.TabIndex = 2;
+            GrpPlaylist.TabStop = false;
+            GrpPlaylist.Text = "Playlist";
+            // 
+            // DgvPlaylist
+            // 
+            DgvPlaylist.AllowUserToOrderColumns = true;
+            DgvPlaylist.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvPlaylist.Columns.AddRange(new DataGridViewColumn[] { CmnTsIndex, CmnTsPlaylistTrackNumber, CmnTsPlaylistName, CmnRemove });
+            DgvPlaylist.Location = new Point(3, 19);
+            DgvPlaylist.Name = "DgvPlaylist";
+            DgvPlaylist.ReadOnly = true;
+            DgvPlaylist.Size = new Size(370, 118);
+            DgvPlaylist.TabIndex = 0;
+            // 
+            // GrpTsProfile
+            // 
+            GrpTsProfile.Controls.Add(BtnTsClearProfile);
+            GrpTsProfile.Controls.Add(BtnTsAddAllToPlaylist);
+            GrpTsProfile.Controls.Add(BtnTsExportProfile);
+            GrpTsProfile.Controls.Add(LblTsProfileWarning);
+            GrpTsProfile.Controls.Add(BtnTsLoadProfile);
+            GrpTsProfile.Controls.Add(BtnTsAddTrack);
+            GrpTsProfile.Controls.Add(DgvProfile);
+            GrpTsProfile.Location = new Point(3, 3);
+            GrpTsProfile.Name = "GrpTsProfile";
+            GrpTsProfile.Size = new Size(755, 223);
+            GrpTsProfile.TabIndex = 1;
+            GrpTsProfile.TabStop = false;
+            GrpTsProfile.Text = "Record Profile";
+            // 
+            // BtnTsClearProfile
+            // 
+            BtnTsClearProfile.Location = new Point(662, 191);
+            BtnTsClearProfile.Name = "BtnTsClearProfile";
+            BtnTsClearProfile.Size = new Size(87, 25);
+            BtnTsClearProfile.TabIndex = 6;
+            BtnTsClearProfile.Text = "Clear Profile";
+            BtnTsClearProfile.UseVisualStyleBackColor = true;
+            // 
+            // BtnTsAddAllToPlaylist
+            // 
+            BtnTsAddAllToPlaylist.Location = new Point(544, 191);
+            BtnTsAddAllToPlaylist.Name = "BtnTsAddAllToPlaylist";
+            BtnTsAddAllToPlaylist.Size = new Size(112, 25);
+            BtnTsAddAllToPlaylist.TabIndex = 5;
+            BtnTsAddAllToPlaylist.Text = "Add All to Playlist";
+            BtnTsAddAllToPlaylist.UseVisualStyleBackColor = true;
+            // 
+            // BtnTsExportProfile
+            // 
+            BtnTsExportProfile.Location = new Point(242, 191);
+            BtnTsExportProfile.Name = "BtnTsExportProfile";
+            BtnTsExportProfile.Size = new Size(92, 25);
+            BtnTsExportProfile.TabIndex = 4;
+            BtnTsExportProfile.Text = "Export Profile";
+            BtnTsExportProfile.UseVisualStyleBackColor = true;
+            // 
+            // LblTsProfileWarning
+            // 
+            LblTsProfileWarning.AutoSize = true;
+            LblTsProfileWarning.Location = new Point(6, 19);
+            LblTsProfileWarning.Name = "LblTsProfileWarning";
+            LblTsProfileWarning.Size = new Size(708, 15);
+            LblTsProfileWarning.TabIndex = 3;
+            LblTsProfileWarning.Text = "Warning: Adding or removing tracks to the record profile will clear the playlist. All changes will automatically be sent to the turntable.";
+            // 
+            // BtnTsLoadProfile
+            // 
+            BtnTsLoadProfile.Location = new Point(144, 191);
+            BtnTsLoadProfile.Name = "BtnTsLoadProfile";
+            BtnTsLoadProfile.Size = new Size(92, 25);
+            BtnTsLoadProfile.TabIndex = 2;
+            BtnTsLoadProfile.Text = "Load Profile";
+            BtnTsLoadProfile.UseVisualStyleBackColor = true;
+            // 
+            // BtnTsAddTrack
+            // 
+            BtnTsAddTrack.Location = new Point(6, 191);
+            BtnTsAddTrack.Name = "BtnTsAddTrack";
+            BtnTsAddTrack.Size = new Size(132, 25);
+            BtnTsAddTrack.TabIndex = 1;
+            BtnTsAddTrack.Text = "Add Track At Position";
+            BtnTsAddTrack.UseVisualStyleBackColor = true;
+            // 
+            // DgvProfile
+            // 
+            DgvProfile.AllowUserToAddRows = false;
+            DgvProfile.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvProfile.Columns.AddRange(new DataGridViewColumn[] { CmnTsPosition, CmnTrackNumber, CmnTsName, CmnTsAddToPlaylist, CmnTsRemove });
+            DgvProfile.Location = new Point(6, 37);
+            DgvProfile.Name = "DgvProfile";
+            DgvProfile.Size = new Size(743, 148);
+            DgvProfile.TabIndex = 0;
+            // 
+            // CmnTsPosition
+            // 
+            CmnTsPosition.HeaderText = "Position";
+            CmnTsPosition.Name = "CmnTsPosition";
+            CmnTsPosition.Width = 65;
+            // 
+            // CmnTrackNumber
+            // 
+            CmnTrackNumber.HeaderText = "Track #";
+            CmnTrackNumber.Name = "CmnTrackNumber";
+            CmnTrackNumber.Width = 70;
+            // 
+            // CmnTsName
+            // 
+            CmnTsName.HeaderText = "Name";
+            CmnTsName.Name = "CmnTsName";
+            CmnTsName.Width = 400;
+            // 
+            // CmnTsAddToPlaylist
+            // 
+            CmnTsAddToPlaylist.HeaderText = "Add to Playlist";
+            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
+            CmnTsAddToPlaylist.Text = "Add to Playlist";
+            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
+            // 
+            // CmnTsRemove
+            // 
+            CmnTsRemove.HeaderText = "Remove";
+            CmnTsRemove.Name = "CmnTsRemove";
+            CmnTsRemove.Width = 60;
             // 
             // CboSerialOptions
             // 
@@ -1442,15 +1700,52 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // BtnHomeClutch
+            // BtnClearPlaylist
             // 
-            BtnHomeClutch.Location = new Point(6, 19);
-            BtnHomeClutch.Name = "BtnHomeClutch";
-            BtnHomeClutch.Size = new Size(160, 28);
-            BtnHomeClutch.TabIndex = 3;
-            BtnHomeClutch.Text = "Home Clutch";
-            BtnHomeClutch.UseVisualStyleBackColor = true;
-            BtnHomeClutch.Click += BtnHomeClutch_Click;
+            BtnClearPlaylist.Location = new Point(290, 140);
+            BtnClearPlaylist.Name = "BtnClearPlaylist";
+            BtnClearPlaylist.Size = new Size(85, 23);
+            BtnClearPlaylist.TabIndex = 6;
+            BtnClearPlaylist.Text = "Clear Playlist";
+            BtnClearPlaylist.UseVisualStyleBackColor = true;
+            // 
+            // CmnTsIndex
+            // 
+            CmnTsIndex.HeaderText = "Index";
+            CmnTsIndex.Name = "CmnTsIndex";
+            CmnTsIndex.ReadOnly = true;
+            CmnTsIndex.Width = 50;
+            // 
+            // CmnTsPlaylistTrackNumber
+            // 
+            CmnTsPlaylistTrackNumber.HeaderText = "Track #";
+            CmnTsPlaylistTrackNumber.Name = "CmnTsPlaylistTrackNumber";
+            CmnTsPlaylistTrackNumber.ReadOnly = true;
+            CmnTsPlaylistTrackNumber.Width = 70;
+            // 
+            // CmnTsPlaylistName
+            // 
+            CmnTsPlaylistName.HeaderText = "Name";
+            CmnTsPlaylistName.Name = "CmnTsPlaylistName";
+            CmnTsPlaylistName.ReadOnly = true;
+            CmnTsPlaylistName.Width = 140;
+            // 
+            // CmnRemove
+            // 
+            CmnRemove.HeaderText = "Remove";
+            CmnRemove.Name = "CmnRemove";
+            CmnRemove.ReadOnly = true;
+            CmnRemove.Width = 60;
+            // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Location = new Point(6, 140);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 23);
+            button1.TabIndex = 7;
+            button1.Text = "Send and Scan";
+            button1.UseVisualStyleBackColor = true;
             // 
             // FrmMainForm
             // 
@@ -1502,8 +1797,16 @@
             GrpSpeedGroup.ResumeLayout(false);
             GrpSpeedGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumSpeed).EndInit();
-            tabGraphical.ResumeLayout(false);
-            tabGraphical.PerformLayout();
+            tabTrackSelect.ResumeLayout(false);
+            GrpTsNowPlaying.ResumeLayout(false);
+            GrpTsNowPlaying.PerformLayout();
+            GrpTsIr.ResumeLayout(false);
+            GrpTsIr.PerformLayout();
+            GrpPlaylist.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvPlaylist).EndInit();
+            GrpTsProfile.ResumeLayout(false);
+            GrpTsProfile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvProfile).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1516,8 +1819,7 @@
         private ComboBox CboSerialOptions;
         private Label LblSerialOptions;
         private Label LblConnectionStatus;
-        private TabPage tabGraphical;
-        private Label LblTodo2;
+        private TabPage tabTrackSelect;
         private GroupBox GrpSimpleInput;
         private TextBox TxtSimpleCommandInput;
         private Label LblSimpleExtraData;
@@ -1636,5 +1938,35 @@
         private Label LblHMotorPolarity;
         private Label LblHMotorPolarityData;
         private Button BtnHomeClutch;
+        private DataGridView DgvProfile;
+        private GroupBox GrpTsProfile;
+        private Button BtnTsAddTrack;
+        private Label LblTsProfileWarning;
+        private Button BtnTsLoadProfile;
+        private Button BtnTsExportProfile;
+        private Button BtnTsClearProfile;
+        private Button BtnTsAddAllToPlaylist;
+        private DataGridViewTextBoxColumn CmnTsPosition;
+        private DataGridViewTextBoxColumn CmnTrackNumber;
+        private DataGridViewTextBoxColumn CmnTsName;
+        private DataGridViewButtonColumn CmnTsAddToPlaylist;
+        private DataGridViewButtonColumn CmnTsRemove;
+        private GroupBox GrpPlaylist;
+        private GroupBox GrpTsIr;
+        private Label lblTsComingSoon;
+        private DataGridView DgvPlaylist;
+        private GroupBox GrpTsNowPlaying;
+        private Label LblTsPlaylistProgress;
+        private ProgressBar PrgTsNowPlaying;
+        private Label LblTsCurrentTrack;
+        private Button BtnSkipForward;
+        private Button BtnTsSkipBackwards;
+        private ProgressBar PrgTsPlaylistProgress;
+        private Button BtnClearPlaylist;
+        private DataGridViewTextBoxColumn CmnTsIndex;
+        private DataGridViewTextBoxColumn CmnTsPlaylistTrackNumber;
+        private DataGridViewTextBoxColumn CmnTsPlaylistName;
+        private DataGridViewButtonColumn CmnRemove;
+        private Button button1;
     }
 }
