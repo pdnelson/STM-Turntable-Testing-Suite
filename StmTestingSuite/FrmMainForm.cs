@@ -12,6 +12,7 @@ namespace StmTestingSuite
         private readonly StmLogger Logger;
         private readonly ConnectionMonitor ConnMonitor;
         private readonly AdvancedTabMonitor AdvTabMonitor;
+        private readonly TrackSelectTabMonitor TrackSelectTabMonitor;
         private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
@@ -20,6 +21,7 @@ namespace StmTestingSuite
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
             AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblActualHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
+            TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -261,16 +263,30 @@ namespace StmTestingSuite
                     e.Cancel = true;
                     MessageBox.Show("Must connnect to a turntable before changing tabs.", "Cannot Change Tabs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                else if (current.Text == "Advanced")
+                else
                 {
-                    AdvTabMonitor.Start();
-                    BtnCalRefresh_Click(sender, e);
-                    Logger.LogMessage("Advanced Tab", "Started monitoring");
-                }
-                else if (current.Text != "Advanced")
-                {
-                    AdvTabMonitor.Stop();
-                    Logger.LogMessage("Advanced Tab", "Ended monitoring");
+                    if (current.Text == "Advanced")
+                    {
+                        AdvTabMonitor.Start();
+                        BtnCalRefresh_Click(sender, e);
+                        Logger.LogMessage("Advanced Tab", "Started monitoring");
+                    }
+                    else if (current.Text != "Advanced" && AdvTabMonitor.Running)
+                    {
+                        AdvTabMonitor.Stop();
+                        Logger.LogMessage("Advanced Tab", "Ended monitoring");
+                    }
+
+                    if (current.Text == "Track Select")
+                    {
+                        TrackSelectTabMonitor.Start();
+                        Logger.LogMessage("Track Select Tab", "Started monitoring");
+                    }
+                    else if (current.Text != "Track Select" && TrackSelectTabMonitor.Running)
+                    {
+                        TrackSelectTabMonitor.Stop();
+                        Logger.LogMessage("Track Select Tab", "Ended monitoring");
+                    }
                 }
             }
         }

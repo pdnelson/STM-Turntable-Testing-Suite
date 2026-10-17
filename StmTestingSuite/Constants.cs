@@ -9,6 +9,7 @@
         public const int CommandTimeoutTimeMs = 2;
         public const int SendCommandDebounceMs = 10;
         public const int AdvancedTabDataPollMs = 50;
+        public const int TrackSelectTabDataPollMs = 200;
         public const int ConnectionMonitorPollMs = 450;
 
         public const byte AdvancedDataStartKey = 0b01010111;

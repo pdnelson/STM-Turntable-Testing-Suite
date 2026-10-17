@@ -1,8 +1,5 @@
 ﻿using StmTestingSuite.Command;
-using StmTestingSuite.Model.Command;
 using StmTestingSuite.Model.StmEnum;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace StmTestingSuite
@@ -76,7 +73,7 @@ namespace StmTestingSuite
         // Statistics
         Label LblUpTime { get; } = lblUpTime;
 
-        private bool Running { get; set; } = false;
+        public bool Running { get; set; } = false;
 
         public void Start()
         {

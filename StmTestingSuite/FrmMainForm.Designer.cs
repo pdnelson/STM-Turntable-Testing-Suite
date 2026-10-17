@@ -156,7 +156,13 @@
             GrpTsIr = new GroupBox();
             lblTsComingSoon = new Label();
             GrpPlaylist = new GroupBox();
+            BtnSendAndScan = new Button();
+            BtnClearPlaylist = new Button();
             DgvPlaylist = new DataGridView();
+            CmnTsIndex = new DataGridViewTextBoxColumn();
+            CmnTsPlaylistTrackNumber = new DataGridViewTextBoxColumn();
+            CmnTsPlaylistName = new DataGridViewTextBoxColumn();
+            CmnRemove = new DataGridViewButtonColumn();
             GrpTsProfile = new GroupBox();
             BtnTsClearProfile = new Button();
             BtnTsAddAllToPlaylist = new Button();
@@ -165,22 +171,16 @@
             BtnTsLoadProfile = new Button();
             BtnTsAddTrack = new Button();
             DgvProfile = new DataGridView();
-            CmnTsPosition = new DataGridViewTextBoxColumn();
-            CmnTrackNumber = new DataGridViewTextBoxColumn();
-            CmnTsName = new DataGridViewTextBoxColumn();
-            CmnTsAddToPlaylist = new DataGridViewButtonColumn();
-            CmnTsRemove = new DataGridViewButtonColumn();
             CboSerialOptions = new ComboBox();
             LblSerialOptions = new Label();
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            BtnClearPlaylist = new Button();
-            CmnTsIndex = new DataGridViewTextBoxColumn();
-            CmnTsPlaylistTrackNumber = new DataGridViewTextBoxColumn();
-            CmnTsPlaylistName = new DataGridViewTextBoxColumn();
-            CmnRemove = new DataGridViewButtonColumn();
-            button1 = new Button();
+            CmnTsPosition = new DataGridViewTextBoxColumn();
+            CmnTrackNumber = new DataGridViewTextBoxColumn();
+            CmnTsName = new DataGridViewTextBoxColumn();
+            CmnTsAddToPlaylist = new DataGridViewButtonColumn();
+            CmnTsRemove = new DataGridViewButtonColumn();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -1520,7 +1520,7 @@
             // 
             // GrpPlaylist
             // 
-            GrpPlaylist.Controls.Add(button1);
+            GrpPlaylist.Controls.Add(BtnSendAndScan);
             GrpPlaylist.Controls.Add(BtnClearPlaylist);
             GrpPlaylist.Controls.Add(DgvPlaylist);
             GrpPlaylist.Location = new Point(3, 232);
@@ -1529,6 +1529,25 @@
             GrpPlaylist.TabIndex = 2;
             GrpPlaylist.TabStop = false;
             GrpPlaylist.Text = "Playlist";
+            // 
+            // BtnSendAndScan
+            // 
+            BtnSendAndScan.Enabled = false;
+            BtnSendAndScan.Location = new Point(6, 140);
+            BtnSendAndScan.Name = "BtnSendAndScan";
+            BtnSendAndScan.Size = new Size(94, 23);
+            BtnSendAndScan.TabIndex = 7;
+            BtnSendAndScan.Text = "Send and Scan";
+            BtnSendAndScan.UseVisualStyleBackColor = true;
+            // 
+            // BtnClearPlaylist
+            // 
+            BtnClearPlaylist.Location = new Point(290, 140);
+            BtnClearPlaylist.Name = "BtnClearPlaylist";
+            BtnClearPlaylist.Size = new Size(85, 23);
+            BtnClearPlaylist.TabIndex = 6;
+            BtnClearPlaylist.Text = "Clear Playlist";
+            BtnClearPlaylist.UseVisualStyleBackColor = true;
             // 
             // DgvPlaylist
             // 
@@ -1540,6 +1559,34 @@
             DgvPlaylist.ReadOnly = true;
             DgvPlaylist.Size = new Size(370, 118);
             DgvPlaylist.TabIndex = 0;
+            // 
+            // CmnTsIndex
+            // 
+            CmnTsIndex.HeaderText = "Index";
+            CmnTsIndex.Name = "CmnTsIndex";
+            CmnTsIndex.ReadOnly = true;
+            CmnTsIndex.Width = 50;
+            // 
+            // CmnTsPlaylistTrackNumber
+            // 
+            CmnTsPlaylistTrackNumber.HeaderText = "Track #";
+            CmnTsPlaylistTrackNumber.Name = "CmnTsPlaylistTrackNumber";
+            CmnTsPlaylistTrackNumber.ReadOnly = true;
+            CmnTsPlaylistTrackNumber.Width = 70;
+            // 
+            // CmnTsPlaylistName
+            // 
+            CmnTsPlaylistName.HeaderText = "Name";
+            CmnTsPlaylistName.Name = "CmnTsPlaylistName";
+            CmnTsPlaylistName.ReadOnly = true;
+            CmnTsPlaylistName.Width = 140;
+            // 
+            // CmnRemove
+            // 
+            CmnRemove.HeaderText = "Remove";
+            CmnRemove.Name = "CmnRemove";
+            CmnRemove.ReadOnly = true;
+            CmnRemove.Width = 60;
             // 
             // GrpTsProfile
             // 
@@ -1621,37 +1668,6 @@
             DgvProfile.Size = new Size(743, 148);
             DgvProfile.TabIndex = 0;
             // 
-            // CmnTsPosition
-            // 
-            CmnTsPosition.HeaderText = "Position";
-            CmnTsPosition.Name = "CmnTsPosition";
-            CmnTsPosition.Width = 65;
-            // 
-            // CmnTrackNumber
-            // 
-            CmnTrackNumber.HeaderText = "Track #";
-            CmnTrackNumber.Name = "CmnTrackNumber";
-            CmnTrackNumber.Width = 70;
-            // 
-            // CmnTsName
-            // 
-            CmnTsName.HeaderText = "Name";
-            CmnTsName.Name = "CmnTsName";
-            CmnTsName.Width = 400;
-            // 
-            // CmnTsAddToPlaylist
-            // 
-            CmnTsAddToPlaylist.HeaderText = "Add to Playlist";
-            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
-            CmnTsAddToPlaylist.Text = "Add to Playlist";
-            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
-            // 
-            // CmnTsRemove
-            // 
-            CmnTsRemove.HeaderText = "Remove";
-            CmnTsRemove.Name = "CmnTsRemove";
-            CmnTsRemove.Width = 60;
-            // 
             // CboSerialOptions
             // 
             CboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -1700,52 +1716,37 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // BtnClearPlaylist
+            // CmnTsPosition
             // 
-            BtnClearPlaylist.Location = new Point(290, 140);
-            BtnClearPlaylist.Name = "BtnClearPlaylist";
-            BtnClearPlaylist.Size = new Size(85, 23);
-            BtnClearPlaylist.TabIndex = 6;
-            BtnClearPlaylist.Text = "Clear Playlist";
-            BtnClearPlaylist.UseVisualStyleBackColor = true;
+            CmnTsPosition.HeaderText = "Position";
+            CmnTsPosition.Name = "CmnTsPosition";
+            CmnTsPosition.Width = 65;
             // 
-            // CmnTsIndex
+            // CmnTrackNumber
             // 
-            CmnTsIndex.HeaderText = "Index";
-            CmnTsIndex.Name = "CmnTsIndex";
-            CmnTsIndex.ReadOnly = true;
-            CmnTsIndex.Width = 50;
+            CmnTrackNumber.HeaderText = "Track #";
+            CmnTrackNumber.Name = "CmnTrackNumber";
+            CmnTrackNumber.ReadOnly = true;
+            CmnTrackNumber.Width = 70;
             // 
-            // CmnTsPlaylistTrackNumber
+            // CmnTsName
             // 
-            CmnTsPlaylistTrackNumber.HeaderText = "Track #";
-            CmnTsPlaylistTrackNumber.Name = "CmnTsPlaylistTrackNumber";
-            CmnTsPlaylistTrackNumber.ReadOnly = true;
-            CmnTsPlaylistTrackNumber.Width = 70;
+            CmnTsName.HeaderText = "Name";
+            CmnTsName.Name = "CmnTsName";
+            CmnTsName.Width = 350;
             // 
-            // CmnTsPlaylistName
+            // CmnTsAddToPlaylist
             // 
-            CmnTsPlaylistName.HeaderText = "Name";
-            CmnTsPlaylistName.Name = "CmnTsPlaylistName";
-            CmnTsPlaylistName.ReadOnly = true;
-            CmnTsPlaylistName.Width = 140;
+            CmnTsAddToPlaylist.HeaderText = "Add to Playlist";
+            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
+            CmnTsAddToPlaylist.Text = "Add to Playlist";
+            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
             // 
-            // CmnRemove
+            // CmnTsRemove
             // 
-            CmnRemove.HeaderText = "Remove";
-            CmnRemove.Name = "CmnRemove";
-            CmnRemove.ReadOnly = true;
-            CmnRemove.Width = 60;
-            // 
-            // button1
-            // 
-            button1.Enabled = false;
-            button1.Location = new Point(6, 140);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 23);
-            button1.TabIndex = 7;
-            button1.Text = "Send and Scan";
-            button1.UseVisualStyleBackColor = true;
+            CmnTsRemove.HeaderText = "Remove";
+            CmnTsRemove.Name = "CmnTsRemove";
+            CmnTsRemove.Width = 60;
             // 
             // FrmMainForm
             // 
@@ -1946,11 +1947,6 @@
         private Button BtnTsExportProfile;
         private Button BtnTsClearProfile;
         private Button BtnTsAddAllToPlaylist;
-        private DataGridViewTextBoxColumn CmnTsPosition;
-        private DataGridViewTextBoxColumn CmnTrackNumber;
-        private DataGridViewTextBoxColumn CmnTsName;
-        private DataGridViewButtonColumn CmnTsAddToPlaylist;
-        private DataGridViewButtonColumn CmnTsRemove;
         private GroupBox GrpPlaylist;
         private GroupBox GrpTsIr;
         private Label lblTsComingSoon;
@@ -1967,6 +1963,11 @@
         private DataGridViewTextBoxColumn CmnTsPlaylistTrackNumber;
         private DataGridViewTextBoxColumn CmnTsPlaylistName;
         private DataGridViewButtonColumn CmnRemove;
-        private Button button1;
+        private Button BtnSendAndScan;
+        private DataGridViewTextBoxColumn CmnTsPosition;
+        private DataGridViewTextBoxColumn CmnTrackNumber;
+        private DataGridViewTextBoxColumn CmnTsName;
+        private DataGridViewButtonColumn CmnTsAddToPlaylist;
+        private DataGridViewButtonColumn CmnTsRemove;
     }
 }
