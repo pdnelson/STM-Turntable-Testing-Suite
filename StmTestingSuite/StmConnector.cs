@@ -122,6 +122,7 @@ namespace StmTestingSuite
                 }
                 catch (Exception)
                 {
+                    Sem.Release();
                     response = null;
                 }
             }
