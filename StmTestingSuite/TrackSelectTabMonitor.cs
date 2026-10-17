@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace StmTestingSuite
 {
@@ -21,7 +22,10 @@ namespace StmTestingSuite
 
         // Progress bars
         ProgressBar prgCurrentTrack,
-        ProgressBar prgPlaylist)
+        ProgressBar prgPlaylist,
+        
+        // Labels
+        Label lblNowPlaying)
     {
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
@@ -36,6 +40,8 @@ namespace StmTestingSuite
         // Progress bars
         ProgressBar PrgCurrentTrack { get; } = prgCurrentTrack;
         ProgressBar PrgPlaylist { get; } = prgPlaylist;
+
+        Label LblNowPlaying { get; } = lblNowPlaying;
 
         public bool Running { get; set; } = false;
 
@@ -71,10 +77,11 @@ namespace StmTestingSuite
         {
             Utilities.WriteToUiFromThread(Form, () =>
             {
+                // POPULATING THE RECORD PROFILE IS HERE!!!
+
                 // If the counts are different, then the track listing has changed, and we need to update the whole thing
                 if(DgvProfile.Rows.Count != data.NormalizedProfile.Length)
                 {
-                    // Set profile
                     DgvProfile.Rows.Clear();
 
                     for (ushort i = 0; i < data.NormalizedProfile.Length; i++)
@@ -93,13 +100,75 @@ namespace StmTestingSuite
                 // Otherwise, we can just update each row with what is there. Only the position can possibly change
                 else
                 {
-
                     for (ushort i = 0; i < data.NormalizedProfile.Length; i++)
                     {
                         DgvProfile.Rows[i].Cells[0].Value = data.NormalizedProfile[i].ToString();
                         DgvProfile.UpdateCellValue(0, i);
+
+                        if(i != data.NormalizedProfile.Length - 1)
+                        {
+                            bool onTrack = data.CurrentPosition >= data.NormalizedProfile[i] && data.CurrentPosition < data.NormalizedProfile[i + 1];
+
+                            if (onTrack)
+                            {
+                                DgvProfile.Rows[i].DefaultCellStyle.BackColor = Color.Coral;
+                            }
+                            else
+                            {
+                                DgvProfile.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                            }
+                        }
                     }
                 }
+
+                // POPULATING THE PLAYLIST IS HERE!!!
+
+                // If the counts are different, then the track listing has changed, and we need to update the whole thing
+                if (DgvPlaylist.Rows.Count != data.Playlist.Length)
+                {
+                    DgvPlaylist.Rows.Clear();
+
+                    for(ushort i = 0; i < data.Playlist.Length; i++)
+                    {
+                        var profileTrack = data.Playlist[i];
+                        var trackNumber = DgvProfile.Rows[profileTrack].Cells[1].Value;
+                        var trackName = DgvProfile.Rows[profileTrack].Cells[2].Value;
+
+                        if(trackNumber != null && trackName != null)
+                        {
+                            DgvPlaylist.Rows.Add(i + 1, trackNumber, trackName);
+                        }
+
+                        if(data.CurrentPlaylistIndex == i)
+                        {
+                            DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.Teal;
+                        }
+                    }
+                }
+                else
+                {
+                    for (ushort i = 0; i < data.Playlist.Length; i++)
+                    {
+                        var profileTrack = data.Playlist[i];
+
+                        DgvPlaylist.Rows[i].Cells[0].Value = i + 1;
+                        DgvPlaylist.Rows[i].Cells[1].Value = DgvProfile.Rows[profileTrack].Cells[1].Value;
+                        DgvPlaylist.Rows[i].Cells[2].Value = DgvProfile.Rows[profileTrack].Cells[2].Value;
+
+                        if (data.CurrentPlaylistIndex == i)
+                        {
+                            DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.Coral;
+                        } 
+                        else
+                        {
+                            DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                        }
+
+                        DgvProfile.UpdateCellValue(0, i);
+                    }
+                }
+
+                // CALCULATING THE CURRENT PLAYING PROGRESS BAR IS HERE!
             });
         }
     }
