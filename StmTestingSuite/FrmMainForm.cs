@@ -216,6 +216,7 @@ namespace StmTestingSuite
                 new CmdSetAddTrackAtPosition(Conn, Logger),
                 new CmdSetAddProfileToPlaylist(Conn, Logger),
                 new CmdSetAddToPlaylist(Conn, Logger),
+                new CmdSetPositionAtProfileIndex(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
@@ -667,9 +668,17 @@ namespace StmTestingSuite
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                var command = new CmdSetAddToPlaylist(Conn, Logger);
-                command.UpdateInputData((byte)e.RowIndex);
-                ExecuteSimpleCommand(command);
+                if(e.ColumnIndex == 3)
+                {
+                    var command = new CmdSetAddToPlaylist(Conn, Logger);
+                    command.UpdateInputData((byte)e.RowIndex);
+                    ExecuteSimpleCommand(command);
+                } else
+                {
+                    var command = new CmdActionGoToPositionH(Conn, Logger);
+                    command.UpdateInputData($"{DgvProfile.Rows[e.RowIndex].Cells[0].Value},0,6");
+                    ExecuteSimpleCommand(command);
+                }
             }
         }
 
@@ -682,6 +691,19 @@ namespace StmTestingSuite
             {
                 var command = new CmdSetRemoveFromPlaylist(Conn, Logger);
                 command.UpdateInputData((byte)e.RowIndex);
+                ExecuteSimpleCommand(command);
+            }
+        }
+
+        private void DgvProfile_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewTextBoxColumn &&
+                e.RowIndex >= 0)
+            {
+                var command = new CmdSetPositionAtProfileIndex(Conn, Logger);
+                command.UpdateInputData($"{e.RowIndex},{DgvProfile.Rows[e.RowIndex].Cells[0].Value}");
                 ExecuteSimpleCommand(command);
             }
         }
