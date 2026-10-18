@@ -187,7 +187,7 @@ namespace StmTestingSuite
                             DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.White;
                         }
 
-                        DgvProfile.UpdateCellValue(0, i);
+                        DgvPlaylist.UpdateCellValue(0, i);
                     }
                 }
 
