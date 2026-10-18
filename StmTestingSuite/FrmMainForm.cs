@@ -209,6 +209,8 @@ namespace StmTestingSuite
                 new CmdSetRotateSpeed(Conn, Logger),
                 new CmdSetAzEncoderZero(Conn, Logger),
                 new CmdSetSaveSettings(Conn, Logger),
+                new CmdSetClearPlaylist(Conn, Logger),
+                new CmdSetClearProfile(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
@@ -517,12 +519,17 @@ namespace StmTestingSuite
 
         private void BtnClearPlaylist_Click(object sender, EventArgs e)
         {
-
+            ExecuteSimpleCommand(new CmdSetClearPlaylist(Conn, Logger));
         }
 
         private void BtnTsSkipBackwards_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdActionSkipBackward(Conn, Logger));
+        }
+
+        private void BtnTsClearProfile_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdSetClearProfile(Conn, Logger));
         }
     }
 }

@@ -27,6 +27,8 @@
         SET_ROTATE_SIZE = 36,
         SET_AZ_ENCODER_ZERO = 37,
         SET_SAVE_SETTINGS = 38,
+        SET_CLEAR_PROFILE = 39,
+        SET_CLEAR_PLAYLIST = 40,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,

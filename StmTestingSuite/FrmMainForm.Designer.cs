@@ -1592,6 +1592,7 @@
             BtnTsClearProfile.TabIndex = 6;
             BtnTsClearProfile.Text = "Clear Profile";
             BtnTsClearProfile.UseVisualStyleBackColor = true;
+            BtnTsClearProfile.Click += BtnTsClearProfile_Click;
             // 
             // BtnTsAddAllToPlaylist
             // 

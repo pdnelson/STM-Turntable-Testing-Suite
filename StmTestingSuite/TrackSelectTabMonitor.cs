@@ -86,16 +86,19 @@ namespace StmTestingSuite
                 {
                     DgvProfile.Rows.Clear();
 
-                    for (ushort i = 0; i < data.NormalizedProfile.Length; i++)
+                    if(data.NormalizedProfile.Length > 0)
                     {
-                        if (i == data.NormalizedProfile.Length - 1)
+                        for (ushort i = 0; i < data.NormalizedProfile.Length; i++)
                         {
-                            DgvProfile.Rows.Add(data.NormalizedProfile[i], "N/A", $"Record End");
-                        }
-                        else
-                        {
-                            var track = i + 1;
-                            DgvProfile.Rows.Add(data.NormalizedProfile[i], track, $"Track #{track}");
+                            if (i == data.NormalizedProfile.Length - 1)
+                            {
+                                DgvProfile.Rows.Add(data.NormalizedProfile[i], "N/A", $"Record End");
+                            }
+                            else
+                            {
+                                var track = i + 1;
+                                DgvProfile.Rows.Add(data.NormalizedProfile[i], track, $"Track #{track}");
+                            }
                         }
                     }
                 }
@@ -140,23 +143,27 @@ namespace StmTestingSuite
 
                     int playlistProgressMax = 0;
 
-                    for (ushort i = 0; i < data.Playlist.Length; i++)
+                    if (data.Playlist.Length > 0)
                     {
-                        var profileTrackIndex = data.Playlist[i];
-                        var trackNumber = DgvProfile.Rows[profileTrackIndex].Cells[1].Value;
-                        var trackName = DgvProfile.Rows[profileTrackIndex].Cells[2].Value;
-
-                        if(trackNumber != null && trackName != null)
+                        for (ushort i = 0; i < data.Playlist.Length; i++)
                         {
-                            DgvPlaylist.Rows.Add(i + 1, trackNumber, trackName);
+                            var profileTrackIndex = data.Playlist[i];
+                            var trackNumber = DgvProfile.Rows[profileTrackIndex].Cells[1].Value;
+                            var trackName = DgvProfile.Rows[profileTrackIndex].Cells[2].Value;
+
+                            if (trackNumber != null && trackName != null)
+                            {
+                                DgvPlaylist.Rows.Add(i + 1, trackNumber, trackName);
+                            }
+
+                            if (data.CurrentPlaylistIndex == i)
+                            {
+                                DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.Teal;
+                            }
+
+                            playlistProgressMax += TrackRangeByIndex(data.NormalizedProfile, profileTrackIndex);
                         }
 
-                        if(data.CurrentPlaylistIndex == i)
-                        {
-                            DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.Teal;
-                        }
-
-                        playlistProgressMax += TrackRangeByIndex(data.NormalizedProfile, profileTrackIndex);
                     }
 
                     PrgPlaylist.Maximum = playlistProgressMax;
