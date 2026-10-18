@@ -611,6 +611,8 @@ namespace StmTestingSuite
 
             if (fileContent != "")
             {
+                TrackSelectTabMonitor.Paused = true;
+
                 Utilities.CommandWrapper(ConnMonitor, async () =>
                 {
                     Utilities.WriteToUiFromThread(this, () =>
@@ -656,6 +658,10 @@ namespace StmTestingSuite
                         var command = new CmdSetOverwriteRecordProfile(Conn, Logger);
                         command.UpdateInputData(positions);
                         await command.Execute();
+
+                        await Task.Delay(Constants.SendCommandDebounceMs);
+
+                        TrackSelectTabMonitor.Paused = false;
                     }
                 });
             }

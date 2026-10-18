@@ -45,6 +45,8 @@ namespace StmTestingSuite
 
         public bool Running { get; set; } = false;
 
+        public bool Paused { get; set; } = false;
+
         public void Start()
         {
             var dataCommand = new CmdGetProfilePlaylist(Conn, null);
@@ -54,14 +56,17 @@ namespace StmTestingSuite
             {
                 while(Running)
                 {
-                    CmdGetProfilePlaylist.Response? data = await dataCommand.ExecuteWithResult();
-
-                    if(data != null)
+                    if(!Paused)
                     {
-                        UpdateUserInterface((CmdGetProfilePlaylist.Response)data);
-                    }
+                        CmdGetProfilePlaylist.Response? data = await dataCommand.ExecuteWithResult();
 
-                    await Task.Delay(Constants.TrackSelectTabDataPollMs);
+                        if (data != null)
+                        {
+                            UpdateUserInterface((CmdGetProfilePlaylist.Response)data);
+                        }
+
+                        await Task.Delay(Constants.TrackSelectTabDataPollMs);
+                    }
                 }
             });
 
