@@ -1651,6 +1651,7 @@
             DgvProfile.Name = "DgvProfile";
             DgvProfile.Size = new Size(743, 148);
             DgvProfile.TabIndex = 0;
+            DgvProfile.CellContentClick += DgvProfile_CellContentClick;
             // 
             // CmnTsPosition
             // 

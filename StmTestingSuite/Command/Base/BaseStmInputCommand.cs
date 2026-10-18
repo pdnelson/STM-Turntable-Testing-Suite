@@ -11,6 +11,11 @@
             InputData = rawData;
         }
 
+        public void UpdateInputData(byte readableData)
+        {
+            InputData = [readableData];
+        }
+
         public void UpdateInputData(UInt16 readableData)
         {
             ReadableInputData = readableData.ToString();

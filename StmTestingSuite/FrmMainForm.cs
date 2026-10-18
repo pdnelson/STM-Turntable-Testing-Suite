@@ -215,6 +215,7 @@ namespace StmTestingSuite
                 new CmdSetClearProfile(Conn, Logger),
                 new CmdSetAddTrackAtPosition(Conn, Logger),
                 new CmdSetAddProfileToPlaylist(Conn, Logger),
+                new CmdSetAddToPlaylist(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
@@ -656,6 +657,19 @@ namespace StmTestingSuite
                         await command.Execute();
                     }
                 });
+            }
+        }
+
+        private void DgvProfile_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                var command = new CmdSetAddToPlaylist(Conn, Logger);
+                command.UpdateInputData((byte)e.RowIndex);
+                ExecuteSimpleCommand(command);
             }
         }
     }

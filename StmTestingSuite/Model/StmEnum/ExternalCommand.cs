@@ -32,6 +32,7 @@
         SET_ADD_TRACK_AT_POSITION = 41,
         SET_ADD_PROFILE_TO_PLAYLIST = 42,
         SET_OVERWRITE_RECORD_PROFILE = 43,
+        SET_ADD_TO_PLAYLIST = 44,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,
