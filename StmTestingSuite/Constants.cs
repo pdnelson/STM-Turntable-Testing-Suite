@@ -18,5 +18,7 @@
         public const string RecordProfileFileExtension = "stpf";
 
         public const string FileDialogFilter = $"{RecordProfileFileExtension} files (*.{RecordProfileFileExtension})|*.{RecordProfileFileExtension}";
+
+        public const byte SpeedAutomatic = 100;
     }
 }

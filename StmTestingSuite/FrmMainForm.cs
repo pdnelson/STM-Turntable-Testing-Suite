@@ -676,7 +676,7 @@ namespace StmTestingSuite
                 } else
                 {
                     var command = new CmdActionGoToPositionH(Conn, Logger);
-                    command.UpdateInputData($"{DgvProfile.Rows[e.RowIndex].Cells[0].Value},0,6");
+                    command.UpdateInputData($"{DgvProfile.Rows[e.RowIndex].Cells[0].Value},0,{Constants.SpeedAutomatic}");
                     ExecuteSimpleCommand(command);
                 }
             }

@@ -47,7 +47,7 @@ namespace StmTestingSuite.Command
             {
                 return "Speed must be greater than 0.";
             }
-            else if (speed > 50)
+            else if (speed > 50 && speed != Constants.SpeedAutomatic)
             {
                 return "Speed RPM cannot exceed 50";
             }
