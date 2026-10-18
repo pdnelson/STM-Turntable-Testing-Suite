@@ -1602,6 +1602,7 @@
             BtnTsAddAllToPlaylist.TabIndex = 5;
             BtnTsAddAllToPlaylist.Text = "Add All to Playlist";
             BtnTsAddAllToPlaylist.UseVisualStyleBackColor = true;
+            BtnTsAddAllToPlaylist.Click += BtnTsAddAllToPlaylist_Click;
             // 
             // BtnTsExportProfile
             // 
@@ -1638,6 +1639,7 @@
             BtnTsAddTrack.TabIndex = 1;
             BtnTsAddTrack.Text = "Add Track At Position";
             BtnTsAddTrack.UseVisualStyleBackColor = true;
+            BtnTsAddTrack.Click += BtnTsAddTrack_Click;
             // 
             // DgvProfile
             // 

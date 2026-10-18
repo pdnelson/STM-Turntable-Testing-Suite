@@ -211,6 +211,8 @@ namespace StmTestingSuite
                 new CmdSetSaveSettings(Conn, Logger),
                 new CmdSetClearPlaylist(Conn, Logger),
                 new CmdSetClearProfile(Conn, Logger),
+                new CmdSetAddTrackAtPosition(Conn, Logger),
+                new CmdSetAddProfileToPlaylist(Conn, Logger),
 
                 // get
                 new CmdGetCurrentCommand(Conn, Logger),
@@ -530,6 +532,16 @@ namespace StmTestingSuite
         private void BtnTsClearProfile_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdSetClearProfile(Conn, Logger));
+        }
+
+        private void BtnTsAddTrack_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdSetAddTrackAtPosition(Conn, Logger));
+        }
+
+        private void BtnTsAddAllToPlaylist_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdSetAddProfileToPlaylist(Conn, Logger));
         }
     }
 }
