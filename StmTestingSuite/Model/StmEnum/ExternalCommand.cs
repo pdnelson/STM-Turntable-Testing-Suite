@@ -15,6 +15,8 @@
         ACTION_GO_TO_POSITION_V = 8,
         ACTION_MOVE_N_STEPS_V = 9,
         ACTION_HOME_CLUTCH = 10,
+        ACTION_SKIP_FORWARD = 11,
+        ACTION_SKIP_BACKWARD = 12,
 
         // Set commands
         SET_SPEED = 31,

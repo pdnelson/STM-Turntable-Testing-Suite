@@ -197,6 +197,8 @@ namespace StmTestingSuite
                 new CmdActionStepHorizontally(Conn, Logger),
                 new CmdActionToggleClutch(Conn, Logger),
                 new CmdActionHomeClutch(Conn, Logger),
+                new CmdActionSkipForward(Conn, Logger),
+                new CmdActionSkipForward(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -510,12 +512,17 @@ namespace StmTestingSuite
 
         private void BtnSkipForward_Click(object sender, EventArgs e)
         {
-
+            ExecuteSimpleCommand(new CmdActionSkipForward(Conn, Logger));
         }
 
         private void BtnClearPlaylist_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnTsSkipBackwards_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdActionSkipBackward(Conn, Logger));
         }
     }
 }

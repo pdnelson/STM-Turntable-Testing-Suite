@@ -1462,6 +1462,7 @@
             BtnTsSkipBackwards.TabIndex = 4;
             BtnTsSkipBackwards.Text = "Skip Backward";
             BtnTsSkipBackwards.UseVisualStyleBackColor = true;
+            BtnTsSkipBackwards.Click += BtnTsSkipBackwards_Click;
             // 
             // PrgTsPlaylistProgress
             // 
