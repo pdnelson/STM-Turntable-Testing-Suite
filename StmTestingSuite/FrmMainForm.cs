@@ -512,5 +512,10 @@ namespace StmTestingSuite
         {
 
         }
+
+        private void BtnClearPlaylist_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

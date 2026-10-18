@@ -153,8 +153,6 @@
             LblTsPlaylistProgress = new Label();
             PrgTsNowPlaying = new ProgressBar();
             LblTsCurrentTrack = new Label();
-            GrpTsIr = new GroupBox();
-            lblTsComingSoon = new Label();
             GrpPlaylist = new GroupBox();
             BtnSendAndScan = new Button();
             BtnClearPlaylist = new Button();
@@ -209,7 +207,6 @@
             ((System.ComponentModel.ISupportInitialize)NumSpeed).BeginInit();
             tabTrackSelect.SuspendLayout();
             GrpTsNowPlaying.SuspendLayout();
-            GrpTsIr.SuspendLayout();
             GrpPlaylist.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvPlaylist).BeginInit();
             GrpTsProfile.SuspendLayout();
@@ -1423,7 +1420,6 @@
             // tabTrackSelect
             // 
             tabTrackSelect.Controls.Add(GrpTsNowPlaying);
-            tabTrackSelect.Controls.Add(GrpTsIr);
             tabTrackSelect.Controls.Add(GrpPlaylist);
             tabTrackSelect.Controls.Add(GrpTsProfile);
             tabTrackSelect.Location = new Point(4, 24);
@@ -1499,25 +1495,6 @@
             LblTsCurrentTrack.TabIndex = 0;
             LblTsCurrentTrack.Text = "- Not Playing -";
             // 
-            // GrpTsIr
-            // 
-            GrpTsIr.Controls.Add(lblTsComingSoon);
-            GrpTsIr.Location = new Point(-4, 407);
-            GrpTsIr.Name = "GrpTsIr";
-            GrpTsIr.Size = new Size(756, 145);
-            GrpTsIr.TabIndex = 3;
-            GrpTsIr.TabStop = false;
-            GrpTsIr.Text = "IR Sensor";
-            // 
-            // lblTsComingSoon
-            // 
-            lblTsComingSoon.AutoSize = true;
-            lblTsComingSoon.Location = new Point(210, 113);
-            lblTsComingSoon.Name = "lblTsComingSoon";
-            lblTsComingSoon.Size = new Size(82, 15);
-            lblTsComingSoon.TabIndex = 0;
-            lblTsComingSoon.Text = "Coming soon!";
-            // 
             // GrpPlaylist
             // 
             GrpPlaylist.Controls.Add(BtnSendAndScan);
@@ -1525,7 +1502,7 @@
             GrpPlaylist.Controls.Add(DgvPlaylist);
             GrpPlaylist.Location = new Point(3, 232);
             GrpPlaylist.Name = "GrpPlaylist";
-            GrpPlaylist.Size = new Size(381, 169);
+            GrpPlaylist.Size = new Size(381, 320);
             GrpPlaylist.TabIndex = 2;
             GrpPlaylist.TabStop = false;
             GrpPlaylist.Text = "Playlist";
@@ -1533,7 +1510,7 @@
             // BtnSendAndScan
             // 
             BtnSendAndScan.Enabled = false;
-            BtnSendAndScan.Location = new Point(6, 140);
+            BtnSendAndScan.Location = new Point(6, 291);
             BtnSendAndScan.Name = "BtnSendAndScan";
             BtnSendAndScan.Size = new Size(94, 23);
             BtnSendAndScan.TabIndex = 7;
@@ -1542,12 +1519,13 @@
             // 
             // BtnClearPlaylist
             // 
-            BtnClearPlaylist.Location = new Point(290, 140);
+            BtnClearPlaylist.Location = new Point(290, 291);
             BtnClearPlaylist.Name = "BtnClearPlaylist";
             BtnClearPlaylist.Size = new Size(85, 23);
             BtnClearPlaylist.TabIndex = 6;
             BtnClearPlaylist.Text = "Clear Playlist";
             BtnClearPlaylist.UseVisualStyleBackColor = true;
+            BtnClearPlaylist.Click += BtnClearPlaylist_Click;
             // 
             // DgvPlaylist
             // 
@@ -1558,7 +1536,7 @@
             DgvPlaylist.Location = new Point(3, 19);
             DgvPlaylist.Name = "DgvPlaylist";
             DgvPlaylist.ReadOnly = true;
-            DgvPlaylist.Size = new Size(370, 118);
+            DgvPlaylist.Size = new Size(370, 266);
             DgvPlaylist.TabIndex = 0;
             // 
             // CmnTsIndex
@@ -1802,8 +1780,6 @@
             tabTrackSelect.ResumeLayout(false);
             GrpTsNowPlaying.ResumeLayout(false);
             GrpTsNowPlaying.PerformLayout();
-            GrpTsIr.ResumeLayout(false);
-            GrpTsIr.PerformLayout();
             GrpPlaylist.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvPlaylist).EndInit();
             GrpTsProfile.ResumeLayout(false);
@@ -1949,8 +1925,6 @@
         private Button BtnTsClearProfile;
         private Button BtnTsAddAllToPlaylist;
         private GroupBox GrpPlaylist;
-        private GroupBox GrpTsIr;
-        private Label lblTsComingSoon;
         private DataGridView DgvPlaylist;
         private GroupBox GrpTsNowPlaying;
         private Label LblTsPlaylistProgress;

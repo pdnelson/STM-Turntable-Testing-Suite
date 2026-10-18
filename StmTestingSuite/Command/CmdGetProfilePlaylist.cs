@@ -59,7 +59,7 @@ namespace StmTestingSuite.Command
                     dataIndex += 2;
                 }
 
-                Playlist = new short[rawData[3]];
+                Playlist = new ushort[rawData[3]];
 
                 ushort playlistStart = (ushort)((KnownDataSize - 1) + normalizedProfileSize);
 
@@ -75,7 +75,7 @@ namespace StmTestingSuite.Command
             public ushort CurrentPosition { get; }
             public short CurrentPlaylistIndex { get; }
             public ushort[] NormalizedProfile { get; }
-            public short[] Playlist { get; }
+            public ushort[] Playlist { get; }
 
             public readonly override string ToString()
             {

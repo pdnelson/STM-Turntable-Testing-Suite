@@ -77,6 +77,8 @@ namespace StmTestingSuite
         {
             Utilities.WriteToUiFromThread(Form, () =>
             {
+                short onTrackProfileIndex = -1;
+
                 // POPULATING THE RECORD PROFILE IS HERE!!!
 
                 // If the counts are different, then the track listing has changed, and we need to update the whole thing
@@ -100,6 +102,7 @@ namespace StmTestingSuite
                 // Otherwise, we can just update each row with what is there. Only the position can possibly change
                 else
                 {
+                    bool isOnAnyTrack = false;
                     for (ushort i = 0; i < data.NormalizedProfile.Length; i++)
                     {
                         DgvProfile.Rows[i].Cells[0].Value = data.NormalizedProfile[i].ToString();
@@ -112,12 +115,19 @@ namespace StmTestingSuite
                             if (onTrack)
                             {
                                 DgvProfile.Rows[i].DefaultCellStyle.BackColor = Color.Coral;
+                                isOnAnyTrack = true;
+                                onTrackProfileIndex = (short)i;
                             }
                             else
                             {
                                 DgvProfile.Rows[i].DefaultCellStyle.BackColor = Color.White;
                             }
                         }
+                    }
+
+                    if(!isOnAnyTrack)
+                    {
+                        onTrackProfileIndex = -1;
                     }
                 }
 
@@ -128,11 +138,13 @@ namespace StmTestingSuite
                 {
                     DgvPlaylist.Rows.Clear();
 
-                    for(ushort i = 0; i < data.Playlist.Length; i++)
+                    int playlistProgressMax = 0;
+
+                    for (ushort i = 0; i < data.Playlist.Length; i++)
                     {
-                        var profileTrack = data.Playlist[i];
-                        var trackNumber = DgvProfile.Rows[profileTrack].Cells[1].Value;
-                        var trackName = DgvProfile.Rows[profileTrack].Cells[2].Value;
+                        var profileTrackIndex = data.Playlist[i];
+                        var trackNumber = DgvProfile.Rows[profileTrackIndex].Cells[1].Value;
+                        var trackName = DgvProfile.Rows[profileTrackIndex].Cells[2].Value;
 
                         if(trackNumber != null && trackName != null)
                         {
@@ -143,7 +155,11 @@ namespace StmTestingSuite
                         {
                             DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.Teal;
                         }
+
+                        playlistProgressMax += TrackRangeByIndex(data.NormalizedProfile, profileTrackIndex);
                     }
+
+                    PrgPlaylist.Maximum = playlistProgressMax;
                 }
                 else
                 {
@@ -169,7 +185,66 @@ namespace StmTestingSuite
                 }
 
                 // CALCULATING THE CURRENT PLAYING PROGRESS BAR IS HERE!
+                if(onTrackProfileIndex > -1)
+                {
+                    LblNowPlaying.Text = $"Now Playing: {DgvProfile.Rows[onTrackProfileIndex].Cells[2].Value}";
+
+                    PrgCurrentTrack.Minimum = data.NormalizedProfile[onTrackProfileIndex];
+                    PrgCurrentTrack.Maximum = data.NormalizedProfile[onTrackProfileIndex + 1];
+                    PrgCurrentTrack.Value = data.CurrentPosition;
+                } 
+                else
+                {
+                    PrgCurrentTrack.Minimum = 0;
+                    PrgCurrentTrack.Maximum = 10;
+                    PrgCurrentTrack.Value = 0;
+
+                    LblNowPlaying.Text = "Idle";
+                }
+
+                if(data.Playlist.Length > 0)
+                {
+
+                    // CALCULATING THE PLAYLIST PROGRESS BAR IS HERE!
+                    int totalPlayedSoFar = 0;
+                    for (int i = 0; i < data.CurrentPlaylistIndex; i++)
+                    {
+                        totalPlayedSoFar += TrackRangeByIndex(data.NormalizedProfile, data.Playlist[i]);
+                    }
+
+                    // This is different than the above calculation, because the above calculation COULD be a different track on the
+                    // record than the current playlist item (if the user moves the tonearm).
+                    int currentPlaylistTrackProgress = 0;
+                    
+                    if(data.CurrentPlaylistIndex > -1)
+                    {
+                        var profileIndex = data.Playlist[data.CurrentPlaylistIndex];
+
+                        currentPlaylistTrackProgress = data.CurrentPosition - data.NormalizedProfile[profileIndex];
+
+                        // If the toenarm somehow moved beyond the bounds of the playlist track, zero it out, because the user
+                        // is moving it around manually, and the data is no longer useful.
+                        if (currentPlaylistTrackProgress < 0)
+                        {
+                            currentPlaylistTrackProgress = 0;
+                        }
+                        else if (currentPlaylistTrackProgress > TrackRangeByIndex(data.NormalizedProfile, profileIndex))
+                        {
+                            currentPlaylistTrackProgress = 0;
+                        }
+                    }
+
+                    PrgPlaylist.Value = totalPlayedSoFar + currentPlaylistTrackProgress;
+                } else
+                {
+                    PrgPlaylist.Value = 0;
+                }
             });
+        }
+
+        private ushort TrackRangeByIndex(ushort[] profile, ushort index)
+        {
+            return (ushort)(profile[index + 1] - profile[index]);
         }
     }
 }
