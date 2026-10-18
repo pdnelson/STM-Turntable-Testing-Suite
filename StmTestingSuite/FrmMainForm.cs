@@ -651,8 +651,6 @@ namespace StmTestingSuite
                             }
                         }
 
-                        await Task.Delay(Constants.SendCommandDebounceMs);
-
                         var command = new CmdSetOverwriteRecordProfile(Conn, Logger);
                         command.UpdateInputData(positions);
                         await command.Execute();
