@@ -14,5 +14,7 @@
 
         public const byte AdvancedDataStartKey = 0b01010111;
         public const byte AdvancedDataEndKey = 0b10101000;
+
+        public const string RecordProfileFileExtension = "stpf";
     }
 }

@@ -3,6 +3,7 @@ using StmTestingSuite.Command.Base;
 using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
 using StmTestingSuite.Model.StmEnum;
+using System.Text;
 
 namespace StmTestingSuite
 {
@@ -542,6 +543,44 @@ namespace StmTestingSuite
         private void BtnTsAddAllToPlaylist_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdSetAddProfileToPlaylist(Conn, Logger));
+        }
+
+        private void BtnTsExportProfile_Click(object sender, EventArgs e)
+        {
+            StringBuilder profileString = new StringBuilder();
+
+            for(int i = 0; i < DgvProfile.Rows.Count; i++)
+            {
+                profileString.Append($"{DgvProfile.Rows[i].Cells[0].Value},{DgvProfile.Rows[i].Cells[2].Value}\n");
+            }
+
+            if(profileString.Length > 0) {
+                SaveFileDialog sfd = new SaveFileDialog();
+
+                if(sfd != null)
+                {
+                    sfd.Filter = $"{Constants.RecordProfileFileExtension} files (*.{Constants.RecordProfileFileExtension})|*.{Constants.RecordProfileFileExtension}";
+                    sfd.FilterIndex = 0;
+                    sfd.RestoreDirectory = true;
+
+                    Stream writeStream;
+
+                    if(sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        if ((writeStream = sfd.OpenFile()) != null)
+                        {
+                            try
+                            {
+                                writeStream.Write(Encoding.ASCII.GetBytes(profileString.ToString()));
+                            } 
+                            finally
+                            {
+                                writeStream.Close();
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
