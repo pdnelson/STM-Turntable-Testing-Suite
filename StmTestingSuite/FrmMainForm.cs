@@ -4,6 +4,7 @@ using StmTestingSuite.Model.Command.Group;
 using StmTestingSuite.Model.Command.Input;
 using StmTestingSuite.Model.StmEnum;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StmTestingSuite
 {
@@ -549,30 +550,31 @@ namespace StmTestingSuite
         {
             StringBuilder profileString = new StringBuilder();
 
-            for(int i = 0; i < DgvProfile.Rows.Count; i++)
+            for (int i = 0; i < DgvProfile.Rows.Count; i++)
             {
                 profileString.Append($"{DgvProfile.Rows[i].Cells[0].Value},{DgvProfile.Rows[i].Cells[2].Value}\n");
             }
 
-            if(profileString.Length > 0) {
+            if (profileString.Length > 0)
+            {
                 SaveFileDialog sfd = new SaveFileDialog();
 
-                if(sfd != null)
+                if (sfd != null)
                 {
-                    sfd.Filter = $"{Constants.RecordProfileFileExtension} files (*.{Constants.RecordProfileFileExtension})|*.{Constants.RecordProfileFileExtension}";
+                    sfd.Filter = Constants.FileDialogFilter;
                     sfd.FilterIndex = 0;
                     sfd.RestoreDirectory = true;
 
                     Stream writeStream;
 
-                    if(sfd.ShowDialog() == DialogResult.OK)
+                    if (sfd.ShowDialog() == DialogResult.OK)
                     {
                         if ((writeStream = sfd.OpenFile()) != null)
                         {
                             try
                             {
                                 writeStream.Write(Encoding.ASCII.GetBytes(profileString.ToString()));
-                            } 
+                            }
                             finally
                             {
                                 writeStream.Close();
@@ -580,6 +582,82 @@ namespace StmTestingSuite
                         }
                     }
                 }
+            }
+        }
+
+        private void BtnTsLoadProfile_Click(object sender, EventArgs e)
+        {
+            var fileContent = "";
+
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.InitialDirectory = "c:\\";
+                ofd.Filter = Constants.FileDialogFilter;
+                ofd.FilterIndex = 0;
+                ofd.RestoreDirectory = true;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    var fileStream = ofd.OpenFile();
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        fileContent = reader.ReadToEnd();
+                    }
+                }
+            }
+
+            if (fileContent != "")
+            {
+                Utilities.CommandWrapper(ConnMonitor, async () =>
+                {
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        DgvProfile.Rows.Clear();
+                    });
+
+                    await Task.Delay(Constants.SendCommandDebounceMs);
+
+                    string[] dataRows = fileContent.Split('\n');
+
+                    if (dataRows.Length > 0)
+                    {
+                        ushort[] positions = new ushort[dataRows.Length - 1];
+
+                        // - 1 to skip the empty row at the end
+                        for (ushort i = 0; i < dataRows.Length - 1; i++)
+                        {
+                            string[] splitRow = dataRows[i].Split(',', 2);
+
+                            ushort position = UInt16.Parse(splitRow[0]);
+                            string name = splitRow[1];
+
+                            positions[i] = position;
+
+                            if (i == dataRows.Length - 2)
+                            {
+                                Utilities.WriteToUiFromThread(this, () =>
+                                {
+                                    DgvProfile.Rows.Add(position, "N/A", "Record End");
+                                });
+                            }
+                            else
+                            {
+                                var track = i + 1;
+                                Utilities.WriteToUiFromThread(this, () =>
+                                {
+                                    DgvProfile.Rows.Add(position, track, name);
+                                });
+                            }
+                        }
+
+                        await Task.Delay(Constants.SendCommandDebounceMs);
+
+                        var command = new CmdSetOverwriteRecordProfile(Conn, Logger);
+                        command.UpdateInputData(positions);
+                        await command.Execute();
+                    }
+                });
             }
         }
     }

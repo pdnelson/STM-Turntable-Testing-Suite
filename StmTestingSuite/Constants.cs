@@ -16,5 +16,7 @@
         public const byte AdvancedDataEndKey = 0b10101000;
 
         public const string RecordProfileFileExtension = "stpf";
+
+        public const string FileDialogFilter = $"{RecordProfileFileExtension} files (*.{RecordProfileFileExtension})|*.{RecordProfileFileExtension}";
     }
 }

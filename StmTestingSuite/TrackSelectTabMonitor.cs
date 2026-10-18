@@ -92,7 +92,7 @@ namespace StmTestingSuite
                         {
                             if (i == data.NormalizedProfile.Length - 1)
                             {
-                                DgvProfile.Rows.Add(data.NormalizedProfile[i], "N/A", $"Record End");
+                                DgvProfile.Rows.Add(data.NormalizedProfile[i], "N/A", "Record End");
                             }
                             else
                             {

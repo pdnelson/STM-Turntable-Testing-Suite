@@ -169,15 +169,15 @@
             BtnTsLoadProfile = new Button();
             BtnTsAddTrack = new Button();
             DgvProfile = new DataGridView();
+            CmnTsPosition = new DataGridViewTextBoxColumn();
+            CmnTrackNumber = new DataGridViewTextBoxColumn();
+            CmnTsName = new DataGridViewTextBoxColumn();
+            CmnTsAddToPlaylist = new DataGridViewButtonColumn();
             CboSerialOptions = new ComboBox();
             LblSerialOptions = new Label();
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            CmnTsPosition = new DataGridViewTextBoxColumn();
-            CmnTrackNumber = new DataGridViewTextBoxColumn();
-            CmnTsName = new DataGridViewTextBoxColumn();
-            CmnTsAddToPlaylist = new DataGridViewButtonColumn();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -1630,6 +1630,7 @@
             BtnTsLoadProfile.TabIndex = 2;
             BtnTsLoadProfile.Text = "Load Profile";
             BtnTsLoadProfile.UseVisualStyleBackColor = true;
+            BtnTsLoadProfile.Click += BtnTsLoadProfile_Click;
             // 
             // BtnTsAddTrack
             // 
@@ -1650,6 +1651,32 @@
             DgvProfile.Name = "DgvProfile";
             DgvProfile.Size = new Size(743, 148);
             DgvProfile.TabIndex = 0;
+            // 
+            // CmnTsPosition
+            // 
+            CmnTsPosition.HeaderText = "Position";
+            CmnTsPosition.Name = "CmnTsPosition";
+            CmnTsPosition.Width = 65;
+            // 
+            // CmnTrackNumber
+            // 
+            CmnTrackNumber.HeaderText = "Track #";
+            CmnTrackNumber.Name = "CmnTrackNumber";
+            CmnTrackNumber.ReadOnly = true;
+            CmnTrackNumber.Width = 70;
+            // 
+            // CmnTsName
+            // 
+            CmnTsName.HeaderText = "Name";
+            CmnTsName.Name = "CmnTsName";
+            CmnTsName.Width = 400;
+            // 
+            // CmnTsAddToPlaylist
+            // 
+            CmnTsAddToPlaylist.HeaderText = "Add to Playlist";
+            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
+            CmnTsAddToPlaylist.Text = "Add to Playlist";
+            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
             // 
             // CboSerialOptions
             // 
@@ -1698,32 +1725,6 @@
             BtnRefreshSerialPorts.Text = "Refresh";
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
-            // 
-            // CmnTsPosition
-            // 
-            CmnTsPosition.HeaderText = "Position";
-            CmnTsPosition.Name = "CmnTsPosition";
-            CmnTsPosition.Width = 65;
-            // 
-            // CmnTrackNumber
-            // 
-            CmnTrackNumber.HeaderText = "Track #";
-            CmnTrackNumber.Name = "CmnTrackNumber";
-            CmnTrackNumber.ReadOnly = true;
-            CmnTrackNumber.Width = 70;
-            // 
-            // CmnTsName
-            // 
-            CmnTsName.HeaderText = "Name";
-            CmnTsName.Name = "CmnTsName";
-            CmnTsName.Width = 400;
-            // 
-            // CmnTsAddToPlaylist
-            // 
-            CmnTsAddToPlaylist.HeaderText = "Add to Playlist";
-            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
-            CmnTsAddToPlaylist.Text = "Add to Playlist";
-            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
             // 
             // FrmMainForm
             // 
