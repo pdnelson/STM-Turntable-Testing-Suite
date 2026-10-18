@@ -672,5 +672,18 @@ namespace StmTestingSuite
                 ExecuteSimpleCommand(command);
             }
         }
+
+        private void DgvPlaylist_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                var command = new CmdSetRemoveFromPlaylist(Conn, Logger);
+                command.UpdateInputData((byte)e.RowIndex);
+                ExecuteSimpleCommand(command);
+            }
+        }
     }
 }
