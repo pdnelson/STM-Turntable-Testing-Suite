@@ -675,9 +675,12 @@ namespace StmTestingSuite
                     ExecuteSimpleCommand(command);
                 } else
                 {
-                    var command = new CmdActionGoToPositionH(Conn, Logger);
-                    command.UpdateInputData($"{DgvProfile.Rows[e.RowIndex].Cells[0].Value},0,{Constants.SpeedAutomatic}");
-                    ExecuteSimpleCommand(command);
+                    if (e.RowIndex != DgvProfile.Rows.Count - 1)
+                    {
+                        var command = new CmdActionGoToPositionH(Conn, Logger);
+                        command.UpdateInputData($"{DgvProfile.Rows[e.RowIndex].Cells[0].Value},0,{Constants.SpeedAutomatic}");
+                        ExecuteSimpleCommand(command);
+                    }
                 }
             }
         }
