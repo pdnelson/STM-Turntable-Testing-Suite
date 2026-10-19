@@ -169,16 +169,16 @@
             BtnTsLoadProfile = new Button();
             BtnTsAddTrack = new Button();
             DgvProfile = new DataGridView();
-            CboSerialOptions = new ComboBox();
-            LblSerialOptions = new Label();
-            LblConnectionStatus = new Label();
-            BtnConnect = new Button();
-            BtnRefreshSerialPorts = new Button();
             CmnTsPosition = new DataGridViewTextBoxColumn();
             CmnTrackNumber = new DataGridViewTextBoxColumn();
             CmnTsName = new DataGridViewTextBoxColumn();
             CmnTsAddToPlaylist = new DataGridViewButtonColumn();
             CmnPlay = new DataGridViewButtonColumn();
+            CboSerialOptions = new ComboBox();
+            LblSerialOptions = new Label();
+            LblConnectionStatus = new Label();
+            BtnConnect = new Button();
+            BtnRefreshSerialPorts = new Button();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -1659,6 +1659,41 @@
             DgvProfile.CellContentClick += DgvProfile_CellContentClick;
             DgvProfile.CellEndEdit += DgvProfile_CellEndEdit;
             // 
+            // CmnTsPosition
+            // 
+            CmnTsPosition.HeaderText = "Position";
+            CmnTsPosition.Name = "CmnTsPosition";
+            CmnTsPosition.Width = 65;
+            // 
+            // CmnTrackNumber
+            // 
+            CmnTrackNumber.HeaderText = "Track #";
+            CmnTrackNumber.Name = "CmnTrackNumber";
+            CmnTrackNumber.ReadOnly = true;
+            CmnTrackNumber.Width = 70;
+            // 
+            // CmnTsName
+            // 
+            CmnTsName.HeaderText = "Name";
+            CmnTsName.Name = "CmnTsName";
+            CmnTsName.Width = 370;
+            // 
+            // CmnTsAddToPlaylist
+            // 
+            CmnTsAddToPlaylist.HeaderText = "";
+            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
+            CmnTsAddToPlaylist.Text = "Add to Playlist";
+            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
+            // 
+            // CmnPlay
+            // 
+            CmnPlay.HeaderText = "";
+            CmnPlay.Name = "CmnPlay";
+            CmnPlay.ReadOnly = true;
+            CmnPlay.Text = "Play";
+            CmnPlay.UseColumnTextForButtonValue = true;
+            CmnPlay.Width = 75;
+            // 
             // CboSerialOptions
             // 
             CboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -1707,41 +1742,6 @@
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
             // 
-            // CmnTsPosition
-            // 
-            CmnTsPosition.HeaderText = "Position";
-            CmnTsPosition.Name = "CmnTsPosition";
-            CmnTsPosition.Width = 65;
-            // 
-            // CmnTrackNumber
-            // 
-            CmnTrackNumber.HeaderText = "Track #";
-            CmnTrackNumber.Name = "CmnTrackNumber";
-            CmnTrackNumber.ReadOnly = true;
-            CmnTrackNumber.Width = 70;
-            // 
-            // CmnTsName
-            // 
-            CmnTsName.HeaderText = "Name";
-            CmnTsName.Name = "CmnTsName";
-            CmnTsName.Width = 370;
-            // 
-            // CmnTsAddToPlaylist
-            // 
-            CmnTsAddToPlaylist.HeaderText = "";
-            CmnTsAddToPlaylist.Name = "CmnTsAddToPlaylist";
-            CmnTsAddToPlaylist.Text = "Add to Playlist";
-            CmnTsAddToPlaylist.UseColumnTextForButtonValue = true;
-            // 
-            // CmnPlay
-            // 
-            CmnPlay.HeaderText = "";
-            CmnPlay.Name = "CmnPlay";
-            CmnPlay.ReadOnly = true;
-            CmnPlay.Text = "Play";
-            CmnPlay.UseColumnTextForButtonValue = true;
-            CmnPlay.Width = 75;
-            // 
             // FrmMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1756,7 +1756,7 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmMainForm";
-            Text = "Statimatic STM Testing Suite";
+            Text = "Statimatic Turntable Testing Suite";
             TabMain.ResumeLayout(false);
             TabSimple.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).EndInit();
