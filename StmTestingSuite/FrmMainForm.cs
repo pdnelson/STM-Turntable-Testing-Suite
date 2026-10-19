@@ -615,6 +615,8 @@ namespace StmTestingSuite
 
                 Utilities.CommandWrapper(ConnMonitor, async () =>
                 {
+                    await Task.Delay(Constants.TrackSelectTabDataPollMs);
+
                     Utilities.WriteToUiFromThread(this, () =>
                     {
                         DgvProfile.Rows.Clear();
