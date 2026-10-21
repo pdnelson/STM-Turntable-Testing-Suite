@@ -140,13 +140,12 @@ namespace StmTestingSuite
                 }
 
                 // POPULATING THE PLAYLIST IS HERE!!!
+                int playlistProgressMax = 0;
 
                 // If the counts are different, then the track listing has changed, and we need to update the whole thing
                 if (DgvPlaylist.Rows.Count != data.Playlist.Length)
                 {
                     DgvPlaylist.Rows.Clear();
-
-                    int playlistProgressMax = 0;
 
                     if (data.Playlist.Length > 0)
                     {
@@ -170,18 +169,16 @@ namespace StmTestingSuite
                         }
 
                     }
-
-                    PrgPlaylist.Maximum = playlistProgressMax;
                 }
                 else
                 {
                     for (ushort i = 0; i < data.Playlist.Length; i++)
                     {
-                        var profileTrack = data.Playlist[i];
+                        var profileTrackIndex = data.Playlist[i];
 
                         DgvPlaylist.Rows[i].Cells[0].Value = i + 1;
-                        DgvPlaylist.Rows[i].Cells[1].Value = DgvProfile.Rows[profileTrack].Cells[1].Value;
-                        DgvPlaylist.Rows[i].Cells[2].Value = DgvProfile.Rows[profileTrack].Cells[2].Value;
+                        DgvPlaylist.Rows[i].Cells[1].Value = DgvProfile.Rows[profileTrackIndex].Cells[1].Value;
+                        DgvPlaylist.Rows[i].Cells[2].Value = DgvProfile.Rows[profileTrackIndex].Cells[2].Value;
 
                         if (data.CurrentPlaylistIndex == i)
                         {
@@ -193,11 +190,14 @@ namespace StmTestingSuite
                         }
 
                         DgvPlaylist.UpdateCellValue(0, i);
+                        playlistProgressMax += TrackRangeByIndex(data.NormalizedProfile, profileTrackIndex);
                     }
                 }
 
+                PrgPlaylist.Maximum = playlistProgressMax;
+
                 // CALCULATING THE CURRENT PLAYING PROGRESS BAR IS HERE!
-                if(onTrackProfileIndex > -1)
+                if (onTrackProfileIndex > -1)
                 {
                     LblNowPlaying.Text = $"Now Playing: {DgvProfile.Rows[onTrackProfileIndex].Cells[2].Value}";
 
