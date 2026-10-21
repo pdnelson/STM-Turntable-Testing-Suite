@@ -676,12 +676,13 @@ namespace StmTestingSuite
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                if(e.ColumnIndex == 3)
+                if (e.ColumnIndex == 3)
                 {
                     var command = new CmdSetAddToPlaylist(Conn, Logger);
                     command.UpdateInputData((byte)e.RowIndex);
                     ExecuteSimpleCommand(command);
-                } else
+                }
+                else
                 {
                     if (e.RowIndex != DgvProfile.Rows.Count - 1)
                     {
@@ -717,6 +718,16 @@ namespace StmTestingSuite
                 command.UpdateInputData($"{e.RowIndex},{DgvProfile.Rows[e.RowIndex].Cells[0].Value}");
                 ExecuteSimpleCommand(command);
             }
+        }
+
+        private void BtnTsPause_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdActionPauseUnpause(Conn, Logger));
+        }
+
+        private void BtnTsPlayReturn_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdActionPlayOrReturn(Conn, Logger));
         }
     }
 }
