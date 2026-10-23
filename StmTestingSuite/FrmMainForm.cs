@@ -28,6 +28,9 @@ namespace StmTestingSuite
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
 
+            DgvPlaylist.RowHeadersVisible = false;
+            DgvProfile.RowHeadersVisible = false;
+
             // Populate command group list items
             List<StmExternalCommandGroup> groupOptions = [];
             foreach (StmExternalCommandGroupType commandGroup in Enum.GetValues<StmExternalCommandGroupType>())

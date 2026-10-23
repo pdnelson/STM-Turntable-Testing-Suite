@@ -82,8 +82,6 @@ namespace StmTestingSuite
         {
             Utilities.WriteToUiFromThread(Form, () =>
             {
-                short onTrackProfileIndex = -1;
-
                 // POPULATING THE RECORD PROFILE IS HERE!!!
 
                 // If the counts are different, then the track listing has changed, and we need to update the whole thing
@@ -110,7 +108,6 @@ namespace StmTestingSuite
                 // Otherwise, we can just update each row with what is there. Only the position can possibly change
                 else
                 {
-                    bool isOnAnyTrack = false;
                     for (ushort i = 0; i < data.NormalizedProfile.Length; i++)
                     {
                         DgvProfile.Rows[i].Cells[0].Value = data.NormalizedProfile[i].ToString();
@@ -118,13 +115,9 @@ namespace StmTestingSuite
 
                         if(i != data.NormalizedProfile.Length - 1)
                         {
-                            bool onTrack = data.CurrentPosition >= data.NormalizedProfile[i] && data.CurrentPosition < data.NormalizedProfile[i + 1];
-
-                            if (onTrack)
+                            if (i == data.CurrentPlayingTrackIndex)
                             {
                                 DgvProfile.Rows[i].DefaultCellStyle.BackColor = Color.Coral;
-                                isOnAnyTrack = true;
-                                onTrackProfileIndex = (short)i;
                             }
                             else
                             {
@@ -132,15 +125,7 @@ namespace StmTestingSuite
                             }
                         }
                     }
-
-                    if(!isOnAnyTrack)
-                    {
-                        onTrackProfileIndex = -1;
-                    }
                 }
-
-                // POPULATING THE PLAYLIST IS HERE!!!
-                int playlistProgressMax = 0;
 
                 // If the counts are different, then the track listing has changed, and we need to update the whole thing
                 if (DgvPlaylist.Rows.Count != data.Playlist.Length)
@@ -164,8 +149,6 @@ namespace StmTestingSuite
                             {
                                 DgvPlaylist.Rows[i].DefaultCellStyle.BackColor = Color.Teal;
                             }
-
-                            playlistProgressMax += TrackRangeByIndex(data.NormalizedProfile, profileTrackIndex);
                         }
 
                     }
@@ -190,73 +173,22 @@ namespace StmTestingSuite
                         }
 
                         DgvPlaylist.UpdateCellValue(0, i);
-                        playlistProgressMax += TrackRangeByIndex(data.NormalizedProfile, profileTrackIndex);
                     }
                 }
 
-                PrgPlaylist.Maximum = playlistProgressMax;
+                PrgCurrentTrack.Maximum = data.CurrentTrackProgressMax;
+                PrgCurrentTrack.Value = data.CurrentTrackProgress;
+                PrgPlaylist.Maximum = data.PlaylistProgressMax;
+                PrgPlaylist.Value = data.PlaylistProgress;
 
-                // CALCULATING THE CURRENT PLAYING PROGRESS BAR IS HERE!
-                if (onTrackProfileIndex > -1)
+                if(data.CurrentPlayingTrackIndex > -1)
                 {
-                    LblNowPlaying.Text = $"Now Playing: {DgvProfile.Rows[onTrackProfileIndex].Cells[2].Value}";
-
-                    PrgCurrentTrack.Minimum = data.NormalizedProfile[onTrackProfileIndex];
-                    PrgCurrentTrack.Maximum = data.NormalizedProfile[onTrackProfileIndex + 1];
-                    PrgCurrentTrack.Value = data.CurrentPosition;
-                } 
-                else
-                {
-                    PrgCurrentTrack.Minimum = 0;
-                    PrgCurrentTrack.Maximum = 10;
-                    PrgCurrentTrack.Value = 0;
-
-                    LblNowPlaying.Text = "Idle";
-                }
-
-                if(data.Playlist.Length > 0)
-                {
-
-                    // CALCULATING THE PLAYLIST PROGRESS BAR IS HERE!
-                    int totalPlayedSoFar = 0;
-                    for (int i = 0; i < data.CurrentPlaylistIndex; i++)
-                    {
-                        totalPlayedSoFar += TrackRangeByIndex(data.NormalizedProfile, data.Playlist[i]);
-                    }
-
-                    // This is different than the above calculation, because the above calculation COULD be a different track on the
-                    // record than the current playlist item (if the user moves the tonearm).
-                    int currentPlaylistTrackProgress = 0;
-                    
-                    if(data.CurrentPlaylistIndex > -1)
-                    {
-                        var profileIndex = data.Playlist[data.CurrentPlaylistIndex];
-
-                        currentPlaylistTrackProgress = data.CurrentPosition - data.NormalizedProfile[profileIndex];
-
-                        // If the toenarm somehow moved beyond the bounds of the playlist track, zero it out, because the user
-                        // is moving it around manually, and the data is no longer useful.
-                        if (currentPlaylistTrackProgress < 0)
-                        {
-                            currentPlaylistTrackProgress = 0;
-                        }
-                        else if (currentPlaylistTrackProgress > TrackRangeByIndex(data.NormalizedProfile, profileIndex))
-                        {
-                            currentPlaylistTrackProgress = 0;
-                        }
-                    }
-
-                    PrgPlaylist.Value = totalPlayedSoFar + currentPlaylistTrackProgress;
+                    LblNowPlaying.Text = $"Now Playing: {DgvProfile.Rows[data.CurrentPlayingTrackIndex].Cells[2].Value}";
                 } else
                 {
-                    PrgPlaylist.Value = 0;
+                    LblNowPlaying.Text = "Idle";
                 }
             });
-        }
-
-        private ushort TrackRangeByIndex(ushort[] profile, ushort index)
-        {
-            return (ushort)(profile[index + 1] - profile[index]);
         }
     }
 }

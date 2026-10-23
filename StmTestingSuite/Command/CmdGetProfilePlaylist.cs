@@ -7,14 +7,14 @@ namespace StmTestingSuite.Command
 {
     internal class CmdGetProfilePlaylist(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
-        private const ushort KnownDataSize = 7;
+        private const ushort KnownDataSize = 20;
 
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_PROFILE_PLAYLIST;
         public override string Name => "Record Profile and Playlist";
 
         // This is not the actual response size, this is just the max the response size could be.
-        public override ushort ResponseSize => 163;
+        public override ushort ResponseSize => 176;
 
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
@@ -47,6 +47,20 @@ namespace StmTestingSuite.Command
                 ushort normalizedProfileSize = rawData[2];
                 NormalizedProfile = new ushort[normalizedProfileSize >> 1];
 
+                byte[] trackProgress = { rawData[6], rawData[7] };
+                CurrentTrackProgress = BitConverter.ToUInt16(trackProgress);
+
+                byte[] trackProgressMax = { rawData[8], rawData[9] };
+                CurrentTrackProgressMax = BitConverter.ToUInt16(trackProgressMax);
+
+                CurrentPlayingTrackIndex = (sbyte)rawData[10];
+
+                byte[] playlistProgress = { rawData[11], rawData[12], rawData[13], rawData[14] };
+                PlaylistProgress = BitConverter.ToInt32(playlistProgress);
+
+                byte[] playlistProgressMax = { rawData[15], rawData[16], rawData[17], rawData[18] };
+                PlaylistProgressMax = BitConverter.ToInt32(playlistProgressMax);
+
                 ushort profileIndex = 0;
                 ushort dataIndex = KnownDataSize - 1;
 
@@ -74,6 +88,11 @@ namespace StmTestingSuite.Command
 
             public ushort CurrentPosition { get; }
             public short CurrentPlaylistIndex { get; }
+            public ushort CurrentTrackProgress { get; }
+            public ushort CurrentTrackProgressMax { get; }
+            public short CurrentPlayingTrackIndex { get; }
+            public int PlaylistProgress { get; }
+            public int PlaylistProgressMax { get; }
             public ushort[] NormalizedProfile { get; }
             public ushort[] Playlist { get; }
 
