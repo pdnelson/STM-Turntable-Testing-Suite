@@ -23,7 +23,7 @@ namespace StmTestingSuite
             Conn = new StmConnector();
             Logger = new StmLogger(DgvSimpleLog, this);
             AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblActualHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData);
-            TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress, LblTsCurrentTrack);
+            TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress, LblTsCurrentTrack, ChkAutoPickup);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -204,6 +204,7 @@ namespace StmTestingSuite
                 new CmdActionHomeClutch(Conn, Logger),
                 new CmdActionSkipForward(Conn, Logger),
                 new CmdActionSkipForward(Conn, Logger),
+                new CmdActionPlayAtTrackIndex(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -689,8 +690,8 @@ namespace StmTestingSuite
                 {
                     if (e.RowIndex != DgvProfile.Rows.Count - 1)
                     {
-                        var command = new CmdActionGoToPositionH(Conn, Logger);
-                        command.UpdateInputData($"{DgvProfile.Rows[e.RowIndex].Cells[0].Value},0,{Constants.SpeedAutomatic}");
+                        var command = new CmdActionPlayAtTrackIndex(Conn, Logger);
+                        command.UpdateInputData(e.RowIndex.ToString());
                         ExecuteSimpleCommand(command);
                     }
                 }
@@ -731,6 +732,20 @@ namespace StmTestingSuite
         private void BtnTsPlayReturn_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdActionPlayOrReturn(Conn, Logger));
+        }
+
+        private void ChkAutoPickup_Click(object sender, EventArgs e)
+        {
+            TrackSelectTabMonitor.Paused = true;
+
+            Utilities.CommandWrapper(ConnMonitor, async () =>
+            {
+                await new CmdSetToggleAutoReturn(Conn, Logger).Execute();
+
+                await Task.Delay(Constants.TrackSelectTabDataPollMs);
+
+                TrackSelectTabMonitor.Paused = false;
+            });
         }
     }
 }

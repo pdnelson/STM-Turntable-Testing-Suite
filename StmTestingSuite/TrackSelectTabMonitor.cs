@@ -1,11 +1,4 @@
 ﻿using StmTestingSuite.Command;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Runtime.CompilerServices;
-using System.Text;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace StmTestingSuite
 {
@@ -23,9 +16,13 @@ namespace StmTestingSuite
         // Progress bars
         ProgressBar prgCurrentTrack,
         ProgressBar prgPlaylist,
-        
+
         // Labels
-        Label lblNowPlaying)
+        Label lblNowPlaying,
+
+        // Checkboxes
+        CheckBox chkAutoReturn
+        )
     {
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
@@ -42,6 +39,8 @@ namespace StmTestingSuite
         ProgressBar PrgPlaylist { get; } = prgPlaylist;
 
         Label LblNowPlaying { get; } = lblNowPlaying;
+
+        CheckBox ChkAutoReturn { get; } = chkAutoReturn;
 
         public bool Running { get; set; } = false;
 
@@ -176,6 +175,7 @@ namespace StmTestingSuite
                     }
                 }
 
+                ChkAutoReturn.Checked = data.AutoReturn;
                 PrgCurrentTrack.Maximum = data.CurrentTrackProgressMax;
                 PrgCurrentTrack.Value = data.CurrentTrackProgress;
                 PrgPlaylist.Maximum = data.PlaylistProgressMax;

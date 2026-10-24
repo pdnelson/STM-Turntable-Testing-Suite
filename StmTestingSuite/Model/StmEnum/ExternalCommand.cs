@@ -17,6 +17,7 @@
         ACTION_HOME_CLUTCH = 10,
         ACTION_SKIP_FORWARD = 11,
         ACTION_SKIP_BACKWARD = 12,
+        ACTION_PLAY_AT_TRACK_INDEX = 13,
 
         // Set commands
         SET_SPEED = 31,
@@ -35,6 +36,7 @@
         SET_ADD_TO_PLAYLIST = 44,
         SET_REMOVE_FROM_PLAYLIST = 45,
         SET_POSITION_AT_PROFILE_INDEX = 46,
+        SET_TOGGLE_AUTO_RETURN = 47,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,

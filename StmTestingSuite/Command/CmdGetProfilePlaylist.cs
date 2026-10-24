@@ -7,7 +7,7 @@ namespace StmTestingSuite.Command
 {
     internal class CmdGetProfilePlaylist(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
-        private const ushort KnownDataSize = 20;
+        private const ushort KnownDataSize = 21;
 
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_PROFILE_PLAYLIST;
@@ -61,6 +61,8 @@ namespace StmTestingSuite.Command
                 byte[] playlistProgressMax = { rawData[15], rawData[16], rawData[17], rawData[18] };
                 PlaylistProgressMax = BitConverter.ToInt32(playlistProgressMax);
 
+                AutoReturn = rawData[19] == 1;
+
                 ushort profileIndex = 0;
                 ushort dataIndex = KnownDataSize - 1;
 
@@ -86,6 +88,7 @@ namespace StmTestingSuite.Command
                 CurrentPosition = BitConverter.ToUInt16(normHorizontalBytes);
             }
 
+            public bool AutoReturn { get; }
             public ushort CurrentPosition { get; }
             public short CurrentPlaylistIndex { get; }
             public ushort CurrentTrackProgress { get; }
