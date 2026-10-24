@@ -75,6 +75,8 @@ namespace StmTestingSuite
 
         public bool Running { get; set; } = false;
 
+        public bool Paused { get; set; } = false;
+
         public void Start()
         {
             var dataCommand = new CmdGetAdvancedSuiteData(Conn, null);
@@ -84,11 +86,14 @@ namespace StmTestingSuite
             {
                 while(Running)
                 {
-                    CmdGetAdvancedSuiteData.Response? data = await dataCommand.ExecuteWithResult();
-
-                    if(data != null)
+                    if(!Paused)
                     {
-                        UpdateUserInterface((CmdGetAdvancedSuiteData.Response)data);
+                        CmdGetAdvancedSuiteData.Response? data = await dataCommand.ExecuteWithResult();
+
+                        if (data != null)
+                        {
+                            UpdateUserInterface((CmdGetAdvancedSuiteData.Response)data);
+                        }
                     }
 
                     await Task.Delay(Constants.AdvancedTabDataPollMs);

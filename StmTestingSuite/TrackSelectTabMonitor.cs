@@ -63,9 +63,9 @@ namespace StmTestingSuite
                         {
                             UpdateUserInterface((CmdGetProfilePlaylist.Response)data);
                         }
-
-                        await Task.Delay(Constants.TrackSelectTabDataPollMs);
                     }
+
+                    await Task.Delay(Constants.TrackSelectTabDataPollMs);
                 }
             });
 

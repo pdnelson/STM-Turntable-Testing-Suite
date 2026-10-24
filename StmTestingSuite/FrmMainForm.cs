@@ -325,48 +325,40 @@ namespace StmTestingSuite
             ExecuteSimpleCommand(new CmdSetRotateSize(Conn, Logger));
         }
 
-        private void RadSize7In_Click(object sender, EventArgs e)
+        private void UpdateSize(SizeOption newSize)
         {
-            if (((RadioButton)sender).Checked)
+            AdvTabMonitor.Paused = true;
+
+            Utilities.CommandWrapper(ConnMonitor, async () =>
             {
                 var command = new CmdSetSize(Conn, Logger);
-                command.UpdateInputData((byte)SizeOption.IN_7);
+                command.UpdateInputData((byte)newSize);
+                await command.Execute();
 
-                ExecuteSimpleCommand(command);
-            }
+                await Task.Delay(Constants.AdvancedTabDataPollMs);
+
+                AdvTabMonitor.Paused = false;
+            });
+        }
+
+        private void RadSize7In_Click(object sender, EventArgs e)
+        {
+            UpdateSize(SizeOption.IN_7);
         }
 
         private void RadSize10In_Click(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked)
-            {
-                var command = new CmdSetSize(Conn, Logger);
-                command.UpdateInputData((byte)SizeOption.IN_10);
-
-                ExecuteSimpleCommand(command);
-            }
+            UpdateSize(SizeOption.IN_10);
         }
 
         private void RadSize12In_Click(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked)
-            {
-                var command = new CmdSetSize(Conn, Logger);
-                command.UpdateInputData((byte)SizeOption.IN_12);
-
-                ExecuteSimpleCommand(command);
-            }
+            UpdateSize(SizeOption.IN_12);
         }
 
         private void RadSizeAuto_Click(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked)
-            {
-                var command = new CmdSetSize(Conn, Logger);
-                command.UpdateInputData((byte)SizeOption.AUTO);
-
-                ExecuteSimpleCommand(command);
-            }
+            UpdateSize(SizeOption.AUTO);
         }
 
         private void BtnSubmitSpeed_Click(object sender, EventArgs e)
