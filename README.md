@@ -22,7 +22,7 @@ Advanced view lets you see all aspects of the turntable's state, including verti
 <img width="795" height="664" alt="image" src="https://github.com/user-attachments/assets/cc440503-bd2c-46a4-aa18-5888d8849a97" />
 
 ## Track Select
-Track Select lets you view your record's normalized profile, and build a playlist out of the tracks on it. Progress bars at the top show you, from top to bottom, the current playing track, and then the overall playlist's progress.
+Track Select lets you view your record's normalized profile, and build a playlist out of the tracks on it. Progress bars at the top show you, from top to bottom, the current playing track, and then the overall playlist's progress. The rows highlighted in orange are the ones currently playing.
 
 <img width="795" height="664" alt="image" src="https://github.com/user-attachments/assets/0c125f47-47a4-433e-b39e-c2d9f8a759ae" />
 
