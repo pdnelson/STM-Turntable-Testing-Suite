@@ -19,11 +19,13 @@ Simple View is the simplest test tab: You can execute commands, one at a time, m
 ## Advanced View
 Advanced view lets you see all aspects of the turntable's state, including vertical and horizontal positioning, the current speed, and so on. Functions are also available to allow you to execute advanced movements, while concurrently monitoring the state.
 
-<img width="793" height="576" alt="image" src="https://github.com/user-attachments/assets/e2e94d23-eeb6-43b9-9f39-64f4e5454ad3" />
+<img width="795" height="664" alt="image" src="https://github.com/user-attachments/assets/cc440503-bd2c-46a4-aa18-5888d8849a97" />
 
+## Track Select
+Track Select lets you view your record's normalized profile, and build a playlist out of the tracks on it. Progress bars at the top show you, from top to bottom, the current playing track, and then the overall playlist's progress.
 
-## Graphical View
-Coming soon...
+<img width="795" height="664" alt="image" src="https://github.com/user-attachments/assets/0c125f47-47a4-433e-b39e-c2d9f8a759ae" />
+
 
 ## Statimatic Turntables This Supports
 - STM-01
