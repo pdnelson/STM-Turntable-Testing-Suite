@@ -10,7 +10,7 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_ADVANCED_SUITE_DATA;
         public override string Name => "Advanced Suite Data";
-        public override ushort ResponseSize => 24;
+        public override ushort ResponseSize => 27;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             Response? response = null;
@@ -61,6 +61,11 @@ namespace StmTestingSuite.Command
 
                 byte[] actHorizontalBytes = { rawData[21], rawData[22] };
                 ActualHorizontalPosition = BitConverter.ToUInt16(actHorizontalBytes);
+
+                byte[] photoDiodeBytes = { rawData[23], rawData[24] };
+                PhotoDiodeValue = BitConverter.ToUInt16(photoDiodeBytes);
+
+                HeadshellLEDStatus = rawData[25] == 1;
             }
 
             public ushort VerticalPosition { get; }
@@ -76,10 +81,12 @@ namespace StmTestingSuite.Command
             public float SpeedTarget { get; }
             public SizeOption SizeSetting { get; }
             public ClutchStatus ClutchStatus { get; }
+            public ushort PhotoDiodeValue { get; }
+            public bool HeadshellLEDStatus { get; }
 
             public readonly override string ToString()
             {
-                return $"({VerticalPosition}, {NormalizedHorizontalPosition}, {ActualHorizontalPosition} {LiftStatus}, {HomeStatus}, {ClutchStatus}, {CommandId}, {SubCommandId}, {CommandStatus}, {UpTimeSeconds}, {SpeedSetting}, {SpeedTarget}, {SizeSetting})";
+                return $"({VerticalPosition}, {NormalizedHorizontalPosition}, {ActualHorizontalPosition} {LiftStatus}, {HomeStatus}, {ClutchStatus}, {CommandId}, {SubCommandId}, {CommandStatus}, {UpTimeSeconds}, {SpeedSetting}, {SpeedTarget}, {SizeSetting}, {HeadshellLEDStatus}, {PhotoDiodeValue})";
             }
         }
     }

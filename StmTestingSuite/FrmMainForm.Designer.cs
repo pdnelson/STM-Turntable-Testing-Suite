@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainForm));
             TabMain = new TabControl();
             TabSimple = new TabPage();
@@ -47,6 +50,13 @@
             CboSimpleCommandInput = new ComboBox();
             NumSimpleCommandInput = new NumericUpDown();
             tabAdvanced = new TabPage();
+            grpSensor = new GroupBox();
+            CrtSensorData = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            LblSensorLedStatusData = new Label();
+            LblLedStatus = new Label();
+            btnToggleSensorLED = new Button();
+            LblSensorValueData = new Label();
+            LblSensorValue = new Label();
             GrpCalibration = new GroupBox();
             LblHMotorPolarityData = new Label();
             LblHMotorPolarity = new Label();
@@ -187,6 +197,8 @@
             GrpSimpleInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).BeginInit();
             tabAdvanced.SuspendLayout();
+            grpSensor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CrtSensorData).BeginInit();
             GrpCalibration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumZeroAzEncoder).BeginInit();
             GrpVerticalManualMovement.SuspendLayout();
@@ -396,6 +408,7 @@
             // 
             // tabAdvanced
             // 
+            tabAdvanced.Controls.Add(grpSensor);
             tabAdvanced.Controls.Add(GrpCalibration);
             tabAdvanced.Controls.Add(GrpVerticalManualMovement);
             tabAdvanced.Controls.Add(GrpAdvancedVerticalMovement);
@@ -414,6 +427,90 @@
             tabAdvanced.TabIndex = 1;
             tabAdvanced.Text = "Advanced";
             tabAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // grpSensor
+            // 
+            grpSensor.Controls.Add(CrtSensorData);
+            grpSensor.Controls.Add(LblSensorLedStatusData);
+            grpSensor.Controls.Add(LblLedStatus);
+            grpSensor.Controls.Add(btnToggleSensorLED);
+            grpSensor.Controls.Add(LblSensorValueData);
+            grpSensor.Controls.Add(LblSensorValue);
+            grpSensor.Location = new Point(6, 394);
+            grpSensor.Name = "grpSensor";
+            grpSensor.Size = new Size(202, 155);
+            grpSensor.TabIndex = 14;
+            grpSensor.TabStop = false;
+            grpSensor.Text = "Record Sensor";
+            // 
+            // CrtSensorData
+            // 
+            chartArea1.AxisX.LabelStyle.Enabled = false;
+            chartArea1.AxisY.Maximum = 1024D;
+            chartArea1.AxisY.Minimum = 0D;
+            chartArea1.Name = "ChartArea1";
+            CrtSensorData.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            CrtSensorData.Legends.Add(legend1);
+            CrtSensorData.Location = new Point(6, 18);
+            CrtSensorData.Name = "CrtSensorData";
+            CrtSensorData.RightToLeft = RightToLeft.No;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "SensorData";
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
+            CrtSensorData.Series.Add(series1);
+            CrtSensorData.Size = new Size(185, 84);
+            CrtSensorData.TabIndex = 15;
+            // 
+            // LblSensorLedStatusData
+            // 
+            LblSensorLedStatusData.AutoSize = true;
+            LblSensorLedStatusData.Location = new Point(166, 108);
+            LblSensorLedStatusData.Name = "LblSensorLedStatusData";
+            LblSensorLedStatusData.Size = new Size(25, 15);
+            LblSensorLedStatusData.TabIndex = 4;
+            LblSensorLedStatusData.Text = "n/a";
+            // 
+            // LblLedStatus
+            // 
+            LblLedStatus.AutoSize = true;
+            LblLedStatus.Location = new Point(136, 108);
+            LblLedStatus.Name = "LblLedStatus";
+            LblLedStatus.Size = new Size(30, 15);
+            LblLedStatus.TabIndex = 3;
+            LblLedStatus.Text = "LED:";
+            // 
+            // btnToggleSensorLED
+            // 
+            btnToggleSensorLED.Location = new Point(6, 126);
+            btnToggleSensorLED.Name = "btnToggleSensorLED";
+            btnToggleSensorLED.Size = new Size(190, 23);
+            btnToggleSensorLED.TabIndex = 2;
+            btnToggleSensorLED.Text = "Toggle LED";
+            btnToggleSensorLED.UseVisualStyleBackColor = true;
+            btnToggleSensorLED.Click += button1_Click;
+            // 
+            // LblSensorValueData
+            // 
+            LblSensorValueData.AutoSize = true;
+            LblSensorValueData.Location = new Point(43, 108);
+            LblSensorValueData.Name = "LblSensorValueData";
+            LblSensorValueData.Size = new Size(25, 15);
+            LblSensorValueData.TabIndex = 1;
+            LblSensorValueData.Text = "n/a";
+            // 
+            // LblSensorValue
+            // 
+            LblSensorValue.AutoSize = true;
+            LblSensorValue.Location = new Point(6, 108);
+            LblSensorValue.Name = "LblSensorValue";
+            LblSensorValue.Size = new Size(38, 15);
+            LblSensorValue.TabIndex = 0;
+            LblSensorValue.Text = "Value:";
             // 
             // GrpCalibration
             // 
@@ -1796,6 +1893,9 @@
             GrpSimpleInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumSimpleCommandInput).EndInit();
             tabAdvanced.ResumeLayout(false);
+            grpSensor.ResumeLayout(false);
+            grpSensor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CrtSensorData).EndInit();
             GrpCalibration.ResumeLayout(false);
             GrpCalibration.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumZeroAzEncoder).EndInit();
@@ -1992,5 +2092,12 @@
         private DataGridViewTextBoxColumn CmnTsPlaylistName;
         private DataGridViewButtonColumn CmnRemove;
         private CheckBox ChkAutoPickup;
+        private GroupBox grpSensor;
+        private Label LblSensorValueData;
+        private Label LblSensorValue;
+        private Button btnToggleSensorLED;
+        private Label LblSensorLedStatusData;
+        private Label LblLedStatus;
+        private System.Windows.Forms.DataVisualization.Charting.Chart CrtSensorData;
     }
 }

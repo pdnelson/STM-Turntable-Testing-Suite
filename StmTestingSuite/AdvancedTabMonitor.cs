@@ -1,6 +1,7 @@
 ﻿using StmTestingSuite.Command;
 using StmTestingSuite.Model.StmEnum;
 using System.Text;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StmTestingSuite
 {
@@ -37,7 +38,14 @@ namespace StmTestingSuite
         Label lblCommandStatus,
 
         // Statistics
-        Label lblUpTime)
+        Label lblUpTime,
+
+        // Record sensor data
+        Chart crtRecordSensor,
+        Label lblSensorValue,
+        Label lblSensorLedStatus
+
+        )
     {
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
@@ -72,6 +80,11 @@ namespace StmTestingSuite
 
         // Statistics
         Label LblUpTime { get; } = lblUpTime;
+
+        // Record Sensor
+        Chart CrtRecordSensor { get; } = crtRecordSensor;
+        Label LblSensorValue { get; } = lblSensorValue;
+        Label LblSensorLedStatus { get; } = lblSensorLedStatus;
 
         public bool Running { get; set; } = false;
 
@@ -152,6 +165,25 @@ namespace StmTestingSuite
                 LblCurrCommand.Text = data.CommandId.GetString();
                 LblCurrSubCommand.Text = data.SubCommandId.GetString();
                 LblCommandStatus.Text = data.CommandStatus.GetString();
+
+                // Record Sensor
+                CrtRecordSensor.Series[0].Points.Add(data.PhotoDiodeValue);
+
+                if (CrtRecordSensor.Series[0].Points.Count() > 25)
+                {
+                    CrtRecordSensor.Series[0].Points.RemoveAt(0);
+                    CrtRecordSensor.ResetAutoValues();
+                }
+
+                LblSensorValue.Text = data.PhotoDiodeValue.ToString();
+
+                if(data.HeadshellLEDStatus)
+                {
+                    LblSensorLedStatus.Text = "ON";
+                } else
+                {
+                    LblSensorLedStatus.Text = "OFF";
+                }
 
                 // Statistics
                 LblUpTime.Text = Utilities.secondsToTimeString(data.UpTimeSeconds);
