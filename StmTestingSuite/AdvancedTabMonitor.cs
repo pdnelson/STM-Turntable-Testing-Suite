@@ -169,7 +169,7 @@ namespace StmTestingSuite
                 // Record Sensor
                 CrtRecordSensor.Series[0].Points.Add(data.PhotoDiodeValue);
 
-                if (CrtRecordSensor.Series[0].Points.Count() > 25)
+                if (CrtRecordSensor.Series[0].Points.Count > 25)
                 {
                     CrtRecordSensor.Series[0].Points.RemoveAt(0);
                     CrtRecordSensor.ResetAutoValues();

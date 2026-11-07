@@ -31,6 +31,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainForm));
             TabMain = new TabControl();
             TabSimple = new TabPage();
@@ -186,11 +189,18 @@
             CmnTsName = new DataGridViewTextBoxColumn();
             CmnTsAddToPlaylist = new DataGridViewButtonColumn();
             CmnPlay = new DataGridViewButtonColumn();
+            TabRecordSensor = new TabPage();
+            LblRecordSensorLedData = new Label();
+            LblRecordSensorLed = new Label();
+            LblRecordSensorLiveData = new Label();
+            CrtBigSensorData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             CboSerialOptions = new ComboBox();
             LblSerialOptions = new Label();
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
+            LblRecordSensorIntValue = new Label();
+            LblRecordSensorIntValueData = new Label();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -225,6 +235,8 @@
             ((System.ComponentModel.ISupportInitialize)DgvPlaylist).BeginInit();
             GrpTsProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvProfile).BeginInit();
+            TabRecordSensor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CrtBigSensorData).BeginInit();
             SuspendLayout();
             // 
             // TabMain
@@ -232,6 +244,7 @@
             TabMain.Controls.Add(TabSimple);
             TabMain.Controls.Add(tabAdvanced);
             TabMain.Controls.Add(tabTrackSelect);
+            TabMain.Controls.Add(TabRecordSensor);
             TabMain.Location = new Point(12, 35);
             TabMain.Name = "TabMain";
             TabMain.SelectedIndex = 0;
@@ -492,7 +505,6 @@
             btnToggleSensorLED.TabIndex = 2;
             btnToggleSensorLED.Text = "Toggle LED";
             btnToggleSensorLED.UseVisualStyleBackColor = true;
-            btnToggleSensorLED.Click += button1_Click;
             // 
             // LblSensorValueData
             // 
@@ -1823,6 +1835,71 @@
             CmnPlay.UseColumnTextForButtonValue = true;
             CmnPlay.Width = 50;
             // 
+            // TabRecordSensor
+            // 
+            TabRecordSensor.Controls.Add(LblRecordSensorIntValueData);
+            TabRecordSensor.Controls.Add(LblRecordSensorIntValue);
+            TabRecordSensor.Controls.Add(LblRecordSensorLedData);
+            TabRecordSensor.Controls.Add(LblRecordSensorLed);
+            TabRecordSensor.Controls.Add(LblRecordSensorLiveData);
+            TabRecordSensor.Controls.Add(CrtBigSensorData);
+            TabRecordSensor.Location = new Point(4, 24);
+            TabRecordSensor.Name = "TabRecordSensor";
+            TabRecordSensor.Padding = new Padding(3);
+            TabRecordSensor.Size = new Size(761, 555);
+            TabRecordSensor.TabIndex = 3;
+            TabRecordSensor.Text = "Record Sensor";
+            TabRecordSensor.UseVisualStyleBackColor = true;
+            // 
+            // LblRecordSensorLedData
+            // 
+            LblRecordSensorLedData.AutoSize = true;
+            LblRecordSensorLedData.Location = new Point(729, 3);
+            LblRecordSensorLedData.Name = "LblRecordSensorLedData";
+            LblRecordSensorLedData.Size = new Size(25, 15);
+            LblRecordSensorLedData.TabIndex = 3;
+            LblRecordSensorLedData.Text = "n/a";
+            // 
+            // LblRecordSensorLed
+            // 
+            LblRecordSensorLed.AutoSize = true;
+            LblRecordSensorLed.Location = new Point(701, 3);
+            LblRecordSensorLed.Name = "LblRecordSensorLed";
+            LblRecordSensorLed.Size = new Size(30, 15);
+            LblRecordSensorLed.TabIndex = 2;
+            LblRecordSensorLed.Text = "LED:";
+            // 
+            // LblRecordSensorLiveData
+            // 
+            LblRecordSensorLiveData.AutoSize = true;
+            LblRecordSensorLiveData.Location = new Point(6, 3);
+            LblRecordSensorLiveData.Name = "LblRecordSensorLiveData";
+            LblRecordSensorLiveData.Size = new Size(58, 15);
+            LblRecordSensorLiveData.TabIndex = 1;
+            LblRecordSensorLiveData.Text = "Live Data:";
+            // 
+            // CrtBigSensorData
+            // 
+            chartArea2.AxisX.LabelStyle.Enabled = false;
+            chartArea2.AxisY.Maximum = 1024D;
+            chartArea2.AxisY.Minimum = 0D;
+            chartArea2.Name = "ChartArea1";
+            CrtBigSensorData.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            CrtBigSensorData.Legends.Add(legend2);
+            CrtBigSensorData.Location = new Point(3, 21);
+            CrtBigSensorData.Name = "CrtBigSensorData";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsVisibleInLegend = false;
+            series2.IsXValueIndexed = true;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            CrtBigSensorData.Series.Add(series2);
+            CrtBigSensorData.Size = new Size(755, 255);
+            CrtBigSensorData.TabIndex = 0;
+            CrtBigSensorData.Text = "chart1";
+            // 
             // CboSerialOptions
             // 
             CboSerialOptions.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -1870,6 +1947,24 @@
             BtnRefreshSerialPorts.Text = "Refresh";
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
+            // 
+            // LblRecordSensorIntValue
+            // 
+            LblRecordSensorIntValue.AutoSize = true;
+            LblRecordSensorIntValue.Location = new Point(623, 3);
+            LblRecordSensorIntValue.Name = "LblRecordSensorIntValue";
+            LblRecordSensorIntValue.Size = new Size(38, 15);
+            LblRecordSensorIntValue.TabIndex = 4;
+            LblRecordSensorIntValue.Text = "Value:";
+            // 
+            // LblRecordSensorIntValueData
+            // 
+            LblRecordSensorIntValueData.AutoSize = true;
+            LblRecordSensorIntValueData.Location = new Point(657, 3);
+            LblRecordSensorIntValueData.Name = "LblRecordSensorIntValueData";
+            LblRecordSensorIntValueData.Size = new Size(25, 15);
+            LblRecordSensorIntValueData.TabIndex = 5;
+            LblRecordSensorIntValueData.Text = "n/a";
             // 
             // FrmMainForm
             // 
@@ -1931,13 +2026,15 @@
             ((System.ComponentModel.ISupportInitialize)DgvPlaylist).EndInit();
             GrpTsProfile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvProfile).EndInit();
+            TabRecordSensor.ResumeLayout(false);
+            TabRecordSensor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CrtBigSensorData).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TabControl tabMain;
         private TabPage TabSimple;
         private TabPage tabAdvanced;
         private ComboBox CboSerialOptions;
@@ -1996,8 +2093,6 @@
         private Label LblCommandStatus;
         private Label LblSubCommand;
         private Label LblCurrCommand;
-        private Label LblCurrCommandStatus;
-        private Label LblCurrSubCommand;
         private Label LblCurrCommandData;
         private GroupBox GrpManualMovement;
         private Button BtnStepCounterClockwise;
@@ -2099,5 +2194,12 @@
         private Label LblSensorLedStatusData;
         private Label LblLedStatus;
         private System.Windows.Forms.DataVisualization.Charting.Chart CrtSensorData;
+        private TabPage TabRecordSensor;
+        private System.Windows.Forms.DataVisualization.Charting.Chart CrtBigSensorData;
+        private Label LblRecordSensorLiveData;
+        private Label LblRecordSensorLedData;
+        private Label LblRecordSensorLed;
+        private Label LblRecordSensorIntValueData;
+        private Label LblRecordSensorIntValue;
     }
 }

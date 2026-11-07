@@ -13,7 +13,7 @@ namespace StmTestingSuite.Command.Base
             UpdateInputData(option.Name, [option.Value]);
         }
 
-        public void UpdateInputData(byte data)
+        public new void UpdateInputData(byte data)
         {
             string dataName = Options.Find(x => x.Value == data).Name;
 

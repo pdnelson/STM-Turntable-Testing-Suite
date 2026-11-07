@@ -14,6 +14,7 @@ namespace StmTestingSuite
         private readonly ConnectionMonitor ConnMonitor;
         private readonly AdvancedTabMonitor AdvTabMonitor;
         private readonly TrackSelectTabMonitor TrackSelectTabMonitor;
+        private readonly RecordSensorTabMonitor RecordSensorTabMonitor;
         private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
@@ -23,6 +24,7 @@ namespace StmTestingSuite
             Logger = new StmLogger(DgvSimpleLog, this);
             AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblActualHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData, CrtSensorData, LblSensorValueData, LblSensorLedStatusData);
             TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress, LblTsCurrentTrack, ChkAutoPickup);
+            RecordSensorTabMonitor = new RecordSensorTabMonitor(this, Conn, CrtBigSensorData, LblRecordSensorIntValueData, LblRecordSensorLedData);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -235,7 +237,8 @@ namespace StmTestingSuite
                 new CmdGetVerticalEncoderPos(Conn, Logger),
                 new CmdGetAdvancedSuiteData(Conn, Logger),
                 new CmdGetCalibrationValues(Conn, Logger),
-                new CmdGetProfilePlaylist(Conn, Logger)
+                new CmdGetProfilePlaylist(Conn, Logger),
+                new CmdGetRecordSensorTabData(Conn, Logger)
             ];
         }
 
@@ -299,6 +302,17 @@ namespace StmTestingSuite
                     {
                         TrackSelectTabMonitor.Stop();
                         Logger.LogMessage("Track Select Tab", "Ended monitoring");
+                    }
+
+                    if(current.Text == "Record Sensor")
+                    {
+                        RecordSensorTabMonitor.Start();
+                        Logger.LogMessage("Record Sensor Tab", "Started monitoring");
+                    }
+                    else if(current.Text != "Record Sensor" && RecordSensorTabMonitor.Running)
+                    {
+                        RecordSensorTabMonitor.Stop();
+                        Logger.LogMessage("Record Sensor Tab", "Ended monitoring");
                     }
                 }
             }
@@ -737,11 +751,6 @@ namespace StmTestingSuite
 
                 TrackSelectTabMonitor.Paused = false;
             });
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
