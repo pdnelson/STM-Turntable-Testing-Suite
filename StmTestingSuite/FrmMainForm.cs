@@ -239,7 +239,8 @@ namespace StmTestingSuite
                 new CmdGetAdvancedSuiteData(Conn, Logger),
                 new CmdGetCalibrationValues(Conn, Logger),
                 new CmdGetProfilePlaylist(Conn, Logger),
-                new CmdGetRecordSensorTabData(Conn, Logger)
+                new CmdGetRecordSensorTabData(Conn, Logger),
+                new CmdGetRecordProfile(Conn, Logger)
             ];
         }
 
