@@ -19,6 +19,7 @@
         ACTION_SKIP_BACKWARD = 12,
         ACTION_PLAY_AT_TRACK_INDEX = 13,
         ACTION_CALIBRATE_MAINT = 14,
+        ACTION_SCAN_RECORD = 15,
 
         // Set commands
         SET_SPEED = 31,

@@ -21,7 +21,7 @@ namespace StmTestingSuite.Command
 
         public async Task<Response?> ExecuteWithResult()
         {
-            return ((StmCommandResult<Response?>?)Execute().Result)?.Result;
+            return ((StmCommandResult<Response>?)Execute().Result)?.Result;
         }
 
         public struct Response
@@ -29,18 +29,18 @@ namespace StmTestingSuite.Command
             public Response(byte[] rawData)
             {
                 byte[] homeBytes = { rawData[0], rawData[1] };
-                HomePosition = BitConverter.ToUInt16(homeBytes);
+                Lower = BitConverter.ToUInt16(homeBytes);
 
                 byte[] scanEndBytes = { rawData[2], rawData[3] };
-                ScanEndPosition = BitConverter.ToUInt16(scanEndBytes);
+                Upper = BitConverter.ToUInt16(scanEndBytes);
             }
 
-            public ushort HomePosition { get; }
-            public ushort ScanEndPosition { get; }
+            public ushort Lower { get; }
+            public ushort Upper { get; }
 
             public readonly override string ToString()
             {
-                return $"{HomePosition}, {ScanEndPosition}";
+                return $"{Lower}, {Upper}";
             }
         }
     }

@@ -39,13 +39,17 @@ namespace StmTestingSuite.Command
                 PhotoDiodeValue = BitConverter.ToUInt16(photoDiodeBytes);
 
                 HeadshellLEDStatus = rawData[3] == 1;
+
+                byte[] hPosBytes = { rawData[4], rawData[5] };
+                HorizontalPosition = BitConverter.ToUInt16(hPosBytes);
             }
             public ushort PhotoDiodeValue { get; }
             public bool HeadshellLEDStatus { get; }
+            public ushort HorizontalPosition { get; }
 
             public readonly override string ToString()
             {
-                return $"({HeadshellLEDStatus}, {PhotoDiodeValue})";
+                return $"({HeadshellLEDStatus}, {PhotoDiodeValue}, {HorizontalPosition})";
             }
         }
     }

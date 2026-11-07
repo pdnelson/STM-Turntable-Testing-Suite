@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainForm));
             TabMain = new TabControl();
             TabSimple = new TabPage();
@@ -193,6 +196,11 @@
             CmnTsAddToPlaylist = new DataGridViewButtonColumn();
             CmnPlay = new DataGridViewButtonColumn();
             TabRecordSensor = new TabPage();
+            BtnClearRawProfile = new Button();
+            BtnExplortRawProfile = new Button();
+            BtnScanRecord = new Button();
+            LblProfileData = new Label();
+            CrtRawProfile = new System.Windows.Forms.DataVisualization.Charting.Chart();
             LblRecordSensorIntValueData = new Label();
             LblRecordSensorIntValue = new Label();
             LblRecordSensorLedData = new Label();
@@ -204,6 +212,7 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
+            PrgScan = new ProgressBar();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -239,6 +248,7 @@
             GrpTsProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvProfile).BeginInit();
             TabRecordSensor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CrtRawProfile).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CrtBigSensorData).BeginInit();
             SuspendLayout();
             // 
@@ -461,24 +471,24 @@
             // 
             // CrtSensorData
             // 
-            chartArea1.AxisX.LabelStyle.Enabled = false;
-            chartArea1.AxisY.Maximum = 1024D;
-            chartArea1.AxisY.Minimum = 0D;
-            chartArea1.Name = "ChartArea1";
-            CrtSensorData.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            CrtSensorData.Legends.Add(legend1);
+            chartArea4.AxisX.LabelStyle.Enabled = false;
+            chartArea4.AxisY.Maximum = 1024D;
+            chartArea4.AxisY.Minimum = 0D;
+            chartArea4.Name = "ChartArea1";
+            CrtSensorData.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            CrtSensorData.Legends.Add(legend4);
             CrtSensorData.Location = new Point(6, 18);
             CrtSensorData.Name = "CrtSensorData";
             CrtSensorData.RightToLeft = RightToLeft.No;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsVisibleInLegend = false;
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "SensorData";
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
-            CrtSensorData.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.IsVisibleInLegend = false;
+            series4.IsXValueIndexed = true;
+            series4.Legend = "Legend1";
+            series4.Name = "SensorData";
+            series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
+            CrtSensorData.Series.Add(series4);
             CrtSensorData.Size = new Size(160, 84);
             CrtSensorData.TabIndex = 15;
             // 
@@ -1871,6 +1881,12 @@
             // 
             // TabRecordSensor
             // 
+            TabRecordSensor.Controls.Add(PrgScan);
+            TabRecordSensor.Controls.Add(BtnClearRawProfile);
+            TabRecordSensor.Controls.Add(BtnExplortRawProfile);
+            TabRecordSensor.Controls.Add(BtnScanRecord);
+            TabRecordSensor.Controls.Add(LblProfileData);
+            TabRecordSensor.Controls.Add(CrtRawProfile);
             TabRecordSensor.Controls.Add(LblRecordSensorIntValueData);
             TabRecordSensor.Controls.Add(LblRecordSensorIntValue);
             TabRecordSensor.Controls.Add(LblRecordSensorLedData);
@@ -1884,6 +1900,67 @@
             TabRecordSensor.TabIndex = 3;
             TabRecordSensor.Text = "Record Sensor";
             TabRecordSensor.UseVisualStyleBackColor = true;
+            // 
+            // BtnClearRawProfile
+            // 
+            BtnClearRawProfile.Location = new Point(696, 526);
+            BtnClearRawProfile.Name = "BtnClearRawProfile";
+            BtnClearRawProfile.Size = new Size(62, 23);
+            BtnClearRawProfile.TabIndex = 10;
+            BtnClearRawProfile.Text = "Clear";
+            BtnClearRawProfile.UseVisualStyleBackColor = true;
+            BtnClearRawProfile.Click += BtnClearRawProfile_Click;
+            // 
+            // BtnExplortRawProfile
+            // 
+            BtnExplortRawProfile.Location = new Point(70, 526);
+            BtnExplortRawProfile.Name = "BtnExplortRawProfile";
+            BtnExplortRawProfile.Size = new Size(62, 23);
+            BtnExplortRawProfile.TabIndex = 9;
+            BtnExplortRawProfile.Text = "Export";
+            BtnExplortRawProfile.UseVisualStyleBackColor = true;
+            // 
+            // BtnScanRecord
+            // 
+            BtnScanRecord.Location = new Point(6, 526);
+            BtnScanRecord.Name = "BtnScanRecord";
+            BtnScanRecord.Size = new Size(58, 23);
+            BtnScanRecord.TabIndex = 8;
+            BtnScanRecord.Text = "Scan";
+            BtnScanRecord.UseVisualStyleBackColor = true;
+            BtnScanRecord.Click += BtnScanRecord_Click;
+            // 
+            // LblProfileData
+            // 
+            LblProfileData.AutoSize = true;
+            LblProfileData.Location = new Point(0, 256);
+            LblProfileData.Name = "LblProfileData";
+            LblProfileData.Size = new Size(96, 15);
+            LblProfileData.TabIndex = 7;
+            LblProfileData.Text = "Captured Profile:";
+            // 
+            // CrtRawProfile
+            // 
+            chartArea5.AxisX.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
+            chartArea5.AxisY.Maximum = 1024D;
+            chartArea5.AxisY.Minimum = 0D;
+            chartArea5.Name = "ChartArea1";
+            CrtRawProfile.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            CrtRawProfile.Legends.Add(legend5);
+            CrtRawProfile.Location = new Point(3, 274);
+            CrtRawProfile.Name = "CrtRawProfile";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
+            series5.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            CrtRawProfile.Series.Add(series5);
+            CrtRawProfile.Size = new Size(755, 246);
+            CrtRawProfile.TabIndex = 6;
+            CrtRawProfile.Text = "chart1";
             // 
             // LblRecordSensorIntValueData
             // 
@@ -1932,23 +2009,23 @@
             // 
             // CrtBigSensorData
             // 
-            chartArea2.AxisX.LabelStyle.Enabled = false;
-            chartArea2.AxisY.Maximum = 1024D;
-            chartArea2.AxisY.Minimum = 0D;
-            chartArea2.Name = "ChartArea1";
-            CrtBigSensorData.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            CrtBigSensorData.Legends.Add(legend2);
+            chartArea6.AxisX.LabelStyle.Enabled = false;
+            chartArea6.AxisY.Maximum = 1024D;
+            chartArea6.AxisY.Minimum = 0D;
+            chartArea6.Name = "ChartArea1";
+            CrtBigSensorData.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            CrtBigSensorData.Legends.Add(legend6);
             CrtBigSensorData.Location = new Point(3, 21);
             CrtBigSensorData.Name = "CrtBigSensorData";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.IsXValueIndexed = true;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            CrtBigSensorData.Series.Add(series2);
-            CrtBigSensorData.Size = new Size(755, 255);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.IsVisibleInLegend = false;
+            series6.IsXValueIndexed = true;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            CrtBigSensorData.Series.Add(series6);
+            CrtBigSensorData.Size = new Size(755, 232);
             CrtBigSensorData.TabIndex = 0;
             CrtBigSensorData.Text = "chart1";
             // 
@@ -1999,6 +2076,13 @@
             BtnRefreshSerialPorts.Text = "Refresh";
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
+            // 
+            // PrgScan
+            // 
+            PrgScan.Location = new Point(138, 526);
+            PrgScan.Name = "PrgScan";
+            PrgScan.Size = new Size(494, 23);
+            PrgScan.TabIndex = 11;
             // 
             // FrmMainForm
             // 
@@ -2062,6 +2146,7 @@
             ((System.ComponentModel.ISupportInitialize)DgvProfile).EndInit();
             TabRecordSensor.ResumeLayout(false);
             TabRecordSensor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CrtRawProfile).EndInit();
             ((System.ComponentModel.ISupportInitialize)CrtBigSensorData).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -2238,5 +2323,11 @@
         private Label LblScanEndData;
         private Label LblScanEnd;
         private Button BtnCalibrateMaint;
+        private Button BtnClearRawProfile;
+        private Button BtnExplortRawProfile;
+        private Button BtnScanRecord;
+        private Label LblProfileData;
+        private System.Windows.Forms.DataVisualization.Charting.Chart CrtRawProfile;
+        private ProgressBar PrgScan;
     }
 }

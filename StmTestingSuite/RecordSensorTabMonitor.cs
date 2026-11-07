@@ -1,7 +1,4 @@
 ﻿using StmTestingSuite.Command;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StmTestingSuite
@@ -9,25 +6,35 @@ namespace StmTestingSuite
     internal class RecordSensorTabMonitor(
         Form mainForm,
         StmConnector conn,
+        RecordScanner scanner,
 
         // Record sensor data
         Chart crtRecordSensor,
         Label lblSensorValue,
-        Label lblSensorLedStatus
+        Label lblSensorLedStatus,
+
+        // Progress
+        ProgressBar prgScan
     )
     {
 
         Form Form { get; } = mainForm;
         StmConnector Conn { get; } = conn;
+        RecordScanner Scanner { get; } = scanner;
 
         // Record Sensor
         Chart CrtRecordSensor { get; } = crtRecordSensor;
         Label LblSensorValue { get; } = lblSensorValue;
         Label LblSensorLedStatus { get; } = lblSensorLedStatus;
 
+        // Progress
+        ProgressBar PrgScan { get; } = prgScan;
+
         public bool Running { get; set; } = false;
 
         public bool Paused { get; set; } = false;
+
+        public ushort HorizontalPosition { get; set; } = 0;
 
         public void Start()
         {
@@ -62,6 +69,8 @@ namespace StmTestingSuite
 
         private void UpdateUserInterface(CmdGetRecordSensorTabData.Response data)
         {
+            HorizontalPosition = data.HorizontalPosition;
+
             Utilities.WriteToUiFromThread(Form, () =>
             {
                 // Record Sensor
@@ -82,6 +91,14 @@ namespace StmTestingSuite
                 else
                 {
                     LblSensorLedStatus.Text = "OFF";
+                }
+
+                if(Scanner.Running)
+                {
+                    PrgScan.Value = data.HorizontalPosition;
+                } else
+                {
+                    PrgScan.Value = PrgScan.Minimum;
                 }
             });
         }

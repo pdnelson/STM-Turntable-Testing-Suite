@@ -15,6 +15,7 @@ namespace StmTestingSuite
         private readonly AdvancedTabMonitor AdvTabMonitor;
         private readonly TrackSelectTabMonitor TrackSelectTabMonitor;
         private readonly RecordSensorTabMonitor RecordSensorTabMonitor;
+        private readonly RecordScanner RecordScanner;
         private List<BaseStmCommand> Commands = [];
 
         public FrmMainForm()
@@ -24,8 +25,9 @@ namespace StmTestingSuite
             Logger = new StmLogger(DgvSimpleLog, this);
             AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblActualHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData, CrtSensorData, LblSensorValueData, LblSensorLedStatusData);
             TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress, LblTsCurrentTrack, ChkAutoPickup);
-            RecordSensorTabMonitor = new RecordSensorTabMonitor(this, Conn, CrtBigSensorData, LblRecordSensorIntValueData, LblRecordSensorLedData);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
+            RecordScanner = new RecordScanner(this, Conn, ConnMonitor, Logger, CrtRawProfile, BtnScanRecord, BtnClearRawProfile, PrgScan);
+            RecordSensorTabMonitor = new RecordSensorTabMonitor(this, Conn, RecordScanner, CrtBigSensorData, LblRecordSensorIntValueData, LblRecordSensorLedData, PrgScan);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
 
@@ -207,6 +209,7 @@ namespace StmTestingSuite
                 new CmdActionSkipForward(Conn, Logger),
                 new CmdActionPlayAtTrackIndex(Conn, Logger),
                 new CmdActionCalibrationMaint(Conn, Logger),
+                new CmdActionScanRecord(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -760,6 +763,16 @@ namespace StmTestingSuite
         private void BtnCalibrateMaint_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdActionCalibrationMaint(Conn, Logger));
+        }
+
+        private void BtnScanRecord_Click(object sender, EventArgs e)
+        {
+            RecordScanner.Scan();
+        }
+
+        private void BtnClearRawProfile_Click(object sender, EventArgs e)
+        {
+            RecordScanner.Clear();
         }
     }
 }

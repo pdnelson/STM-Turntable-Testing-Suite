@@ -16,6 +16,8 @@ namespace StmTestingSuite.Command.Base
         public StmLogger? Logger { get; } = logger;
 
         public virtual async Task<IStmCommandResult?> Execute() {
+            if(!Conn.Connected) return null;
+
             int dataSize = 1; // command
             byte[]? inputData = null;
 
