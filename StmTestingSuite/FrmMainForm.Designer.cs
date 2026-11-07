@@ -61,6 +61,9 @@
             LblSensorValueData = new Label();
             LblSensorValue = new Label();
             GrpCalibration = new GroupBox();
+            BtnCalibrateMaint = new Button();
+            LblScanEndData = new Label();
+            LblScanEnd = new Label();
             LblHMotorPolarityData = new Label();
             LblHMotorPolarity = new Label();
             LblZeroAzEncoder = new Label();
@@ -190,6 +193,8 @@
             CmnTsAddToPlaylist = new DataGridViewButtonColumn();
             CmnPlay = new DataGridViewButtonColumn();
             TabRecordSensor = new TabPage();
+            LblRecordSensorIntValueData = new Label();
+            LblRecordSensorIntValue = new Label();
             LblRecordSensorLedData = new Label();
             LblRecordSensorLed = new Label();
             LblRecordSensorLiveData = new Label();
@@ -199,8 +204,6 @@
             LblConnectionStatus = new Label();
             BtnConnect = new Button();
             BtnRefreshSerialPorts = new Button();
-            LblRecordSensorIntValue = new Label();
-            LblRecordSensorIntValueData = new Label();
             TabMain.SuspendLayout();
             TabSimple.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvSimpleLog).BeginInit();
@@ -451,7 +454,7 @@
             grpSensor.Controls.Add(LblSensorValue);
             grpSensor.Location = new Point(6, 394);
             grpSensor.Name = "grpSensor";
-            grpSensor.Size = new Size(202, 155);
+            grpSensor.Size = new Size(172, 155);
             grpSensor.TabIndex = 14;
             grpSensor.TabStop = false;
             grpSensor.Text = "Record Sensor";
@@ -476,13 +479,13 @@
             series1.Name = "SensorData";
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
             CrtSensorData.Series.Add(series1);
-            CrtSensorData.Size = new Size(185, 84);
+            CrtSensorData.Size = new Size(160, 84);
             CrtSensorData.TabIndex = 15;
             // 
             // LblSensorLedStatusData
             // 
             LblSensorLedStatusData.AutoSize = true;
-            LblSensorLedStatusData.Location = new Point(166, 108);
+            LblSensorLedStatusData.Location = new Point(133, 108);
             LblSensorLedStatusData.Name = "LblSensorLedStatusData";
             LblSensorLedStatusData.Size = new Size(25, 15);
             LblSensorLedStatusData.TabIndex = 4;
@@ -491,7 +494,7 @@
             // LblLedStatus
             // 
             LblLedStatus.AutoSize = true;
-            LblLedStatus.Location = new Point(136, 108);
+            LblLedStatus.Location = new Point(103, 108);
             LblLedStatus.Name = "LblLedStatus";
             LblLedStatus.Size = new Size(30, 15);
             LblLedStatus.TabIndex = 3;
@@ -501,7 +504,7 @@
             // 
             btnToggleSensorLED.Location = new Point(6, 126);
             btnToggleSensorLED.Name = "btnToggleSensorLED";
-            btnToggleSensorLED.Size = new Size(190, 23);
+            btnToggleSensorLED.Size = new Size(160, 23);
             btnToggleSensorLED.TabIndex = 2;
             btnToggleSensorLED.Text = "Toggle LED";
             btnToggleSensorLED.UseVisualStyleBackColor = true;
@@ -526,6 +529,9 @@
             // 
             // GrpCalibration
             // 
+            GrpCalibration.Controls.Add(BtnCalibrateMaint);
+            GrpCalibration.Controls.Add(LblScanEndData);
+            GrpCalibration.Controls.Add(LblScanEnd);
             GrpCalibration.Controls.Add(LblHMotorPolarityData);
             GrpCalibration.Controls.Add(LblHMotorPolarity);
             GrpCalibration.Controls.Add(LblZeroAzEncoder);
@@ -549,12 +555,40 @@
             GrpCalibration.Controls.Add(LblVPolarity);
             GrpCalibration.Controls.Add(LblHPolarityData);
             GrpCalibration.Controls.Add(LblHPolarity);
-            GrpCalibration.Location = new Point(465, 394);
+            GrpCalibration.Location = new Point(184, 394);
             GrpCalibration.Name = "GrpCalibration";
-            GrpCalibration.Size = new Size(288, 155);
+            GrpCalibration.Size = new Size(275, 155);
             GrpCalibration.TabIndex = 4;
             GrpCalibration.TabStop = false;
             GrpCalibration.Text = "Calibration Values";
+            // 
+            // BtnCalibrateMaint
+            // 
+            BtnCalibrateMaint.Location = new Point(128, 126);
+            BtnCalibrateMaint.Name = "BtnCalibrateMaint";
+            BtnCalibrateMaint.Size = new Size(69, 23);
+            BtnCalibrateMaint.TabIndex = 25;
+            BtnCalibrateMaint.Text = "Cal. M.";
+            BtnCalibrateMaint.UseVisualStyleBackColor = true;
+            BtnCalibrateMaint.Click += BtnCalibrateMaint_Click;
+            // 
+            // LblScanEndData
+            // 
+            LblScanEndData.AutoSize = true;
+            LblScanEndData.Location = new Point(227, 78);
+            LblScanEndData.Name = "LblScanEndData";
+            LblScanEndData.Size = new Size(25, 15);
+            LblScanEndData.TabIndex = 24;
+            LblScanEndData.Text = "n/a";
+            // 
+            // LblScanEnd
+            // 
+            LblScanEnd.AutoSize = true;
+            LblScanEnd.Location = new Point(172, 78);
+            LblScanEnd.Name = "LblScanEnd";
+            LblScanEnd.Size = new Size(58, 15);
+            LblScanEnd.TabIndex = 23;
+            LblScanEnd.Text = "Scan End:";
             // 
             // LblHMotorPolarityData
             // 
@@ -603,17 +637,17 @@
             // 
             // BtnCalibrate
             // 
-            BtnCalibrate.Location = new Point(141, 126);
+            BtnCalibrate.Location = new Point(128, 100);
             BtnCalibrate.Name = "BtnCalibrate";
             BtnCalibrate.Size = new Size(69, 23);
             BtnCalibrate.TabIndex = 17;
-            BtnCalibrate.Text = "Calibrate";
+            BtnCalibrate.Text = "Cal. 1st";
             BtnCalibrate.UseVisualStyleBackColor = true;
             BtnCalibrate.Click += BtnCalibrate_Click;
             // 
             // BtnCalRefresh
             // 
-            BtnCalRefresh.Location = new Point(213, 126);
+            BtnCalRefresh.Location = new Point(200, 126);
             BtnCalRefresh.Name = "BtnCalRefresh";
             BtnCalRefresh.Size = new Size(69, 23);
             BtnCalRefresh.TabIndex = 16;
@@ -624,7 +658,7 @@
             // LblCal12InData
             // 
             LblCal12InData.AutoSize = true;
-            LblCal12InData.Location = new Point(238, 63);
+            LblCal12InData.Location = new Point(227, 63);
             LblCal12InData.Name = "LblCal12InData";
             LblCal12InData.Size = new Size(25, 15);
             LblCal12InData.TabIndex = 15;
@@ -633,7 +667,7 @@
             // LblCal10InData
             // 
             LblCal10InData.AutoSize = true;
-            LblCal10InData.Location = new Point(238, 48);
+            LblCal10InData.Location = new Point(227, 48);
             LblCal10InData.Name = "LblCal10InData";
             LblCal10InData.Size = new Size(25, 15);
             LblCal10InData.TabIndex = 14;
@@ -642,7 +676,7 @@
             // LblCal7InData
             // 
             LblCal7InData.AutoSize = true;
-            LblCal7InData.Location = new Point(238, 33);
+            LblCal7InData.Location = new Point(227, 33);
             LblCal7InData.Name = "LblCal7InData";
             LblCal7InData.Size = new Size(25, 15);
             LblCal7InData.TabIndex = 13;
@@ -651,7 +685,7 @@
             // LblCal12In
             // 
             LblCal12In.AutoSize = true;
-            LblCal12In.Location = new Point(214, 63);
+            LblCal12In.Location = new Point(203, 63);
             LblCal12In.Name = "LblCal12In";
             LblCal12In.Size = new Size(27, 15);
             LblCal12In.TabIndex = 12;
@@ -660,7 +694,7 @@
             // LblCal10In
             // 
             LblCal10In.AutoSize = true;
-            LblCal10In.Location = new Point(214, 48);
+            LblCal10In.Location = new Point(203, 48);
             LblCal10In.Name = "LblCal10In";
             LblCal10In.Size = new Size(27, 15);
             LblCal10In.TabIndex = 11;
@@ -669,7 +703,7 @@
             // LblCal7In
             // 
             LblCal7In.AutoSize = true;
-            LblCal7In.Location = new Point(220, 33);
+            LblCal7In.Location = new Point(209, 33);
             LblCal7In.Name = "LblCal7In";
             LblCal7In.Size = new Size(21, 15);
             LblCal7In.TabIndex = 10;
@@ -678,7 +712,7 @@
             // LblHomeData
             // 
             LblHomeData.AutoSize = true;
-            LblHomeData.Location = new Point(238, 18);
+            LblHomeData.Location = new Point(227, 18);
             LblHomeData.Name = "LblHomeData";
             LblHomeData.Size = new Size(25, 15);
             LblHomeData.TabIndex = 9;
@@ -705,7 +739,7 @@
             // LblHome
             // 
             LblHome.AutoSize = true;
-            LblHome.Location = new Point(198, 18);
+            LblHome.Location = new Point(187, 18);
             LblHome.Name = "LblHome";
             LblHome.Size = new Size(43, 15);
             LblHome.TabIndex = 6;
@@ -1290,7 +1324,7 @@
             GrpStatistics.Controls.Add(LblUpTime);
             GrpStatistics.Location = new Point(465, 276);
             GrpStatistics.Name = "GrpStatistics";
-            GrpStatistics.Size = new Size(288, 112);
+            GrpStatistics.Size = new Size(288, 273);
             GrpStatistics.TabIndex = 3;
             GrpStatistics.TabStop = false;
             GrpStatistics.Text = "Statistics";
@@ -1851,6 +1885,24 @@
             TabRecordSensor.Text = "Record Sensor";
             TabRecordSensor.UseVisualStyleBackColor = true;
             // 
+            // LblRecordSensorIntValueData
+            // 
+            LblRecordSensorIntValueData.AutoSize = true;
+            LblRecordSensorIntValueData.Location = new Point(657, 3);
+            LblRecordSensorIntValueData.Name = "LblRecordSensorIntValueData";
+            LblRecordSensorIntValueData.Size = new Size(25, 15);
+            LblRecordSensorIntValueData.TabIndex = 5;
+            LblRecordSensorIntValueData.Text = "n/a";
+            // 
+            // LblRecordSensorIntValue
+            // 
+            LblRecordSensorIntValue.AutoSize = true;
+            LblRecordSensorIntValue.Location = new Point(623, 3);
+            LblRecordSensorIntValue.Name = "LblRecordSensorIntValue";
+            LblRecordSensorIntValue.Size = new Size(38, 15);
+            LblRecordSensorIntValue.TabIndex = 4;
+            LblRecordSensorIntValue.Text = "Value:";
+            // 
             // LblRecordSensorLedData
             // 
             LblRecordSensorLedData.AutoSize = true;
@@ -1947,24 +1999,6 @@
             BtnRefreshSerialPorts.Text = "Refresh";
             BtnRefreshSerialPorts.UseVisualStyleBackColor = true;
             BtnRefreshSerialPorts.Click += BtnRefreshSerialPorts_Click;
-            // 
-            // LblRecordSensorIntValue
-            // 
-            LblRecordSensorIntValue.AutoSize = true;
-            LblRecordSensorIntValue.Location = new Point(623, 3);
-            LblRecordSensorIntValue.Name = "LblRecordSensorIntValue";
-            LblRecordSensorIntValue.Size = new Size(38, 15);
-            LblRecordSensorIntValue.TabIndex = 4;
-            LblRecordSensorIntValue.Text = "Value:";
-            // 
-            // LblRecordSensorIntValueData
-            // 
-            LblRecordSensorIntValueData.AutoSize = true;
-            LblRecordSensorIntValueData.Location = new Point(657, 3);
-            LblRecordSensorIntValueData.Name = "LblRecordSensorIntValueData";
-            LblRecordSensorIntValueData.Size = new Size(25, 15);
-            LblRecordSensorIntValueData.TabIndex = 5;
-            LblRecordSensorIntValueData.Text = "n/a";
             // 
             // FrmMainForm
             // 
@@ -2201,5 +2235,8 @@
         private Label LblRecordSensorLed;
         private Label LblRecordSensorIntValueData;
         private Label LblRecordSensorIntValue;
+        private Label LblScanEndData;
+        private Label LblScanEnd;
+        private Button BtnCalibrateMaint;
     }
 }

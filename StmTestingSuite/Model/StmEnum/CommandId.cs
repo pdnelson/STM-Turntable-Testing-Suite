@@ -7,7 +7,7 @@
         UNPAUSE = 2,
         MOVE_N_STEPS_H = 3,
         HOME = 4,
-        CALIBRATION = 5,
+        CALIBRATION_FIRST = 5,
         TEST_MODE = 6,
         ERROR = 7,
         TOGGLE_CLUTCH = 8,
@@ -16,6 +16,7 @@
         GO_TO_POSITION_V = 11,
         MOVE_N_STEPS_V = 12,
         HOME_CLUTCH = 13,
-        SET_CLUTCH = 14
+        SET_CLUTCH = 14,
+        CALIBRATION_MAINT = 15
     }
 }

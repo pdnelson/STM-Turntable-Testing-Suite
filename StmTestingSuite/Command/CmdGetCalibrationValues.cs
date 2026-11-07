@@ -10,7 +10,7 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_CALIBRATION_VALUES;
         public override string Name => "Calibration Values";
-        public override ushort ResponseSize => 17;
+        public override ushort ResponseSize => 19;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             Response? response = null;
@@ -56,6 +56,9 @@ namespace StmTestingSuite.Command
 
                 byte[] in12Bytes = { rawData[14], rawData[15] };
                 In12 = BitConverter.ToUInt16(in12Bytes);
+
+                byte[] scanEndBytes = { rawData[16], rawData[17] };
+                ScanEnd = BitConverter.ToUInt16(scanEndBytes);
             }
             public EncoderPolarity HorizontalMotorPolarity { get; }
             public EncoderPolarity HorizontalPolarity { get; }
@@ -66,10 +69,11 @@ namespace StmTestingSuite.Command
             public ushort In7 { get; }
             public ushort In10 { get; }
             public ushort In12 { get; }
+            public ushort ScanEnd { get; }
 
             public readonly override string ToString()
             {
-                return $"({HorizontalMotorPolarity}, {HorizontalPolarity}, {VerticalPolarity}, {Home}, {UpperLimit}, {LowerLimit}, {In7}, {In10}, {In12})";
+                return $"({HorizontalMotorPolarity}, {HorizontalPolarity}, {VerticalPolarity}, {Home}, {UpperLimit}, {LowerLimit}, {In7}, {In10}, {In12}, {ScanEnd})";
             }
         }
     }

@@ -29,7 +29,7 @@
                 CommandId.UNPAUSE => "Unpause",
                 CommandId.MOVE_N_STEPS_H => "Move n Steps (Horizontal)",
                 CommandId.HOME => "Home",
-                CommandId.CALIBRATION => "Calibration",
+                CommandId.CALIBRATION_FIRST => "Calibration (First)",
                 CommandId.TEST_MODE => "Test Mode",
                 CommandId.ERROR => "Error",
                 CommandId.TOGGLE_CLUTCH => "Toggle Clutch",
@@ -39,6 +39,7 @@
                 CommandId.MOVE_N_STEPS_V => "Move n Steps (Vertical)",
                 CommandId.HOME_CLUTCH => "Home Clutch",
                 CommandId.SET_CLUTCH => "Set Clutch",
+                CommandId.CALIBRATION_MAINT => "Calibration (Maintenance)",
                 _ => "Invalid Data Received"
             };
         }
@@ -70,6 +71,7 @@
                 SubCommandId.MOVE_CLUTCH_TO_HOME => "Move clutch to home",
                 SubCommandId.MOVE_CLUTCH_TO_LIMIT => "Move clutch to limit",
                 SubCommandId.H_ERROR_CORRECT => "Error Correct Horizontal Position",
+                SubCommandId.CALIBRATE_RECORD_SCAN_END_POSITION => "Calibrate Record Scan End Position",
                 _ => "Invalid Data Received"
             };
         }

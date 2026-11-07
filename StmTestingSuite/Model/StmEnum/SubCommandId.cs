@@ -24,6 +24,7 @@
         SET_POLL_SPEED = 22,
         MOVE_CLUTCH_TO_HOME = 23,
         MOVE_CLUTCH_TO_LIMIT = 24,
-        H_ERROR_CORRECT = 25
+        H_ERROR_CORRECT = 25,
+        CALIBRATE_RECORD_SCAN_END_POSITION = 26
     }
 }

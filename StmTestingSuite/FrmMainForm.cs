@@ -194,7 +194,7 @@ namespace StmTestingSuite
                 new CmdConnectionTest(Conn, Logger),
 
                 // action
-                new CmdActionCalibration(Conn, Logger),
+                new CmdActionCalibrationFirst(Conn, Logger),
                 new CmdActionGoToPositionH(Conn, Logger),
                 new CmdActionGoToPositionV(Conn, Logger),
                 new CmdActionMoveNStepsH(Conn, Logger),
@@ -206,6 +206,7 @@ namespace StmTestingSuite
                 new CmdActionSkipForward(Conn, Logger),
                 new CmdActionSkipForward(Conn, Logger),
                 new CmdActionPlayAtTrackIndex(Conn, Logger),
+                new CmdActionCalibrationMaint(Conn, Logger),
 
                 // set
                 new CmdSetClearActionCommand(Conn, Logger),
@@ -304,12 +305,12 @@ namespace StmTestingSuite
                         Logger.LogMessage("Track Select Tab", "Ended monitoring");
                     }
 
-                    if(current.Text == "Record Sensor")
+                    if (current.Text == "Record Sensor")
                     {
                         RecordSensorTabMonitor.Start();
                         Logger.LogMessage("Record Sensor Tab", "Started monitoring");
                     }
-                    else if(current.Text != "Record Sensor" && RecordSensorTabMonitor.Running)
+                    else if (current.Text != "Record Sensor" && RecordSensorTabMonitor.Running)
                     {
                         RecordSensorTabMonitor.Stop();
                         Logger.LogMessage("Record Sensor Tab", "Ended monitoring");
@@ -503,6 +504,7 @@ namespace StmTestingSuite
                         LblCal7InData.Text = result.In7.ToString();
                         LblCal10InData.Text = result.In10.ToString();
                         LblCal12InData.Text = result.In12.ToString();
+                        LblScanEndData.Text = result.ScanEnd.ToString();
                     });
                 }
             });
@@ -510,7 +512,7 @@ namespace StmTestingSuite
 
         private void BtnCalibrate_Click(object sender, EventArgs e)
         {
-            ExecuteSimpleCommand(new CmdActionCalibration(Conn, Logger));
+            ExecuteSimpleCommand(new CmdActionCalibrationFirst(Conn, Logger));
         }
 
         private void BtnZeroAzEncoder_Click(object sender, EventArgs e)
@@ -751,6 +753,11 @@ namespace StmTestingSuite
 
                 TrackSelectTabMonitor.Paused = false;
             });
+        }
+
+        private void BtnCalibrateMaint_Click(object sender, EventArgs e)
+        {
+            ExecuteSimpleCommand(new CmdActionCalibrationMaint(Conn, Logger));
         }
     }
 }
