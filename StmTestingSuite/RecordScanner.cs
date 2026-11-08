@@ -54,21 +54,31 @@ namespace StmTestingSuite
 
                     Running = true;
 
+                    CommandId? lastCommand = CommandId.SCAN_RECORD;
+
                     // Monitor record scanning
-                    while (await new CmdGetCurrentCommand(Conn, null).ExecuteWithResult() != CommandId.NONE && Running)
+                    while (lastCommand == CommandId.SCAN_RECORD && Running)
                     {
-                        await Task.Delay(500);
+                        await Task.Delay(100);
+
+                        lastCommand = await new CmdGetCurrentCommand(Conn, null).ExecuteWithResult();
                     }
 
-                    // Grab the record profile and populate data
-                    Profile = await new CmdGetRecordProfile(Conn, Logger).ExecuteWithResult();
-                    PopulateChart(bounds.Lower, bounds.Upper);
+                    if(lastCommand == CommandId.ERROR)
+                    {
+                        MessageBox.Show("Failed to scan the record.", "Scan Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    } else
+                    {
+                        // Grab the record profile and populate data
+                        Profile = await new CmdGetRecordProfile(Conn, Logger).ExecuteWithResult();
+                        PopulateChart(bounds.Lower, bounds.Upper);
 
-                    // Clear the record profile
-                    await new CmdSetClearProfile(Conn, Logger).Execute();
+                        // Clear the record profile
+                        await new CmdSetClearProfile(Conn, Logger).Execute();
 
-                    // Return the tonearm home
-                    await new CmdActionPlayOrReturn(Conn, Logger).Execute();
+                        // Return the tonearm home
+                        await new CmdActionPlayOrReturn(Conn, Logger).Execute();
+                    }
                 } 
                 else
                 {

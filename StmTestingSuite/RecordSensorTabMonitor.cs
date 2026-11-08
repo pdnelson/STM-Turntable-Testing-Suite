@@ -10,6 +10,7 @@ namespace StmTestingSuite
 
         // Record sensor data
         Chart crtRecordSensor,
+        Chart crtProfile,
         Label lblSensorValue,
         Label lblSensorLedStatus,
 
@@ -24,8 +25,10 @@ namespace StmTestingSuite
 
         // Record Sensor
         Chart CrtRecordSensor { get; } = crtRecordSensor;
+        Chart CrtProfile { get; } = crtProfile;
         Label LblSensorValue { get; } = lblSensorValue;
         Label LblSensorLedStatus { get; } = lblSensorLedStatus;
+        VerticalLineAnnotation VlaCurrentPosition { get; } = (VerticalLineAnnotation)crtProfile.Annotations[0];
 
         // Progress
         ProgressBar PrgScan { get; } = prgScan;
@@ -111,7 +114,22 @@ namespace StmTestingSuite
                 {
                     PrgScan.Value = PrgScan.Minimum;
                 }
+
+                // If there's a profile, show vertical line indicators
+                if(Scanner.Profile.Length > 0)
+                {
+                    VlaCurrentPosition.Visible = true;
+                    VlaCurrentPosition.X = 8500;
+                } else
+                {
+                    VlaCurrentPosition.Visible = false;
+                }
             });
+        }
+
+        private void VerticalIndicator(ushort position, string label)
+        {
+
         }
     }
 }

@@ -27,7 +27,7 @@ namespace StmTestingSuite
             TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress, LblTsCurrentTrack, ChkAutoPickup);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
             RecordScanner = new RecordScanner(this, Conn, ConnMonitor, Logger, CrtRawProfile, BtnScanRecord, BtnClearRawProfile, PrgScan);
-            RecordSensorTabMonitor = new RecordSensorTabMonitor(this, Conn, RecordScanner, CrtBigSensorData, LblRecordSensorIntValueData, LblRecordSensorLedData, PrgScan);
+            RecordSensorTabMonitor = new RecordSensorTabMonitor(this, Conn, RecordScanner, CrtBigSensorData, CrtRawProfile, LblRecordSensorIntValueData, LblRecordSensorLedData, PrgScan);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
 
