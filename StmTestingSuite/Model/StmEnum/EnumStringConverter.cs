@@ -40,6 +40,7 @@
                 CommandId.HOME_CLUTCH => "Home Clutch",
                 CommandId.SET_CLUTCH => "Set Clutch",
                 CommandId.CALIBRATION_MAINT => "Calibration (Maintenance)",
+                CommandId.SCAN_RECORD => "Scan Record",
                 _ => "Invalid Data Received"
             };
         }
@@ -72,6 +73,7 @@
                 SubCommandId.MOVE_CLUTCH_TO_LIMIT => "Move clutch to limit",
                 SubCommandId.H_ERROR_CORRECT => "Error Correct Horizontal Position",
                 SubCommandId.CALIBRATE_RECORD_SCAN_END_POSITION => "Calibrate Record Scan End Position",
+                SubCommandId.SCAN_RECORD => "Scan Record",
                 _ => "Invalid Data Received"
             };
         }

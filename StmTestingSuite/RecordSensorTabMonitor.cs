@@ -95,7 +95,18 @@ namespace StmTestingSuite
 
                 if(Scanner.Running)
                 {
-                    PrgScan.Value = data.HorizontalPosition;
+                    if(data.HorizontalPosition > PrgScan.Maximum)
+                    {
+                        PrgScan.Value = PrgScan.Maximum;
+                    } 
+                    else if(data.HorizontalPosition < PrgScan.Minimum)
+                    {
+                        PrgScan.Value = PrgScan.Minimum;
+                    }
+                    else
+                    {
+                        PrgScan.Value = data.HorizontalPosition;
+                    }
                 } else
                 {
                     PrgScan.Value = PrgScan.Minimum;

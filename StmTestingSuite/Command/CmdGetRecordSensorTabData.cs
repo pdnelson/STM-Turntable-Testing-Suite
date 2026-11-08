@@ -10,7 +10,7 @@ namespace StmTestingSuite.Command
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_RECORD_SENSOR_TAB;
         public override string Name => "Record Sensor Tab Data";
-        public override ushort ResponseSize => 5;
+        public override ushort ResponseSize => 7;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             Response? response = null;

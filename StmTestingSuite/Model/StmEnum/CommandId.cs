@@ -17,6 +17,7 @@
         MOVE_N_STEPS_V = 12,
         HOME_CLUTCH = 13,
         SET_CLUTCH = 14,
-        CALIBRATION_MAINT = 15
+        CALIBRATION_MAINT = 15,
+        SCAN_RECORD = 16
     }
 }
