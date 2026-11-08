@@ -1,5 +1,6 @@
 ﻿using StmTestingSuite.Command;
 using StmTestingSuite.Model.StmEnum;
+using System.Text;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StmTestingSuite
@@ -12,6 +13,7 @@ namespace StmTestingSuite
         Chart crtRawProfile,
         Button btnScan,
         Button btnClear,
+        Button btnExport,
         ProgressBar prgScan
         )
     {
@@ -22,6 +24,7 @@ namespace StmTestingSuite
         Chart CrtRawProfile { get; } = crtRawProfile;
         Button BtnScan { get; } = btnScan;
         Button BtnClear { get; } = btnClear;
+        Button BtnExport { get; } = btnExport;
         ProgressBar PrgScan { get; } = prgScan;
         public bool Running { get; set; } = false;
         public ushort[] Profile { get; set; } = [];
@@ -76,7 +79,12 @@ namespace StmTestingSuite
                     {
                         // Grab the record profile and populate data
                         Profile = await new CmdGetRecordProfile(Conn, Logger).ExecuteWithResult();
-                        PopulateChart(bounds.Lower, bounds.Upper);
+                        PopulateChart();
+
+                        Utilities.WriteToUiFromThread(Form, () =>
+                        {
+                            BtnExport.Enabled = true;
+                        });
 
                         // Clear the record profile
                         await new CmdSetClearProfile(Conn, Logger).Execute();
@@ -107,21 +115,36 @@ namespace StmTestingSuite
         public void Clear()
         {
             Profile = [];
+            LowerBound = 0;
+            UpperBound = 0;
+            BtnExport.Enabled = false;
             CrtRawProfile.Series[0].Points.Clear();
         }
 
-        private void PopulateChart(ushort lowerBound, ushort upperBound)
+        private void PopulateChart()
         {
             Utilities.WriteToUiFromThread(Form, () =>
             {
-                CrtRawProfile.ChartAreas[0].Axes[0].Minimum = lowerBound;
-                CrtRawProfile.ChartAreas[0].Axes[0].Maximum = upperBound;
+                CrtRawProfile.ChartAreas[0].Axes[0].Minimum = LowerBound;
+                CrtRawProfile.ChartAreas[0].Axes[0].Maximum = UpperBound;
 
                 for (ushort i = 0; i < Profile.Length; i++)
                 {
-                    CrtRawProfile.Series[0].Points.AddXY(lowerBound + i, Profile[i]);
+                    CrtRawProfile.Series[0].Points.AddXY(LowerBound + i, Profile[i]);
                 }
             });
+        }
+
+        public void Export()
+        {
+            StringBuilder csvString = new StringBuilder();
+
+            for (ushort i = 0; i < Profile.Length; i++)
+            {
+                csvString.Append($"{LowerBound + i},{Profile[i]}\n");
+            }
+
+            Utilities.SaveStringBuilderToFile(csvString, Constants.CsvFileExtension);
         }
     }
 }

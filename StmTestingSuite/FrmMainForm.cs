@@ -26,7 +26,7 @@ namespace StmTestingSuite
             AdvTabMonitor = new AdvancedTabMonitor(this, Conn, BtnPlay, BtnPause, RadSize7In, RadSize10In, RadSize12In, RadSizeAuto, LblSpeedSettingData, LblTargetSpeedData, LblActualSpeedData, LblVerticalPositionData, LblHorizontalPositionData, LblActualHorizontalPositionData, LblLiftStatusData, LblHomeStatusData, LblClutchData, LblCurrCommandData, LblCurrSubCommandData, LblCurrCommandStatusData, LblUpTimeData, CrtSensorData, LblSensorValueData, LblSensorLedStatusData);
             TrackSelectTabMonitor = new TrackSelectTabMonitor(this, Conn, BtnSendAndScan, DgvProfile, DgvPlaylist, PrgTsNowPlaying, PrgTsPlaylistProgress, LblTsCurrentTrack, ChkAutoPickup);
             ConnMonitor = new ConnectionMonitor(this, Conn, Logger, TabMain, CboSerialOptions, LblConnectionStatus, BtnConnect, GrpSimpleInput, BtnRefreshSerialPorts, BtnSimpleSendCommand);
-            RecordScanner = new RecordScanner(this, Conn, ConnMonitor, Logger, CrtRawProfile, BtnScanRecord, BtnClearRawProfile, PrgScan);
+            RecordScanner = new RecordScanner(this, Conn, ConnMonitor, Logger, CrtRawProfile, BtnScanRecord, BtnClearRawProfile, BtnExplortRawProfile, PrgScan);
             RecordSensorTabMonitor = new RecordSensorTabMonitor(this, Conn, RecordScanner, CrtBigSensorData, CrtRawProfile, LblRecordSensorIntValueData, LblRecordSensorLedData, PrgScan);
             ConnMonitor.RefreshSerialOptions();
             RegisterCommands();
@@ -573,34 +573,7 @@ namespace StmTestingSuite
                 profileString.Append($"{DgvProfile.Rows[i].Cells[0].Value},{DgvProfile.Rows[i].Cells[2].Value}\n");
             }
 
-            if (profileString.Length > 0)
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-
-                if (sfd != null)
-                {
-                    sfd.Filter = Constants.FileDialogFilter;
-                    sfd.FilterIndex = 0;
-                    sfd.RestoreDirectory = true;
-
-                    Stream writeStream;
-
-                    if (sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        if ((writeStream = sfd.OpenFile()) != null)
-                        {
-                            try
-                            {
-                                writeStream.Write(Encoding.ASCII.GetBytes(profileString.ToString()));
-                            }
-                            finally
-                            {
-                                writeStream.Close();
-                            }
-                        }
-                    }
-                }
-            }
+            Utilities.SaveStringBuilderToFile(profileString, Constants.RecordProfileFileExtension);
         }
 
         private void BtnTsLoadProfile_Click(object sender, EventArgs e)
@@ -610,7 +583,7 @@ namespace StmTestingSuite
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.InitialDirectory = "c:\\";
-                ofd.Filter = Constants.FileDialogFilter;
+                ofd.Filter = Constants.FileDialogExtensionFilter(Constants.RecordProfileFileExtension);
                 ofd.FilterIndex = 0;
                 ofd.RestoreDirectory = true;
 
@@ -773,6 +746,11 @@ namespace StmTestingSuite
         private void BtnClearRawProfile_Click(object sender, EventArgs e)
         {
             RecordScanner.Clear();
+        }
+
+        private void BtnExplortRawProfile_Click(object sender, EventArgs e)
+        {
+            RecordScanner.Export();
         }
     }
 }

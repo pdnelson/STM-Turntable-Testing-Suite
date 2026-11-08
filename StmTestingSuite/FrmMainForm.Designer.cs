@@ -1921,12 +1921,14 @@
             // 
             // BtnExplortRawProfile
             // 
+            BtnExplortRawProfile.Enabled = false;
             BtnExplortRawProfile.Location = new Point(70, 526);
             BtnExplortRawProfile.Name = "BtnExplortRawProfile";
             BtnExplortRawProfile.Size = new Size(62, 23);
             BtnExplortRawProfile.TabIndex = 9;
             BtnExplortRawProfile.Text = "Export";
             BtnExplortRawProfile.UseVisualStyleBackColor = true;
+            BtnExplortRawProfile.Click += BtnExplortRawProfile_Click;
             // 
             // BtnScanRecord
             // 

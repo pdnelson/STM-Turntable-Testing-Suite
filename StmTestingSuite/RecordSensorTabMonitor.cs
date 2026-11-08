@@ -128,10 +128,5 @@ namespace StmTestingSuite
                 }
             });
         }
-
-        private void VerticalIndicator(ushort position, string label)
-        {
-
-        }
     }
 }

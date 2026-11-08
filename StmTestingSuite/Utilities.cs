@@ -47,5 +47,37 @@ namespace StmTestingSuite
 
             commandTask.Start();
         }
+
+        public static void SaveStringBuilderToFile(StringBuilder stringBuilder, string fileExtension)
+        {
+            if (stringBuilder.Length > 0)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+
+                if (sfd != null)
+                {
+                    sfd.Filter = Constants.FileDialogExtensionFilter(fileExtension);
+                    sfd.FilterIndex = 0;
+                    sfd.RestoreDirectory = true;
+
+                    Stream writeStream;
+
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        if ((writeStream = sfd.OpenFile()) != null)
+                        {
+                            try
+                            {
+                                writeStream.Write(Encoding.ASCII.GetBytes(stringBuilder.ToString()));
+                            }
+                            finally
+                            {
+                                writeStream.Close();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
