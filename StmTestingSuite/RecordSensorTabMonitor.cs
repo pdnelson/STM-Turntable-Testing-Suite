@@ -119,7 +119,9 @@ namespace StmTestingSuite
                 if(Scanner.Profile.Length > 0)
                 {
                     VlaCurrentPosition.Visible = true;
-                    VlaCurrentPosition.X = 8500;
+
+                    VlaCurrentPosition.AxisX = CrtProfile.ChartAreas[0].AxisX;
+                    VlaCurrentPosition.X = data.HorizontalPosition;
                 } else
                 {
                     VlaCurrentPosition.Visible = false;

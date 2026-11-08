@@ -1949,9 +1949,14 @@
             // 
             // CrtRawProfile
             // 
+            verticalLineAnnotation1.EndCap = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Round;
+            verticalLineAnnotation1.Height = 85D;
             verticalLineAnnotation1.LineColor = Color.RoyalBlue;
             verticalLineAnnotation1.LineWidth = 2;
             verticalLineAnnotation1.Name = "VltCurrentTonearmPosition";
+            verticalLineAnnotation1.Width = 2D;
+            verticalLineAnnotation1.X = 20D;
+            verticalLineAnnotation1.Y = 2D;
             CrtRawProfile.Annotations.Add(verticalLineAnnotation1);
             chartArea2.AxisX.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
             chartArea2.AxisY.Maximum = 1024D;

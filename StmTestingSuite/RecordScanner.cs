@@ -25,6 +25,8 @@ namespace StmTestingSuite
         ProgressBar PrgScan { get; } = prgScan;
         public bool Running { get; set; } = false;
         public ushort[] Profile { get; set; } = [];
+        public ushort LowerBound { get; set; } = 0;
+        public ushort UpperBound { get; set; } = 0;
 
         public void Scan()
         {
@@ -40,6 +42,9 @@ namespace StmTestingSuite
                 if(nullBounds != null)
                 {
                     CmdGetRecordProfileBounds.Response bounds = (CmdGetRecordProfileBounds.Response)nullBounds;
+
+                    LowerBound = bounds.Lower;
+                    UpperBound = bounds.Upper;
 
                     // Scan the record
                     await new CmdActionScanRecord(Conn, Logger).Execute();
