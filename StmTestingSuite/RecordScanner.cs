@@ -67,14 +67,18 @@ namespace StmTestingSuite
                     // Monitor record scanning
                     while (lastCommand == CommandId.SCAN_RECORD && Running)
                     {
-                        await Task.Delay(100);
+                        await Task.Delay(500);
 
                         lastCommand = await new CmdGetCurrentCommand(Conn, null).ExecuteWithResult();
                     }
 
                     if(lastCommand == CommandId.ERROR)
                     {
-                        MessageBox.Show("Failed to scan the record.", "Scan Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                        Utilities.WriteToUiFromThread(Form, () =>
+                        {
+                            MessageBox.Show(Form, "Failed to scan the record.", "Scan Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        });
                     } else
                     {
                         // Grab the record profile and populate data
@@ -95,7 +99,10 @@ namespace StmTestingSuite
                 } 
                 else
                 {
-                    MessageBox.Show("Failed to acquire the record profile's upper and lower bounds.", "Scan Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Utilities.WriteToUiFromThread(Form, () =>
+                    {
+                        MessageBox.Show(Form, "Failed to acquire the record profile's upper and lower bounds.", "Scan Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    });
                 }
 
                 Utilities.WriteToUiFromThread(Form, () =>

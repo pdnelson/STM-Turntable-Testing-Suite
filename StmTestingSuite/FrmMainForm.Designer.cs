@@ -1969,6 +1969,7 @@
             CrtRawProfile.Legends.Add(legend2);
             CrtRawProfile.Location = new Point(3, 274);
             CrtRawProfile.Name = "CrtRawProfile";
+            series2.BorderWidth = 2;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.IsVisibleInLegend = false;
@@ -2037,6 +2038,7 @@
             CrtBigSensorData.Legends.Add(legend3);
             CrtBigSensorData.Location = new Point(3, 21);
             CrtBigSensorData.Name = "CrtBigSensorData";
+            series3.BorderWidth = 2;
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series3.IsVisibleInLegend = false;

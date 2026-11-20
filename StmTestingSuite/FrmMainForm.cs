@@ -318,6 +318,7 @@ namespace StmTestingSuite
                     else if (current.Text != "Record Sensor" && RecordSensorTabMonitor.Running)
                     {
                         RecordSensorTabMonitor.Stop();
+                        RecordScanner.Cancel();
                         Logger.LogMessage("Record Sensor Tab", "Ended monitoring");
                     }
                 }
