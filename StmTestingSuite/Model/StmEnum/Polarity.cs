@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    public enum EncoderPolarity : byte
+    public enum Polarity : byte
     {
         NORMAL = 0,
         REVERSED = 1

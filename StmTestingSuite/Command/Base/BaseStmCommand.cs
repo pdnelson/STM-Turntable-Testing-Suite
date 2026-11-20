@@ -5,7 +5,7 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command.Base
 {
-    abstract class BaseStmCommand(StmConnector conn, StmLogger? logger)
+    public abstract class BaseStmCommand(StmConnector conn, StmLogger? logger)
     {
         public abstract StmExternalCommandGroupType GroupType { get; }
         public abstract ExternalCommand ExternalCommandType { get; }

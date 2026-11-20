@@ -65,14 +65,14 @@
             LblSensorValueData = new Label();
             LblSensorValue = new Label();
             GrpCalibration = new GroupBox();
+            LblHOffsetData = new Label();
+            LblHOffset = new Label();
+            BtnEdit = new Button();
             BtnCalibrateMaint = new Button();
             LblScanEndData = new Label();
             LblScanEnd = new Label();
             LblHMotorPolarityData = new Label();
             LblHMotorPolarity = new Label();
-            LblZeroAzEncoder = new Label();
-            NumZeroAzEncoder = new NumericUpDown();
-            BtnZeroAzEncoder = new Button();
             BtnCalibrate = new Button();
             BtnCalRefresh = new Button();
             LblCal12InData = new Label();
@@ -223,7 +223,6 @@
             grpSensor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CrtSensorData).BeginInit();
             GrpCalibration.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)NumZeroAzEncoder).BeginInit();
             GrpVerticalManualMovement.SuspendLayout();
             GrpAdvancedVerticalMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumVerticalMoveToPositionInput).BeginInit();
@@ -540,14 +539,14 @@
             // 
             // GrpCalibration
             // 
+            GrpCalibration.Controls.Add(LblHOffsetData);
+            GrpCalibration.Controls.Add(LblHOffset);
+            GrpCalibration.Controls.Add(BtnEdit);
             GrpCalibration.Controls.Add(BtnCalibrateMaint);
             GrpCalibration.Controls.Add(LblScanEndData);
             GrpCalibration.Controls.Add(LblScanEnd);
             GrpCalibration.Controls.Add(LblHMotorPolarityData);
             GrpCalibration.Controls.Add(LblHMotorPolarity);
-            GrpCalibration.Controls.Add(LblZeroAzEncoder);
-            GrpCalibration.Controls.Add(NumZeroAzEncoder);
-            GrpCalibration.Controls.Add(BtnZeroAzEncoder);
             GrpCalibration.Controls.Add(BtnCalibrate);
             GrpCalibration.Controls.Add(BtnCalRefresh);
             GrpCalibration.Controls.Add(LblCal12InData);
@@ -573,11 +572,39 @@
             GrpCalibration.TabStop = false;
             GrpCalibration.Text = "Calibration Values";
             // 
+            // LblHOffsetData
+            // 
+            LblHOffsetData.AutoSize = true;
+            LblHOffsetData.Location = new Point(227, 93);
+            LblHOffsetData.Name = "LblHOffsetData";
+            LblHOffsetData.Size = new Size(25, 15);
+            LblHOffsetData.TabIndex = 28;
+            LblHOffsetData.Text = "n/a";
+            // 
+            // LblHOffset
+            // 
+            LblHOffset.AutoSize = true;
+            LblHOffset.Location = new Point(174, 93);
+            LblHOffset.Name = "LblHOffset";
+            LblHOffset.Size = new Size(56, 15);
+            LblHOffset.TabIndex = 27;
+            LblHOffset.Text = "H-Offset:";
+            // 
+            // BtnEdit
+            // 
+            BtnEdit.Location = new Point(3, 126);
+            BtnEdit.Name = "BtnEdit";
+            BtnEdit.Size = new Size(45, 23);
+            BtnEdit.TabIndex = 26;
+            BtnEdit.Text = "Edit";
+            BtnEdit.UseVisualStyleBackColor = true;
+            BtnEdit.Click += BtnEdit_Click;
+            // 
             // BtnCalibrateMaint
             // 
-            BtnCalibrateMaint.Location = new Point(128, 126);
+            BtnCalibrateMaint.Location = new Point(136, 126);
             BtnCalibrateMaint.Name = "BtnCalibrateMaint";
-            BtnCalibrateMaint.Size = new Size(69, 23);
+            BtnCalibrateMaint.Size = new Size(57, 23);
             BtnCalibrateMaint.TabIndex = 25;
             BtnCalibrateMaint.Text = "Cal. M.";
             BtnCalibrateMaint.UseVisualStyleBackColor = true;
@@ -619,38 +646,11 @@
             LblHMotorPolarity.TabIndex = 21;
             LblHMotorPolarity.Text = "H-Motor Polarity:";
             // 
-            // LblZeroAzEncoder
-            // 
-            LblZeroAzEncoder.AutoSize = true;
-            LblZeroAzEncoder.Location = new Point(6, 108);
-            LblZeroAzEncoder.Name = "LblZeroAzEncoder";
-            LblZeroAzEncoder.Size = new Size(98, 15);
-            LblZeroAzEncoder.TabIndex = 20;
-            LblZeroAzEncoder.Text = "Zero AZ Encoder:";
-            // 
-            // NumZeroAzEncoder
-            // 
-            NumZeroAzEncoder.Location = new Point(6, 126);
-            NumZeroAzEncoder.Maximum = new decimal(new int[] { 16383, 0, 0, 0 });
-            NumZeroAzEncoder.Name = "NumZeroAzEncoder";
-            NumZeroAzEncoder.Size = new Size(65, 23);
-            NumZeroAzEncoder.TabIndex = 19;
-            // 
-            // BtnZeroAzEncoder
-            // 
-            BtnZeroAzEncoder.Location = new Point(77, 126);
-            BtnZeroAzEncoder.Name = "BtnZeroAzEncoder";
-            BtnZeroAzEncoder.Size = new Size(45, 23);
-            BtnZeroAzEncoder.TabIndex = 18;
-            BtnZeroAzEncoder.Text = "Send";
-            BtnZeroAzEncoder.UseVisualStyleBackColor = true;
-            BtnZeroAzEncoder.Click += BtnZeroAzEncoder_Click;
-            // 
             // BtnCalibrate
             // 
-            BtnCalibrate.Location = new Point(128, 100);
+            BtnCalibrate.Location = new Point(69, 126);
             BtnCalibrate.Name = "BtnCalibrate";
-            BtnCalibrate.Size = new Size(69, 23);
+            BtnCalibrate.Size = new Size(62, 23);
             BtnCalibrate.TabIndex = 17;
             BtnCalibrate.Text = "Cal. 1st";
             BtnCalibrate.UseVisualStyleBackColor = true;
@@ -658,9 +658,9 @@
             // 
             // BtnCalRefresh
             // 
-            BtnCalRefresh.Location = new Point(200, 126);
+            BtnCalRefresh.Location = new Point(209, 126);
             BtnCalRefresh.Name = "BtnCalRefresh";
-            BtnCalRefresh.Size = new Size(69, 23);
+            BtnCalRefresh.Size = new Size(60, 23);
             BtnCalRefresh.TabIndex = 16;
             BtnCalRefresh.Text = "Refresh";
             BtnCalRefresh.UseVisualStyleBackColor = true;
@@ -2125,7 +2125,6 @@
             ((System.ComponentModel.ISupportInitialize)CrtSensorData).EndInit();
             GrpCalibration.ResumeLayout(false);
             GrpCalibration.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)NumZeroAzEncoder).EndInit();
             GrpVerticalManualMovement.ResumeLayout(false);
             GrpAdvancedVerticalMovement.ResumeLayout(false);
             GrpAdvancedVerticalMovement.PerformLayout();
@@ -2284,9 +2283,6 @@
         private Button BtnCalibrate;
         private Label LblActualHorizontalPositionData;
         private Label LblActualHorizontalPosition;
-        private NumericUpDown NumZeroAzEncoder;
-        private Button BtnZeroAzEncoder;
-        private Label LblZeroAzEncoder;
         private Label LblHMotorPolarity;
         private Label LblHMotorPolarityData;
         private Button BtnHomeClutch;
@@ -2343,5 +2339,8 @@
         private Label LblProfileData;
         private System.Windows.Forms.DataVisualization.Charting.Chart CrtRawProfile;
         private ProgressBar PrgScan;
+        private Button BtnEdit;
+        private Label LblHOffsetData;
+        private Label LblHOffset;
     }
 }

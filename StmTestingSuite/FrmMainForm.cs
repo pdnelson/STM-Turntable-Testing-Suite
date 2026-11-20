@@ -18,6 +18,8 @@ namespace StmTestingSuite
         private readonly RecordScanner RecordScanner;
         private List<BaseStmCommand> Commands = [];
 
+        private FrmEditCalibration? EditCalibrationForm;
+
         public FrmMainForm()
         {
             InitializeComponent();
@@ -218,7 +220,6 @@ namespace StmTestingSuite
                 new CmdSetSpeed(Conn, Logger),
                 new CmdSetRotateSize(Conn, Logger),
                 new CmdSetRotateSpeed(Conn, Logger),
-                new CmdSetAzEncoderZero(Conn, Logger),
                 new CmdSetSaveSettings(Conn, Logger),
                 new CmdSetClearPlaylist(Conn, Logger),
                 new CmdSetClearProfile(Conn, Logger),
@@ -488,6 +489,22 @@ namespace StmTestingSuite
             ExecuteSimpleCommand(command);
         }
 
+        private void WriteCalibrationValuesToUi(CmdGetCalibrationValues.Response calibration)
+        {
+            LblHMotorPolarityData.Text = EnumStringConverter.GetString(calibration.HorizontalMotorPolarity);
+            LblHPolarityData.Text = EnumStringConverter.GetString(calibration.HorizontalPolarity);
+            LblVPolarityData.Text = EnumStringConverter.GetString(calibration.VerticalPolarity);
+
+            LblUpperLimitData.Text = calibration.UpperLimit.ToString();
+            LblLowerLimitData.Text = calibration.LowerLimit.ToString();
+            LblHomeData.Text = calibration.Home.ToString();
+            LblCal7InData.Text = calibration.In7.ToString();
+            LblCal10InData.Text = calibration.In10.ToString();
+            LblCal12InData.Text = calibration.In12.ToString();
+            LblScanEndData.Text = calibration.ScanEnd.ToString();
+            LblHOffsetData.Text = calibration.HorizontalOffset.ToString();
+        }
+
         private void BtnCalRefresh_Click(object sender, EventArgs e)
         {
             Utilities.CommandWrapper(ConnMonitor, async () =>
@@ -500,17 +517,7 @@ namespace StmTestingSuite
 
                     Utilities.WriteToUiFromThread(this, () =>
                     {
-                        LblHMotorPolarityData.Text = EnumStringConverter.GetString(result.HorizontalMotorPolarity);
-                        LblHPolarityData.Text = EnumStringConverter.GetString(result.HorizontalPolarity);
-                        LblVPolarityData.Text = EnumStringConverter.GetString(result.VerticalPolarity);
-
-                        LblUpperLimitData.Text = result.UpperLimit.ToString();
-                        LblLowerLimitData.Text = result.LowerLimit.ToString();
-                        LblHomeData.Text = result.Home.ToString();
-                        LblCal7InData.Text = result.In7.ToString();
-                        LblCal10InData.Text = result.In10.ToString();
-                        LblCal12InData.Text = result.In12.ToString();
-                        LblScanEndData.Text = result.ScanEnd.ToString();
+                        WriteCalibrationValuesToUi(result);
                     });
                 }
             });
@@ -519,15 +526,6 @@ namespace StmTestingSuite
         private void BtnCalibrate_Click(object sender, EventArgs e)
         {
             ExecuteSimpleCommand(new CmdActionCalibrationFirst(Conn, Logger));
-        }
-
-        private void BtnZeroAzEncoder_Click(object sender, EventArgs e)
-        {
-            var command = new CmdSetAzEncoderZero(Conn, Logger);
-            decimal value = NumZeroAzEncoder.Value;
-            command.UpdateInputData(Decimal.ToUInt16(value));
-
-            ExecuteSimpleCommand(command);
         }
 
         private void BtnHomeClutch_Click(object sender, EventArgs e)
@@ -752,6 +750,27 @@ namespace StmTestingSuite
         private void BtnExplortRawProfile_Click(object sender, EventArgs e)
         {
             RecordScanner.Export();
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            Utilities.CommandWrapper(ConnMonitor, async () =>
+            {
+                var nullResult = await new CmdGetCalibrationValues(Conn, Logger).ExecuteWithResult();
+
+                if (nullResult != null)
+                {
+                    var result = (CmdGetCalibrationValues.Response)nullResult;
+
+                    Utilities.WriteToUiFromThread(this, () =>
+                    {
+                        WriteCalibrationValuesToUi(result);
+
+                        EditCalibrationForm = new FrmEditCalibration(Conn, Logger, ConnMonitor, result, () => { BtnCalRefresh_Click(sender, e); });
+                        EditCalibrationForm.Show();
+                    });
+                }
+            });
         }
     }
 }

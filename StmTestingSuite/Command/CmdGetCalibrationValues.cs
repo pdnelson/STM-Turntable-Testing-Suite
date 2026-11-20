@@ -5,12 +5,12 @@ using StmTestingSuite.Model.StmEnum;
 
 namespace StmTestingSuite.Command
 {
-    internal class CmdGetCalibrationValues(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
+    public class CmdGetCalibrationValues(StmConnector comm, StmLogger? logger) : BaseStmCommand(comm, logger)
     {
         public override StmExternalCommandGroupType GroupType => StmExternalCommandGroupType.GET;
         public override ExternalCommand ExternalCommandType => ExternalCommand.GET_CALIBRATION_VALUES;
         public override string Name => "Calibration Values";
-        public override ushort ResponseSize => 19;
+        public override ushort ResponseSize => 21;
         public override IStmCommandResult InterpretResponseData(byte[] rawData)
         {
             Response? response = null;
@@ -35,9 +35,9 @@ namespace StmTestingSuite.Command
         {
             public Response(byte[] rawData)
             {
-                HorizontalMotorPolarity = (EncoderPolarity)rawData[1];
-                HorizontalPolarity = (EncoderPolarity)rawData[2];
-                VerticalPolarity = (EncoderPolarity)rawData[3];
+                HorizontalMotorPolarity = (Polarity)rawData[1];
+                HorizontalPolarity = (Polarity)rawData[2];
+                VerticalPolarity = (Polarity)rawData[3];
 
                 byte[] homeBytes = { rawData[4], rawData[5] };
                 Home = BitConverter.ToUInt16(homeBytes);
@@ -59,10 +59,13 @@ namespace StmTestingSuite.Command
 
                 byte[] scanEndBytes = { rawData[16], rawData[17] };
                 ScanEnd = BitConverter.ToUInt16(scanEndBytes);
+
+                byte[] hOffsetBytes = { rawData[18], rawData[19] };
+                HorizontalOffset = BitConverter.ToUInt16(hOffsetBytes);
             }
-            public EncoderPolarity HorizontalMotorPolarity { get; }
-            public EncoderPolarity HorizontalPolarity { get; }
-            public EncoderPolarity VerticalPolarity { get; }
+            public Polarity HorizontalMotorPolarity { get; }
+            public Polarity HorizontalPolarity { get; }
+            public Polarity VerticalPolarity { get; }
             public ushort Home { get; }
             public ushort UpperLimit { get; }
             public ushort LowerLimit { get; }
@@ -70,10 +73,11 @@ namespace StmTestingSuite.Command
             public ushort In10 { get; }
             public ushort In12 { get; }
             public ushort ScanEnd { get; }
+            public ushort HorizontalOffset { get; }
 
             public readonly override string ToString()
             {
-                return $"({HorizontalMotorPolarity}, {HorizontalPolarity}, {VerticalPolarity}, {Home}, {UpperLimit}, {LowerLimit}, {In7}, {In10}, {In12}, {ScanEnd})";
+                return $"({HorizontalMotorPolarity}, {HorizontalPolarity}, {VerticalPolarity}, {Home}, {UpperLimit}, {LowerLimit}, {In7}, {In10}, {In12}, {ScanEnd}, {HorizontalOffset})";
             }
         }
     }

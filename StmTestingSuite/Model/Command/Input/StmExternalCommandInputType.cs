@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.Command.Input
 {
-    enum StmExternalCommandInputType
+    public enum StmExternalCommandInputType
     {
         NONE,
         NUMERIC_INT,

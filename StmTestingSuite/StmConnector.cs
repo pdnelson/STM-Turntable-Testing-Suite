@@ -3,7 +3,7 @@ using System.IO.Ports;
 
 namespace StmTestingSuite
 {
-    internal class StmConnector
+    public class StmConnector
     {
         SerialPort? Port { get; set; }
         public bool Connected { get; private set; } = false;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StmTestingSuite
 {
-    internal class StmLogger(DataGridView dgv, Form form)
+    public class StmLogger(DataGridView dgv, Form form)
     {
         DataGridView Dgv { get; } = dgv;
         Form Form { get; } = form;

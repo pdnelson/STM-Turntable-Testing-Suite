@@ -5,7 +5,7 @@ using System.IO.Ports;
 
 namespace StmTestingSuite
 {
-    internal class ConnectionMonitor(
+    public class ConnectionMonitor(
         Form mainForm,
         StmConnector conn, 
         StmLogger logger, 

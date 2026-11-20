@@ -133,11 +133,11 @@
             };
         }
 
-        public static String GetString(this EncoderPolarity polarity)
+        public static String GetString(this Polarity polarity)
         {
             return polarity switch { 
-                EncoderPolarity.NORMAL => "Normal",
-                EncoderPolarity.REVERSED => "Reversed",
+                Polarity.NORMAL => "Normal",
+                Polarity.REVERSED => "Reversed",
                 _ => "Invalid Data Received"
             };
         }

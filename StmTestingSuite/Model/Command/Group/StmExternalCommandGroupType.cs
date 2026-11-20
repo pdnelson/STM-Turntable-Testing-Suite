@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.Command.Group
 {
-    enum StmExternalCommandGroupType
+    public enum StmExternalCommandGroupType
     {
         OTHER,
         ACTION,

@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.StmEnum
 {
-    enum ExternalCommand : byte
+    public enum ExternalCommand : byte
     {
         CONNECTION_TEST = 0,
 
@@ -28,7 +28,6 @@
         SET_ROTATE_SPEED = 34,
         SET_CLEAR_ACTION_COMMAND = 35,
         SET_ROTATE_SIZE = 36,
-        SET_AZ_ENCODER_ZERO = 37,
         SET_SAVE_SETTINGS = 38,
         SET_CLEAR_PROFILE = 39,
         SET_CLEAR_PLAYLIST = 40,
@@ -39,6 +38,7 @@
         SET_REMOVE_FROM_PLAYLIST = 45,
         SET_POSITION_AT_PROFILE_INDEX = 46,
         SET_TOGGLE_AUTO_RETURN = 47,
+        SET_CALIBRATION_VALUES = 48,
 
         // Get commands
         GET_VERTICAL_ENCODER_POS = 100,

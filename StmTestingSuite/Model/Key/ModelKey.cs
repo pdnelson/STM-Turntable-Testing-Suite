@@ -1,6 +1,6 @@
 ﻿namespace StmTestingSuite.Model.Key
 {
-    enum ModelKey : byte
+    public enum ModelKey : byte
     {
         NONE = 4,
         INIT = 12,
