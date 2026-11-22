@@ -25,5 +25,7 @@
         }
 
         public const byte SpeedAutomatic = 100;
+        public const ushort MaxAnalogValue = 1023;
+        public const ushort Max14BitEncoderValue = 16383;
     }
 }

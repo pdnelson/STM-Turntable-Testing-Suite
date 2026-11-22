@@ -117,7 +117,6 @@
             CboHPolarity.Name = "CboHPolarity";
             CboHPolarity.Size = new Size(121, 23);
             CboHPolarity.TabIndex = 5;
-            CboHPolarity.SelectedIndexChanged += CboHPolarity_SelectedIndexChanged;
             // 
             // LblHPolarity
             // 

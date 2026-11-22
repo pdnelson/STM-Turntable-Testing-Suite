@@ -18,14 +18,14 @@ namespace StmTestingSuite
             ConnMonitor = connMonitor;
             BeforeClose = beforeClose;
 
-            AssignMax(NumUpperLimit, 1023, calibrationValues.UpperLimit);
-            AssignMax(NumLowerLimit, 1023, calibrationValues.LowerLimit);
-            AssignMax(NumHome, 16383, calibrationValues.Home);
-            AssignMax(Num7In, 16383, calibrationValues.In7);
-            AssignMax(Num10In, 16383, calibrationValues.In10);
-            AssignMax(Num12In, 16383, calibrationValues.In12);
-            AssignMax(NumScanEnd, 16383, calibrationValues.ScanEnd);
-            AssignMax(NumOffset, 16383, calibrationValues.HorizontalOffset);
+            AssignMax(NumUpperLimit, Constants.MaxAnalogValue, calibrationValues.UpperLimit);
+            AssignMax(NumLowerLimit, Constants.MaxAnalogValue, calibrationValues.LowerLimit);
+            AssignMax(NumHome, Constants.Max14BitEncoderValue, calibrationValues.Home);
+            AssignMax(Num7In, Constants.Max14BitEncoderValue, calibrationValues.In7);
+            AssignMax(Num10In, Constants.Max14BitEncoderValue, calibrationValues.In10);
+            AssignMax(Num12In, Constants.Max14BitEncoderValue, calibrationValues.In12);
+            AssignMax(NumScanEnd, Constants.Max14BitEncoderValue, calibrationValues.ScanEnd);
+            AssignMax(NumOffset, Constants.Max14BitEncoderValue, calibrationValues.HorizontalOffset);
 
             List<Polarity> polOptions1 = [Polarity.NORMAL, Polarity.REVERSED];
             List<Polarity> polOptions2 = [Polarity.NORMAL, Polarity.REVERSED];
@@ -51,11 +51,6 @@ namespace StmTestingSuite
             {
                 dest.Value = value;
             }
-        }
-
-        private void CboHPolarity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void BtnCalCancel_Click(object sender, EventArgs e)
