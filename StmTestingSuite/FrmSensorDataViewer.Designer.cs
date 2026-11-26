@@ -28,73 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSensorDataViewer));
             CrtComparison = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             LblBounds = new Label();
-            contextMenuStrip2 = new ContextMenuStrip(components);
-            TxtLowerBound = new TextBox();
-            TxtUpperBound = new TextBox();
             BtnAdd = new Button();
             TxtNew = new TextBox();
             CboRemove = new ComboBox();
             BtnRemove = new Button();
             BtnClearAll = new Button();
+            NumLower = new NumericUpDown();
+            NumUpper = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)CrtComparison).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumLower).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumUpper).BeginInit();
             SuspendLayout();
             // 
             // CrtComparison
             // 
-            chartArea2.Name = "ChartArea1";
-            CrtComparison.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            CrtComparison.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            CrtComparison.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            CrtComparison.Legends.Add(legend1);
             CrtComparison.Location = new Point(12, 41);
             CrtComparison.Name = "CrtComparison";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            CrtComparison.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            CrtComparison.Series.Add(series1);
             CrtComparison.Size = new Size(776, 397);
             CrtComparison.TabIndex = 0;
             CrtComparison.Text = "Comparison";
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
             // LblBounds
             // 
             LblBounds.AutoSize = true;
-            LblBounds.Location = new Point(604, 13);
+            LblBounds.Location = new Point(604, 16);
             LblBounds.Name = "LblBounds";
             LblBounds.Size = new Size(60, 15);
             LblBounds.TabIndex = 3;
             LblBounds.Text = "X Bounds:";
-            // 
-            // contextMenuStrip2
-            // 
-            contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new Size(61, 4);
-            // 
-            // TxtLowerBound
-            // 
-            TxtLowerBound.Location = new Point(670, 10);
-            TxtLowerBound.Name = "TxtLowerBound";
-            TxtLowerBound.Size = new Size(56, 23);
-            TxtLowerBound.TabIndex = 5;
-            // 
-            // TxtUpperBound
-            // 
-            TxtUpperBound.Location = new Point(732, 11);
-            TxtUpperBound.Name = "TxtUpperBound";
-            TxtUpperBound.Size = new Size(56, 23);
-            TxtUpperBound.TabIndex = 6;
             // 
             // BtnAdd
             // 
@@ -138,18 +113,32 @@
             BtnClearAll.Text = "Clear All";
             BtnClearAll.UseVisualStyleBackColor = true;
             // 
+            // NumLower
+            // 
+            NumLower.Location = new Point(670, 13);
+            NumLower.Name = "NumLower";
+            NumLower.Size = new Size(56, 23);
+            NumLower.TabIndex = 12;
+            // 
+            // NumUpper
+            // 
+            NumUpper.Location = new Point(732, 13);
+            NumUpper.Name = "NumUpper";
+            NumUpper.Size = new Size(56, 23);
+            NumUpper.TabIndex = 13;
+            // 
             // FrmSensorDataViewer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(NumUpper);
+            Controls.Add(NumLower);
             Controls.Add(BtnClearAll);
             Controls.Add(BtnRemove);
             Controls.Add(CboRemove);
             Controls.Add(TxtNew);
             Controls.Add(BtnAdd);
-            Controls.Add(TxtUpperBound);
-            Controls.Add(TxtLowerBound);
             Controls.Add(LblBounds);
             Controls.Add(CrtComparison);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -157,6 +146,8 @@
             Text = "Sensor Data Viewer";
             SizeChanged += FrmSensorDataViewer_SizeChanged;
             ((System.ComponentModel.ISupportInitialize)CrtComparison).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumLower).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumUpper).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,15 +155,13 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart CrtComparison;
-        private ContextMenuStrip contextMenuStrip1;
         private Label LblBounds;
-        private ContextMenuStrip contextMenuStrip2;
-        private TextBox TxtLowerBound;
-        private TextBox TxtUpperBound;
         private Button BtnAdd;
         private TextBox TxtNew;
         private ComboBox CboRemove;
         private Button BtnRemove;
         private Button BtnClearAll;
+        private NumericUpDown NumLower;
+        private NumericUpDown NumUpper;
     }
 }

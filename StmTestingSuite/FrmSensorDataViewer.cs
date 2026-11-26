@@ -10,8 +10,8 @@
         private void FrmSensorDataViewer_SizeChanged(object sender, EventArgs e)
         {
             // Position the X bounds based on the window size
-            TxtUpperBound.Location = new Point(this.Size.Width - 84, TxtUpperBound.Location.Y);
-            TxtLowerBound.Location = new Point(this.Size.Width - 146, TxtLowerBound.Location.Y);
+            NumUpper.Location = new Point(this.Size.Width - 84, NumUpper.Location.Y);
+            NumLower.Location = new Point(this.Size.Width - 146, NumLower.Location.Y);
             LblBounds.Location = new Point(this.Size.Width - 212, LblBounds.Location.Y);
 
             // Resize the chart based on the window size
