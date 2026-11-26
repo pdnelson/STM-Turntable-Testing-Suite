@@ -772,5 +772,11 @@ namespace StmTestingSuite
                 }
             });
         }
+
+        private void BtnOpenDataViewer_Click(object sender, EventArgs e)
+        {
+            var newForm = new FrmSensorDataViewer();
+            newForm.Show();
+        }
     }
 }
