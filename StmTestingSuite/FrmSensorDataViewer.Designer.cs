@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSensorDataViewer));
             CrtComparison = new System.Windows.Forms.DataVisualization.Charting.Chart();
             LblBounds = new Label();
@@ -54,10 +53,6 @@
             CrtComparison.Legends.Add(legend1);
             CrtComparison.Location = new Point(12, 41);
             CrtComparison.Name = "CrtComparison";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            CrtComparison.Series.Add(series1);
             CrtComparison.Size = new Size(776, 397);
             CrtComparison.TabIndex = 0;
             CrtComparison.Text = "Comparison";
@@ -79,6 +74,7 @@
             BtnAdd.TabIndex = 7;
             BtnAdd.Text = "Add";
             BtnAdd.UseVisualStyleBackColor = true;
+            BtnAdd.Click += BtnAdd_Click;
             // 
             // TxtNew
             // 
@@ -89,6 +85,7 @@
             // 
             // CboRemove
             // 
+            CboRemove.DropDownStyle = ComboBoxStyle.DropDownList;
             CboRemove.FormattingEnabled = true;
             CboRemove.Location = new Point(197, 11);
             CboRemove.Name = "CboRemove";
@@ -97,21 +94,25 @@
             // 
             // BtnRemove
             // 
+            BtnRemove.Enabled = false;
             BtnRemove.Location = new Point(324, 11);
             BtnRemove.Name = "BtnRemove";
             BtnRemove.Size = new Size(61, 23);
             BtnRemove.TabIndex = 10;
             BtnRemove.Text = "Remove";
             BtnRemove.UseVisualStyleBackColor = true;
+            BtnRemove.Click += BtnRemove_Click;
             // 
             // BtnClearAll
             // 
+            BtnClearAll.Enabled = false;
             BtnClearAll.Location = new Point(391, 10);
             BtnClearAll.Name = "BtnClearAll";
             BtnClearAll.Size = new Size(61, 23);
             BtnClearAll.TabIndex = 11;
             BtnClearAll.Text = "Clear All";
             BtnClearAll.UseVisualStyleBackColor = true;
+            BtnClearAll.Click += BtnClearAll_Click;
             // 
             // NumLower
             // 

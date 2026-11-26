@@ -577,25 +577,7 @@ namespace StmTestingSuite
 
         private void BtnTsLoadProfile_Click(object sender, EventArgs e)
         {
-            var fileContent = "";
-
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.InitialDirectory = "c:\\";
-                ofd.Filter = Constants.FileDialogExtensionFilter(Constants.RecordProfileFileExtension);
-                ofd.FilterIndex = 0;
-                ofd.RestoreDirectory = true;
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    var fileStream = ofd.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        fileContent = reader.ReadToEnd();
-                    }
-                }
-            }
+            var fileContent = Utilities.OpenFile(Constants.RecordProfileFileExtension);
 
             if (fileContent != "")
             {
